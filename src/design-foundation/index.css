@@ -1,0 +1,78 @@
+/**
+* Place to inject globally available classes and custom properties
+*/
+
+@import url("https://fonts.googleapis.com/css2?family=Assistant:wght@700;800&family=Overpass:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+*,
+::after,
+::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+body {
+    font-family: 'Overpass', sans-serif;
+}
+
+input {
+    all: unset;
+    font-family: 'Overpass', sans-serif;
+}
+
+::placeholder {
+    font-family: 'Overpass', sans-serif;
+}
+
+button {
+    all: unset;
+    font-family: inherit;
+
+}
+
+
+ul {
+    list-style-type: none;
+}
+
+li {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.visually-hidden {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.remove-styles {
+    all: unset;
+    all: revert;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+}
