@@ -1,6 +1,6 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
-import { useSystemDesign } from '../design-foundation/useSystemDesign';
+import { useSystemDesign } from '../design/useSystemDesign';
 import useThemeMode from '../hooks/useThemeMode';
 
 interface ContextProps {

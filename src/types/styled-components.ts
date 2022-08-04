@@ -10,7 +10,7 @@ import {
 	AppSpacingType,
 	AppTextFSType,
 	AppZIndexType,
-} from '../design-foundation/design-variables';
+} from '../design/design-variables';
 
 declare module 'styled-components' {
 	export interface DefaultTheme {

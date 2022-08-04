@@ -1,6 +1,6 @@
-// import { useMutation, useQuery, useQueryClient } from 'react-query';
+// import { QueryKey, useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 
-// export default function usePersistentContext(key: string) {
+// export default function usePersistentContext(key: QueryKey) {
 // 	const queryClient = useQueryClient();
 
 // 	const { data } = useQuery(key, () => localStorage.getItem(key));

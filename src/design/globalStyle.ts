@@ -1,16 +1,27 @@
 import { createGlobalStyle } from 'styled-components';
-/*
- * Styled components global style configuration
- * used to globally inject configurable variables in styling
- * Main part of our styling is atomic and governed by themes configured in "system-design-variables.ts"
- * */
+
 export const GlobalStyles = createGlobalStyle`
-    html {
+  html {
         font-size: 62.5%;
+      min-height: 100%;
+      
+      
     }
-  body {
-    color: ${({ theme }) => theme.colors.primary.text};
-    background: ${({ theme }) => theme.colors.primary.background};
+    body {
+      color: ${({ theme }) => theme.colors.primary.text};
+      background: ${({ theme }) => theme.colors.background.gradient};
+      /* background-repeat: no-repeat; */
+      /* background-size: auto 100%; */
+      /* background: red; */
+       min-height: 100%;
+         background-repeat: no-repeat;
+    background-attachment: fixed;
+       /* width: 100%; */
+         
+            /* min-height: 100vh; */
+       
+     
+     
 
   }
 

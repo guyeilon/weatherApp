@@ -1,5 +1,5 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { SvgFav, SvgFb, SvgGoogle, SvgHome, SvgHomeFull } from '../../assets/Svg.styles';
+import { SvgFav, SvgFb, SvgGoogle, SvgHome, SvgHomeFull, SvgLogout, SvgMap } from '../../assets/Svg.styles';
 
 import * as Styled from './styles';
 
@@ -11,6 +11,7 @@ export type ButtonProps<T extends ElementType> = {
 	svg?: string;
 	navbar?: boolean;
 	children: ReactNode;
+	className?: string;
 } & ComponentPropsWithoutRef<T>;
 
 const Button = <T extends ElementType = 'button'>({
@@ -20,6 +21,7 @@ const Button = <T extends ElementType = 'button'>({
 	children,
 	navBar,
 	svg,
+	className,
 	...rest
 }: ButtonProps<T>): JSX.Element => {
 	const IconToShow = (svg: string | undefined) => {
@@ -36,6 +38,10 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgHome width='30' height='30' />;
 			case 'homeFull':
 				return <SvgHomeFull width='30' height='30' />;
+			case 'logout':
+				return <SvgLogout width='30' height='30' />;
+			case 'map':
+				return <SvgMap width='30' height='30' />;
 
 			default:
 				break;
@@ -43,7 +49,13 @@ const Button = <T extends ElementType = 'button'>({
 	};
 	return (
 		<>
-			<Styled.BTN as={renderAs as ElementType} addToFav={addToFav} login={login} svg={svg} {...rest}>
+			<Styled.BTN
+				as={renderAs as ElementType}
+				addToFav={addToFav}
+				login={login}
+				svg={svg}
+				{...rest}
+				className={className}>
 				<Styled.IconWrapper>{IconToShow(svg)}</Styled.IconWrapper>
 				{children}
 			</Styled.BTN>

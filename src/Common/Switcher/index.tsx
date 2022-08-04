@@ -5,7 +5,9 @@ import * as Styled from './style';
 interface SwitchProps {
 	leftSvg?: React.ReactNode;
 	rightSvg?: React.ReactNode;
-	isDark: boolean;
+	isChecked: boolean;
+	className?: string;
+
 	onClick: () => void;
 }
 
@@ -16,10 +18,10 @@ const spring = {
 	mass: 1.25,
 };
 
-const Switcher: React.FC<SwitchProps> = ({ leftSvg, rightSvg, onClick, isDark }) => {
+const Switcher: React.FC<SwitchProps> = ({ leftSvg, rightSvg, onClick, isChecked, className }) => {
 	return (
 		<>
-			<Styled.Switch isDark={isDark} onClick={onClick}>
+			<Styled.Switch isChecked={isChecked} onClick={onClick} className={className}>
 				<Styled.LeftSvgWrapper>{leftSvg}</Styled.LeftSvgWrapper>
 				<Styled.RightSvgWrapper>{rightSvg}</Styled.RightSvgWrapper>
 				<Styled.Handle as={motion.div} layout transition={spring} onClick={onClick} />

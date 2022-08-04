@@ -1,7 +1,11 @@
 import { motion } from 'framer-motion';
 import * as Styled from './Svg.styles';
 
-const Logo = () => {
+export interface NavbarLogoProps {
+	className?: string;
+}
+
+const NavbarLogo: React.FC<NavbarLogoProps> = ({ className }) => {
 	const pathVariants = {
 		hidden: {
 			opacity: 0,
@@ -77,7 +81,7 @@ const Logo = () => {
 		},
 	};
 	return (
-		<Styled.LogoWrapper>
+		<Styled.NavbarLogoWrapper className={className}>
 			<motion.svg fill='none' xmlns='http://www.w3.org/2000/svg'>
 				<motion.mask id='path-1-inside-1_3_8' fill='white'>
 					<motion.path
@@ -144,8 +148,8 @@ const Logo = () => {
 					</motion.filter>
 				</motion.defs>
 			</motion.svg>
-		</Styled.LogoWrapper>
+		</Styled.NavbarLogoWrapper>
 	);
 };
 
-export default Logo;
+export default NavbarLogo;

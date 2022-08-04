@@ -1,22 +1,22 @@
 import styled from 'styled-components/macro';
-import { boolean } from 'yup';
 
 export interface switchProps {
-	isDark: boolean;
+	isChecked: boolean;
 }
 
 export const Switch = styled.div<switchProps>`
 	position: relative;
-	width: 75px;
+	min-width: 75px;
 	height: 42px;
 	border: solid 1px #444e72;
 	background-color: #fff;
 	border-radius: 50px;
 	display: flex;
 	padding: 4px;
-
+	/* margin-right: 16px; */
 	cursor: pointer;
-	justify-content: ${({ isDark }) => (isDark ? ` flex-start ` : `flex-end `)};
+
+	justify-content: ${({ isChecked }) => (isChecked ? ` flex-start ` : `flex-end `)};
 `;
 
 export const Handle = styled.div`

@@ -57,6 +57,10 @@ export const colors = {
 		SecondaryFill: 'rgba(68, 78, 114, 1)',
 		SecondaryStroke: 'rgba(68, 78, 114, 1)',
 	},
+	background: {
+		// gradient: 'linear-gradient(207deg, #47bfdf 100%, #4a91ff -33%), linear-gradient(to bottom, #fff, #fff)',
+		gradient: 'linear-gradient(189deg, rgba(71,191,223,1) 20%, rgba(74,145,255,1) 67%) no-repeat;',
+	},
 };
 
 export const darkColors = {
@@ -109,6 +113,10 @@ export const darkColors = {
 		primaryStroke: 'rgba(255, 255, 255, 1)',
 		SecondaryFill: 'rgba(68, 78, 114, 1)',
 		SecondaryStroke: 'rgba(68, 78, 114, 1)',
+	},
+	background: {
+		// gradient: ' linear-gradient(207deg, #191634 100%, #1e437c -33%), linear-gradient(to bottom, #fff, #fff);',
+		gradient: ' linear-gradient(189deg, rgba(30,67,124,1) 15%, rgba(25,22,52,1) 78%) , no-repeat',
 	},
 };
 
@@ -168,8 +176,8 @@ export type AppFontWeightType = typeof fontWeights;
 
 export const responsiveBreakPoints = {
 	phone: 'max-width: 414px',
-	tablet: 'min-width: 414px ',
-	desktop: 'min-width: 1280px',
+	tablet: 'max-width: 1280px ',
+	desktop: 'min-width: 1920px',
 };
 
 export type AppBreakpointsType = typeof responsiveBreakPoints;
@@ -218,6 +226,7 @@ export const boxShadows = {
 	searchInput: ' inset -6px 4px 4px 0 rgba(255, 255, 255, 0.1), inset 2px -3px 6px 0 rgba(0, 0, 0, 0.1)',
 
 	notificationModal: '  0 2px 20px 0 rgba(0, 0, 0, 0.16);',
+	desktopNavbar: '0 1px 2px 0 rgba(0, 0, 0, 0.1);',
 };
 export type AppBoxShadowsType = typeof boxShadows;
 /* Z-indexes */
