@@ -1,5 +1,15 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { SvgFav, SvgFb, SvgGoogle, SvgHome, SvgHomeFull, SvgLogout, SvgMap } from '../../assets/Svg.styles';
+import {
+	SvgFav,
+	SvgFb,
+	SvgGoogle,
+	SvgHome,
+	SvgHomeFull,
+	SvgLogout,
+	SvgMap,
+	SvgMenu,
+	SvgSearch,
+} from '../../assets/Svg.styles';
 
 import * as Styled from './styles';
 
@@ -10,6 +20,7 @@ export type ButtonProps<T extends ElementType> = {
 	disabled?: boolean;
 	svg?: string;
 	navbar?: boolean;
+	footer?: boolean;
 	children: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
@@ -19,7 +30,8 @@ const Button = <T extends ElementType = 'button'>({
 	login,
 	addToFav,
 	children,
-	navBar,
+	navbar,
+	footer,
 	svg,
 	className,
 	...rest
@@ -40,8 +52,14 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgHomeFull width='30' height='30' />;
 			case 'logout':
 				return <SvgLogout width='30' height='30' />;
+			case 'logoutDark':
+				return <SvgLogout outlinedark='true' width='30' height='30' />;
 			case 'map':
 				return <SvgMap width='30' height='30' />;
+			case 'menu':
+				return <SvgMenu width='30' height='30' />;
+			case 'search':
+				return <SvgSearch width='30' height='30' />;
 
 			default:
 				break;
@@ -53,6 +71,8 @@ const Button = <T extends ElementType = 'button'>({
 				as={renderAs as ElementType}
 				addToFav={addToFav}
 				login={login}
+				navbar={navbar}
+				footer={footer}
 				svg={svg}
 				{...rest}
 				className={className}>

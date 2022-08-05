@@ -1,5 +1,5 @@
 import styled, { css } from 'styled-components/macro';
-import { SvgFav, SvgProps } from '../../assets/Svg.styles';
+import { SvgFav } from '../../assets/Svg.styles';
 
 const buttonCustomProps = css`
 	--mainBg: ${({ theme }) => theme.colors.buttons.primary.bg};
@@ -26,8 +26,9 @@ const buttonCustomProps = css`
 const defaultButton = css`
 	/* display */
 	display: flex;
+	flex-direction: row;
 	justify-content: center;
-	max-width: 100%;
+	/* max-width: 100%; */
 	align-items: center;
 
 	/* styling */
@@ -109,6 +110,13 @@ const linkButton = css`
 const navbarButton = css`
 	color: var(--mainTextColor);
 `;
+const MobileFooterButton = css`
+	color: var(--mainTextColor);
+	flex-direction: column;
+	font-weight: normal;
+	font-size: ${({ theme }) => theme.textFontSize.xs};
+	line-height: 1.25;
+`;
 
 const activeButton = css`
 	transform: scale(0.97);
@@ -119,6 +127,7 @@ interface StyledButtonProps {
 	login?: boolean;
 	disabled?: boolean;
 	navbar?: boolean;
+	footer?: boolean;
 	as?: React.ElementType;
 }
 export const IconWrapper = styled.div`
@@ -137,23 +146,24 @@ export const BTN = styled.button<StyledButtonProps>`
 	${defaultButton}
 
 	&:hover {
-		${p => !p.disabled && !p.addToFav && !p.navbar && !p.as && hoveredLoginButton};
+		${p => !p.disabled && !p.addToFav && !p.navbar && !p.as && !p.footer && hoveredLoginButton};
 		${p => !p.disabled && p.addToFav && hoveredAddToFavButton};
 		${p => p.as && hoveredLinkButton};
 	}
 
 	&:focus {
-		${p => !p.navbar && !p.disabled && !p.addToFav && focusedButton};
+		${p => !p.footer && !p.navbar && !p.disabled && !p.addToFav && focusedButton};
 	}
 
 	&:active {
-		${p => !p.navbar && !p.disabled && activeButton};
+		${p => !p.footer && !p.navbar && !p.disabled && activeButton};
 	}
 
 	${p => p.login && loginButton};
 	${p => p.addToFav && addToFavButton}
 	${p => p.as && linkButton}
 	${p => p.navbar && navbarButton}
+	${p => p.footer && MobileFooterButton}
 
 	&:disabled {
 		${p => p.login && disabledLoginButton};
@@ -161,6 +171,8 @@ export const BTN = styled.button<StyledButtonProps>`
 	}
 
 	${IconWrapper} {
-		display: ${props => ((props.addToFav || props.as || props.navbar) && !props.disabled ? `block  ` : `none `)};
+		display: ${props =>
+			(props.addToFav || props.as || props.navbar || props.footer) && !props.disabled ? `block  ` : `none `};
+		margin-right: ${props => props.footer && `0`};
 	}
 `;

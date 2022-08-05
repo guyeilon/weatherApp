@@ -19,8 +19,6 @@ export const useThemeMode = () => {
 		// const localTheme = themeData;
 
 		localTheme && setTheme(localTheme);
-		console.log('render', localTheme);
-		console.log(theme);
 
 		// typeof localTheme === 'string' && setTheme(localTheme);
 	}, [localTheme]);

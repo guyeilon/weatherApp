@@ -9,7 +9,7 @@ import { ReactComponent as Home } from './Svgs/homeOutline.svg';
 import { ReactComponent as HomeFull } from './Svgs/homeFull.svg';
 import { ReactComponent as Logout } from './Svgs/logout.svg';
 import { ReactComponent as Map } from './Svgs/map.svg';
-// import { ReactComponent as NavbarLogo } from './Svgs/navbarLogo.svg';
+import { ReactComponent as Menu } from './Svgs/menu.svg';
 import { ReactComponent as Fav } from './Svgs/fav.svg';
 import { ReactComponent as Google } from './Svgs/google.svg';
 import { ReactComponent as Fb } from './Svgs/facebook.svg';
@@ -76,6 +76,9 @@ const svgStyles = <
 };
 
 export const SvgTest = styled(Test)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgMenu = styled(Menu)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgMap = styled(Map)<SvgProps>`

@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './design/globalStyle';
 
 import { useSystemDesign } from './design/useSystemDesign';
-import useThemeMode from './hooks/useThemeMode';
+
 import ThemeContext from './contexts/ThemeContext';
 
 import './design/index.css';
-import { SvgMoon, SvgSun } from './assets/Svg.styles';
+
 import useStore from './App/store';
-import Login from './Pages/Login';
-import Switcher from './Common/Switcher';
-import DesktopNavbar from './Components/DesktopNavbar';
+
+import Navbar from './Components/Navbar';
 
 const App: React.FC = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();
@@ -24,7 +23,7 @@ const App: React.FC = () => {
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>
 				<GlobalStyles />
-				<DesktopNavbar />
+				{/* <Navbar /> */}
 
 				{/* <Login /> */}
 			</ThemeProvider>
