@@ -13,15 +13,10 @@ export const InputWrapper = styled.div`
 	max-width: 100%;
 
 	order: 4;
-
-	margin-left: 47px;
-	margin-right: 40px;
-	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		margin-right: 124px;
-	}
 `;
 export const searchInput = styled.input`
 	font-size: ${({ theme }) => theme.textFontSize.base};
+	font-weight: bold;
 	line-height: 1.2;
 	width: 100%;
 	color: ${({ theme }) => theme.colors.inputs.textInputColor};
@@ -29,7 +24,6 @@ export const searchInput = styled.input`
 	::placeholder {
 		color: ${({ theme }) => theme.colors.inputs.placeHolderColor};
 	}
-	background-color: ${({ theme }) => theme.colors.inputs.mainBg};
 	border-radius: ${({ theme }) => theme.border.base};
 	padding: 16px 24px;
 `;

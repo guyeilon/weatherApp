@@ -15,7 +15,11 @@ import { ReactComponent as Google } from './Svgs/google.svg';
 import { ReactComponent as Fb } from './Svgs/facebook.svg';
 import { ReactComponent as Clouds } from './Svgs/clouds.svg';
 import { ReactComponent as Test } from './Svgs/test-cropped.svg';
+import { ReactComponent as Arrow } from './Svgs/arrow.svg';
+import { ReactComponent as Location } from './Svgs/location.svg';
+// import { ReactComponent as Loader } from './Svgs/loader.svg';
 
+// export { Loader };
 import Logo from './Logo';
 import NavbarLogo from './NavbarLogo';
 
@@ -78,6 +82,13 @@ const svgStyles = <
 export const SvgTest = styled(Test)<SvgProps>`
 	${props => svgStyles(props)};
 `;
+
+export const SvgLocation = styled(Location)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrow = styled(Arrow)<SvgProps>`
+	${props => svgStyles(props)};
+`;
 export const SvgMenu = styled(Menu)<SvgProps>`
 	${props => svgStyles(props)};
 `;
@@ -137,7 +148,7 @@ export const LogoWrapper = styled.div`
 		height: 97px;
 		display: flex;
 		margin: 0 auto;
-		margin-top: 7.4px;
+		margin-top: 10px;
 		margin-bottom: 31px;
 	}
 `;

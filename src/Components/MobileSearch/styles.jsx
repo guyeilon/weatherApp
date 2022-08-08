@@ -1,4 +1,10 @@
 import styled from 'styled-components/macro';
+import Button from '../../Common/Button';
+import SearchInput from '../../Common/SearchInput';
+
+export const Btn = styled(Button)`
+	width: fit-content;
+`;
 
 export const SearchModal = styled.div`
 	width: 100%;
@@ -39,4 +45,20 @@ export const SearchWrapper = styled.div`
 
 	height: 100vh;
 	width: 100%;
+`;
+
+export const InputWrapper = styled.div`
+	width: 100%;
+`;
+
+export const Input = styled(SearchInput)`
+	background-color: #fff;
+	box-shadow: ${({ theme }) => theme.boxShadows.button}; ;
+`;
+
+export const ArrowBtn = styled(Btn).attrs(props => ({
+	svg: 'arrow',
+	footer: true,
+}))`
+	margin-bottom: 16px;
 `;

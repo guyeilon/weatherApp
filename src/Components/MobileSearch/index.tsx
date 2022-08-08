@@ -32,7 +32,12 @@ const MobileSearch: React.FC<MobileSearchProps> = ({ setToggle, toggle }) => {
 					animate='visible'
 					exit='hidden'
 					onClick={(e: any) => e.stopPropagation()}
-					variants={ModalVariants}></Styled.SearchModal>
+					variants={ModalVariants}>
+					<Styled.ArrowBtn onClick={() => setToggle(!toggle)} />
+					<Styled.InputWrapper>
+						<Styled.Input />
+					</Styled.InputWrapper>
+				</Styled.SearchModal>
 			</Styled.SearchWrapper>
 		</AnimatePresence>
 	);

@@ -15,7 +15,9 @@ const DesktopNavbar: React.FC<DesktopNavbar> = () => {
 			<Styled.Logo />
 			<Styled.HomeBtn>Home</Styled.HomeBtn>
 			<Styled.FavBtn>Favorites</Styled.FavBtn>
-			<Styled.InputWrapper>{/* <Styled.Input /> */}</Styled.InputWrapper>
+			<Styled.InputWrapper>
+				<Styled.Input />
+			</Styled.InputWrapper>
 
 			<Styled.SwitcherWrapper>
 				<Styled.DegreeSwitcher

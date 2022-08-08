@@ -11,7 +11,11 @@ import './design/index.css';
 
 import useStore from './App/store';
 
-import Navbar from './Components/Navbar';
+import Login from './Pages/Login';
+import { Routes, Route } from 'react-router-dom';
+
+import Layout from './Layout/Layout';
+import Forecast from './Components/Forecast';
 
 const App: React.FC = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();
@@ -23,9 +27,12 @@ const App: React.FC = () => {
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>
 				<GlobalStyles />
-				{/* <Navbar /> */}
-
-				{/* <Login /> */}
+				<Routes>
+					<Route path='/login' element={<Login />} />
+					<Route path='/' element={<Layout />}>
+						<Route path='' element={<Forecast />} />
+					</Route>
+				</Routes>
 			</ThemeProvider>
 		</ThemeContext>
 	);

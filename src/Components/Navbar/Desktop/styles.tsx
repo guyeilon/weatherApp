@@ -93,9 +93,15 @@ export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
 `;
 
 export const Input = styled(SearchInput)``;
-export const InputWrapper = styled(SearchInput)`
+export const InputWrapper = styled.div`
 	order: 4;
 	width: 372px;
+	margin-right: 40px;
+	@media only screen and (${({ theme }) => theme.media.desktop}) {
+		order: 4;
+		width: 400px;
+		margin-right: 124px;
+	}
 `;
 
 export const SwitcherWrapper = styled.div`

@@ -3,22 +3,20 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
   html {
         font-size: 62.5%;
-      min-height: 100%;
+      min-height: 100%;                    
       
       
     }
     body {
       color: ${({ theme }) => theme.colors.primary.text};
       background: ${({ theme }) => theme.colors.background.gradient};
-      /* background-repeat: no-repeat; */
-      /* background-size: auto 100%; */
       /* background: red; */
+
        min-height: 100%;
-         background-repeat: no-repeat;
-    background-attachment: fixed;
-       /* width: 100%; */
-         
-            /* min-height: 100vh; */
+       
+      /* background-repeat: no-repeat; */
+      background-attachment: fixed;
+      
        
      
      

@@ -9,6 +9,6 @@ export const FormSchema = yup.object().shape({
 	password: yup
 		.string()
 		.min(6)
-		.matches(passwordRules, { message: 'Please enter a valid passWord' })
+		.matches(passwordRules, { message: 'Please enter a valid password' })
 		.required('Required'),
 });
