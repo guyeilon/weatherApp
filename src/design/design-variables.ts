@@ -8,7 +8,7 @@
 
 export const colors = {
 	primary: {
-		text: '#444e72',
+		text: '#fff',
 		background: '#48bae4',
 		search: '#838baa',
 		searchDark: '#444e72',
@@ -65,7 +65,7 @@ export const colors = {
 
 export const darkColors = {
 	primary: {
-		text: '#444e72',
+		text: '#fff',
 		background: '#1a2b55',
 		search: '#838baa',
 		searchDark: '#444e72',
@@ -210,6 +210,7 @@ export type AppSpacingType = typeof spacing;
 export const borderRadii = {
 	base: '15px',
 	modal: '30px',
+	modalUp: '30px 30px 0 0',
 	button: '10px',
 	input: '10px',
 	toggle: '100px',

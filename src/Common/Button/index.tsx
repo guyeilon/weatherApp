@@ -1,5 +1,7 @@
+import { type } from 'os';
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import {
+	SvgArrow,
 	SvgFav,
 	SvgFb,
 	SvgGoogle,
@@ -18,12 +20,26 @@ export type ButtonProps<T extends ElementType> = {
 	login?: boolean;
 	addToFav?: boolean;
 	disabled?: boolean;
-	svg?: string;
+	svg?: svgTypes;
 	navbar?: boolean;
 	footer?: boolean;
 	children: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
+type svgTypes =
+	| 'fav'
+	| 'favorites'
+	| 'fb'
+	| 'google'
+	| 'home'
+	| 'homeFull'
+	| 'logout'
+	| 'logoutDark'
+	| 'map'
+	| 'menu'
+	| 'search'
+	| 'arrow'
+	| undefined;
 
 const Button = <T extends ElementType = 'button'>({
 	renderAs,
@@ -36,7 +52,7 @@ const Button = <T extends ElementType = 'button'>({
 	className,
 	...rest
 }: ButtonProps<T>): JSX.Element => {
-	const IconToShow = (svg: string | undefined) => {
+	const IconToShow = (svg: svgTypes) => {
 		switch (svg) {
 			case 'fav':
 				return <Styled.FavIcon />;
@@ -60,6 +76,8 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgMenu width='30' height='30' />;
 			case 'search':
 				return <SvgSearch width='30' height='30' />;
+			case 'arrow':
+				return <SvgArrow width='30' height='30' />;
 
 			default:
 				break;
