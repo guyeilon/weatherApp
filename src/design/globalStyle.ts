@@ -10,7 +10,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
       color: ${({ theme }) => theme.colors.primary.text};
       background: ${({ theme }) => theme.colors.background.gradient};
-      /* background: red; */
+    
 
        min-height: 100%;
        

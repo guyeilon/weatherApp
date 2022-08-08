@@ -8,7 +8,7 @@ export const Btn = styled(Button)`
 
 export const SearchModal = styled.div`
 	width: 100%;
-	height: 800px;
+	height: calc(100vh - 90px);
 
 	display: flex;
 	flex-direction: column;
