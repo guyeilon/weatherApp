@@ -6,6 +6,7 @@ import * as Styled from './styles';
 import { getDailyForecast, getFiveDaysForecast, getHourlyForecast, getLocationKey } from '../../api/weatherApi';
 import Loader from '../../assets/Loader';
 import DailyForecast from '../DailyForecast';
+import { getForecastIcon } from '../../constants';
 
 export interface ForecastProps {}
 
@@ -63,21 +64,24 @@ const Forecast: React.FC<ForecastProps> = Props => {
 		],
 	});
 
+	const icon = results[0].data?.DailyForecasts[0]?.Day?.Icon;
+	const dailyTemp = results[0].data?.DailyForecasts[0]?.Temperature;
+
 	console.log(results);
-	console.log(locationKey);
+	console.log(dailyTemp);
 
 	if (!isLocationServiceOn) {
 		content = <NoLocation />;
 	}
 
-	if (isLoading) {
+	if (isLoading && isLocationServiceOn) {
 		content = <Loader />;
 	}
 
 	if (isSuccess) {
 		content = (
 			<>
-				<DailyForecast cityName={cityName} />
+				<DailyForecast cityName={cityName} icon={icon} dailyTemp={dailyTemp} />
 			</>
 		);
 	}

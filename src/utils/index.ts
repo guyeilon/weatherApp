@@ -1,15 +1,4 @@
-export const getInitialThemeMode = () => {
-	// if (typeof window !== 'undefined') {
-	const persistedColorPreference = localStorage.getItem('themeMode');
-	const hasPersistedPreference = typeof persistedColorPreference === 'string';
-	if (hasPersistedPreference) {
-		console.log(persistedColorPreference);
-
-		return persistedColorPreference;
-	} else {
-		return 'light';
-	}
-	// }
-
-	// return 'light';
+export const fToCTemp = (fTemp: number) => {
+	const cTemp = Math.round(((fTemp - 32) * 5) / 9);
+	return cTemp;
 };

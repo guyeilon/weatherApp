@@ -16,7 +16,6 @@ export const MobileMenu = styled.div`
 
 export const ContentWrapper = styled.div`
 	display: block;
-	height: 100vh;
 
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		display: none;
