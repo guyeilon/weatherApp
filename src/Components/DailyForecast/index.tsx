@@ -21,7 +21,7 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, icon, dailyTemp
 		<>
 			<Styled.ContentWrapper>
 				<Styled.CityName>{cityName}</Styled.CityName>
-				<Flex center>
+				<Flex>
 					<Styled.Icon src={getForecastIcon(icon)} />
 					<Styled.AllDayTemp>
 						{toggleTemperature(maxTemp)}&deg;<div> - {toggleTemperature(minTemp)}&deg;</div>

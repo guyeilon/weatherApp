@@ -25,9 +25,11 @@ export const AllDayTemp = styled.p`
 	color: ${({ theme }) => theme.colors.primary.text};
 	line-height: 1.2;
 	align-self: flex-end;
+	vertical-align: bottom;
 
 	& > div {
 		font-size: 45px;
+		padding-bottom: 22px;
 	}
 `;
 export const NightTemp = styled.p`

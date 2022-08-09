@@ -70,7 +70,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	console.log(results);
 	console.log(dailyTemp);
 
-	if (!isLocationServiceOn) {
+	if (!isLocationServiceOn && !isLoading) {
 		content = <NoLocation />;
 	}
 
