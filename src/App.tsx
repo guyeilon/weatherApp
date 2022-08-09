@@ -23,8 +23,6 @@ const App: React.FC = () => {
 
 	const themeMode = store.theme === 'light' ? lightTheme : darkTheme;
 
-	console.log(process.env.REACT_APP_API_KEY);
-
 	return (
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>

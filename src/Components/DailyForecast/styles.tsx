@@ -18,7 +18,7 @@ export const Icon = styled.img`
 	width: 180px;
 	height: 180px;
 `;
-export const AllDayTemp = styled.p`
+export const AllDayTemp = styled.div`
 	display: flex;
 	align-items: flex-end;
 	font-size: 100px;

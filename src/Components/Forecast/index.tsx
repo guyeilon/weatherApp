@@ -52,14 +52,13 @@ const Forecast: React.FC<ForecastProps> = Props => {
 				queryKey: ['HourlyForecast'],
 				queryFn: () => getHourlyForecast(key),
 				staleTime: Infinity,
-				enabled: !!key,
-				retry: false,
+				enabled: false,
 			},
 			{
 				queryKey: ['5daysForecast'],
 				queryFn: () => getFiveDaysForecast(key),
 				staleTime: Infinity,
-				enabled: !!key,
+				enabled: false,
 			},
 		],
 	});
