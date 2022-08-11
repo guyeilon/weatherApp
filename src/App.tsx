@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyles } from './design/globalStyle';
@@ -22,7 +22,9 @@ const App: React.FC = () => {
 	const store = useStore(state => state);
 
 	const themeMode = store.theme === 'light' ? lightTheme : darkTheme;
-
+	useEffect(() => {
+		store.getPermission();
+	}, []);
 	return (
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>
@@ -30,7 +32,9 @@ const App: React.FC = () => {
 				<Routes>
 					<Route path='/login' element={<Login />} />
 					<Route path='/' element={<Layout />}>
-						<Route path='' element={<Forecast />} />
+						<Route path='/' element={<Forecast />} />
+						<Route path='/home' element={<Forecast />} />
+						<Route path='/fav' element={<Forecast />} />
 					</Route>
 				</Routes>
 			</ThemeProvider>

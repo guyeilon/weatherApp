@@ -3,31 +3,17 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
   html {
         font-size: 62.5%;
-      min-height: 100%;                    
-      
-      
-    }
-    body {
-      color: ${({ theme }) => theme.colors.primary.text};
+        
+      }
+      body {
       background: ${({ theme }) => theme.colors.background.gradient};
-    
-
-       min-height: 100%;
-       
-      /* background-repeat: no-repeat; */
-      background-attachment: fixed;
       
-       
-     
-     
+        background-attachment: fixed;
 
-  }
+      }
 
 
-  .icon {
-    color: ${({ theme }) => theme.colors.primary.text};
-    font-size: ${({ theme }) => theme.textFontSize.sm};
-  }
+
 
 
   ::-webkit-scrollbar {

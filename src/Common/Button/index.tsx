@@ -3,6 +3,7 @@ import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import {
 	SvgArrow,
 	SvgFav,
+	SvgFavFull,
 	SvgFb,
 	SvgGoogle,
 	SvgHome,
@@ -39,6 +40,7 @@ type svgTypes =
 	| 'menu'
 	| 'search'
 	| 'arrow'
+	| 'favoritesFull'
 	| undefined;
 
 const Button = <T extends ElementType = 'button'>({
@@ -58,6 +60,8 @@ const Button = <T extends ElementType = 'button'>({
 				return <Styled.FavIcon />;
 			case 'favorites':
 				return <SvgFav width='30' height='30' />;
+			case 'favoritesFull':
+				return <SvgFavFull width='30' height='30' />;
 			case 'fb':
 				return <SvgFb />;
 			case 'google':

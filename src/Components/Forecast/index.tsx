@@ -6,15 +6,15 @@ import * as Styled from './styles';
 import { getDailyForecast, getFiveDaysForecast, getHourlyForecast, getLocationKey } from '../../api/weatherApi';
 import Loader from '../../assets/Loader';
 import DailyForecast from '../DailyForecast';
-import { getForecastIcon } from '../../constants';
+import useStore from '../../App/store';
+import { getTime } from '../../utils';
 
 export interface ForecastProps {}
 
 const Forecast: React.FC<ForecastProps> = Props => {
 	const { error, ...position } = usePosition();
-
-	// console.log(error);
-	// console.log(position);
+	const store = useStore(state => state);
+	const permission = store.permission;
 
 	const isLocationServiceOn = Object.keys(position).length > 0;
 
@@ -38,7 +38,6 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const cityName = locationKey?.LocalizedName;
 
 	const key = locationKey?.Key;
-	console.log(key);
 
 	const results = useQueries({
 		queries: [
@@ -63,24 +62,34 @@ const Forecast: React.FC<ForecastProps> = Props => {
 		],
 	});
 
+	// data:
 	const icon = results[0].data?.DailyForecasts[0]?.Day?.Icon;
 	const dailyTemp = results[0].data?.DailyForecasts[0]?.Temperature;
+	const dayPhrase = results[0].data?.DailyForecasts[0]?.Day.IconPhrase;
+	const nightPhrase = results[0].data?.DailyForecasts[0]?.Night.IconPhrase;
+	const timestamp = results[0].dataUpdatedAt;
 
-	console.log(results);
-	console.log(dailyTemp);
+	console.log(results[0]);
 
-	if (!isLocationServiceOn && !isLoading) {
+	if (!isLocationServiceOn || error) {
 		content = <NoLocation />;
 	}
 
-	if (isLoading && isLocationServiceOn) {
+	if (isLoading && (isLocationServiceOn || !error)) {
 		content = <Loader />;
 	}
 
 	if (isSuccess) {
 		content = (
 			<>
-				<DailyForecast cityName={cityName} icon={icon} dailyTemp={dailyTemp} />
+				<DailyForecast
+					cityName={cityName}
+					icon={icon}
+					dailyTemp={dailyTemp}
+					dayPhrase={dayPhrase}
+					nightPhrase={nightPhrase}
+					timestamp={timestamp}
+				/>
 			</>
 		);
 	}

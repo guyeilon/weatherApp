@@ -4,7 +4,6 @@ import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 
 import * as Styled from './styles';
-import MobileFooter from './Footer';
 
 interface MobileNavbarProps {}
 
@@ -24,7 +23,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 
 	return (
 		<>
-			<Styled.ContentWrapper>
+			<Styled.MobileContentWrapper>
 				<Styled.MobileNavbar>
 					<Styled.MenuBtn onClick={() => setToggle(!toggle)} />
 				</Styled.MobileNavbar>
@@ -37,7 +36,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 							animate='visible'
 							exit='hidden'
 							variants={overlayVariants}>
-							<Styled.mobileMenu
+							<Styled.MobileMenu
 								onClick={(e: any) => e.stopPropagation()}
 								as={motion.div}
 								initial='hidden'
@@ -68,13 +67,11 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 									</Styled.DegreeSwitcherWrapper>
 								</Styled.SwitcherWrapper>
 								<Styled.LogoutBtn>Log out</Styled.LogoutBtn>
-							</Styled.mobileMenu>
+							</Styled.MobileMenu>
 						</Styled.MobileModalWrapper>
 					)}
 				</AnimatePresence>
-
-				<MobileFooter />
-			</Styled.ContentWrapper>
+			</Styled.MobileContentWrapper>
 		</>
 	);
 };

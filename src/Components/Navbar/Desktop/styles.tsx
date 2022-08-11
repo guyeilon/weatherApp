@@ -1,22 +1,35 @@
+import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
 import { SvgNavbarLogo } from '../../../assets/Svg.styles';
 import Button from '../../../Common/Button';
+import { IconWrapper } from '../../../Common/Button/styles';
 import SearchInput from '../../../Common/SearchInput';
 import Switcher from '../../../Common/Switcher';
 
-export const ContentWrapper = styled.div`
+export const DesktopContentWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.primary.background};
 	box-shadow: ${({ theme }) => theme.boxShadows.desktopNavbar};
-	display: inline-flex;
+	display: grid;
+	grid-template-columns:
+		[first] 40px [logo] 0.5fr [menu] 1.5fr
+		[search] auto [switcher] 1.5fr [map] minmax(min-content, 0.25fr)
+		[logout] minmax(min-content, 0.25fr) [last] 40px [end];
+
+	grid-template-areas: '. logo menu input switcher map logout . ';
+
 	align-items: center;
-	justify-content: space-between;
+	justify-items: center;
+	grid-gap: 10px;
 
 	min-width: 100%;
 	height: 94px;
 
-	padding: 0 50px;
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		padding: 0 70px;
+		grid-template-columns:
+			[first] 60px [logo] 0.5fr [menu] 1.5fr [search] auto [map] 1fr [switcher] 0.5fr
+			[logout] 0.5fr [last] 60px [end];
+
+		grid-template-areas: '. logo menu input map switcher  logout . ';
 	}
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		display: none;
@@ -24,39 +37,54 @@ export const ContentWrapper = styled.div`
 `;
 
 export const Logo = styled(SvgNavbarLogo)`
-	order: 1;
-	margin-right: 28px;
-	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		margin-right: 190px;
-	}
+	grid-area: logo;
+	justify-self: start;
 `;
 
 export const NavbarBtn = styled(Button)`
-	/* flex-basis: 50%; */
 	width: fit-content;
 `;
-export const HomeBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'home',
-	navbar: true,
-}))`
-	margin-right: 32px;
-
-	order: 2;
-
+export const MenuWrapper = styled.div`
+	grid-area: menu;
+	display: flex;
+	gap: 16px;
+	justify-self: center;
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		margin-right: 48px;
+		gap: 46px;
 	}
 `;
-export const FavBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'favorites',
+
+export const HomeBtn = styled(NavbarBtn).attrs(props => ({
 	navbar: true,
+	children: 'Home',
 }))`
-	margin-right: 56px;
+	justify-self: start;
+	border-bottom: 2px solid transparent;
+`;
 
-	order: 3;
+export const FavBtn = styled(NavbarBtn).attrs(props => ({
+	navbar: true,
+	children: 'Favorites',
+}))`
+	justify-self: start;
+	border-bottom: 2px solid transparent;
+`;
+export const LinkBorder = styled.div`
+	margin: 0 auto;
+	width: 120%;
 
-	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		margin-right: 139px;
+	border-bottom: 3px solid #fff;
+	display: none;
+	bottom: -25px;
+	margin: auto 0;
+	/* right: 5px; */
+	position: absolute;
+`;
+
+export const RouterWrap = styled(NavLink)`
+	position: relative;
+	&.active > div {
+		display: block;
 	}
 `;
 
@@ -72,40 +100,47 @@ export const MapBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'map',
 	navbar: true,
 }))`
-	margin-right: 32px;
+	@media only screen and (${({ theme }) => theme.media.underDesktop}) {
+		${IconWrapper} {
+			margin-right: 0;
+		}
+	}
 
-	order: 6;
+	grid-area: map;
+	justify-self: end;
+
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		order: 5;
-		margin-right: 81px;
+		justify-self: center;
 	}
 `;
 export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'logout',
 	navbar: true,
 }))`
-	/* margin-left: auto; */
-
-	order: 7;
-
-	@media only screen and (${({ theme }) => theme.media.desktop}) {
+	@media only screen and (${({ theme }) => theme.media.underDesktop}) {
+		${IconWrapper} {
+			margin-right: 0;
+		}
 	}
+
+	grid-area: logout;
+	justify-self: end;
 `;
 
 export const Input = styled(SearchInput)``;
 export const InputWrapper = styled.div`
-	order: 4;
+	grid-area: input;
+
 	width: 372px;
-	margin-right: 40px;
+
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		order: 4;
 		width: 400px;
-		margin-right: 124px;
 	}
 `;
 
 export const SwitcherWrapper = styled.div`
-	order: 5;
+	grid-area: switcher;
 
 	display: flex;
 
@@ -119,78 +154,4 @@ export const DegreeSwitcher = styled(Switcher)`
 	margin-right: 30px;
 `;
 
-export const ThemeSwitcher = styled(Switcher)`
-	margin-right: 96px;
-`;
-
-export const MobileMenu = styled.div`
-	display: none;
-
-	@media only screen and (${({ theme }) => theme.media.phone}) {
-		display: block;
-	}
-`;
-
-export const MobileContent = styled.div`
-	display: block;
-	height: 100vh;
-
-	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		display: none;
-	}
-	@media only screen and (${({ theme }) => theme.media.tablet}) {
-		display: none;
-	}
-`;
-export const MobileNavbar = styled.div`
-	background: transparent;
-	display: inline-flex;
-	align-items: center;
-
-	min-width: 100%;
-	height: 30px;
-	margin-top: 30px;
-
-	padding: 0 30px;
-`;
-
-export const MenuBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'menu',
-	navbar: true,
-}))`
-	margin-left: auto;
-`;
-
-export const MobileModalWrapper = styled.div`
-	position: fixed;
-	top: 0;
-	left: 0;
-	-webkit-backdrop-filter: blur(10px);
-	/* backdrop-filter: blur(10px); */
-	/* background-color: rgba(140, 140, 140, 0.2); */
-	/* background-color: rgba(140, 140, 140, 0.2); */
-	backdrop-filter: blur(0.4rem);
-	z-index: 2;
-
-	height: 100vh;
-	width: 100%;
-`;
-
-export const mobileMenu = styled.div`
-	width: 100%;
-	height: 416px;
-
-	position: fixed;
-	top: auto;
-	right: auto;
-	left: auto;
-	margin: 0 auto;
-	bottom: 0;
-
-	user-select: none;
-
-	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
-	border-top-right-radius: ${({ theme }) => theme.border.modal};
-	border-top-left-radius: ${({ theme }) => theme.border.modal};
-	box-shadow: ${({ theme }) => theme.boxShadows.base};
-`;
+export const ThemeSwitcher = styled(Switcher)``;

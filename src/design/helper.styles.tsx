@@ -2,6 +2,7 @@ import styled from 'styled-components/macro';
 
 interface FlexProps {
 	center?: boolean;
+	mobile?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -12,4 +13,14 @@ export const Flex = styled.div<FlexProps>`
       align-items:center;
       justify-content:center;
      `};
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		${({ mobile }) =>
+			mobile &&
+			`
+		
+      align-items:center;
+      justify-content:center;
+     `};
+	}
 `;

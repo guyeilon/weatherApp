@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { boolean } from 'yup';
-import MobileSearch from '../../../MobileSearch';
+
+import MobileSearch from '../MobileSearch';
 
 import * as Styled from './styles';
 
