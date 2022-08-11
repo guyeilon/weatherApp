@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import Button from '../../../../Common/Button';
+import Button from '../../Common/Button';
 
 export const NavbarBtn = styled(Button)`
 	width: fit-content;
@@ -26,6 +26,10 @@ export const MobileFooter = styled.div`
 	backdrop-filter: blur(20px);
 	border-top-right-radius: ${({ theme }) => theme.border.modal};
 	border-top-left-radius: ${({ theme }) => theme.border.modal};
+
+	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
+		display: none;
+	}
 `;
 
 export const HomeBtn = styled(NavbarBtn).attrs(props => ({

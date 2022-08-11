@@ -1,20 +1,45 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import useStore from '../../../App/store';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../assets/Svg.styles';
-import { motion, Variants, AnimatePresence } from 'framer-motion';
 
 import * as Styled from './styles';
-import SearchInput from '../../../Common/SearchInput';
-export interface DesktopNavbar {}
 
-const DesktopNavbar: React.FC<DesktopNavbar> = () => {
+import { NavLink, useLocation, useParams } from 'react-router-dom';
+export interface DesktopNavbarProps {}
+
+const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const store = useStore(state => state);
+	const location = useLocation();
+
+	const currentLocation = location.pathname.substring(1);
+
+	const [activeHome, setActiveHome] = useState(false);
+	const [activeFav, setActiveFav] = useState(false);
+
+	useEffect(() => {
+		if (currentLocation === 'home') {
+			setActiveHome(true);
+			setActiveFav(false);
+		}
+		if (currentLocation === 'fav') {
+			setActiveFav(true);
+			setActiveHome(false);
+		}
+	}, [currentLocation]);
 
 	return (
-		<Styled.ContentWrapper>
+		<Styled.DesktopContentWrapper>
 			<Styled.Logo />
-			<Styled.HomeBtn>Home</Styled.HomeBtn>
-			<Styled.FavBtn>Favorites</Styled.FavBtn>
+			<Styled.MenuWrapper>
+				<Styled.RouterWrap to='/home'>
+					<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} />
+					<Styled.LinkBorder />
+				</Styled.RouterWrap>
+				<Styled.RouterWrap to='/fav'>
+					<Styled.FavBtn svg={activeFav ? 'favoritesFull' : 'favorites'} />
+					<Styled.LinkBorder />
+				</Styled.RouterWrap>
+			</Styled.MenuWrapper>
 			<Styled.InputWrapper>
 				<Styled.Input />
 			</Styled.InputWrapper>
@@ -39,7 +64,7 @@ const DesktopNavbar: React.FC<DesktopNavbar> = () => {
 			<Styled.LogoutBtn>
 				<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 			</Styled.LogoutBtn>
-		</Styled.ContentWrapper>
+		</Styled.DesktopContentWrapper>
 	);
 };
 

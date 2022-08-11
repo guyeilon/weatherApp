@@ -12,6 +12,7 @@ export const colors = {
 		background: '#48bae4',
 		search: '#838baa',
 		searchDark: '#444e72',
+		modalText: '#444e72',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
@@ -69,6 +70,7 @@ export const darkColors = {
 		background: '#1a2b55',
 		search: '#838baa',
 		searchDark: '#444e72',
+		modalText: '#444e72',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
@@ -175,9 +177,11 @@ export type AppFontWeightType = typeof fontWeights;
 =============================================*/
 
 export const responsiveBreakPoints = {
-	phone: 'max-width: 640px',
-	tablet: 'min-width:640px',
-	desktop: 'min-width: 1920px',
+	phone: 'max-width: 970px',
+	abovePhone: 'min-width: 971px',
+	tablet: 'min-width:1281px',
+	desktop: 'min-width: 1281px',
+	underDesktop: 'max-width: 1280px',
 };
 
 export type AppBreakpointsType = typeof responsiveBreakPoints;
@@ -228,6 +232,7 @@ export const boxShadows = {
 
 	notificationModal: '  0 2px 20px 0 rgba(0, 0, 0, 0.16);',
 	desktopNavbar: '0 1px 2px 0 rgba(0, 0, 0, 0.1);',
+	text: '-2px 3px 1px rgba(0, 0, 0, 0.1), -1px 1px 2px rgba(255, 255, 255, 0.25);',
 };
 export type AppBoxShadowsType = typeof boxShadows;
 /* Z-indexes */

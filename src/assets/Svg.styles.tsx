@@ -11,6 +11,7 @@ import { ReactComponent as Logout } from './Svgs/logout.svg';
 import { ReactComponent as Map } from './Svgs/map.svg';
 import { ReactComponent as Menu } from './Svgs/menu.svg';
 import { ReactComponent as Fav } from './Svgs/fav.svg';
+import { ReactComponent as FavFull } from './Svgs/favFull.svg';
 import { ReactComponent as Google } from './Svgs/google.svg';
 import { ReactComponent as Fb } from './Svgs/facebook.svg';
 import { ReactComponent as Clouds } from './Svgs/clouds.svg';
@@ -107,6 +108,9 @@ export const SvgFahrenheit = styled(Fahrenheit)<SvgProps>`
 export const SvgFav = styled(Fav)<SvgProps>`
 	${props => svgStyles(props)};
 `;
+export const SvgFavFull = styled(FavFull)<SvgProps>`
+	${props => svgStyles(props)};
+`;
 export const SvgSearch = styled(Search)<SvgProps>`
 	${props => svgStyles(props)};
 `;
@@ -153,11 +157,11 @@ export const LogoWrapper = styled.div`
 	}
 `;
 export const NavbarLogoWrapper = styled.div`
-	width: 80px;
+	width: 85px;
 	height: 56px;
 	position: relative;
 
-	margin-right: 16px;
+	/* margin-right: 16px; */
 
 	& svg {
 		position: relative;
@@ -168,8 +172,14 @@ export const NavbarLogoWrapper = styled.div`
 		/* padding-bottom: 1%; */
 		height: 100%;
 		overflow: visible;
+		@media only screen and (${({ theme }) => theme.media.desktop}) {
+			transform: scale(0.7);
+			left: -15px;
+		}
 	}
 
-	@media only screen and (${({ theme }) => theme.media.phone}) {
+	@media only screen and (${({ theme }) => theme.media.desktop}) {
+		width: 110px;
+		height: 72px;
 	}
 `;

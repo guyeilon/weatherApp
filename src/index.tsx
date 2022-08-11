@@ -10,11 +10,11 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
 	<React.StrictMode>
 		<QueryClientProvider client={queryClient}>
-			<HashRouter>
+			<Router>
 				<Routes>
 					<Route path='/*' element={<App />} />
 				</Routes>
-			</HashRouter>
+			</Router>
 			<ReactQueryDevtools initialIsOpen />
 		</QueryClientProvider>
 	</React.StrictMode>

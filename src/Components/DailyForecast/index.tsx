@@ -3,12 +3,20 @@ import React from 'react';
 import useStore from '../../App/store';
 
 import { getForecastIcon } from '../../constants';
-import { Flex } from '../../design/styles';
-import { fToCTemp } from '../../utils';
+import { Flex } from '../../design/helper.styles';
+
+import { fToCTemp, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, icon, dailyTemp }) => {
+const DailyForecast: React.FC<DailyForecastProps> = ({
+	cityName,
+	icon,
+	dailyTemp,
+	dayPhrase,
+	nightPhrase,
+	timestamp,
+}) => {
 	const store = useStore(state => state);
 
 	const toggleTemperature = (temp: number) => {
@@ -19,16 +27,28 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, icon, dailyTemp
 	const minTemp = dailyTemp?.Minimum?.Value;
 	return (
 		<>
-			<Styled.ContentWrapper>
+			<Styled.DailyForecastContainer>
 				<Styled.CityName>{cityName}</Styled.CityName>
-				<Flex>
-					<Styled.Icon src={getForecastIcon(icon)} />
-					<Styled.AllDayTemp>
-						{toggleTemperature(maxTemp)}&deg;<div> - {toggleTemperature(minTemp)}&deg;</div>
-					</Styled.AllDayTemp>
-					{/* <Styled.NightTemp> - {toggleTemperature(minTemp)}&deg;</Styled.NightTemp> */}
-				</Flex>
-			</Styled.ContentWrapper>
+				<Styled.DailyTempIconWrapper>
+					{icon && <Styled.Icon src={getForecastIcon(icon)} />}
+					<Styled.DailyTempWrapper>
+						{maxTemp && (
+							<Styled.DayTemp>
+								{toggleTemperature(maxTemp)}
+								<span>&deg;</span>
+							</Styled.DayTemp>
+						)}
+						{minTemp && (
+							<Styled.NightTemp>
+								- {toggleTemperature(minTemp)}
+								<span>&deg;</span>
+							</Styled.NightTemp>
+						)}
+					</Styled.DailyTempWrapper>
+				</Styled.DailyTempIconWrapper>
+				<Styled.Phrase>{dayPhrase}</Styled.Phrase>
+				<Styled.Date>{getTime(timestamp)}</Styled.Date>
+			</Styled.DailyForecastContainer>
 		</>
 	);
 };

@@ -1,5 +1,4 @@
 import axios from 'axios';
-import { env } from 'process';
 
 const weatherApi = axios.create({
 	baseURL: 'https://dataservice.accuweather.com',
