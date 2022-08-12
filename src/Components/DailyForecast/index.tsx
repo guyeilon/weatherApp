@@ -1,30 +1,19 @@
-import { type } from '@testing-library/user-event/dist/type';
 import React from 'react';
 import useStore from '../../App/store';
-
 import { getForecastIcon } from '../../constants';
-import { Flex } from '../../design/helper.styles';
-
 import { fToCTemp, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({
-	cityName,
-	icon,
-	dailyTemp,
-	dayPhrase,
-	nightPhrase,
-	timestamp,
-}) => {
+const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, getForecastDailyDataByDayIdx }) => {
 	const store = useStore(state => state);
+
+	const [icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp] = getForecastDailyDataByDayIdx(0);
 
 	const toggleTemperature = (temp: number) => {
 		return store.degree === 'fahrenheit' ? temp : fToCTemp(temp);
 	};
 
-	const maxTemp = dailyTemp?.Maximum?.Value;
-	const minTemp = dailyTemp?.Minimum?.Value;
 	return (
 		<>
 			<Styled.DailyForecastContainer>
@@ -32,15 +21,15 @@ const DailyForecast: React.FC<DailyForecastProps> = ({
 				<Styled.DailyTempIconWrapper>
 					{icon && <Styled.Icon src={getForecastIcon(icon)} />}
 					<Styled.DailyTempWrapper>
-						{maxTemp && (
+						{dayTemp && (
 							<Styled.DayTemp>
-								{toggleTemperature(maxTemp)}
+								{toggleTemperature(dayTemp)}
 								<span>&deg;</span>
 							</Styled.DayTemp>
 						)}
-						{minTemp && (
+						{nightTemp && (
 							<Styled.NightTemp>
-								- {toggleTemperature(minTemp)}
+								- {toggleTemperature(nightTemp)}
 								<span>&deg;</span>
 							</Styled.NightTemp>
 						)}

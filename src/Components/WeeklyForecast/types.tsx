@@ -7,7 +7,6 @@ export type dataType = [
 	timestamp: number
 ];
 
-export interface DailyForecastProps {
+export interface WeeklyForecastProps {
 	getForecastDailyDataByDayIdx: (dayInx: number) => dataType;
-	cityName?: string;
 }

@@ -148,12 +148,15 @@ export const LogoWrapper = styled.div`
 	margin-top: 20px;
 	margin-left: 50px;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		width: 148px;
-		height: 97px;
+		width: 182px;
+		height: 119px;
 		display: flex;
 		margin: 0 auto;
 		margin-top: 10px;
 		margin-bottom: 31px;
+		svg {
+			margin: 0 auto;
+		}
 	}
 `;
 export const NavbarLogoWrapper = styled.div`

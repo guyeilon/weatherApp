@@ -71,9 +71,9 @@ export const FavBtn = styled(NavbarBtn).attrs(props => ({
 `;
 export const LinkBorder = styled.div`
 	margin: 0 auto;
-	width: 120%;
+	width: 100%;
 
-	border-bottom: 3px solid #fff;
+	border-bottom: 5px solid #fff;
 	display: none;
 	bottom: -25px;
 	margin: auto 0;

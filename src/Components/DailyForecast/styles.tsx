@@ -1,8 +1,6 @@
 import styled from 'styled-components/macro';
 
 export const DailyForecastContainer = styled.div`
-	margin-top: 64px;
-	margin-left: 50px;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		text-align: center;
 		margin: 0 auto;

@@ -28,7 +28,6 @@ const defaultButton = css`
 	display: flex;
 	flex-direction: row;
 	justify-content: center;
-	/* max-width: 100%; */
 	align-items: center;
 
 	/* styling */
@@ -37,7 +36,6 @@ const defaultButton = css`
 	cursor: pointer;
 	white-space: nowrap;
 
-	/* max-width: 100%; */
 	width: 100%;
 
 	/* typography */
@@ -54,19 +52,10 @@ const loginButton = css`
 	color: var(--mainTextColor);
 	background-image: var(--mainBg);
 	border-radius: var(--borderRadius);
-	/* box-shadow: var(--boxShadow); */
 	word-break: break-all;
 	word-wrap: break-word;
-
-	/* &:before,
-	:after {
-		content: '';
-		float: left;
-		flex-basis: 151px;
-		max-width: 151px;
-	} */
 `;
-const addToFavButton = css`
+const secondary = css`
 	padding: var(--secondaryPadding);
 	background-color: var(--secondaryBg);
 	color: var(--secondaryTextColor);
@@ -77,7 +66,7 @@ const addToFavButton = css`
 const hoveredLoginButton = css`
 	background-image: var(--mainBgHover);
 `;
-const hoveredAddToFavButton = css`
+const hoveredSecondary = css`
 	background-color: var(--secondaryBgHover);
 `;
 const hoveredLinkButton = css`
@@ -93,12 +82,21 @@ const disabledLoginButton = css`
 	color: var(--mainTextColorDisable);
 	cursor: default;
 `;
-const disabledAddToFavButton = css`
+const disabledSecondary = css`
 	background-color: var(--secondaryBgDisabled);
 	color: var(--secondaryTextColorDisable);
 	border: solid 1px var(--secondaryTextColorDisable);
 	box-shadow: none;
 	cursor: default;
+`;
+const ghostButton = css`
+	background-color: var(--secondaryBgDisabled);
+	color: var(--secondaryTextColorDisable);
+	border: solid 1px var(--secondaryTextColorDisable);
+	box-shadow: var(--boxShadow);
+	padding: var(--secondaryPadding);
+
+	border-radius: var(--borderRadius);
 `;
 
 const linkButton = css`
@@ -123,7 +121,8 @@ const activeButton = css`
 `;
 
 interface StyledButtonProps {
-	addToFav?: boolean;
+	secondary?: boolean;
+	ghost?: boolean;
 	login?: boolean;
 	disabled?: boolean;
 	navbar?: boolean;
@@ -146,13 +145,13 @@ export const BTN = styled.button<StyledButtonProps>`
 	${defaultButton}
 
 	&:hover {
-		${p => !p.disabled && !p.addToFav && !p.navbar && !p.as && !p.footer && hoveredLoginButton};
-		${p => !p.disabled && p.addToFav && hoveredAddToFavButton};
+		${p => !p.disabled && !p.secondary && !p.navbar && !p.as && !p.footer && hoveredLoginButton};
+		${p => !p.disabled && p.secondary && hoveredSecondary};
 		${p => p.as && hoveredLinkButton};
 	}
 
 	&:focus {
-		${p => !p.footer && !p.navbar && !p.disabled && !p.addToFav && focusedButton};
+		${p => !p.footer && !p.navbar && !p.disabled && !p.secondary && focusedButton};
 	}
 
 	&:active {
@@ -160,19 +159,20 @@ export const BTN = styled.button<StyledButtonProps>`
 	}
 
 	${p => p.login && loginButton};
-	${p => p.addToFav && addToFavButton}
+	${p => p.secondary && secondary}
 	${p => p.as && linkButton}
 	${p => p.navbar && navbarButton}
 	${p => p.footer && MobileFooterButton}
+	${p => p.ghost && ghostButton}
 
 	&:disabled {
 		${p => p.login && disabledLoginButton};
-		${p => p.addToFav && disabledAddToFavButton};
+		${p => p.secondary && disabledSecondary};
 	}
 
 	${IconWrapper} {
 		display: ${props =>
-			(props.addToFav || props.as || props.navbar || props.footer) && !props.disabled ? `block  ` : `none `};
+			(props.secondary || props.as || props.navbar || props.footer) && !props.disabled ? `block  ` : `none `};
 		margin-right: ${props => props.footer && `0`};
 	}
 `;

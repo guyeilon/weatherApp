@@ -1,4 +1,3 @@
-import { type } from 'os';
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
 import {
 	SvgArrow,
@@ -24,6 +23,8 @@ export type ButtonProps<T extends ElementType> = {
 	svg?: svgTypes;
 	navbar?: boolean;
 	footer?: boolean;
+	ghost?: boolean;
+	secondary?: boolean;
 	children: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
@@ -50,7 +51,9 @@ const Button = <T extends ElementType = 'button'>({
 	children,
 	navbar,
 	footer,
+	secondary,
 	svg,
+	ghost,
 	className,
 	...rest
 }: ButtonProps<T>): JSX.Element => {
@@ -92,10 +95,12 @@ const Button = <T extends ElementType = 'button'>({
 			<Styled.BTN
 				as={renderAs as ElementType}
 				addToFav={addToFav}
+				secondary={secondary}
 				login={login}
 				navbar={navbar}
 				footer={footer}
 				svg={svg}
+				ghost={ghost}
 				{...rest}
 				className={className}>
 				<Styled.IconWrapper>{IconToShow(svg)}</Styled.IconWrapper>

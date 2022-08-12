@@ -179,7 +179,7 @@ export type AppFontWeightType = typeof fontWeights;
 export const responsiveBreakPoints = {
 	phone: 'max-width: 970px',
 	abovePhone: 'min-width: 971px',
-	tablet: 'min-width:1281px',
+	tablet: '971px < width < 1280px',
 	desktop: 'min-width: 1281px',
 	underDesktop: 'max-width: 1280px',
 };
