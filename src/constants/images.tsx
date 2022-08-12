@@ -5,7 +5,6 @@ import storm from '../assets/Icon/storm.png';
 import sunCloud from '../assets/Icon/sunCloud.png';
 import sun from '../assets/Icon/sun.png';
 import wind from '../assets/Icon/wind.png';
-import stars from '../assets/Icon/stars.png';
 
 export default {
 	cloud,
@@ -15,7 +14,6 @@ export default {
 	sunCloud,
 	sun,
 	wind,
-	stars,
 };
 
 export const imagesArray = [

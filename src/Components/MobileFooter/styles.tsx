@@ -9,10 +9,12 @@ export const MobileFooter = styled.div`
 	width: 100%;
 	height: 80px;
 
-	display: flex;
-	flex-direction: row;
+	display: grid;
+	grid-template-columns: [col1] 1fr [divider1] 1px [col2] 1fr [divider2] 1px [col3] 1fr [end];
 
-	justify-content: space-around;
+	grid-template-areas: 'col1 divider1 col2 divider2 col3 ';
+
+	align-items: center;
 
 	position: fixed;
 	top: auto;
@@ -32,6 +34,21 @@ export const MobileFooter = styled.div`
 	}
 `;
 
+export const FavWrapper = styled.div`
+	grid-area: col1;
+	justify-self: center;
+`;
+
+export const SearchWrapper = styled.div`
+	grid-area: col2;
+	justify-self: center;
+`;
+
+export const HomeWrapper = styled.div`
+	grid-area: col3;
+	justify-self: center;
+`;
+
 export const HomeBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'home',
 	footer: true,
@@ -46,9 +63,14 @@ export const SearchBtn = styled(NavbarBtn).attrs(props => ({
 	footer: true,
 }))``;
 
-export const Divider = styled.div`
+export const Divider1 = styled.div`
+	grid-area: divider1;
 	background-color: #fff;
 	width: 1px;
 	height: 46px;
 	margin-top: 15px;
+`;
+
+export const Divider2 = styled(Divider1)`
+	grid-area: divider2;
 `;

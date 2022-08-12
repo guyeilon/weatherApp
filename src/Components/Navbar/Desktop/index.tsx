@@ -13,11 +13,11 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 
 	const currentLocation = location.pathname.substring(1);
 
-	const [activeHome, setActiveHome] = useState(false);
-	const [activeFav, setActiveFav] = useState(false);
+	const [activeHome, setActiveHome] = useState(currentLocation === '' ? true : false);
+	const [activeFav, setActiveFav] = useState(currentLocation === 'fav' ? true : false);
 
 	useEffect(() => {
-		if (currentLocation === 'home') {
+		if (currentLocation === '') {
 			setActiveHome(true);
 			setActiveFav(false);
 		}
@@ -31,7 +31,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 		<Styled.DesktopContentWrapper>
 			<Styled.Logo />
 			<Styled.MenuWrapper>
-				<Styled.RouterWrap to='/home'>
+				<Styled.RouterWrap to='/'>
 					<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} />
 					<Styled.LinkBorder />
 				</Styled.RouterWrap>

@@ -12,16 +12,22 @@ const MobileFooter: React.FC<MobileFooterProps> = () => {
 	return (
 		<>
 			<Styled.MobileFooter>
-				<Styled.FavBtn>Favorites</Styled.FavBtn>
-				<Styled.Divider />
-				<Styled.SearchBtn
-					onClick={() => {
-						setToggle(!toggle);
-					}}>
-					Search
-				</Styled.SearchBtn>
-				<Styled.Divider />
-				<Styled.HomeBtn>Home</Styled.HomeBtn>
+				<Styled.FavWrapper>
+					<Styled.FavBtn>Favorites</Styled.FavBtn>
+				</Styled.FavWrapper>
+				<Styled.Divider1 />
+				<Styled.SearchWrapper>
+					<Styled.SearchBtn
+						onClick={() => {
+							setToggle(!toggle);
+						}}>
+						Search
+					</Styled.SearchBtn>
+				</Styled.SearchWrapper>
+				<Styled.Divider2 />
+				<Styled.HomeWrapper>
+					<Styled.HomeBtn>Home</Styled.HomeBtn>
+				</Styled.HomeWrapper>
 			</Styled.MobileFooter>
 			{toggle && <MobileSearch setToggle={setToggle} toggle={toggle} />}
 		</>

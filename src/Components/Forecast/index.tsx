@@ -7,7 +7,8 @@ import { getDailyForecast, getFiveDaysForecast, getHourlyForecast, getLocationKe
 import Loader from '../../assets/Loader';
 import DailyForecast from '../DailyForecast';
 import useStore from '../../App/store';
-import { getTime } from '../../utils';
+import WeeklyForecast from '../WeeklyForecast';
+import { dataType } from '../DailyForecast/types';
 
 export interface ForecastProps {}
 
@@ -42,10 +43,16 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const results = useQueries({
 		queries: [
 			{
+				queryKey: ['5daysForecast'],
+				queryFn: () => getFiveDaysForecast(key),
+				staleTime: Infinity,
+				enabled: !!key,
+			},
+			{
 				queryKey: ['dailyForecast'],
 				queryFn: () => getDailyForecast(key),
 				staleTime: Infinity,
-				enabled: !!key,
+				enabled: false,
 			},
 			{
 				queryKey: ['HourlyForecast'],
@@ -53,48 +60,42 @@ const Forecast: React.FC<ForecastProps> = Props => {
 				staleTime: Infinity,
 				enabled: false,
 			},
-			{
-				queryKey: ['5daysForecast'],
-				queryFn: () => getFiveDaysForecast(key),
-				staleTime: Infinity,
-				enabled: false,
-			},
 		],
 	});
 
-	// data:
-	const icon = results[0].data?.DailyForecasts[0]?.Day?.Icon;
-	const dailyTemp = results[0].data?.DailyForecasts[0]?.Temperature;
-	const dayPhrase = results[0].data?.DailyForecasts[0]?.Day.IconPhrase;
-	const nightPhrase = results[0].data?.DailyForecasts[0]?.Night.IconPhrase;
-	const timestamp = results[0].dataUpdatedAt;
+	// get forecast data:
 
-	console.log(results[0]);
+	const getForecastDailyDataByDayIdx = (dayInx: number): dataType => {
+		const icon = results[0].data?.DailyForecasts[dayInx]?.Day?.Icon;
+		const dayTemp = results[0].data?.DailyForecasts[dayInx]?.Temperature?.Maximum?.Value;
+		const nightTemp = results[0].data?.DailyForecasts[dayInx]?.Temperature?.Maximum?.Value;
+		const dayPhrase = results[0].data?.DailyForecasts[dayInx]?.Day.IconPhrase;
+		const nightPhrase = results[0].data?.DailyForecasts[dayInx]?.Night.IconPhrase;
+		const timestamp = results[0].dataUpdatedAt;
+
+		return [icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp];
+	};
+
+	console.log(results);
 
 	if (!isLocationServiceOn || error) {
 		content = <NoLocation />;
 	}
 
-	if (isLoading && (isLocationServiceOn || !error)) {
+	if (isLoading && isLocationServiceOn && !error) {
 		content = <Loader />;
 	}
 
 	if (isSuccess) {
 		content = (
-			<>
-				<DailyForecast
-					cityName={cityName}
-					icon={icon}
-					dailyTemp={dailyTemp}
-					dayPhrase={dayPhrase}
-					nightPhrase={nightPhrase}
-					timestamp={timestamp}
-				/>
-			</>
+			<div>
+				<DailyForecast getForecastDailyDataByDayIdx={getForecastDailyDataByDayIdx} cityName={cityName} />
+				<WeeklyForecast getForecastDailyDataByDayIdx={getForecastDailyDataByDayIdx} />
+			</div>
 		);
 	}
 
-	return <>{content}</>;
+	return <Styled.ContentWrapper>{content}</Styled.ContentWrapper>;
 };
 
 export default Forecast;
