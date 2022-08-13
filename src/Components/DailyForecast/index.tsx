@@ -1,17 +1,17 @@
 import React from 'react';
 import useStore from '../../App/store';
 import { getForecastIcon } from '../../constants';
-import { fToCTemp, getTime } from '../../utils';
+import { convertToC, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, getForecastDailyDataByDayIdx }) => {
+const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, getData }) => {
 	const store = useStore(state => state);
 
-	const [icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp] = getForecastDailyDataByDayIdx(0);
+	const { icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp } = getData(0);
 
 	const toggleTemperature = (temp: number) => {
-		return store.degree === 'fahrenheit' ? temp : fToCTemp(temp);
+		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
 	};
 
 	return (

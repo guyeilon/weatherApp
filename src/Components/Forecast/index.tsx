@@ -24,7 +24,9 @@ const Forecast: React.FC<ForecastProps> = Props => {
 
 	if (isLocationServiceOn) {
 		geoString = `${position.latitude},${position.longitude}`;
+		console.log(geoString);
 	}
+	console.log(position);
 
 	const {
 		isLoading,
@@ -46,34 +48,37 @@ const Forecast: React.FC<ForecastProps> = Props => {
 				queryKey: ['5daysForecast'],
 				queryFn: () => getFiveDaysForecast(key),
 				staleTime: Infinity,
+				cacheTime: Infinity,
 				enabled: !!key,
 			},
-			{
-				queryKey: ['dailyForecast'],
-				queryFn: () => getDailyForecast(key),
-				staleTime: Infinity,
-				enabled: false,
-			},
+			// {
+			// 	queryKey: ['dailyForecast'],
+			// 	queryFn: () => getDailyForecast(key),
+			// 	staleTime: Infinity,
+			// 	enabled: false,
+			// },
 			{
 				queryKey: ['HourlyForecast'],
 				queryFn: () => getHourlyForecast(key),
 				staleTime: Infinity,
-				enabled: false,
+				cacheTime: Infinity,
+				enabled: !!key,
 			},
 		],
 	});
 
 	// get forecast data:
 
-	const getForecastDailyDataByDayIdx = (dayInx: number): dataType => {
+	const getData = (dayInx: number): dataType => {
 		const icon = results[0].data?.DailyForecasts[dayInx]?.Day?.Icon;
 		const dayTemp = results[0].data?.DailyForecasts[dayInx]?.Temperature?.Maximum?.Value;
-		const nightTemp = results[0].data?.DailyForecasts[dayInx]?.Temperature?.Maximum?.Value;
+		const nightTemp = results[0].data?.DailyForecasts[dayInx]?.Temperature?.Minimum?.Value;
 		const dayPhrase = results[0].data?.DailyForecasts[dayInx]?.Day.IconPhrase;
 		const nightPhrase = results[0].data?.DailyForecasts[dayInx]?.Night.IconPhrase;
 		const timestamp = results[0].dataUpdatedAt;
+		const date = results[0].data?.DailyForecasts[dayInx]?.EpochDate;
 
-		return [icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp];
+		return { icon, dayTemp, nightTemp, dayPhrase, nightPhrase, timestamp, date };
 	};
 
 	console.log(results);
@@ -89,8 +94,8 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	if (isSuccess) {
 		content = (
 			<div>
-				<DailyForecast getForecastDailyDataByDayIdx={getForecastDailyDataByDayIdx} cityName={cityName} />
-				<WeeklyForecast getForecastDailyDataByDayIdx={getForecastDailyDataByDayIdx} />
+				<DailyForecast getData={getData} cityName={cityName} />
+				<WeeklyForecast getData={getData} />
 			</div>
 		);
 	}
