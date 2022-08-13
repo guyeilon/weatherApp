@@ -27,9 +27,10 @@ export const getDailyForecast = async (locationKey: string) => {
 	return data;
 };
 export const getHourlyForecast = async (locationKey: string) => {
-	const res = await weatherApi.get(`forecasts/v1/hourly/24hour/${locationKey}`, {
+	const res = await weatherApi.get(`forecasts/v1/hourly/12hour/${locationKey}`, {
 		params: {
 			apikey: API_KEY,
+			details: true,
 		},
 	});
 	const data = await res.data;
@@ -39,6 +40,7 @@ export const getFiveDaysForecast = async (locationKey: string) => {
 	const res = await weatherApi.get(`forecasts/v1/daily/5day/${locationKey}`, {
 		params: {
 			apikey: API_KEY,
+			details: true,
 		},
 	});
 	const data = await res.data;
