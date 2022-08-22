@@ -170,6 +170,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 
 	return (
 		<>
+			<Styled.Header>5-days forecast</Styled.Header>
 			<Styled.FiveDaysForecastWrapper>
 				{content}
 				<Styled.DayChart>

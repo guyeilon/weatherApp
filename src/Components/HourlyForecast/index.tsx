@@ -27,16 +27,18 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	const [selected, setSelected] = useState(0);
 
 	useEffect(() => {
-		console.log(carousel.current.scrollWidth, carousel.current.offsetWidth);
-		console.log(carousel.current);
-
 		setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
 	}, []);
 
 	const [width, setWidth] = useState(0);
 
 	content = (
-		<Styled.Carousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
+		<Styled.Carousel
+			ref={carousel}
+			as={motion.div}
+			drag='x'
+			dragConstraints={{ right: 0, left: -width }}
+			whileTap={{ cursor: 'grabbing' }}>
 			{hourlyData.map((hour, idx) => {
 				const icon = hour.icon;
 				const temp = hour.temp;
@@ -44,8 +46,8 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 				const date = hour.date;
 
 				return (
-					<Styled.hourlyData ref={ref} key={idx} as={motion.div}>
-						<Styled.Card selected={idx === selected} as={motion.div}>
+					<Styled.hourlyData key={idx} as={motion.div} whileTap={{ cursor: 'grabbing' }}>
+						<Styled.Card selected={idx === selected} as={motion.div} whileTap={{ cursor: 'grabbing' }}>
 							{date && <Styled.Hour>{getHour(date)}</Styled.Hour>}
 
 							{temp && (
@@ -69,19 +71,21 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	);
 
 	const clickForward = () => {
-		// carousel.current.scrollLeft += carousel.current.scrollWidth / 12;
-		console.log();
-
-		setSelected(selected + 1);
+		ref.current.scrollLeft += 220;
+		if (selected < 11) {
+			setSelected(selected + 1);
+		}
 	};
 	const clickBackwards = () => {
-		carousel.current.scrollLeft -= carousel.current.scrollWidth / 10;
-		setSelected(selected - 1);
+		ref.current.scrollLeft -= 220;
+		if (selected > 0) {
+			setSelected(selected - 1);
+		}
 	};
 
 	return (
 		<>
-			<Styled.hourlyForecastWrapper>{content}</Styled.hourlyForecastWrapper>
+			<Styled.hourlyForecastWrapper ref={ref}>{content}</Styled.hourlyForecastWrapper>
 			<Styled.BtnWrapper>
 				<Button style={{ width: '40px' }} noHover onClick={clickBackwards}>
 					<SvgArrowLeft width='40' height='40' />
