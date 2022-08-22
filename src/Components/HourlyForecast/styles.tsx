@@ -7,26 +7,27 @@ export const hourlyForecastWrapper = styled.div`
 
 	margin-bottom: 50px;
 	overflow: hidden;
-	/* overflow-x: auto; */
+
+	/* cursor: grab; */
 `;
 
 export const Card = styled.div<{ selected: boolean }>`
 	border-radius: 20px;
 	background-color: rgba(255, 255, 255, 0.2);
 	/* background-color: transparent; */
-
+	cursor: grab;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 
 	gap: 24px;
-	width: fit-content;
+
 	width: 152px;
 
 	padding: 40px 0px;
 
-	scroll-snap-align: end;
+	/* scroll-snap-align: end; */
 
 	background-color: ${({ selected }) => (selected ? `rgba(255, 255, 255, 0.2)  ` : `transparent `)};
 `;
@@ -44,6 +45,7 @@ export const Hour = styled.div`
 export const Icon = styled.img`
 	width: 30px;
 	height: 30px;
+	pointer-events: none;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 	}
@@ -74,7 +76,7 @@ export const BtnWrapper = styled.div`
 
 export const Carousel = styled.div`
 	max-width: 100%;
-	margin-top: 88px;
+
 	height: 293px;
 
 	display: grid;

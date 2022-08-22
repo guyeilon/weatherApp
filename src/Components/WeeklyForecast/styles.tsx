@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 export const WeeklyForecastWrapper = styled.div`
 	width: 100%;
 	margin-top: 88px;
-	/* height: 181px; */
+	margin-bottom: 140px;
 
 	border-radius: 20px;
 	border: solid 1px #fff;

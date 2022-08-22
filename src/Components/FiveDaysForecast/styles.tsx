@@ -3,7 +3,7 @@ import { SvgMoonFlat } from '../../assets/Svg.styles';
 
 export const FiveDaysForecastWrapper = styled.div`
 	width: 100%;
-	margin-top: 88px;
+
 	margin-bottom: 100px;
 	/* height: 181px; */
 
@@ -35,7 +35,7 @@ export const Day = styled.div`
 	margin-top: 19px;
 `;
 export const Date = styled.div`
-	font-size: ${({ theme }) => theme.textFontSize.lg};
+	font-size: ${({ theme }) => theme.textFontSize.base};
 	color: ${({ theme }) => theme.colors.primary.text};
 	margin-bottom: 24px;
 `;
@@ -145,4 +145,12 @@ export const col5 = styled.div`
 		background-color: rgba(255, 255, 255, 0.3);
 		border-radius: 20px;
 	}
+`;
+
+export const Header = styled.h2`
+	font-size: ${({ theme }) => theme.headingFontSize.h2};
+	color: ${({ theme }) => theme.colors.primary.text};
+	margin-top: 100px;
+	margin-bottom: 24px;
+	font-weight: bold;
 `;
