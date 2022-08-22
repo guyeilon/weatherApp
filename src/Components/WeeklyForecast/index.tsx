@@ -6,23 +6,24 @@ import { getForecastIcon } from '../../constants';
 import { Flex } from '../../design/helper.styles';
 import useStore from '../../App/store';
 
-const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ getData }) => {
+const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
 	const store = useStore(state => state);
 
 	const toggleTemperature = (temp: number) => {
 		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
 	};
 
-	const days = ['day1', 'day2', 'day3', 'day4'];
-
 	let content;
 
-	content = days.map(day => {
-		const dayIdx = days.indexOf(day);
-		const { icon, dayTemp, nightTemp, date, dayPhrase } = getData(dayIdx);
+	content = fiveDaysData.map((day, idx) => {
+		const icon = day.icon;
+		const dayTemp = day.dayTemp;
+		const nightTemp = day.nightTemp;
+		const dayPhrase = day.dayPhrase;
+		const date = day.date;
 
 		return (
-			<Styled.DailyData area={day} key={day}>
+			<Styled.DailyData key={idx}>
 				{date && dayPhrase && <Styled.DayAndPhrase>{getDay(date) + ' - ' + dayPhrase}</Styled.DayAndPhrase>}
 				<Flex center>
 					{icon && <Styled.Icon src={getForecastIcon(icon)} />}

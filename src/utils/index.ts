@@ -5,6 +5,13 @@ export const convertToC = (fahrenheit: number) => {
 
 	return celsius;
 };
+// convert m/h to k/h :
+
+export const convertMtoK = (mph: number) => {
+	let kph = Math.round(mph / 1.6);
+
+	return kph;
+};
 
 // convert time string to readable time:
 export const getTime = (timestamp: number): string => {
@@ -34,4 +41,25 @@ export const getDay = (timestamp: number): string => {
 	const day = days[date.getDay()];
 
 	return day;
+};
+export const getHour = (timestamp: number) => {
+	const date = new Date(timestamp);
+	const hours = date.getHours();
+	let hourFix = hours <= 9 ? '0' + hours : hours;
+
+	const formattedHour = `${hourFix}:00`;
+
+	return formattedHour;
+};
+
+export const getDayAndMonth = (timestamp: number) => {
+	timestamp = timestamp * 1000;
+	const date = new Date(timestamp);
+	const month = date.getMonth() + 1;
+
+	const day = date.getDate();
+
+	const formattedDay = ` ${day}.${month}`;
+
+	return formattedDay;
 };
