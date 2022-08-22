@@ -1,6 +1,9 @@
 import styled from 'styled-components/macro';
+import Button from '../../Common/Button';
 
 export const DailyForecastContainer = styled.div`
+	display: flex;
+	flex-direction: row;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		text-align: center;
 		margin: 0 auto;
@@ -118,4 +121,10 @@ export const Date = styled.div`
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		font-size: ${({ theme }) => theme.textFontSize.sm};
 	}
+`;
+
+export const FavBtn = styled(Button)`
+	margin-left: auto;
+	align-self: flex-end;
+	max-width: 213px;
 `;

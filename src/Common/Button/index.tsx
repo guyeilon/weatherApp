@@ -25,6 +25,7 @@ export type ButtonProps<T extends ElementType> = {
 	footer?: boolean;
 	ghost?: boolean;
 	secondary?: boolean;
+	noHover?: boolean;
 	children: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
@@ -55,6 +56,7 @@ const Button = <T extends ElementType = 'button'>({
 	svg,
 	ghost,
 	className,
+	noHover,
 	...rest
 }: ButtonProps<T>): JSX.Element => {
 	const IconToShow = (svg: svgTypes) => {
@@ -101,6 +103,7 @@ const Button = <T extends ElementType = 'button'>({
 				footer={footer}
 				svg={svg}
 				ghost={ghost}
+				noHover={noHover}
 				{...rest}
 				className={className}>
 				<Styled.IconWrapper>{IconToShow(svg)}</Styled.IconWrapper>

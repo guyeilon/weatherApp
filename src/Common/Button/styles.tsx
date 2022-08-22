@@ -127,6 +127,7 @@ interface StyledButtonProps {
 	disabled?: boolean;
 	navbar?: boolean;
 	footer?: boolean;
+	noHover?: boolean;
 	as?: React.ElementType;
 }
 export const IconWrapper = styled.div`
@@ -145,7 +146,7 @@ export const BTN = styled.button<StyledButtonProps>`
 	${defaultButton}
 
 	&:hover {
-		${p => !p.disabled && !p.secondary && !p.navbar && !p.as && !p.footer && hoveredLoginButton};
+		${p => !p.disabled && !p.secondary && !p.navbar && !p.as && !p.footer && !p.noHover && hoveredLoginButton};
 		${p => !p.disabled && p.secondary && hoveredSecondary};
 		${p => p.as && hoveredLinkButton};
 	}

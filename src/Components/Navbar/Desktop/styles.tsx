@@ -10,6 +10,9 @@ export const DesktopContentWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.primary.background};
 	box-shadow: ${({ theme }) => theme.boxShadows.desktopNavbar};
 	display: grid;
+	position: fixed;
+	top: 0;
+	z-index: 3;
 	grid-template-columns:
 		[first] 40px [logo] 0.5fr [menu] 1.5fr
 		[search] auto [switcher] 1.5fr [map] minmax(min-content, 0.25fr)

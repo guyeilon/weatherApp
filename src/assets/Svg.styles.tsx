@@ -17,10 +17,13 @@ import { ReactComponent as Fb } from './Svgs/facebook.svg';
 import { ReactComponent as Clouds } from './Svgs/clouds.svg';
 import { ReactComponent as Test } from './Svgs/test-cropped.svg';
 import { ReactComponent as Arrow } from './Svgs/arrow.svg';
+import { ReactComponent as ArrowLeft } from './Svgs/arrowLeft.svg';
+import { ReactComponent as ArrowRight } from './Svgs/arrowRight.svg';
 import { ReactComponent as Location } from './Svgs/location.svg';
-// import { ReactComponent as Loader } from './Svgs/loader.svg';
+import { ReactComponent as Wind } from './Svgs/wind.svg';
+import { ReactComponent as SunFlat } from './Svgs/sunFlat.svg';
+import { ReactComponent as MoonFlat } from './Svgs/moonFlat.svg';
 
-// export { Loader };
 import Logo from './Logo';
 import NavbarLogo from './NavbarLogo';
 
@@ -83,11 +86,26 @@ const svgStyles = <
 export const SvgTest = styled(Test)<SvgProps>`
 	${props => svgStyles(props)};
 `;
+export const SvgWind = styled(Wind)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgSunFlat = styled(SunFlat)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgMoonFlat = styled(MoonFlat)<SvgProps>`
+	${props => svgStyles(props)};
+`;
 
 export const SvgLocation = styled(Location)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgArrow = styled(Arrow)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrowLeft = styled(ArrowLeft)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrowRight = styled(ArrowRight)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgMenu = styled(Menu)<SvgProps>`
