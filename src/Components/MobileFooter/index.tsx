@@ -7,7 +7,7 @@ import * as Styled from './styles';
 interface MobileFooterProps {}
 
 const MobileFooter: React.FC<MobileFooterProps> = () => {
-	const [toggle, setToggle] = useState<boolean>(false);
+	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
 		<>
@@ -19,7 +19,7 @@ const MobileFooter: React.FC<MobileFooterProps> = () => {
 				<Styled.SearchWrapper>
 					<Styled.SearchBtn
 						onClick={() => {
-							setToggle(!toggle);
+							setIsExpanded(true);
 						}}>
 						Search
 					</Styled.SearchBtn>
@@ -29,7 +29,7 @@ const MobileFooter: React.FC<MobileFooterProps> = () => {
 					<Styled.HomeBtn>Home</Styled.HomeBtn>
 				</Styled.HomeWrapper>
 			</Styled.MobileFooter>
-			{toggle && <MobileSearch setToggle={setToggle} toggle={toggle} />}
+			{isExpanded && <MobileSearch setIsExpanded={setIsExpanded} isExpanded={isExpanded} />}
 		</>
 	);
 };
