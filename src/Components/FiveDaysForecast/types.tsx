@@ -6,4 +6,5 @@ export interface FiveDaysForecastProps {
 			date: number;
 		}
 	];
+	isExpanded?: boolean;
 }

@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 interface FlexProps {
 	center?: boolean;
 	mobile?: boolean;
+	desktopOnly?: boolean;
 }
 
 export const Flex = styled.div<FlexProps>`
@@ -21,6 +22,12 @@ export const Flex = styled.div<FlexProps>`
 		
       align-items:center;
       justify-content:center;
+     `};
+		${({ desktopOnly }) =>
+			desktopOnly &&
+			`
+		
+      display:block
      `};
 	}
 `;

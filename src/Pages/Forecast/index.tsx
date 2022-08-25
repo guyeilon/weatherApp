@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQuery, useMutation, useQueryClient, useQueries } from '@tanstack/react-query';
 import { usePosition } from '../../hooks/usePosition';
 import NoLocation from '../../Components/NoLocation';
@@ -12,6 +12,7 @@ import WeeklyForecast from '../../Components/WeeklyForecast';
 import HourlyForecast from '../../Components/HourlyForecast';
 import FiveDaysForecast from '../../Components/FiveDaysForecast';
 import { dataType, hourlyDataType } from './types';
+import Modal from '../../Common/Modal';
 
 export interface ForecastProps {}
 
@@ -22,16 +23,12 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	let content;
 	let geoString = `${position.latitude},${position.longitude}`;
 
-	// console.log(position);
-	// console.log(isLocationServiceOn);
-	// console.log(geoString);
-
 	const {
 		isLoading: isGetLocationLoading,
-		isError,
 		isSuccess: isGetLocationSuccess,
 		error: err,
 		data: LocationKey,
+		isFetching: isGetLocationFetching,
 	} = useQuery(['locationKey'], () => getLocationKey(geoString), {
 		staleTime: Infinity,
 		enabled: isLocationServiceOn,
@@ -87,34 +84,45 @@ const Forecast: React.FC<ForecastProps> = Props => {
 		},
 	});
 
-	console.log('position', position);
-	console.log('isGetLocationLoading', isGetLocationLoading);
-	console.log('isGetLocationSuccess', isGetLocationSuccess);
-	console.log('key', key);
-	console.log('hourlyData', hourlyData);
-	console.log('fiveDaysData', fiveDaysData);
-	console.log('isDailyLoading', isDailyLoading);
-	console.log('isHourlySuccess', isHourlySuccess);
-	console.log('isHourlyError', isHourlySuccess);
-	console.log('hourlyError', hourlyError);
-
-	// console.log('error:', error);
-	// console.log('isLocationServiceOn:', isLocationServiceOn);
-	if (!isGetLocationSuccess || error || !isLocationServiceOn) {
+	if (!isGetLocationFetching && !isLocationServiceOn) {
 		content = <NoLocation />;
 	}
 
-	if (isHourlyLoading && isDailyLoading) {
+	if (isGetLocationFetching) {
 		content = <Loader />;
 	}
 
+	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	if (isDailySuccess && isHourlySuccess) {
 		content = (
 			<div>
 				<DailyForecast fiveDaysData={fiveDaysData} updatedAt={updatedAt} cityName={cityName} />
 				<WeeklyForecast fiveDaysData={fiveDaysData} />
+				<Styled.btnWrapper>
+					<Styled.forecastBtn
+						ghost
+						onClick={() => {
+							setIsExpanded(true);
+						}}>
+						5 Days Forecast
+					</Styled.forecastBtn>
+				</Styled.btnWrapper>
 				<HourlyForecast hourlyData={hourlyData} />
-				{fiveDaysData && <FiveDaysForecast fiveDaysData={fiveDaysData} />}
+
+				<Styled.HideInMobileWrapper>
+					<FiveDaysForecast fiveDaysData={fiveDaysData} />
+				</Styled.HideInMobileWrapper>
+				{isExpanded && (
+					<Modal
+						padding='40px 30px'
+						width='100%'
+						height='511px'
+						position='bottom'
+						isModalOpen={isExpanded}
+						closeModal={() => setIsExpanded(false)}>
+						<FiveDaysForecast fiveDaysData={fiveDaysData} isExpanded={isExpanded} />
+					</Modal>
+				)}
 			</div>
 		);
 	}

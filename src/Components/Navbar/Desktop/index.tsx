@@ -5,6 +5,7 @@ import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../
 import * as Styled from './styles';
 
 import { NavLink, useLocation, useParams } from 'react-router-dom';
+import SearchCity from '../../SearchCity';
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
@@ -41,7 +42,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 				</Styled.RouterWrap>
 			</Styled.MenuWrapper>
 			<Styled.InputWrapper>
-				<Styled.Input />
+				<SearchCity />
 			</Styled.InputWrapper>
 
 			<Styled.SwitcherWrapper>

@@ -6,7 +6,8 @@ export const DailyForecastContainer = styled.div`
 	flex-direction: row;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		text-align: center;
-		margin: 0 auto;
+
+		justify-content: center;
 	}
 `;
 export const CityName = styled.h1`
@@ -127,4 +128,8 @@ export const FavBtn = styled(Button)`
 	margin-left: auto;
 	align-self: flex-end;
 	max-width: 213px;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		display: none;
+	}
 `;

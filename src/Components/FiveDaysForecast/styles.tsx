@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { SvgMoonFlat } from '../../assets/Svg.styles';
+import { SvgMoonFlat, SvgSunFlat } from '../../assets/Svg.styles';
 
 export const FiveDaysForecastWrapper = styled.div`
 	width: 100%;
@@ -19,6 +19,14 @@ export const FiveDaysForecastWrapper = styled.div`
 	padding: 16px 100px;
 
 	position: relative;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		column-gap: 40px;
+		justify-content: center;
+		grid-template-rows: min-content 100px 100px 66px;
+		border: none;
+		margin-bottom: 0;
+	}
 `;
 
 export const DailyData = styled.div<{}>`
@@ -33,11 +41,23 @@ export const Day = styled.div`
 	color: ${({ theme }) => theme.colors.primary.text};
 	margin-bottom: 6px;
 	margin-top: 19px;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.base};
+		color: ${({ theme }) => theme.colors.primary.modalText};
+		margin-top: 52px;
+		margin-bottom: 0;
+	}
 `;
 export const Date = styled.div`
 	font-size: ${({ theme }) => theme.textFontSize.base};
 	color: ${({ theme }) => theme.colors.primary.text};
 	margin-bottom: 24px;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.xs};
+		color: #bebebe;
+
+		margin-bottom: 23px;
+	}
 `;
 
 export const DayChart = styled.div`
@@ -67,10 +87,23 @@ export const MoonIcon = styled(SvgMoonFlat)`
 	grid-row-start: 4;
 	grid-row-end: 5;
 	width: 35px;
-	height: 36px;
+	height: 35px;
 
 	align-self: start;
 	justify-self: center;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		width: 16px;
+		height: 16px;
+	}
+`;
+export const SunIcon = styled(SvgSunFlat)`
+	width: 35px;
+	height: 35px;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		width: 16px;
+		height: 16px;
+	}
 `;
 
 export const TransparentGrid = styled.div`
@@ -89,6 +122,10 @@ export const TransparentGrid = styled.div`
 	position: absolute;
 	top: 0;
 	left: 0;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		display: none;
+	}
 `;
 
 export const col1 = styled.div`
@@ -153,4 +190,11 @@ export const Header = styled.h2`
 	margin-top: 100px;
 	margin-bottom: 24px;
 	font-weight: bold;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.xl};
+		color: ${({ theme }) => theme.colors.primary.modalText};
+		margin-top: 0;
+		margin-bottom: 0;
+	}
 `;

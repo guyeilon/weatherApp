@@ -46,3 +46,13 @@ export const getFiveDaysForecast = async (locationKey: string) => {
 	const data = await res.data;
 	return data;
 };
+export const getAutocompleteResults = async (q: string) => {
+	const res = await weatherApi.get(`/locations/v1/cities/autocomplete`, {
+		params: {
+			apikey: API_KEY,
+			q: q,
+		},
+	});
+	const data = await res.data;
+	return data;
+};
