@@ -1,27 +1,11 @@
 import styled from 'styled-components/macro';
 
-import { SvgClouds, SvgLogo } from '../../assets/Svg.styles';
-
-export const LogoIcon = styled(SvgLogo)`
-	display: flex;
-	margin: 0 auto;
-	width: 122px;
-	height: 79px;
-	margin-top: 20px;
-	margin-left: 50px;
-	@media only screen and (${({ theme }) => theme.media.phone}) {
-		width: 148px;
-		height: 97px;
-		display: flex;
-		margin: 0 auto;
-		margin-top: 7.4px;
-		margin-bottom: 31px;
-	}
-`;
+import { SvgClouds } from '../../assets/Svg.styles';
 
 export const ContentWrapper = styled.div`
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
-	border-radius: ${({ theme }) => theme.border.modal};
+
+	border-radius: ${({ theme }) => theme.border.modalUp};
 	box-shadow: ${({ theme }) => theme.boxShadows.base};
 
 	display: grid;
@@ -29,8 +13,16 @@ export const ContentWrapper = styled.div`
 	grid-template-rows: repeat(4, fit-content(100%));
 	align-items: start;
 
-	max-width: 414px;
-	height: 712px;
+	width: 100%;
+
+	/* height: 713px; */
+
+	position: fixed;
+	top: 135px;
+	right: auto;
+	left: auto;
+	margin: 0 auto;
+	bottom: 0;
 
 	& > * {
 		grid-column: 2;
@@ -45,6 +37,8 @@ export const ContentWrapper = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+
+		border-radius: ${({ theme }) => theme.border.modal};
 	}
 
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
@@ -56,6 +50,8 @@ export const ContentWrapper = styled.div`
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
+
+		border-radius: ${({ theme }) => theme.border.modal};
 	}
 `;
 
@@ -127,6 +123,7 @@ export const ButtonWrapper = styled.div`
 	grid-column: 1 / -1;
 	padding-left: 47px;
 	padding-right: 47px;
+	margin-bottom: 50px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;

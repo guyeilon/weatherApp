@@ -9,12 +9,20 @@ import { ReactComponent as Home } from './Svgs/homeOutline.svg';
 import { ReactComponent as HomeFull } from './Svgs/homeFull.svg';
 import { ReactComponent as Logout } from './Svgs/logout.svg';
 import { ReactComponent as Map } from './Svgs/map.svg';
-// import { ReactComponent as NavbarLogo } from './Svgs/navbarLogo.svg';
+import { ReactComponent as Menu } from './Svgs/menu.svg';
 import { ReactComponent as Fav } from './Svgs/fav.svg';
+import { ReactComponent as FavFull } from './Svgs/favFull.svg';
 import { ReactComponent as Google } from './Svgs/google.svg';
 import { ReactComponent as Fb } from './Svgs/facebook.svg';
 import { ReactComponent as Clouds } from './Svgs/clouds.svg';
 import { ReactComponent as Test } from './Svgs/test-cropped.svg';
+import { ReactComponent as Arrow } from './Svgs/arrow.svg';
+import { ReactComponent as ArrowLeft } from './Svgs/arrowLeft.svg';
+import { ReactComponent as ArrowRight } from './Svgs/arrowRight.svg';
+import { ReactComponent as Location } from './Svgs/location.svg';
+import { ReactComponent as Wind } from './Svgs/wind.svg';
+import { ReactComponent as SunFlat } from './Svgs/sunFlat.svg';
+import { ReactComponent as MoonFlat } from './Svgs/moonFlat.svg';
 
 import Logo from './Logo';
 import NavbarLogo from './NavbarLogo';
@@ -78,6 +86,31 @@ const svgStyles = <
 export const SvgTest = styled(Test)<SvgProps>`
 	${props => svgStyles(props)};
 `;
+export const SvgWind = styled(Wind)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgSunFlat = styled(SunFlat)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgMoonFlat = styled(MoonFlat)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+
+export const SvgLocation = styled(Location)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrow = styled(Arrow)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrowLeft = styled(ArrowLeft)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgArrowRight = styled(ArrowRight)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgMenu = styled(Menu)<SvgProps>`
+	${props => svgStyles(props)};
+`;
 export const SvgMap = styled(Map)<SvgProps>`
 	${props => svgStyles(props)};
 `;
@@ -91,6 +124,9 @@ export const SvgFahrenheit = styled(Fahrenheit)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgFav = styled(Fav)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgFavFull = styled(FavFull)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgSearch = styled(Search)<SvgProps>`
@@ -130,20 +166,23 @@ export const LogoWrapper = styled.div`
 	margin-top: 20px;
 	margin-left: 50px;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		width: 148px;
-		height: 97px;
+		width: 182px;
+		height: 119px;
 		display: flex;
 		margin: 0 auto;
-		margin-top: 7.4px;
+		margin-top: 10px;
 		margin-bottom: 31px;
+		svg {
+			margin: 0 auto;
+		}
 	}
 `;
 export const NavbarLogoWrapper = styled.div`
-	width: 80px;
+	width: 85px;
 	height: 56px;
 	position: relative;
 
-	margin-right: 16px;
+	/* margin-right: 16px; */
 
 	& svg {
 		position: relative;
@@ -154,8 +193,14 @@ export const NavbarLogoWrapper = styled.div`
 		/* padding-bottom: 1%; */
 		height: 100%;
 		overflow: visible;
+		@media only screen and (${({ theme }) => theme.media.desktop}) {
+			transform: scale(0.7);
+			left: -15px;
+		}
 	}
 
-	@media only screen and (${({ theme }) => theme.media.phone}) {
+	@media only screen and (${({ theme }) => theme.media.desktop}) {
+		width: 110px;
+		height: 72px;
 	}
 `;
