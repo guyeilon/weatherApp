@@ -8,10 +8,11 @@
 
 export const colors = {
 	primary: {
-		text: '#444e72',
+		text: '#fff',
 		background: '#48bae4',
 		search: '#838baa',
 		searchDark: '#444e72',
+		modalText: '#444e72',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
@@ -65,16 +66,17 @@ export const colors = {
 
 export const darkColors = {
 	primary: {
-		text: '#444e72',
+		text: '#fff',
 		background: '#1a2b55',
 		search: '#838baa',
 		searchDark: '#444e72',
+		modalText: '#fff',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
 
 	modals: {
-		primaryBg: '#fff',
+		primaryBg: '#444e72',
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
 	},
 	inputs: {
@@ -139,6 +141,7 @@ export type AppGradientsType = typeof allGradients;
 /* Font sizes */
 
 export const textFontSizes = {
+	xxs: '1.2rem', // 12px
 	xs: '1.4rem', // 14px
 	sm: '1.6rem', // 16px
 	base: '1.8rem', // 18px
@@ -175,9 +178,11 @@ export type AppFontWeightType = typeof fontWeights;
 =============================================*/
 
 export const responsiveBreakPoints = {
-	phone: 'max-width: 414px',
-	tablet: 'max-width: 1280px ',
-	desktop: 'min-width: 1920px',
+	phone: 'max-width: 970px',
+	abovePhone: 'min-width: 971px',
+	tablet: '971px < width < 1280px',
+	desktop: 'min-width: 1281px',
+	underDesktop: 'max-width: 1280px',
 };
 
 export type AppBreakpointsType = typeof responsiveBreakPoints;
@@ -210,6 +215,7 @@ export type AppSpacingType = typeof spacing;
 export const borderRadii = {
 	base: '15px',
 	modal: '30px',
+	modalUp: '30px 30px 0 0',
 	button: '10px',
 	input: '10px',
 	toggle: '100px',
@@ -227,6 +233,7 @@ export const boxShadows = {
 
 	notificationModal: '  0 2px 20px 0 rgba(0, 0, 0, 0.16);',
 	desktopNavbar: '0 1px 2px 0 rgba(0, 0, 0, 0.1);',
+	text: '-2px 3px 1px rgba(0, 0, 0, 0.1), -1px 1px 2px rgba(255, 255, 255, 0.25);',
 };
 export type AppBoxShadowsType = typeof boxShadows;
 /* Z-indexes */

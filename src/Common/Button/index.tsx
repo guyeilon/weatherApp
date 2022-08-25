@@ -1,5 +1,17 @@
 import { ComponentPropsWithoutRef, ElementType, ReactNode } from 'react';
-import { SvgFav, SvgFb, SvgGoogle, SvgHome, SvgHomeFull, SvgLogout, SvgMap } from '../../assets/Svg.styles';
+import {
+	SvgArrow,
+	SvgFav,
+	SvgFavFull,
+	SvgFb,
+	SvgGoogle,
+	SvgHome,
+	SvgHomeFull,
+	SvgLogout,
+	SvgMap,
+	SvgMenu,
+	SvgSearch,
+} from '../../assets/Svg.styles';
 
 import * as Styled from './styles';
 
@@ -8,28 +20,53 @@ export type ButtonProps<T extends ElementType> = {
 	login?: boolean;
 	addToFav?: boolean;
 	disabled?: boolean;
-	svg?: string;
+	svg?: svgTypes;
 	navbar?: boolean;
+	footer?: boolean;
+	ghost?: boolean;
+	secondary?: boolean;
+	noHover?: boolean;
 	children: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
+type svgTypes =
+	| 'fav'
+	| 'favorites'
+	| 'fb'
+	| 'google'
+	| 'home'
+	| 'homeFull'
+	| 'logout'
+	| 'logoutDark'
+	| 'map'
+	| 'menu'
+	| 'search'
+	| 'arrow'
+	| 'favoritesFull'
+	| undefined;
 
 const Button = <T extends ElementType = 'button'>({
 	renderAs,
 	login,
 	addToFav,
 	children,
-	navBar,
+	navbar,
+	footer,
+	secondary,
 	svg,
+	ghost,
 	className,
+	noHover,
 	...rest
 }: ButtonProps<T>): JSX.Element => {
-	const IconToShow = (svg: string | undefined) => {
+	const IconToShow = (svg: svgTypes) => {
 		switch (svg) {
 			case 'fav':
 				return <Styled.FavIcon />;
 			case 'favorites':
 				return <SvgFav width='30' height='30' />;
+			case 'favoritesFull':
+				return <SvgFavFull width='30' height='30' />;
 			case 'fb':
 				return <SvgFb />;
 			case 'google':
@@ -40,8 +77,16 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgHomeFull width='30' height='30' />;
 			case 'logout':
 				return <SvgLogout width='30' height='30' />;
+			case 'logoutDark':
+				return <SvgLogout outlinedark='true' width='30' height='30' />;
 			case 'map':
 				return <SvgMap width='30' height='30' />;
+			case 'menu':
+				return <SvgMenu width='30' height='30' />;
+			case 'search':
+				return <SvgSearch width='30' height='30' />;
+			case 'arrow':
+				return <SvgArrow width='30' height='30' />;
 
 			default:
 				break;
@@ -52,8 +97,13 @@ const Button = <T extends ElementType = 'button'>({
 			<Styled.BTN
 				as={renderAs as ElementType}
 				addToFav={addToFav}
+				secondary={secondary}
 				login={login}
+				navbar={navbar}
+				footer={footer}
 				svg={svg}
+				ghost={ghost}
+				noHover={noHover}
 				{...rest}
 				className={className}>
 				<Styled.IconWrapper>{IconToShow(svg)}</Styled.IconWrapper>
