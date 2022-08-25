@@ -3,7 +3,7 @@ import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
 	display: grid;
-	height: calc(100vh + 80px);
+	height: 100vh;
 	/* height: 100vh; */
 	/* justify-content: center; */
 
