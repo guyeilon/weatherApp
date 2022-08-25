@@ -23,7 +23,6 @@ export const Carousel = styled.div`
 	gap: 68px;
 
 	grid-template-columns: repeat(auto-fill, 1fr);
-	/* background-color: #e68888; */
 
 	grid-auto-flow: column;
 	grid-auto-columns: 1fr;

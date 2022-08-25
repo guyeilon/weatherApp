@@ -43,6 +43,7 @@ type svgTypes =
 	| 'search'
 	| 'arrow'
 	| 'favoritesFull'
+	| 'whiteArrow'
 	| undefined;
 
 const Button = <T extends ElementType = 'button'>({
@@ -87,6 +88,8 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgSearch width='30' height='30' />;
 			case 'arrow':
 				return <SvgArrow width='30' height='30' />;
+			case 'whiteArrow':
+				return <SvgArrow full='true' width='30' height='30' />;
 
 			default:
 				break;
