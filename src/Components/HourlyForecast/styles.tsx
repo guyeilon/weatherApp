@@ -10,7 +10,7 @@ export const hourlyForecastWrapper = styled.div`
 	overflow: hidden;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		margin-bottom: 48px;
+		margin-bottom: 100px;
 		margin-top: 48px;
 	}
 `;
