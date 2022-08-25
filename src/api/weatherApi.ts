@@ -4,17 +4,35 @@ const weatherApi = axios.create({
 	baseURL: 'https://dataservice.accuweather.com',
 });
 
-const API_KEY = process.env.REACT_APP_API_KEY;
+let API_KEY = process.env.REACT_APP_API_KEY1;
+
+const toggleApis = (api: string | undefined) => {
+	if (api === process.env.REACT_APP_API_KEY1) {
+		API_KEY = process.env.REACT_APP_API_KEY2;
+		return;
+	} else if (api === process.env.REACT_APP_API_KEY2) {
+		API_KEY = process.env.REACT_APP_API_KEY3;
+		return;
+	}
+	API_KEY = process.env.REACT_APP_API_KEY1;
+};
 
 export const getLocationKey = async (geoString: string) => {
-	const res = await weatherApi.get('/locations/v1/cities/geoposition/search', {
-		params: {
-			apikey: API_KEY,
-			q: geoString,
-		},
-	});
-	const data = await res.data;
-	return data;
+	try {
+		const res = await weatherApi.get('/locations/v1/cities/geoposition/search', {
+			params: {
+				apikey: API_KEY,
+				q: geoString,
+			},
+		});
+
+		const data = await res.data;
+		return data;
+	} catch (error: any) {
+		if (error && error.name === 'AxiosError') {
+			toggleApis(API_KEY);
+		}
+	}
 };
 
 export const getDailyForecast = async (locationKey: string) => {
