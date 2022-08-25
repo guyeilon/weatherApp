@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
-import { motion, Variants, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { AnimatePresence } from 'framer-motion';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
+import useStore from '../../App/store';
 
 interface MobileSearchProps {
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -9,6 +10,8 @@ interface MobileSearchProps {
 }
 
 const MobileSearch: React.FC<MobileSearchProps> = ({ setIsExpanded, isExpanded }) => {
+	const store = useStore(state => state);
+	const isDarkMode = store.theme === 'dark';
 	return (
 		<AnimatePresence>
 			<Modal
@@ -18,7 +21,7 @@ const MobileSearch: React.FC<MobileSearchProps> = ({ setIsExpanded, isExpanded }
 				position='bottom'
 				isModalOpen={isExpanded}
 				closeModal={() => setIsExpanded(false)}>
-				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} svg={isExpanded ? 'whiteArrow' : 'arrow'} />
+				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} svg={isDarkMode ? 'whiteArrow' : 'arrow'} />
 				<Styled.InputWrapper>
 					<Styled.Input />
 				</Styled.InputWrapper>
