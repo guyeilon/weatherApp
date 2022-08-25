@@ -5,7 +5,7 @@ import { convertMtoK, convertToC, getHour } from '../../utils';
 import { getForecastIcon } from '../../constants';
 import { Flex } from '../../design/helper.styles';
 import useStore from '../../App/store';
-import { SvgArrowLeft, SvgArrowRight, SvgWind } from '../../assets/Svg.styles';
+import { SvgArrowLeft, SvgArrowRight } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 import { motion } from 'framer-motion';
 import { useWindowSize } from '../../hooks/useWindowSize';
@@ -55,12 +55,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	};
 
 	content = (
-		<Styled.Carousel
-			ref={carousel}
-			as={motion.div}
-			drag='x'
-			dragConstraints={{ right: 0, left: -width }}
-			whileTap={{ cursor: 'grabbing' }}>
+		<Styled.Carousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
 			{hourlyData.map((hour, idx) => {
 				const icon = hour.icon;
 				const temp = hour.temp;
@@ -69,11 +64,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 
 				return (
 					<Styled.hourlyData key={idx} as={motion.div} whileTap={{ cursor: 'grabbing' }}>
-						<Styled.Card
-							selected={idx === selected}
-							as={motion.div}
-							whileTap={{ cursor: 'grabbing' }}
-							onClick={() => handleTouch(idx)}>
+						<Styled.Card selected={idx === selected} onClick={() => handleTouch(idx)}>
 							{date && <Styled.Hour>{getHour(date)}</Styled.Hour>}
 
 							{temp && (
