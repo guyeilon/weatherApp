@@ -14,7 +14,7 @@ export const FiveDaysForecastWrapper = styled.div`
 	column-gap: 90px;
 
 	grid-template-columns: repeat(5, 1fr);
-	grid-template-rows: min-content 300px 300px 66px;
+	grid-template-rows: min-content 250px 250px 66px;
 
 	padding: 16px 100px;
 
