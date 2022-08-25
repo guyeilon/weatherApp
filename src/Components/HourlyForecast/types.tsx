@@ -7,5 +7,4 @@ export interface hourlyForecastProps {
 			date: number;
 		}
 	];
-	// onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
 }
