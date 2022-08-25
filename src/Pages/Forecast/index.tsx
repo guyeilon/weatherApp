@@ -13,6 +13,7 @@ import HourlyForecast from '../../Components/HourlyForecast';
 import FiveDaysForecast from '../../Components/FiveDaysForecast';
 import { dataType, hourlyDataType } from './types';
 import Modal from '../../Common/Modal';
+import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/reactQueryService';
 
 export interface ForecastProps {}
 
@@ -21,74 +22,18 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const isLocationServiceOn = Object.keys(position).length > 0;
 
 	let content;
-	let geoString = `${position.latitude},${position.longitude}`;
+	let geoString = isLocationServiceOn ? `${position.latitude},${position.longitude}` : undefined;
 
-	const {
-		isLoading: isGetLocationLoading,
-		isSuccess: isGetLocationSuccess,
-		error: err,
-		data: LocationKey,
-		isFetching: isGetLocationFetching,
-	} = useQuery(['locationKey'], () => getLocationKey(geoString), {
-		staleTime: Infinity,
-		enabled: isLocationServiceOn,
-	});
-	const cityName = LocationKey?.LocalizedName;
+	const { isGetLocationSuccess, cityName, cityKey } = useGetLocationQuery(geoString);
 
-	const key = LocationKey?.Key;
+	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(cityKey);
+	const { isHourlySuccess, hourlyData } = useGetHourlyQuery(cityKey);
 
-	const {
-		isLoading: isDailyLoading,
-		// isError: isForecastError,
-		isSuccess: isDailySuccess,
-		data: fiveDaysData,
-		dataUpdatedAt: updatedAt,
-	} = useQuery(['5daysForecast'], () => getFiveDaysForecast(key), {
-		staleTime: Infinity,
-		enabled: !!key,
-		select: fiveDaysData => {
-			const days = fiveDaysData.DailyForecasts.map((day: dataType) => {
-				const icon = day?.Day?.Icon;
-				const dayTemp = day?.Temperature?.Maximum?.Value;
-				const nightTemp = day?.Temperature?.Minimum?.Value;
-				const dayPhrase = day?.Day?.IconPhrase;
-				const nightPhrase = day?.Night?.IconPhrase;
-				const date = day?.EpochDate;
-
-				return { icon, dayTemp, nightTemp, dayPhrase, nightPhrase, date };
-			});
-
-			return days;
-		},
-	});
-	const {
-		isLoading: isHourlyLoading,
-		isError: isHourlyError,
-		isSuccess: isHourlySuccess,
-		error: hourlyError,
-		data: hourlyData,
-	} = useQuery(['12hoursForecast'], () => getHourlyForecast(key), {
-		staleTime: Infinity,
-		enabled: !!key,
-		select: hourlyData => {
-			const hours = hourlyData.map((hour: hourlyDataType) => {
-				const icon = hour?.WeatherIcon;
-				const temp = hour?.Temperature?.Value;
-				const wind = hour?.Wind?.Speed?.Value;
-				const date = hour?.DateTime;
-
-				return { icon, temp, wind, date };
-			});
-
-			return hours;
-		},
-	});
-
-	if (!isGetLocationFetching && !isLocationServiceOn) {
+	if (!isLocationServiceOn) {
 		content = <NoLocation />;
 	}
 
-	if (isGetLocationFetching) {
+	if (isGetLocationSuccess) {
 		content = <Loader />;
 	}
 

@@ -18,7 +18,7 @@ const MobileSearch: React.FC<MobileSearchProps> = ({ setIsExpanded, isExpanded }
 				position='bottom'
 				isModalOpen={isExpanded}
 				closeModal={() => setIsExpanded(false)}>
-				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} />
+				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} svg={isExpanded ? 'whiteArrow' : 'arrow'} />
 				<Styled.InputWrapper>
 					<Styled.Input />
 				</Styled.InputWrapper>
