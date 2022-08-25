@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import useStore from '../../../App/store';
-import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../assets/Svg.styles';
+import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
 
 import * as Styled from './styles';
-import { useCloseModalIfClickedOutside } from '../../../hooks/useCloseIfClickedOutside';
 import Modal from '../../../Common/Modal';
 
 interface MobileNavbarProps {}
