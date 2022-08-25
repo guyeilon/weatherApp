@@ -6,14 +6,13 @@ import Button from '../../Common/Button';
 
 export const NoLocationWrapper = styled.div`
 	margin-top: 23px;
-	margin: 0 auto;
-
-	text-align: center;
-
-	display: flex;
-	flex-direction: column;
-	align-items: center;
+	display: grid;
+	justify-items: center;
 	justify-content: center;
+	grid-template-columns: 1fr minmax(1fr, 355px) 1fr;
+	> * {
+		grid-column: 2;
+	}
 
 	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
 		position: fixed;
@@ -35,7 +34,7 @@ export const SvgNoLocation = styled(SvgLocation)`
 export const SvgLogo = styled(LogoTest)`
 	width: 182px;
 	height: 120px;
-	margin: 0 auto;
+	/* margin: 0 auto;
 	position: relative;
 	margin-bottom: 67px;
 	& svg {
@@ -43,7 +42,7 @@ export const SvgLogo = styled(LogoTest)`
 		position: absolute;
 		top: 10px;
 		left: 15px;
-	}
+	} */
 
 	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
 		display: none;
@@ -63,7 +62,7 @@ export const DesktopTxt = styled.p`
 	font-size: ${({ theme }) => theme.textFontSize.base};
 	color: ${({ theme }) => theme.colors.primary.text};
 
-	width: 269px;
+	max-width: 269px;
 
 	line-height: 1.5;
 
@@ -75,7 +74,8 @@ export const MobileTxt = styled.p`
 	font-size: ${({ theme }) => theme.textFontSize.base};
 	color: ${({ theme }) => theme.colors.primary.text};
 
-	width: 355px;
+	max-width: 355px;
+	text-align: center;
 
 	line-height: 1.5;
 	margin-bottom: 40px;
@@ -101,8 +101,6 @@ export const LocationBtn = styled(Button)`
 	}
 `;
 export const SearchBtn = styled(Button)`
-	/* width: fit-content; */
-
 	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
 		display: none;
 	}

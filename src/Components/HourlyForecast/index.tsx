@@ -8,6 +8,7 @@ import useStore from '../../App/store';
 import { SvgArrowLeft, SvgArrowRight, SvgWind } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 import { motion } from 'framer-motion';
+import { useWindowSize } from '../../hooks/useWindowSize';
 
 const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	const store = useStore(state => state);
@@ -26,11 +27,32 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 
 	const [selected, setSelected] = useState(0);
 
+	const clickForward = () => {
+		ref.current.scrollLeft += 220;
+		if (selected < 11) {
+			setSelected(selected + 1);
+		}
+	};
+	const clickBackwards = () => {
+		ref.current.scrollLeft -= 220;
+		if (selected > 0) {
+			setSelected(selected - 1);
+		}
+	};
+
 	useEffect(() => {
 		setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
 	}, []);
 
 	const [width, setWidth] = useState(0);
+
+	const windowSize = useWindowSize();
+
+	const handleTouch = (idx: number) => {
+		// if (windowSize.width && windowSize.width <= 970) {
+		setSelected(idx);
+		// }
+	};
 
 	content = (
 		<Styled.Carousel
@@ -47,7 +69,11 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 
 				return (
 					<Styled.hourlyData key={idx} as={motion.div} whileTap={{ cursor: 'grabbing' }}>
-						<Styled.Card selected={idx === selected} as={motion.div} whileTap={{ cursor: 'grabbing' }}>
+						<Styled.Card
+							selected={idx === selected}
+							as={motion.div}
+							whileTap={{ cursor: 'grabbing' }}
+							onClick={() => handleTouch(idx)}>
 							{date && <Styled.Hour>{getHour(date)}</Styled.Hour>}
 
 							{temp && (
@@ -59,7 +85,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 							{icon && <Styled.Icon src={getForecastIcon(icon)} />}
 							{wind && (
 								<Flex>
-									<SvgWind width='22' height='22' />
+									<Styled.WindIcon />
 									<Styled.Wind>{toggleSpeed(wind)}</Styled.Wind>
 								</Flex>
 							)}
@@ -69,19 +95,6 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 			})}
 		</Styled.Carousel>
 	);
-
-	const clickForward = () => {
-		ref.current.scrollLeft += 220;
-		if (selected < 11) {
-			setSelected(selected + 1);
-		}
-	};
-	const clickBackwards = () => {
-		ref.current.scrollLeft -= 220;
-		if (selected > 0) {
-			setSelected(selected - 1);
-		}
-	};
 
 	return (
 		<>

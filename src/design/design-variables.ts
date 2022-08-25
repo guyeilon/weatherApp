@@ -70,13 +70,13 @@ export const darkColors = {
 		background: '#1a2b55',
 		search: '#838baa',
 		searchDark: '#444e72',
-		modalText: '#444e72',
+		modalText: '#fff',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
 
 	modals: {
-		primaryBg: '#fff',
+		primaryBg: '#444e72',
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
 	},
 	inputs: {
@@ -141,6 +141,7 @@ export type AppGradientsType = typeof allGradients;
 /* Font sizes */
 
 export const textFontSizes = {
+	xxs: '1.2rem', // 12px
 	xs: '1.4rem', // 14px
 	sm: '1.6rem', // 16px
 	base: '1.8rem', // 18px

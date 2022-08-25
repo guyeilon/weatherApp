@@ -24,9 +24,12 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
 
 		return (
 			<Styled.DailyData key={idx}>
-				{date && dayPhrase && <Styled.DayAndPhrase>{getDay(date) + ' - ' + dayPhrase}</Styled.DayAndPhrase>}
+				<Flex>
+					{icon && <Styled.IconInMobile src={getForecastIcon(icon)} />}
+					{date && dayPhrase && <Styled.DayAndPhrase>{getDay(date) + ' - ' + dayPhrase}</Styled.DayAndPhrase>}
+				</Flex>
 				<Flex center>
-					{icon && <Styled.Icon src={getForecastIcon(icon)} />}
+					{icon && <Styled.IconInDesktop src={getForecastIcon(icon)} />}
 					{dayTemp && nightTemp && (
 						<Styled.Temp>
 							{toggleTemperature(dayTemp)}

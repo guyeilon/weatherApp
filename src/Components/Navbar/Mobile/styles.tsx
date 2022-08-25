@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled, { css } from 'styled-components/macro';
 import Button from '../../../Common/Button';
 import Switcher from '../../../Common/Switcher';
 
@@ -17,6 +17,7 @@ export const MobileNavbar = styled.div`
 	width: 100%;
 	height: 30px;
 	margin-top: 30px;
+	margin-bottom: 24px;
 
 	padding: 0 30px;
 `;
@@ -32,12 +33,12 @@ export const MenuBtn = styled(NavbarBtn).attrs(props => ({
 	align-self: flex-start;
 `;
 
-export const MobileModalWrapper = styled.div`
+export const Container = styled.div`
 	position: fixed;
 	top: 0;
 	left: 0;
 	-webkit-backdrop-filter: blur(10px);
-	backdrop-filter: blur(10px); /* background-color: rgba(140, 140, 140, 0.2); */
+	backdrop-filter: blur(10px);
 
 	backdrop-filter: blur(0.4rem);
 	z-index: 2;
@@ -110,7 +111,7 @@ export const DegreeSwitcher = styled(Switcher)``;
 export const ThemeSwitcher = styled(Switcher)``;
 
 export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'logoutDark',
+	// svg: 'logoutDark',
 	navbar: true,
 }))`
 	margin: 0 auto;

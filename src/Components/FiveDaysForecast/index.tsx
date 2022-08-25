@@ -4,12 +4,11 @@ import * as Styled from './styles';
 import { convertToC, getDay, getDayAndMonth } from '../../utils';
 
 import useStore from '../../App/store';
-import { SvgSunFlat } from '../../assets/Svg.styles';
 
 import Chart from 'react-apexcharts';
 import { motion } from 'framer-motion';
 
-const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => {
+const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData, isExpanded }) => {
 	const store = useStore(state => state);
 
 	const toggleTemperature = (temp: number) => {
@@ -18,15 +17,15 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 
 	let content;
 
+	const isDarkMode = store.theme === 'dark';
+
 	const fahrenheitDay = fiveDaysData?.map(day => day.dayTemp);
 	const celsiusDay = fiveDaysData?.map(day => convertToC(day.dayTemp));
 	const fahrenheitNight = fiveDaysData?.map(day => day.nightTemp);
 	const celsiusNight = fiveDaysData?.map(day => convertToC(day.nightTemp));
 
-	// const dayArray = fiveDaysData?.map(day => toggleTemperature(day.dayTemp));
-
 	const [options, setOptions] = useState({
-		colors: ['#fff'],
+		colors: isExpanded ? ['#bebebe'] : ['#fff'],
 
 		xaxis: {
 			categories: [1, 2, 3, 4, 5],
@@ -65,9 +64,10 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 			enabled: true,
 			offsetY: -10,
 			style: {
-				fontSize: '24px',
+				fontSize: isExpanded ? '14px' : '24px',
 				fontFamily: 'overpass, sans-serif',
 				fontWeight: '500',
+				colors: isExpanded ? (isDarkMode ? ['#fff'] : ['#444e72']) : ['#fff'],
 			},
 			background: {
 				enabled: false,
@@ -80,7 +80,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 		chart: {
 			id: 'dayChart',
 			animations: {
-				enabled: true,
+				enabled: isExpanded ? false : true,
 				dynamicAnimation: {
 					enabled: true,
 					speed: 800,
@@ -99,10 +99,10 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 			enabled: false,
 		},
 		markers: {
-			size: [5, 5],
+			size: isExpanded ? [3, 3] : [5, 5],
 			colors: undefined,
-			strokeColors: '#fff',
-			strokeWidth: 2,
+			strokeColors: isExpanded ? '#bebebe' : '#fff',
+			strokeWidth: isExpanded ? 2 : 2,
 			strokeOpacity: 0.9,
 			strokeDashArray: 0,
 			fillOpacity: 1,
@@ -111,7 +111,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 			radius: 2,
 		},
 		stroke: {
-			width: [2, 2],
+			width: isExpanded ? [1, 1] : [2, 2],
 		},
 	});
 	const [seriesDay, setSeriesDay] = useState([
@@ -157,14 +157,11 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 		const date = day.date;
 
 		return (
-			<>
-				<Styled.DailyData key={idx}>
-					{date && <Styled.Day>{getDay(date)}</Styled.Day>}
-					{date && <Styled.Date>{getDayAndMonth(date)}</Styled.Date>}
-					<SvgSunFlat width='35' height='36' />
-				</Styled.DailyData>
-				<Styled.MoonIcon />
-			</>
+			<Styled.DailyData key={idx}>
+				{date && <Styled.Day>{getDay(date)}</Styled.Day>}
+				{date && <Styled.Date>{getDayAndMonth(date)}</Styled.Date>}
+				<Styled.SunIcon />
+			</Styled.DailyData>
 		);
 	});
 
@@ -175,14 +172,31 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ fiveDaysData }) => 
 				{content}
 				<Styled.DayChart>
 					{fiveDaysData && (
-						<Chart options={options} series={seriesDay} type='line' height={300} width={880} />
+						<Chart
+							options={options}
+							series={seriesDay}
+							type='line'
+							height={isExpanded ? 100 : 300}
+							width={isExpanded ? 300 : 880}
+						/>
 					)}
 				</Styled.DayChart>
 				<Styled.NightChart>
 					{fiveDaysData && (
-						<Chart options={options} series={seriesNight} type='line' height={300} width={880} />
+						<Chart
+							options={options}
+							series={seriesNight}
+							type='line'
+							height={isExpanded ? 100 : 300}
+							width={isExpanded ? 300 : 880}
+						/>
 					)}
 				</Styled.NightChart>
+				<Styled.MoonIcon />
+				<Styled.MoonIcon />
+				<Styled.MoonIcon />
+				<Styled.MoonIcon />
+				<Styled.MoonIcon />
 				<Styled.TransparentGrid>
 					<Styled.col1
 						as={motion.div}

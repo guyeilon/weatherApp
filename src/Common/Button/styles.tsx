@@ -93,8 +93,8 @@ const ghostButton = css`
 	background-color: var(--secondaryBgDisabled);
 	color: var(--secondaryTextColorDisable);
 	border: solid 1px var(--secondaryTextColorDisable);
-	box-shadow: var(--boxShadow);
-	padding: var(--secondaryPadding);
+	/* box-shadow: var(--boxShadow); */
+	/* padding: var(--secondaryPadding); */
 
 	border-radius: var(--borderRadius);
 `;
@@ -146,7 +146,15 @@ export const BTN = styled.button<StyledButtonProps>`
 	${defaultButton}
 
 	&:hover {
-		${p => !p.disabled && !p.secondary && !p.navbar && !p.as && !p.footer && !p.noHover && hoveredLoginButton};
+		${p =>
+			!p.disabled &&
+			!p.secondary &&
+			!p.navbar &&
+			!p.as &&
+			!p.footer &&
+			!p.noHover &&
+			!p.ghost &&
+			hoveredLoginButton};
 		${p => !p.disabled && p.secondary && hoveredSecondary};
 		${p => p.as && hoveredLinkButton};
 	}
