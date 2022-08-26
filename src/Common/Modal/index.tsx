@@ -2,6 +2,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 import * as Styled from './styles';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useCloseModalIfClickedOutside } from '../../hooks/useCloseIfClickedOutside';
+import { UsePreventScrollOutsideModal } from '../../hooks/usePreventScrollOutsideModal';
 
 export interface ModalProps {
 	children?: ReactNode;
@@ -32,19 +33,7 @@ const Modal: React.FC<ModalProps> = ({ children, height, width, position, isModa
 		closeModalFunction: closeModal,
 	});
 
-	useEffect(() => {
-		const preventScroll = (e: TouchEvent) => {
-			if (isModalOpen) {
-				e.preventDefault();
-			}
-		};
-
-		document.body.addEventListener('touchmove', preventScroll, { passive: false });
-
-		return () => {
-			document.body.removeEventListener('touchmove', preventScroll);
-		};
-	}, [WrapperRef, isModalOpen]);
+	UsePreventScrollOutsideModal(isModalOpen);
 
 	return (
 		<AnimatePresence>
