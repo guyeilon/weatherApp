@@ -4,27 +4,32 @@ import * as Styled from './styles';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useCloseModalIfClickedOutside } from '../../hooks/useCloseIfClickedOutside';
 import { UsePreventScrollOutsideModal } from '../../hooks/usePreventScrollOutsideModal';
+import { useGetAnimationByPosition } from '../../hooks/useGetAnimationByPosition';
 
 export interface ModalProps {
 	children?: ReactNode;
 	height: string;
 	width: string;
-	position?: string | undefined;
+	position: string;
 	isModalOpen: boolean;
 	closeModal: () => void;
 	padding?: string | undefined;
+	blur?: boolean | undefined;
 }
 // animation:
-const overlayVariants: Variants = {
-	hidden: { opacity: 0 },
-	visible: { opacity: 1 },
-};
-const panelVariants: Variants = {
-	hidden: { y: 1000 },
-	visible: { y: 0, transition: { type: 'spring', damping: 30, stiffness: 300 } },
-};
 
-const Modal: React.FC<ModalProps> = ({ children, height, width, position, isModalOpen, closeModal, padding }) => {
+const Modal: React.FC<ModalProps> = ({
+	children,
+	height,
+	width,
+	position,
+	isModalOpen,
+	closeModal,
+	padding,
+	blur = true,
+}) => {
+	const { overlayVariants, panelVariants } = useGetAnimationByPosition(position);
+
 	const modalRef = useRef<HTMLDivElement>(null);
 	const WrapperRef = useRef<HTMLDivElement>(null);
 
@@ -41,6 +46,7 @@ const Modal: React.FC<ModalProps> = ({ children, height, width, position, isModa
 	return ReactDOM.createPortal(
 		<AnimatePresence>
 			<Styled.Container
+				blur={blur}
 				as={motion.div}
 				initial='hidden'
 				animate='visible'

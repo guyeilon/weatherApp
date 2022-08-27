@@ -17,8 +17,6 @@ export const UsePreventScrollOutsideModal = (isModalOpen: boolean) => {
 
 	useEffect(() => {
 		const preventScroll = (e: WheelEvent) => {
-			console.log(e);
-
 			if (isModalOpen) {
 				e.preventDefault();
 			}
