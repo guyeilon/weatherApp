@@ -3,6 +3,9 @@ import Button from '../../Common/Button';
 
 export const NavbarBtn = styled(Button)`
 	width: fit-content;
+	& svg {
+		margin-bottom: 9px;
+	}
 `;
 
 export const MobileFooter = styled.div`

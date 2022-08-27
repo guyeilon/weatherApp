@@ -13,12 +13,10 @@ export const DesktopContentWrapper = styled.div`
 	position: fixed;
 	top: 0;
 	z-index: 3;
-	grid-template-columns:
-		[first] 40px [logo] 0.5fr [menu] 1.5fr
-		[search] auto [switcher] 1.5fr [map] minmax(min-content, 0.25fr)
-		[logout] minmax(min-content, 0.25fr) [last] 40px [end];
+	grid-template-columns: repeat(3, 1fr);
 
-	grid-template-areas: '. logo menu input switcher map logout . ';
+	grid-template-areas: 'grid1 grid2 grid3 ';
+	padding: 0 60px;
 
 	align-items: center;
 	justify-items: center;
@@ -28,19 +26,43 @@ export const DesktopContentWrapper = styled.div`
 	height: 94px;
 
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		grid-template-columns:
-			[first] 60px [logo] 0.5fr [menu] 1.5fr [search] auto [map] 1fr [switcher] 0.5fr
-			[logout] 0.5fr [last] 60px [end];
-
-		grid-template-areas: '. logo menu input map switcher  logout . ';
+		padding: 0 70px;
 	}
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		display: none;
 	}
 `;
 
+export const Grid1 = styled.div`
+	grid-area: grid1;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+
+	align-items: center;
+	justify-items: center;
+	grid-gap: 10px;
+`;
+export const Grid2 = styled.div`
+	grid-area: grid2;
+`;
+export const Grid3 = styled.div`
+	grid-area: grid3;
+	display: grid;
+
+	grid-template-columns: repeat(3, 1fr);
+	@media only screen and (${({ theme }) => theme.media.desktop}) {
+		grid-template-areas: 'map switcher logout ';
+	}
+	@media only screen and (${({ theme }) => theme.media.tablet}) {
+		grid-template-areas: ' switcher map logout ';
+	}
+
+	align-items: center;
+	justify-items: center;
+	grid-gap: 10px;
+`;
+
 export const Logo = styled(SvgNavbarLogo)`
-	grid-area: logo;
 	justify-self: start;
 `;
 
@@ -48,10 +70,10 @@ export const NavbarBtn = styled(Button)`
 	width: fit-content;
 `;
 export const MenuWrapper = styled.div`
-	grid-area: menu;
 	display: flex;
 	gap: 16px;
-	justify-self: center;
+	justify-self: end;
+
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		gap: 46px;
 	}
@@ -96,7 +118,10 @@ export const DesktopTxt = styled.div`
 	font-weight: 500;
 	display: none;
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		display: block;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		vertical-align: middle;
 	}
 `;
 export const MapBtn = styled(NavbarBtn).attrs(props => ({
@@ -111,6 +136,7 @@ export const MapBtn = styled(NavbarBtn).attrs(props => ({
 
 	grid-area: map;
 	justify-self: end;
+	/* align-self: center; */
 
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		justify-self: center;
@@ -132,13 +158,12 @@ export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
 
 export const Input = styled(SearchInput)``;
 export const InputWrapper = styled.div`
-	grid-area: input;
-
-	width: 372px;
+	max-width: 372px;
+	justify-self: center;
 
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		order: 4;
-		width: 400px;
+		max-width: 400px;
 	}
 `;
 

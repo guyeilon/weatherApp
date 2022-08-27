@@ -110,7 +110,7 @@ const Button = <T extends ElementType = 'button'>({
 				{...rest}
 				className={className}>
 				<Styled.IconWrapper>{IconToShow(svg)}</Styled.IconWrapper>
-				{children}
+				<Styled.BtnTxt>{children}</Styled.BtnTxt>
 			</Styled.BTN>
 		</>
 	);

@@ -8,8 +8,20 @@ const positionBottom = css`
 	margin: 0 auto;
 	bottom: 0;
 `;
+const positionTop = css`
+	position: fixed;
+	top: 94px;
+	right: auto;
+	left: auto;
+	/* margin: 0 auto; */
+	/* bottom: 0; */
+`;
+const blurBg = css`
+	background-color: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(4px);
+`;
 
-export const Container = styled.div`
+export const Container = styled.div<{ blur?: boolean }>`
 	z-index: ${({ theme }) => theme.zIndex.highestPriority};
 
 	position: fixed;
@@ -22,8 +34,7 @@ export const Container = styled.div`
 	align-items: center;
 	justify-content: center;
 
-	background-color: rgba(255, 255, 255, 0.1);
-	backdrop-filter: blur(20px);
+	${({ blur }) => blur && blurBg};
 `;
 
 interface ModalProps {
@@ -40,6 +51,7 @@ export const ModalWrapper = styled.div<ModalProps>`
 	padding: ${({ padding }) => padding || '40px'};
 
 	${({ position }) => position === 'bottom' && positionBottom};
+	${({ position }) => position === 'top' && positionTop};
 	/* display: flex;
 	align-items: center;
 	justify-content: center; */

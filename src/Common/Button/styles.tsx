@@ -29,6 +29,8 @@ const defaultButton = css`
 	flex-direction: row;
 	justify-content: center;
 	align-items: center;
+	align-content: center;
+	align-self: center;
 
 	/* styling */
 	position: relative;
@@ -41,7 +43,7 @@ const defaultButton = css`
 	/* typography */
 	font-family: inherit;
 	font-size: var(--fontSize);
-	line-height: var(--lineHeight);
+	/* line-height: var(--lineHeight); */
 	font-weight: var(--fontWeight);
 
 	/* animation */
@@ -132,6 +134,16 @@ interface StyledButtonProps {
 }
 export const IconWrapper = styled.div`
 	margin-right: 8px;
+	& > svg {
+		display: flex;
+		align-self: center;
+		justify-content: center;
+	}
+`;
+export const BtnTxt = styled.div`
+	display: flex;
+	align-self: center;
+	justify-content: center;
 `;
 export const FavIcon = styled(SvgFav).attrs(props => ({
 	outlinedark: 'true',
