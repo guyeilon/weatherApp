@@ -3,13 +3,18 @@ import { createGlobalStyle } from 'styled-components';
 export const GlobalStyles = createGlobalStyle`
   html {
         font-size: 62.5%;
+        height: 100%;
         
       }
       body {
+        min-height: 100%;
       background: ${({ theme }) => theme.colors.background.gradient};
       
         background-attachment: fixed;
         overflow-x: hidden;
+
+        display: flex;
+        flex-direction:column
 
       }
 

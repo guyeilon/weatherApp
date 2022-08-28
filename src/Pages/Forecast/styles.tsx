@@ -2,8 +2,9 @@ import styled from 'styled-components/macro';
 import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
+	position: relative;
 	display: grid;
-	height: 100vh;
+	min-height: 100%;
 	/* height: 100vh; */
 	/* justify-content: center; */
 

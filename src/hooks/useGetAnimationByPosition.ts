@@ -16,15 +16,15 @@ export const useGetAnimationByPosition = (position: string) => {
 			break;
 		case 'top':
 			panelVariants = {
-				hidden: { y: -1000 },
-				visible: { y: 0, transition: { type: 'spring', damping: 30, stiffness: 300 } },
+				hidden: { y: -1000, opacity: 0, transition: { duration: 0.1 } },
+				visible: { y: 0, opacity: 1, transition: { type: 'spring', damping: 30, stiffness: 300 } },
 			};
 			break;
 
 		default:
 			panelVariants = {
-				hidden: { y: 1000 },
-				visible: { y: 0, transition: { type: 'spring', damping: 30, stiffness: 300 } },
+				hidden: { y: 1000, opacity: 0, transition: { duration: 0.1 } },
+				visible: { y: 0, opacity: 1, transition: { type: 'spring', damping: 30, stiffness: 300 } },
 			};
 			break;
 	}
