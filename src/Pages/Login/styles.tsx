@@ -1,7 +1,5 @@
 import styled from 'styled-components/macro';
 
-import { SvgClouds } from '../../assets/Svg.styles';
-
 export const ContentWrapper = styled.div`
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
 
@@ -137,14 +135,6 @@ export const ButtonWrapper = styled.div`
 	}
 `;
 
-export const Clouds = styled(SvgClouds)`
-	position: fixed;
-	top: 123px;
-	left: 100px;
-	width: 1167px;
-	height: 355px;
-	z-index: -1;
-`;
 export const Div = styled.div`
 	position: fixed;
 	top: 123px;

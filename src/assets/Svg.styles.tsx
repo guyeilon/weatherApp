@@ -14,7 +14,7 @@ import { ReactComponent as Fav } from './Svgs/fav.svg';
 import { ReactComponent as FavFull } from './Svgs/favFull.svg';
 import { ReactComponent as Google } from './Svgs/google.svg';
 import { ReactComponent as Fb } from './Svgs/facebook.svg';
-import { ReactComponent as Clouds } from './Svgs/clouds.svg';
+import { ReactComponent as Cloud } from './Svgs/cloud.svg';
 import { ReactComponent as Test } from './Svgs/test-cropped.svg';
 import { ReactComponent as Arrow } from './Svgs/arrow.svg';
 import { ReactComponent as ArrowLeft } from './Svgs/arrowLeft.svg';
@@ -153,7 +153,7 @@ export const SvgMoon = styled(Moon)<SvgProps>`
 export const SvgLogo = styled(Logo)<SvgProps>`
 	${props => svgStyles(props)};
 `;
-export const SvgClouds = styled(Clouds)<SvgProps>`
+export const SvgCloud = styled(Cloud)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgNavbarLogo = styled(NavbarLogo)<SvgProps>`
