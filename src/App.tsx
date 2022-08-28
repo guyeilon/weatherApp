@@ -16,6 +16,7 @@ import { Routes, Route } from 'react-router-dom';
 
 import Layout from './Layout/Layout';
 import Forecast from './Pages/Forecast';
+import Clouds from './Components/Clouds';
 
 const App: React.FC = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();

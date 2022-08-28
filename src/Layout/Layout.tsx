@@ -8,8 +8,8 @@ const Layout = () => {
 	return (
 		<>
 			<Navbar />
-			<Clouds cloudsNum={10} />
 			<Outlet />
+			<Clouds cloudsNum={5} />
 			<MobileFooter />
 		</>
 	);

@@ -9,8 +9,9 @@ export const NavbarBtn = styled(Button)`
 `;
 
 export const MobileFooter = styled.div`
-	width: 100%;
+	width: 100vw;
 	height: 80px;
+	z-index: 10;
 
 	display: grid;
 	grid-template-columns: [col1] 1fr [divider1] 1px [col2] 1fr [divider2] 1px [col3] 1fr [end];
@@ -20,11 +21,12 @@ export const MobileFooter = styled.div`
 	align-items: center;
 
 	position: fixed;
-	top: auto;
+	/* top: calc(100vh - 80px); */
 	right: auto;
 	left: auto;
 	margin: 0 auto;
 	bottom: 0;
+	top: auto;
 
 	background-color: rgba(255, 255, 255, 0.3);
 	-webkit-backdrop-filter: blur(20px);

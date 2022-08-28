@@ -11,10 +11,10 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	const debouncedSearch = useDebounce(search, 2000);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const client = useQueryClient();
-	console.log('client', client.getQueryData);
+	// console.log('client', client.getQueryData);
 
 	const result = client.getQueryData(['Autocomplete', search], { exact: true });
-	console.log('result,', result);
+	// console.log('result,', result);
 
 	const { data, isLoading } = useQuery(
 		['Autocomplete', result ? search : debouncedSearch],
@@ -29,7 +29,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	const handleChange = (e: any) => {
 		setSearch(e.target.value);
 	};
-	console.log('data', data);
+	// console.log('data', data);
 
 	return (
 		<>
