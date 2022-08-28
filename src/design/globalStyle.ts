@@ -9,6 +9,7 @@ export const GlobalStyles = createGlobalStyle`
       background: ${({ theme }) => theme.colors.background.gradient};
       
         background-attachment: fixed;
+        overflow-x: hidden;
 
       }
 
