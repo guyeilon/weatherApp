@@ -2,7 +2,7 @@ import { RefObject } from 'react';
 import styled from 'styled-components/macro';
 import { SvgWind } from '../../assets/Svg.styles';
 
-export const hourlyForecastWrapper = styled.div`
+export const hourlyForecastCarousel = styled.div`
 	/* overscroll-behavior-x: contain; */
 	/* scroll-snap-type: x; */
 
@@ -14,7 +14,7 @@ export const hourlyForecastWrapper = styled.div`
 		margin-top: 48px;
 	}
 `;
-export const Carousel = styled.div`
+export const InnerCarousel = styled.div`
 	max-width: 100%;
 
 	height: 293px;

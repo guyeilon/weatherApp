@@ -1,60 +1,133 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { SearchCityProps } from './types';
+import { CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } from './types';
 import * as Styled from './styles';
-import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getAutocompleteResults } from '../../api/weatherApi';
-import useDebounce from '../../hooks/useDebounce';
+
 import Modal from '../../Common/Modal';
+import { useGetCityQuery } from '../../services/reactQueryService';
+
+import { Bars } from 'react-loader-spinner';
+import { SvgCity } from '../../assets/Svg.styles';
 
 const SearchCity: React.FC<SearchCityProps> = () => {
 	const [search, setSearch] = useState('');
-	const debouncedSearch = useDebounce(search, 2000);
-	const [isExpanded, setIsExpanded] = useState(false);
-	const client = useQueryClient();
-	// console.log('client', client.getQueryData);
-
-	const result = client.getQueryData(['Autocomplete', search], { exact: true });
-	// console.log('result,', result);
-
-	const { data, isLoading } = useQuery(
-		['Autocomplete', result ? search : debouncedSearch],
-		() => getAutocompleteResults(result ? search : debouncedSearch),
-		{
-			enabled: !!search,
-			cacheTime: Infinity,
-			staleTime: Infinity,
-		}
-	);
+	const [isFocused, setIsFocused] = useState(false);
 
 	const handleChange = (e: any) => {
 		setSearch(e.target.value);
 	};
-	// console.log('data', data);
+
+	const { citiesData, isLoading } = useGetCityQuery(search);
 
 	return (
 		<>
-			<Styled.Input onChange={handleChange} />
-
-			{isExpanded && (
-				<Modal
-					blur={false}
-					padding='40px 30px'
-					width='476px'
-					height='372px'
-					position='top'
-					isModalOpen={isExpanded}
-					closeModal={() => setIsExpanded(false)}>
-					hi
-				</Modal>
-			)}
+			<Styled.Input
+				onChange={handleChange}
+				onFocus={() => setIsFocused(true)}
+				onBlur={() => setIsFocused(false)}
+			/>
+			<SearchCityPopOver
+				isLoading={isLoading}
+				data={citiesData}
+				show={!!search && isFocused}
+				isFocused={isFocused}
+				searchValue={search}
+				setSearch={setSearch}
+			/>
 		</>
 	);
 };
 
 export default SearchCity;
 
-export interface SearchResultPopOverProps {}
+const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
+	isLoading,
+	data,
+	show,
+	searchValue,
+	isFocused,
+	setSearch,
+}) => {
+	const [isExpanded, setIsExpanded] = useState(false);
 
-const SearchResultPopOver: React.FC<SearchResultPopOverProps> = Props => {
-	return <div></div>;
+	const closeModal = () => {
+		setIsExpanded(false);
+		// setSearch('');
+		console.log('modal close when not focused');
+	};
+
+	useEffect(() => {
+		console.log(show);
+
+		if (!isExpanded) {
+			show && setIsExpanded(true);
+		} else {
+			!show && closeModal();
+		}
+	}, [show, isFocused]);
+	console.log('searchModalOpen?', isExpanded);
+	// console.log('show', show);
+	console.log('isLoading', isLoading);
+	console.log('isFocused', isFocused);
+	console.log('searchValue', searchValue);
+
+	return (
+		<>
+			{isExpanded && (
+				<Modal
+					blur='main'
+					padding='24px 0'
+					width='476px'
+					height='372px'
+					position='top'
+					isModalOpen={isExpanded}
+					closeModal={() => setIsExpanded(false)}
+					useCloseModal={false}>
+					{isLoading && (
+						<Styled.LoaderWrapper>
+							<Bars
+								height='80'
+								width='80'
+								color='#0f0f0ef0'
+								ariaLabel='bars-loading'
+								wrapperStyle={{}}
+								wrapperClass=''
+								visible={true}
+							/>
+						</Styled.LoaderWrapper>
+					)}
+					{!isLoading && data.length === 0 && (
+						<Styled.NoResultWrapper>
+							<Styled.InnerContentWrapper>
+								<SvgCity width='120' height='120' />
+								<Styled.NoResultTxt>
+									We couldn’t find any city named "<span>{searchValue}</span>@", please try again.
+								</Styled.NoResultTxt>
+							</Styled.InnerContentWrapper>
+						</Styled.NoResultWrapper>
+					)}
+					{data && data.length > 0 && searchValue && (
+						<Styled.ContentWrapper>
+							{data.map(city => (
+								<Styled.CityWrapper key={city.cityKey}>
+									<CityNameHighlighter searchValue={searchValue} cityName={city.cityName} />
+									<Styled.CountryName>{city.countryName}</Styled.CountryName>
+								</Styled.CityWrapper>
+							))}
+						</Styled.ContentWrapper>
+					)}
+				</Modal>
+			)}
+		</>
+	);
+};
+
+const CityNameHighlighter: React.FC<CityNameHighlighterProps> = ({ cityName, searchValue }) => {
+	const parts = cityName.split(new RegExp(`(${searchValue})`, 'gi'));
+
+	return (
+		<Styled.CityName>
+			<span>{parts[1]}</span>
+			{parts[2]},&nbsp;
+		</Styled.CityName>
+	);
 };

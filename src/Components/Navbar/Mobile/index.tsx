@@ -12,6 +12,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const store = useStore(state => state);
 	const isDarkMode = store.theme === 'dark';
 	const [isExpanded, setIsExpanded] = useState(false);
+	console.log('MenuModal:', isExpanded);
 
 	return (
 		<>

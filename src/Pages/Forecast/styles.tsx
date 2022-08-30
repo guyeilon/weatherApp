@@ -3,6 +3,7 @@ import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
 	position: relative;
+	/* overflow: hidden; */
 	display: grid;
 	min-height: 100%;
 	/* height: 100vh; */

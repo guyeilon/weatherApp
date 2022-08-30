@@ -14,9 +14,9 @@ export interface ModalProps {
 	isModalOpen: boolean;
 	closeModal: () => void;
 	padding?: string | undefined;
-	blur?: boolean | undefined;
+	blur?: string | undefined;
+	useCloseModal?: boolean | undefined;
 }
-// animation:
 
 const Modal: React.FC<ModalProps> = ({
 	children,
@@ -26,7 +26,8 @@ const Modal: React.FC<ModalProps> = ({
 	isModalOpen,
 	closeModal,
 	padding,
-	blur = true,
+	blur = 'all',
+	useCloseModal = true,
 }) => {
 	const { overlayVariants, panelVariants } = useGetAnimationByPosition(position);
 
@@ -37,6 +38,7 @@ const Modal: React.FC<ModalProps> = ({
 		isModalOpen: isModalOpen,
 		modalRef: modalRef,
 		closeModalFunction: closeModal,
+		useCloseModal: useCloseModal,
 	});
 
 	UsePreventScrollOutsideModal(isModalOpen);

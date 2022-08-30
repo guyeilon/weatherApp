@@ -10,31 +10,41 @@ const positionBottom = css`
 `;
 const positionTop = css`
 	position: fixed;
-	top: 94px;
+	top: 0;
 	right: auto;
 	left: auto;
-	/* margin: 0 auto; */
-	/* bottom: 0; */
 `;
-const blurBg = css`
+const blurAll = css`
 	background-color: rgba(255, 255, 255, 0.1);
 	backdrop-filter: blur(4px);
-`;
-
-export const Container = styled.div<{ blur?: boolean }>`
-	z-index: ${({ theme }) => theme.zIndex.highestPriority};
 
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	bottom: 0;
+`;
+const blurMain = css`
+	background-color: rgba(255, 255, 255, 0.1);
+	backdrop-filter: blur(4px);
+
+	position: fixed;
+	top: 94px;
+	left: 0;
+	right: 0;
+	bottom: 0;
+`;
+
+export const Container = styled.div<{ blur?: string }>`
+	z-index: ${({ theme }) => theme.zIndex.highestPriority};
 
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	height: 100vh;
 
-	${({ blur }) => blur && blurBg};
+	${({ blur }) => blur === 'all' && blurAll};
+	${({ blur }) => blur === 'main' && blurMain};
 `;
 
 interface ModalProps {
@@ -52,12 +62,10 @@ export const ModalWrapper = styled.div<ModalProps>`
 
 	${({ position }) => position === 'bottom' && positionBottom};
 	${({ position }) => position === 'top' && positionTop};
-	/* display: flex;
-	align-items: center;
-	justify-content: center; */
 
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
-	border-radius: ${({ theme }) => theme.border.modalUp};
+	border-radius: ${({ theme, position }) => position === 'bottom' && theme.border.modalUp};
+	border-radius: ${({ theme, position }) => position === 'top' && theme.border.modal};
 
 	box-shadow: ${({ theme }) => theme.boxShadows.base};
 `;

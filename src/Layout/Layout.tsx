@@ -9,7 +9,6 @@ const Layout = () => {
 		<>
 			<Navbar />
 			<Outlet />
-			{/* <Clouds cloudsNum={5} /> */}
 			<MobileFooter />
 		</>
 	);

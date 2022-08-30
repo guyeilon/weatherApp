@@ -13,6 +13,7 @@ export const colors = {
 		search: '#838baa',
 		searchDark: '#444e72',
 		modalText: '#444e72',
+		secondaryModalText: '#838baa',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
@@ -20,6 +21,7 @@ export const colors = {
 	modals: {
 		primaryBg: '#fff',
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
+		hover: '#f2f2f2',
 	},
 	inputs: {
 		mainBg: '#f2f2f2',
@@ -71,6 +73,7 @@ export const darkColors = {
 		search: '#838baa',
 		searchDark: '#444e72',
 		modalText: '#fff',
+		secondaryModalText: '#fff',
 	},
 
 	red: { danger: '#f0274b', lightDanger: '#ffe7e7' },
@@ -78,6 +81,7 @@ export const darkColors = {
 	modals: {
 		primaryBg: '#444e72',
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
+		hover: '#838baa',
 	},
 	inputs: {
 		mainBg: '#f2f2f2',

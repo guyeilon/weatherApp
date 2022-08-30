@@ -19,13 +19,18 @@ export const UsePreventScrollOutsideModal = (isModalOpen: boolean) => {
 		const preventScroll = (e: WheelEvent) => {
 			if (isModalOpen) {
 				e.preventDefault();
+				e.stopPropagation();
 			}
 		};
 
-		document.body.addEventListener('wheel', preventScroll, { passive: false });
-
+		const rootEl = document.getElementById('root');
+		if (rootEl) {
+			rootEl.addEventListener('wheel', preventScroll, { passive: false });
+		}
 		return () => {
-			document.body.removeEventListener('wheel', preventScroll);
+			if (rootEl) {
+				rootEl.removeEventListener('wheel', preventScroll);
+			}
 		};
 	}, [isModalOpen]);
 };

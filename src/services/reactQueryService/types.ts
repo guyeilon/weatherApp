@@ -30,3 +30,11 @@ export type hourlyDataType = {
 		Speed: { Value: number };
 	};
 };
+export type cityDataType = {
+	Key: number;
+
+	Country: {
+		LocalizedName: string;
+	};
+	LocalizedName: string;
+};

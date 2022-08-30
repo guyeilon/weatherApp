@@ -30,6 +30,7 @@ const App: React.FC = () => {
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>
 				<GlobalStyles />
+				{/* <Clouds cloudsNum={10} /> */}
 				<Routes>
 					<Route path='/login' element={<Login />} />
 					<Route path='/' element={<Layout />}>
