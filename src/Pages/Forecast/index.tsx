@@ -26,7 +26,6 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	let geoString = isLocationServiceOn ? `${position.latitude},${position.longitude}` : undefined;
 
 	const { isGetLocationSuccess, cityName, cityKey } = useGetLocationQuery(geoString);
-
 	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(cityKey);
 	const { isHourlySuccess, hourlyData } = useGetHourlyQuery(cityKey);
 
@@ -39,6 +38,8 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	}
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
+	console.log('forecastModal', isExpanded);
+
 	if (isDailySuccess && isHourlySuccess) {
 		content = (
 			<div>

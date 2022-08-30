@@ -55,7 +55,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	};
 
 	content = (
-		<Styled.Carousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
+		<Styled.InnerCarousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
 			{hourlyData.map((hour, idx) => {
 				const icon = hour.icon;
 				const temp = hour.temp;
@@ -84,12 +84,14 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 					</Styled.hourlyData>
 				);
 			})}
-		</Styled.Carousel>
+		</Styled.InnerCarousel>
 	);
 
 	return (
 		<>
-			<Styled.hourlyForecastWrapper ref={ref}>{content}</Styled.hourlyForecastWrapper>
+			<Styled.hourlyForecastCarousel ref={ref} as={motion.div}>
+				{content}
+			</Styled.hourlyForecastCarousel>
 			<Styled.BtnWrapper>
 				<Button style={{ width: '40px' }} noHover onClick={clickBackwards}>
 					<SvgArrowLeft width='40' height='40' />

@@ -53,11 +53,26 @@ export const InputWrapper = styled.div`
 
 export const Input = styled(SearchInput)`
 	background-color: #fff;
-	box-shadow: ${({ theme }) => theme.boxShadows.button}; ;
+	box-shadow: ${({ theme }) => theme.boxShadows.button};
+	margin-bottom: 21px;
 `;
 
 export const ArrowBtn = styled(Btn).attrs(props => ({
 	footer: true,
 }))`
 	margin-bottom: 16px;
+`;
+export const ResultContentWrapper = styled.div``;
+export const SearchScreen = styled.div`
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	gap: 40px;
+	margin-top: 100px;
+`;
+export const SearchScreenTxt = styled.div`
+	color: ${({ theme }) => theme.colors.primary.modalText};
+	font-size: ${({ theme }) => theme.textFontSize.xs}; ;
 `;

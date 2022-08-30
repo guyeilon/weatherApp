@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import MobileSearch from '../MobileSearch';
+import MobileSearchCity from '../MobileSearchCity';
 
 import * as Styled from './styles';
 
@@ -29,7 +29,7 @@ const MobileFooter: React.FC<MobileFooterProps> = () => {
 					<Styled.HomeBtn>Home</Styled.HomeBtn>
 				</Styled.HomeWrapper>
 			</Styled.MobileFooter>
-			{isExpanded && <MobileSearch setIsExpanded={setIsExpanded} isExpanded={isExpanded} />}
+			{isExpanded && <MobileSearchCity setIsExpanded={setIsExpanded} isExpanded={isExpanded} />}
 		</>
 	);
 };

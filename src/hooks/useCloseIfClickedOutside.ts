@@ -4,14 +4,20 @@ export const useCloseModalIfClickedOutside = ({
 	isModalOpen,
 	modalRef,
 	closeModalFunction,
+	useCloseModal,
 }: {
 	isModalOpen: boolean;
 	modalRef: React.RefObject<HTMLDivElement | HTMLUListElement>;
 	closeModalFunction: () => void;
+	useCloseModal: boolean;
 }): void => {
 	useEffect(() => {
 		const checkIfClickedOutside = (e: MouseEvent) => {
-			if (isModalOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+			if (useCloseModal && isModalOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
+				console.log('isModalOpen?', isModalOpen);
+
+				console.log('closing modal....');
+
 				closeModalFunction();
 			}
 		};
