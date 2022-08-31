@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
@@ -55,7 +56,7 @@ export const ContentWrapper = styled.div`
 
 export const Header = styled.h1`
 	margin-top: 37px;
-	color: ${({ theme }) => theme.colors.primary.text};
+	color: ${({ theme }) => theme.colors.primary.modalText};
 	text-align: center;
 	margin-bottom: 24px;
 	font-size: ${({ theme }) => theme.headingFontSize.h1};
@@ -133,6 +134,9 @@ export const ButtonWrapper = styled.div`
 		justify-content: center;
 		gap: 47px;
 	}
+`;
+export const Btn = styled(Button)`
+	color: ${({ theme }) => theme.colors.primary.modalText};
 `;
 
 export const Div = styled.div`

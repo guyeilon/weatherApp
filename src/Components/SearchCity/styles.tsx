@@ -56,10 +56,13 @@ export const LoaderWrapper = styled.div`
 	width: 476px;
 `;
 
-export const ContentWrapper = styled.ul`
+export const ContentWrapper = styled.div`
+	overflow: hidden;
+	border-radius: ${({ theme }) => theme.border.modal};
+`;
+export const ScrollWrapper = styled.div`
 	overflow-y: scroll;
 	height: 340px;
-	/* padding: 0; */
 `;
 
 export const CityWrapper = styled.li`

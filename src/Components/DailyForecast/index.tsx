@@ -1,7 +1,6 @@
 import React from 'react';
-import useStore from '../../App/store';
+import { useStore } from '../../App/store';
 import { getForecastIcon } from '../../constants';
-import { Flex } from '../../design/helper.styles';
 import { convertToC, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';

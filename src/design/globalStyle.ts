@@ -11,7 +11,7 @@ export const GlobalStyles = createGlobalStyle`
       background: ${({ theme }) => theme.colors.background.gradient};
       
         background-attachment: fixed;
-        overflow-x: hidden;
+        overflow: hidden;
 
         display: flex;
         flex-direction:column
@@ -25,6 +25,7 @@ export const GlobalStyles = createGlobalStyle`
   ::-webkit-scrollbar {
     width: 5px;
     height: 8px;
+  
   }
 
   ::-webkit-scrollbar-track {
@@ -34,5 +35,6 @@ export const GlobalStyles = createGlobalStyle`
 
   ::-webkit-scrollbar-thumb {
     background: ${({ theme }) => theme.colors.primary.search};
+     border-radius: 8px;
   }
 `;
