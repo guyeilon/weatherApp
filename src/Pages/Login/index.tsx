@@ -6,21 +6,31 @@ import * as Styled from './styles';
 import { useFormik } from 'formik';
 import { FormSchema } from '../../schemas';
 import Logo from '../../assets/Logo';
+import { useAuth } from '../../auth/useAuth';
+
+import { useLoginStore } from '../../App/store';
 
 export interface LoginProps {}
 
-const Login: React.FC<LoginProps> = Props => {
-	const onSubmit = async (values: any, actions: any) => {
-		console.log(values);
+interface ValuesType {
+	email: string;
+	password: string;
+}
 
-		await new Promise(resolve => setTimeout(resolve, 1000));
+const Login: React.FC<LoginProps> = Props => {
+	const auth = useAuth();
+	const loginStore = useLoginStore(state => state);
+
+	const onSubmit = async (values: ValuesType, actions: any) => {
+		const { email, password } = values;
+		auth.login(email, password);
 		actions.resetForm();
 	};
 
 	const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } = useFormik({
 		initialValues: {
-			email: '',
-			password: '',
+			email: 'guyeilon84@gmail.com',
+			password: '@Q1w2e3r4',
 		},
 		validationSchema: FormSchema,
 		onSubmit,
@@ -61,12 +71,12 @@ const Login: React.FC<LoginProps> = Props => {
 				</form>
 				<Styled.Line data='Or log in with' />
 				<Styled.ButtonWrapper>
-					<Button renderAs={'a'} svg='fb'>
+					<Styled.Btn renderAs={'a'} svg='fb'>
 						Log in with Facebook
-					</Button>
-					<Button renderAs={'a'} svg='google'>
+					</Styled.Btn>
+					<Styled.Btn renderAs={'a'} svg='google'>
 						Log in with Google
-					</Button>
+					</Styled.Btn>
 				</Styled.ButtonWrapper>
 			</Styled.ContentWrapper>
 		</>

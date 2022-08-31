@@ -3,7 +3,7 @@ import { CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } fro
 import * as Styled from './styles';
 
 import Modal from '../../Common/Modal';
-import { useGetCityQuery } from '../../services/reactQueryService';
+import { useGetCityQuery } from '../../services/forecastQueryService';
 
 import { Bars } from 'react-loader-spinner';
 import { SvgCity } from '../../assets/Svg.styles';
@@ -17,6 +17,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	};
 
 	const { citiesData, isLoading } = useGetCityQuery(search);
+	console.log('data,', citiesData);
 
 	return (
 		<>
@@ -27,7 +28,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 			/>
 			<SearchCityPopOver
 				isLoading={isLoading}
-				data={citiesData}
+				data={!!search ? citiesData : []}
 				show={!!search && isFocused}
 				isFocused={isFocused}
 				searchValue={search}
@@ -52,11 +53,12 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 	const closeModal = () => {
 		setIsExpanded(false);
 		// setSearch('');
-		console.log('modal close when not focused');
+		console.log('modal close when not focused or search deleted...');
+		console.log(searchValue);
 	};
 
 	useEffect(() => {
-		console.log(show);
+		// console.log(show);
 
 		if (!isExpanded) {
 			show && setIsExpanded(true);
@@ -64,11 +66,11 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 			!show && closeModal();
 		}
 	}, [show, isFocused]);
-	console.log('searchModalOpen?', isExpanded);
+	// console.log('searchModalOpen?', isExpanded);
 	// console.log('show', show);
-	console.log('isLoading', isLoading);
-	console.log('isFocused', isFocused);
-	console.log('searchValue', searchValue);
+	// console.log('isLoading', isLoading);
+	// console.log('isFocused', isFocused);
+	// console.log('searchValue', searchValue);
 
 	return (
 		<>
@@ -77,7 +79,7 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 					blur='main'
 					padding='24px 0'
 					width='476px'
-					height='372px'
+					height='360px'
 					position='top'
 					isModalOpen={isExpanded}
 					closeModal={() => setIsExpanded(false)}
@@ -107,12 +109,14 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 					)}
 					{data && data.length > 0 && searchValue && (
 						<Styled.ContentWrapper>
-							{data.map(city => (
-								<Styled.CityWrapper key={city.cityKey}>
-									<CityNameHighlighter searchValue={searchValue} cityName={city.cityName} />
-									<Styled.CountryName>{city.countryName}</Styled.CountryName>
-								</Styled.CityWrapper>
-							))}
+							<Styled.ScrollWrapper>
+								{data.map(city => (
+									<Styled.CityWrapper key={city.cityKey}>
+										<CityNameHighlighter searchValue={searchValue} cityName={city.cityName} />
+										<Styled.CountryName>{city.countryName}</Styled.CountryName>
+									</Styled.CityWrapper>
+								))}
+							</Styled.ScrollWrapper>
 						</Styled.ContentWrapper>
 					)}
 				</Modal>

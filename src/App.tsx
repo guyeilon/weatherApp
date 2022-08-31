@@ -9,7 +9,7 @@ import ThemeContext from './contexts/ThemeContext';
 
 import './design/index.css';
 
-import useStore from './App/store';
+import { useStore } from './App/store';
 
 import Login from './Pages/Login';
 import { Routes, Route } from 'react-router-dom';
@@ -30,7 +30,7 @@ const App: React.FC = () => {
 		<ThemeContext>
 			<ThemeProvider theme={themeMode}>
 				<GlobalStyles />
-				{/* <Clouds cloudsNum={10} /> */}
+				<Clouds cloudsNum={10} />
 				<Routes>
 					<Route path='/login' element={<Login />} />
 					<Route path='/' element={<Layout />}>

@@ -1,5 +1,6 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
+import { UserData } from '../types/user';
 
 const toggleTheme = (theme: string) => {
 	return theme === 'dark' ? 'light' : 'dark';
@@ -24,8 +25,8 @@ const useStore = create<Store>()(
 			theme: 'light',
 			degree: 'celsius',
 			permission: false,
-			toggleTheme: (theme: string) => set(() => ({ theme: toggleTheme(theme) })),
-			toggleDegree: (degree: string) => set(() => ({ degree: toggleDegree(degree) })),
+			toggleTheme: (theme: string) => set(state => ({ ...state, theme: toggleTheme(theme) })),
+			toggleDegree: (degree: string) => set(state => ({ ...state, degree: toggleDegree(degree) })),
 			getPermission: async () => {
 				const permissions = await navigator.permissions.query({ name: 'geolocation' });
 				const result = permissions.state;
@@ -40,14 +41,22 @@ const useStore = create<Store>()(
 		}
 	)
 );
+type loginStore = {
+	user: UserData | null;
+	setUser: (user: UserData) => void;
+};
 
-export default useStore;
+const useLoginStore = create<loginStore>()(
+	persist(
+		(set): loginStore => ({
+			user: null,
+			setUser: (user: UserData) => set(state => ({ ...state, user: user })),
+		}),
+		{
+			name: 'loggedInUser',
+			getStorage: () => localStorage,
+		}
+	)
+);
 
-const usePermissionStore = create(() => ({
-	permission: 'denied',
-	getPermission: async () => {
-		const permissions = await navigator.permissions.query({ name: 'geolocation' });
-		const result = permissions.state;
-		return result;
-	},
-}));
+export { useStore, useLoginStore };

@@ -4,7 +4,7 @@ import * as Styled from './styles';
 import { convertToC, getDay } from '../../utils';
 import { getForecastIcon } from '../../constants';
 import { Flex } from '../../design/helper.styles';
-import useStore from '../../App/store';
+import { useStore } from '../../App/store';
 
 const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
 	const store = useStore(state => state);

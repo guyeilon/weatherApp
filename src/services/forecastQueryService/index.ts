@@ -114,17 +114,17 @@ export const useGetCityQuery = (search: string | undefined) => {
 		}
 	);
 
-	if (search === '') {
-		console.log('delete search...');
-		return {
-			citiesData: [],
-			isLoading: false,
-		};
-	} else {
-		return {
-			citiesData,
-			isLoading,
-			// prevSearchedData,
-		};
-	}
+	// if (search === '') {
+	// 	console.log('delete search...');
+	// 	return {
+	// 		citiesData: [],
+	// 		isLoading: false,
+	// 	};
+	// } else {
+	return {
+		citiesData,
+		isLoading,
+		// prevSearchedData,
+	};
+	// }
 };

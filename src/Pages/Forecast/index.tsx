@@ -13,7 +13,7 @@ import HourlyForecast from '../../Components/HourlyForecast';
 import FiveDaysForecast from '../../Components/FiveDaysForecast';
 import { dataType, hourlyDataType } from './types';
 import Modal from '../../Common/Modal';
-import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/reactQueryService';
+import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/forecastQueryService';
 import Clouds from '../../Components/Clouds';
 
 export interface ForecastProps {}
