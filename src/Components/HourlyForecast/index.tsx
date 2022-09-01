@@ -4,7 +4,7 @@ import * as Styled from './styles';
 import { convertMtoK, convertToC, getHour } from '../../utils';
 import { getForecastIcon } from '../../constants';
 import { Flex } from '../../design/helper.styles';
-import { useStore } from '../../App/store';
+import { useStore } from '../../zustand/store';
 import { SvgArrowLeft, SvgArrowRight } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 import { motion } from 'framer-motion';

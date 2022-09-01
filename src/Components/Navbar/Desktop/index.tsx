@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useStore } from '../../../App/store';
+import { useStore } from '../../../zustand/store';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../assets/Svg.styles';
 
 import * as Styled from './styles';
@@ -37,7 +37,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 						<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} />
 						<Styled.LinkBorder />
 					</Styled.RouterWrap>
-					<Styled.RouterWrap to='/fav'>
+					<Styled.RouterWrap to='/favorites'>
 						<Styled.FavBtn svg={activeFav ? 'favoritesFull' : 'favorites'} />
 						<Styled.LinkBorder />
 					</Styled.RouterWrap>

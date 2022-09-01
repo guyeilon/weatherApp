@@ -1,3 +1,4 @@
+// forecastTypes:
 export type dailyDataType = {
 	Day: {
 		Icon: number;
@@ -37,4 +38,13 @@ export type cityDataType = {
 		LocalizedName: string;
 	};
 	LocalizedName: string;
+};
+
+// userTypes:
+export type IUser = {
+	email: string;
+	firstName: string;
+	lastName: string;
+	id: number;
+	token: string;
 };

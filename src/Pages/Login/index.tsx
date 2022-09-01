@@ -8,7 +8,8 @@ import { FormSchema } from '../../schemas';
 import Logo from '../../assets/Logo';
 import { useAuth } from '../../auth/useAuth';
 
-import { useLoginStore } from '../../App/store';
+import { useLoginStore } from '../../zustand/store';
+import { useUserQuery } from '../../services/react-query/useUserQuery';
 
 export interface LoginProps {}
 
@@ -21,9 +22,14 @@ const Login: React.FC<LoginProps> = Props => {
 	const auth = useAuth();
 	const loginStore = useLoginStore(state => state);
 
+	const { user } = useUserQuery();
+	console.log('user from login:', user);
+
 	const onSubmit = async (values: ValuesType, actions: any) => {
 		const { email, password } = values;
-		auth.login(email, password);
+		const user = await auth.login(email, password);
+		console.log(user);
+
 		actions.resetForm();
 	};
 

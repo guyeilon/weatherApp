@@ -3,7 +3,7 @@ import { FiveDaysForecastProps } from './types';
 import * as Styled from './styles';
 import { convertToC, getDay, getDayAndMonth } from '../../utils';
 
-import { useStore } from '../../App/store';
+import { useStore } from '../../zustand/store';
 
 import Chart from 'react-apexcharts';
 import { motion } from 'framer-motion';

@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import { useQuery, useMutation, useQueryClient, useQueries } from '@tanstack/react-query';
+
 import { usePosition } from '../../hooks/usePosition';
-import NoLocation from '../../Components/NoLocation';
+import NoLocation from '../NoLocation';
 import * as Styled from './styles';
-import { getFiveDaysForecast, getHourlyForecast, getLocationKey } from '../../api/weatherApi';
-import Loader from '../../assets/Loader';
-import DailyForecast from '../../Components/DailyForecast';
 
-import WeeklyForecast from '../../Components/WeeklyForecast';
+import DailyForecast from '../DailyForecast';
 
-import HourlyForecast from '../../Components/HourlyForecast';
-import FiveDaysForecast from '../../Components/FiveDaysForecast';
-import { dataType, hourlyDataType } from './types';
+import WeeklyForecast from '../WeeklyForecast';
+
+import HourlyForecast from '../HourlyForecast';
+import FiveDaysForecast from '../FiveDaysForecast';
+
 import Modal from '../../Common/Modal';
-import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/forecastQueryService';
-import Clouds from '../../Components/Clouds';
+import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/react-query/useForecastQuery';
+import Clouds from '../Clouds';
+import { toast } from 'react-toastify';
 
 export interface ForecastProps {}
 
@@ -29,12 +29,11 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(cityKey);
 	const { isHourlySuccess, hourlyData } = useGetHourlyQuery(cityKey);
 
-	if (!isLocationServiceOn) {
+	if (error) {
 		content = <NoLocation />;
-	}
-
-	if (isGetLocationSuccess) {
-		content = <Loader />;
+		toast('cant get location', {
+			toastId: '1',
+		});
 	}
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);

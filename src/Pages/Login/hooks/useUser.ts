@@ -1,5 +1,6 @@
 import { AxiosResponse } from 'axios';
-import { UserData } from '../../../types/user';
+
+import { IUser } from '../../../types/types';
 
 // import { axiosInstance, getJWTHeader } from '../../../axiosInstance';
 // import { queryKeys } from '../../../react-query/constants';
@@ -21,8 +22,8 @@ import { UserData } from '../../../types/user';
 // }
 
 interface UseUser {
-	user: UserData | null;
-	updateUser: (user: UserData) => void;
+	user: IUser | null;
+	updateUser: (user: IUser) => void;
 	clearUser: () => void;
 }
 
@@ -31,9 +32,7 @@ export function useUser(): UseUser {
 	const user = null;
 
 	// meant to be called from useAuth
-	function updateUser(newUser: UserData): void {
-		// TODO: update the user in the query cache
-	}
+	function updateUser(newUser: IUser): void {}
 
 	// meant to be called from useAuth
 	function clearUser() {
