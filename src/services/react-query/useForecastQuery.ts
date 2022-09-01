@@ -2,11 +2,12 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 
 import { getAutocompleteCityName, getFiveDaysForecast, getHourlyForecast, getLocationKey } from '../../api/weatherApi';
 import useDebounce from '../../hooks/useDebounce';
+import { queryKeys } from './constants';
 import { cityDataType, dailyDataType, hourlyDataType } from './types';
 
 export const useGetLocationQuery = (geoString: string | undefined) => {
 	const { isSuccess: isGetLocationSuccess, data: LocationKey } = useQuery(
-		['locationKey'],
+		[queryKeys.locationKey],
 		() => getLocationKey(geoString),
 		{
 			staleTime: Infinity,
@@ -31,7 +32,7 @@ export const useGetDailyQuery = (key: number | undefined) => {
 		isSuccess: isDailySuccess,
 		data: fiveDaysData,
 		dataUpdatedAt: updatedAt,
-	} = useQuery(['5daysForecast'], () => getFiveDaysForecast(key), {
+	} = useQuery([queryKeys.dailyForecast], () => getFiveDaysForecast(key), {
 		staleTime: Infinity,
 		cacheTime: Infinity,
 		enabled: Boolean(key),
@@ -60,7 +61,7 @@ export const useGetDailyQuery = (key: number | undefined) => {
 
 export const useGetHourlyQuery = (key: number | undefined) => {
 	const { isSuccess: isHourlySuccess, data: hourlyData } = useQuery(
-		['12hoursForecast'],
+		[queryKeys.hourlyForecast],
 		() => getHourlyForecast(key),
 		{
 			staleTime: Infinity,
@@ -93,7 +94,7 @@ export const useGetCityQuery = (search: string | undefined) => {
 	const { data: citiesData, isLoading } = useQuery(
 		// ['Autocomplete', prevSearchedData ? search : debouncedSearch],
 		// ['Autocomplete' debouncedSearch],
-		['Autocomplete', debouncedSearch],
+		[queryKeys.Autocomplete, debouncedSearch],
 		// () => getAutocompleteCityName(prevSearchedData ? search : debouncedSearch),
 		() => getAutocompleteCityName(debouncedSearch),
 		{

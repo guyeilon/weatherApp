@@ -4,7 +4,7 @@ import * as Styled from './styles';
 import { motion, Variants, AnimatePresence } from 'framer-motion';
 import { useCloseModalIfClickedOutside } from '../../hooks/useCloseIfClickedOutside';
 import { UsePreventScrollOutsideModal } from '../../hooks/usePreventScrollOutsideModal';
-import { useGetAnimationByPosition } from '../../hooks/useGetAnimationByPosition';
+import { useGetAnimationByPosition } from './hooks/useGetAnimationByPosition';
 
 export interface ModalProps {
 	children?: ReactNode;
@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> = ({
 
 	UsePreventScrollOutsideModal(isModalOpen);
 
-	const modalRoot = document.getElementById('portal') as HTMLElement;
+	const modalRoot = document.getElementById('modal') as HTMLElement;
 
 	return ReactDOM.createPortal(
 		<AnimatePresence>

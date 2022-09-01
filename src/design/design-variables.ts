@@ -23,6 +23,10 @@ export const colors = {
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
 		hover: '#f2f2f2',
 	},
+	toast: {
+		error: '#ffe7e7',
+		success: 'rgba(0, 0, 0, 0.8)',
+	},
 	inputs: {
 		mainBg: '#f2f2f2',
 		focusBg: '#fff',
@@ -82,6 +86,10 @@ export const darkColors = {
 		primaryBg: '#444e72',
 		notificationBg: ' rgba(0, 0, 0, 0.8)',
 		hover: '#838baa',
+	},
+	toast: {
+		error: '#ffe7e7',
+		success: 'rgba(0, 0, 0, 0.8)',
 	},
 	inputs: {
 		mainBg: '#f2f2f2',

@@ -3,7 +3,7 @@ import { CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } fro
 import * as Styled from './styles';
 
 import Modal from '../../Common/Modal';
-import { useGetCityQuery } from '../../services/forecastQueryService';
+import { useGetCityQuery } from '../../services/react-query/useForecastQuery';
 
 import { Bars } from 'react-loader-spinner';
 import { SvgCity } from '../../assets/Svg.styles';

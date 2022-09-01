@@ -1,9 +1,8 @@
 import { Outlet } from 'react-router-dom';
-import Clouds from '../Components/Clouds';
 
-import MobileFooter from '../Components/MobileFooter';
+import MobileFooter from '../MobileFooter';
 
-import Navbar from '../Components/Navbar';
+import Navbar from '../Navbar';
 const Layout = () => {
 	return (
 		<>

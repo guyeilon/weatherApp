@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useStore } from '../../../App/store';
+import { useStore } from '../../../zustand/store';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
 
 import * as Styled from './styles';

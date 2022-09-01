@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { UserData } from '../types/user';
+import { IUser } from '../types/types';
 
 const toggleTheme = (theme: string) => {
 	return theme === 'dark' ? 'light' : 'dark';
@@ -42,15 +42,15 @@ const useStore = create<Store>()(
 	)
 );
 type loginStore = {
-	user: UserData | null;
-	setUser: (user: UserData) => void;
+	user: IUser | null;
+	setUser: (user: IUser) => void;
 };
 
 const useLoginStore = create<loginStore>()(
 	persist(
 		(set): loginStore => ({
 			user: null,
-			setUser: (user: UserData) => set(state => ({ ...state, user: user })),
+			setUser: (user: IUser) => set(state => ({ ...state, user: user })),
 		}),
 		{
 			name: 'loggedInUser',
