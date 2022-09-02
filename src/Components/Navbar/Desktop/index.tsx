@@ -14,15 +14,15 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 
 	const currentLocation = location.pathname.substring(1);
 
-	const [activeHome, setActiveHome] = useState(currentLocation === '' ? true : false);
-	const [activeFav, setActiveFav] = useState(currentLocation === 'fav' ? true : false);
+	const [activeHome, setActiveHome] = useState(currentLocation === '/' ? true : false);
+	const [activeFav, setActiveFav] = useState(currentLocation === 'favorites' ? true : false);
 
 	useEffect(() => {
 		if (currentLocation === '') {
 			setActiveHome(true);
 			setActiveFav(false);
 		}
-		if (currentLocation === 'fav') {
+		if (currentLocation === 'favorites') {
 			setActiveFav(true);
 			setActiveHome(false);
 		}

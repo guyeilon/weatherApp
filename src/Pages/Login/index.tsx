@@ -9,7 +9,7 @@ import Logo from '../../assets/Logo';
 import { useAuth } from '../../auth/useAuth';
 
 import { useLoginStore } from '../../zustand/store';
-import { useUserQuery } from '../../services/react-query/useUserQuery';
+import { useUserQuery } from '../../react-query/useUserQuery';
 
 export interface LoginProps {}
 

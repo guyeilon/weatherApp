@@ -5,21 +5,6 @@ export const weatherApi = axios.create({
 	baseURL: accuweatherUrl,
 });
 
-export const getLocationKey = async (geoString: string | undefined) => {
-	if (typeof geoString === 'undefined') {
-		console.log('Invalid geolocation position');
-		return;
-	}
-	const res = await weatherApi.get('/locations/v1/cities/geoposition/search', {
-		params: {
-			apikey: API_KEY,
-			q: geoString,
-		},
-	});
-	const data = await res.data;
-	return data;
-};
-
 export const getHourlyForecast = async (locationKey: number | undefined) => {
 	if (typeof locationKey === 'undefined') {
 		console.log('Invalid city key');

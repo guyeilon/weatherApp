@@ -4,9 +4,12 @@ import { getForecastIcon } from '../../../constants';
 import { convertToC, getTime } from '../../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
+import { useGetDailyForecast } from '../hooks/useDailyForcaste';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, fiveDaysData, updatedAt }) => {
+const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, cityKey }) => {
 	const store = useStore(state => state);
+
+	const { fiveDaysData, updatedAt } = useGetDailyForecast(cityKey);
 
 	const icon = fiveDaysData[0]?.icon;
 	const dayTemp = fiveDaysData[0]?.dayTemp;

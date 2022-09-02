@@ -1,3 +1,4 @@
+import React from 'react';
 import { Id, toast } from 'react-toastify';
 
 interface UseCustomToast {
@@ -5,11 +6,15 @@ interface UseCustomToast {
 	status: 'error' | 'success';
 }
 
-export function useCustomToast({ title, status }: UseCustomToast) {
+export function fireToast({ title, status }: UseCustomToast) {
 	if (status === 'error') {
-		return toast.error(title, { toastId: 'error', containerId: 'error' });
+		if (!toast.isActive('error')) {
+			return toast.error(title, { toastId: 'error', containerId: 'error' });
+		}
 	}
 	if (status === 'success') {
+		// if (!toast.isActive('success')) {
 		return toast.success(title, { toastId: 'success', containerId: 'success' });
+		// }
 	}
 }
