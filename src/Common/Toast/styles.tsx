@@ -12,29 +12,42 @@ export const Toast = styled(ToastContainer).attrs({
 
 	/* .toast is passed to toastClassName */
 	.toast {
-		background-color: ${({ theme }) => theme.colors.toast.success};
 		font-size: ${({ theme }) => theme.textFontSize.lg};
-		font-weight: ${({ theme }) => theme.fontWeights.light};
+
 		padding: 28px 40px;
 		font-family: Overpass;
 		border-radius: 8px;
+		bottom: 54px;
 
-		position: fixed;
-		top: 50%;
-		left: 50%;
-		transform: translate(-50%, 50%);
+		@media only screen and (${({ theme }) => theme.media.phone}) {
+			bottom: 128px;
+		}
 	}
 
 	button[aria-label='close'] {
 		display: none;
 	}
 
-	/* .body is passed to bodyClassName */
-	.body {
+	.body .Toastify__toast-icon {
+		width: 30px;
+		@media only screen and (${({ theme }) => theme.media.phone}) {
+			width: 24px;
+		}
 	}
 
-	/* .progress is passed to progressClassName */
 	.progress {
-		display: none;
+	}
+`;
+
+export const ToastSuccess = styled(Toast)`
+	.toast {
+		background-color: ${({ theme }) => theme.colors.toast.success};
+		color: ${({ theme }) => theme.colors.primary.text};
+	}
+`;
+export const ToastError = styled(Toast)`
+	.toast {
+		background-color: ${({ theme }) => theme.colors.toast.error};
+		color: #4d4d4d;
 	}
 `;

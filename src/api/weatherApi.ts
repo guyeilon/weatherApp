@@ -1,10 +1,9 @@
 import axios from 'axios';
+import { accuweatherUrl, API_KEY } from './constants';
 
-const weatherApi = axios.create({
-	baseURL: 'https://dataservice.accuweather.com',
+export const weatherApi = axios.create({
+	baseURL: accuweatherUrl,
 });
-
-const API_KEY = process.env.REACT_APP_API_KEY;
 
 export const getLocationKey = async (geoString: string | undefined) => {
 	if (typeof geoString === 'undefined') {

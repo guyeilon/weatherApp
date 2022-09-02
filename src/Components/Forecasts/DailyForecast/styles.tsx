@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import Button from '../../Common/Button';
+import Button from '../../../Common/Button';
 
 export const DailyForecastContainer = styled.div`
 	display: flex;

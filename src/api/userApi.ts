@@ -1,5 +1,5 @@
 import axios, { AxiosError, AxiosResponse } from 'axios';
-import { IUser } from '../types/types';
+import { IUser } from '../types/user';
 
 export interface Credentials {
 	email: string;

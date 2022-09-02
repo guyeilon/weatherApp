@@ -3,7 +3,7 @@ import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { ThreeDots } from 'react-loader-spinner';
 
 export function Loading(): ReactElement {
-	const isFetching = useIsFetching();
+	const isFetching = useIsFetching(['forecast']);
 	const isMutating = useIsMutating();
 
 	const display: boolean = isFetching || isMutating ? true : false;
