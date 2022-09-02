@@ -1,9 +1,10 @@
 export const queryKeys = {
 	// forecast:
-	hourlyForecast: 'hourlyForecast',
-	dailyForecast: 'dailyForecast',
+	hourly: 'Hourly',
+	daily: 'Daily',
 	Autocomplete: 'Autocomplete',
-	locationKey: 'locationKey',
+	locationKey: 'LocationKey',
+	forecast: 'forecast',
 
 	// auth:
 	user: 'user',

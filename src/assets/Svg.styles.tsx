@@ -24,6 +24,8 @@ import { ReactComponent as Wind } from './Svgs/wind.svg';
 import { ReactComponent as SunFlat } from './Svgs/sunFlat.svg';
 import { ReactComponent as MoonFlat } from './Svgs/moonFlat.svg';
 import { ReactComponent as City } from './Svgs/city.svg';
+import { ReactComponent as Check } from './Svgs/check.svg';
+import { ReactComponent as InfoCircle } from './Svgs/infoCircle.svg';
 
 import Logo from './Logo';
 import NavbarLogo from './NavbarLogo';
@@ -85,6 +87,12 @@ const svgStyles = <
 };
 
 export const SvgTest = styled(Test)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgCheck = styled(Check)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgInfoCircle = styled(InfoCircle)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgCity = styled(City)<SvgProps>`

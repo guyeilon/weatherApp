@@ -1,6 +1,6 @@
 import { AxiosResponse } from 'axios';
 
-import { IUser } from '../../../types/types';
+import { IUser } from '../../../types/user';
 
 // import { axiosInstance, getJWTHeader } from '../../../axiosInstance';
 // import { queryKeys } from '../../../react-query/constants';

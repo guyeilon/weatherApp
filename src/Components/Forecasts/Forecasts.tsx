@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
-import { usePosition } from '../../hooks/usePosition';
+import { useGetPositionString } from './hooks/useGetPositionString';
 import NoLocation from '../NoLocation';
 import * as Styled from './styles';
 
-import DailyForecast from '../DailyForecast';
+import DailyForecast from './DailyForecast/DailyForecast';
 
 import WeeklyForecast from '../WeeklyForecast';
 
@@ -13,17 +13,15 @@ import FiveDaysForecast from '../FiveDaysForecast';
 
 import Modal from '../../Common/Modal';
 import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/react-query/useForecastQuery';
-import Clouds from '../Clouds';
-import { toast } from 'react-toastify';
+
+import { useCustomToast } from '../App/hooks/useCustomToast';
 
 export interface ForecastProps {}
 
 const Forecast: React.FC<ForecastProps> = Props => {
-	const { error, ...position } = usePosition();
-	const isLocationServiceOn = Object.keys(position).length > 0;
+	const { error, geoString } = useGetPositionString();
 
 	let content;
-	let geoString = isLocationServiceOn ? `${position.latitude},${position.longitude}` : undefined;
 
 	const { isGetLocationSuccess, cityName, cityKey } = useGetLocationQuery(geoString);
 	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(cityKey);
@@ -31,9 +29,6 @@ const Forecast: React.FC<ForecastProps> = Props => {
 
 	if (error) {
 		content = <NoLocation />;
-		toast('cant get location', {
-			toastId: '1',
-		});
 	}
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);

@@ -1,6 +1,6 @@
 import create from 'zustand';
 import { persist } from 'zustand/middleware';
-import { IUser } from '../types/types';
+import { IUser } from '../types/user';
 
 const toggleTheme = (theme: string) => {
 	return theme === 'dark' ? 'light' : 'dark';

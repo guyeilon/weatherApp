@@ -24,7 +24,7 @@ export const colors = {
 		hover: '#f2f2f2',
 	},
 	toast: {
-		error: '#ffe7e7',
+		error: '#f38f8f',
 		success: 'rgba(0, 0, 0, 0.8)',
 	},
 	inputs: {
@@ -88,7 +88,7 @@ export const darkColors = {
 		hover: '#838baa',
 	},
 	toast: {
-		error: '#ffe7e7',
+		error: '#f38f8f',
 		success: 'rgba(0, 0, 0, 0.8)',
 	},
 	inputs: {

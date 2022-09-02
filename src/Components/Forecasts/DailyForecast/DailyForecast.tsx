@@ -1,7 +1,7 @@
 import React from 'react';
-import { useStore } from '../../zustand/store';
-import { getForecastIcon } from '../../constants';
-import { convertToC, getTime } from '../../utils';
+import { useStore } from '../../../zustand/store';
+import { getForecastIcon } from '../../../constants';
+import { convertToC, getTime } from '../../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 

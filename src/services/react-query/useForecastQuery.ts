@@ -7,7 +7,7 @@ import { cityDataType, dailyDataType, hourlyDataType } from './types';
 
 export const useGetLocationQuery = (geoString: string | undefined) => {
 	const { isSuccess: isGetLocationSuccess, data: LocationKey } = useQuery(
-		[queryKeys.locationKey],
+		[queryKeys.forecast, queryKeys.locationKey],
 		() => getLocationKey(geoString),
 		{
 			staleTime: Infinity,
@@ -32,7 +32,7 @@ export const useGetDailyQuery = (key: number | undefined) => {
 		isSuccess: isDailySuccess,
 		data: fiveDaysData,
 		dataUpdatedAt: updatedAt,
-	} = useQuery([queryKeys.dailyForecast], () => getFiveDaysForecast(key), {
+	} = useQuery([queryKeys.forecast, queryKeys.daily], () => getFiveDaysForecast(key), {
 		staleTime: Infinity,
 		cacheTime: Infinity,
 		enabled: Boolean(key),
@@ -61,7 +61,7 @@ export const useGetDailyQuery = (key: number | undefined) => {
 
 export const useGetHourlyQuery = (key: number | undefined) => {
 	const { isSuccess: isHourlySuccess, data: hourlyData } = useQuery(
-		[queryKeys.hourlyForecast],
+		[queryKeys.forecast, queryKeys.hourly],
 		() => getHourlyForecast(key),
 		{
 			staleTime: Infinity,
