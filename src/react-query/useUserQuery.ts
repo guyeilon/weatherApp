@@ -1,5 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
-import { getUserFavorites } from '../../api/userApi';
+import { getUserFavorites } from '../api/userApi';
 
 import { queryKeys } from './constants';
 import { IUser } from './types';

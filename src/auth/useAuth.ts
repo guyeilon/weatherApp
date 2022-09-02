@@ -1,6 +1,6 @@
 import { authServerCall } from '../api/userApi';
 
-import { useUserQuery } from '../services/react-query/useUserQuery';
+import { useUserQuery } from '../react-query/useUserQuery';
 
 interface UseAuth {
 	login: (email: string, password: string) => void;

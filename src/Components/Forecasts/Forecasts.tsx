@@ -12,9 +12,9 @@ import HourlyForecast from '../HourlyForecast';
 import FiveDaysForecast from '../FiveDaysForecast';
 
 import Modal from '../../Common/Modal';
-import { useGetDailyQuery, useGetHourlyQuery, useGetLocationQuery } from '../../services/react-query/useForecastQuery';
+import { useGetDailyQuery, useGetHourlyQuery } from '../../react-query/useForecastQuery';
 
-import { useCustomToast } from '../App/hooks/useCustomToast';
+import { useGetLocation } from './hooks/useGetLocation';
 
 export interface ForecastProps {}
 
@@ -22,10 +22,11 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const { error, geoString } = useGetPositionString();
 
 	let content;
+	// should get props with city key and name if not show local forecast
 
-	const { isGetLocationSuccess, cityName, cityKey } = useGetLocationQuery(geoString);
-	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(cityKey);
-	const { isHourlySuccess, hourlyData } = useGetHourlyQuery(cityKey);
+	const { localCityName, localCityKey } = useGetLocation(geoString);
+	const { isDailySuccess, fiveDaysData, updatedAt } = useGetDailyQuery(localCityKey);
+	const { isHourlySuccess, hourlyData } = useGetHourlyQuery(localCityKey);
 
 	if (error) {
 		content = <NoLocation />;
@@ -37,7 +38,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	if (isDailySuccess && isHourlySuccess) {
 		content = (
 			<div>
-				<DailyForecast fiveDaysData={fiveDaysData} updatedAt={updatedAt} cityName={cityName} />
+				<DailyForecast cityKey={localCityKey} cityName={localCityName} />
 				<WeeklyForecast fiveDaysData={fiveDaysData} />
 				<Styled.btnWrapper>
 					<Styled.forecastBtn
