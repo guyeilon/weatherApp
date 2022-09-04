@@ -1,6 +1,4 @@
-import { imagesArray } from './images';
-
-export { default as images } from './images';
+import { imagesArray } from '../../../constants/images';
 
 export const getForecastIcon = (iconNumber: number) => {
 	let res;

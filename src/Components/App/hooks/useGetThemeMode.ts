@@ -1,9 +1,9 @@
 import { useSystemDesign } from '../../../design/useSystemDesign';
-import { useStore } from '../../../zustand/store';
+import { useAppStore } from '../../../zustand/store';
 
 export const useGetThemeMode = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();
-	const store = useStore(state => state);
+	const store = useAppStore(state => state);
 
 	const themeMode = store.theme === 'light' ? lightTheme : darkTheme;
 

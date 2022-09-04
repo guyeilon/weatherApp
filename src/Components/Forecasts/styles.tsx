@@ -3,15 +3,11 @@ import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
 	position: relative;
-	/* overflow: hidden; */
+
 	display: grid;
-	min-height: 100%;
-	/* height: 100vh; */
-	/* justify-content: center; */
+	height: calc(100vh + 90px);
 
-	/* margin-top: 64px; */
-
-	grid-template-columns: calc(100vw - 95%) minmax(auto, calc(100vw - 50px)) calc(100vw - 95%);
+	grid-template-columns: 1fr minmax(auto, calc(100vw - 50px)) 1fr;
 	@media only screen and (${({ theme }) => theme.media.tablet}) {
 		grid-template-columns: calc(100vw - 95%) minmax(auto, calc(100vw - 100px)) calc(100vw - 95%);
 		margin-top: 158px;
@@ -36,13 +32,4 @@ export const btnWrapper = styled.div`
 `;
 export const forecastBtn = styled(Button)`
 	padding: 16px 0px;
-
-	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
-		display: none;
-	}
-`;
-export const HideInMobileWrapper = styled.div`
-	@media only screen and (${({ theme }) => theme.media.phone}) {
-		display: none;
-	}
 `;

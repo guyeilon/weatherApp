@@ -17,7 +17,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	};
 
 	const { citiesData, isLoading } = useGetCityQuery(search);
-	console.log('data,', citiesData);
+	// console.log('data,', citiesData);
 
 	return (
 		<>
@@ -53,8 +53,8 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 	const closeModal = () => {
 		setIsExpanded(false);
 		// setSearch('');
-		console.log('modal close when not focused or search deleted...');
-		console.log(searchValue);
+		// console.log('modal close when not focused or search deleted...');
+		// console.log(searchValue);
 	};
 
 	useEffect(() => {

@@ -1,7 +1,6 @@
 import { DailyData } from '../../../types/forecastType';
 
-export interface DailyForecastProps {
-	cityName: string;
-	updatedAt: number;
+export interface FiveDaysForecastProps {
+	isExpanded?: boolean;
 	data: DailyData;
 }

@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useStore } from '../../../zustand/store';
+import { useAppStore } from '../../../zustand/store';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../assets/Svg.styles';
 
 import * as Styled from './styles';
@@ -9,7 +9,7 @@ import SearchCity from '../../SearchCity';
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
-	const store = useStore(state => state);
+	const store = useAppStore(state => state);
 	const location = useLocation();
 
 	const currentLocation = location.pathname.substring(1);

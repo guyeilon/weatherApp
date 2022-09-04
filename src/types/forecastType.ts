@@ -24,21 +24,53 @@ type Temp = {
 	};
 };
 
+export type DailyData = [
+	{
+		icon: number;
+		dayTemp: number;
+		nightTemp: number;
+		dayPhrase: string;
+		nightPhrase: string;
+		timestamp: number;
+		date: number;
+	}
+];
+export type HourlyData = [
+	{
+		icon: number;
+		temp: number;
+		wind: number;
+		date: number;
+	}
+];
+
 export interface ReturnDailyForecast {
-	cityName?: string;
 	updatedAt: number;
-	fiveDaysData: [
-		{
-			icon: number;
-			dayTemp: number;
-			nightTemp: number;
-			dayPhrase: string;
-			nightPhrase: string;
-			timestamp: number;
-			date: number;
-		}
-	];
+	fiveDaysData: DailyData;
+	isSuccess: boolean;
 }
+
+export interface GetHourlyForecast {
+	WeatherIcon: number;
+	DateTime: number;
+	Temperature: {
+		Value: number;
+	};
+	Wind: {
+		Speed: { Value: number };
+	};
+}
+export interface ReturnHourlyForecast {
+	hourlyData: HourlyData;
+	isSuccess: boolean;
+}
+export type fiveDaysData = [
+	{
+		dayTemp: number;
+		nightTemp: number;
+		date: number;
+	}
+];
 
 export interface LocationKey {
 	localCityKey: number;

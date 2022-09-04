@@ -11,11 +11,11 @@ export const WeeklyForecastWrapper = styled.div`
 	display: grid;
 	gap: 10px;
 
-	grid-template-columns: repeat(5, 1fr);
+	grid-template-columns: repeat(4, 1fr);
 	padding: 0 60px;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		grid-template-rows: repeat(5, min-content);
+		grid-template-rows: repeat(4, min-content);
 		grid-template-columns: none;
 		padding: 0;
 		gap: 8px;
@@ -24,19 +24,22 @@ export const WeeklyForecastWrapper = styled.div`
 	}
 `;
 
-export const DailyData = styled.div<{}>`
+export const DailyData = styled.div`
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
 	gap: 40px;
 	margin: 35px 0;
+	justify-self: center;
+
 	/* width: 150px; */
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		flex-direction: row;
 		margin: 0;
 		align-items: stretch;
 		justify-content: space-between;
+		justify-self: normal;
 		gap: 0px;
 	}
 `;
