@@ -3,10 +3,10 @@ import { CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } fro
 import * as Styled from './styles';
 
 import Modal from '../../Common/Modal';
-import { useGetCityQuery } from '../../react-query/useForecastQuery';
 
 import { Bars } from 'react-loader-spinner';
 import { SvgCity } from '../../assets/Svg.styles';
+import { useAutocompleteResult } from './hooks/useAutocompleteResult';
 
 const SearchCity: React.FC<SearchCityProps> = () => {
 	const [search, setSearch] = useState('');
@@ -16,7 +16,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 		setSearch(e.target.value);
 	};
 
-	const { citiesData, isLoading } = useGetCityQuery(search);
+	const { citiesData, isLoading } = useAutocompleteResult(search);
 	// console.log('data,', citiesData);
 
 	return (

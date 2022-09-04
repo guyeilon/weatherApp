@@ -44,6 +44,15 @@ export type HourlyData = [
 	}
 ];
 
+export type CityDataType = {
+	Key: number;
+
+	Country: {
+		LocalizedName: string;
+	};
+	LocalizedName: string;
+};
+
 export interface ReturnDailyForecast {
 	updatedAt: number;
 	fiveDaysData: DailyData;
