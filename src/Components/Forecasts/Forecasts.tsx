@@ -25,7 +25,6 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const { error, geoString } = useGetPositionString();
 	const { localCityName, localCityKey } = useGetLocation(geoString);
 	const { width: screenWidth } = useWindowSize();
-	console.log(screenWidth);
 
 	const { isSuccess: isDailySuccess, fiveDaysData, updatedAt } = useDailyForecast(localCityKey, localCityName);
 	const { isSuccess: isHourlySuccess, hourlyData } = useGetHourlyForecast(localCityKey, localCityName);

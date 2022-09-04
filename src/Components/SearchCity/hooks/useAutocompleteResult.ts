@@ -1,11 +1,26 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { API_KEY } from '../../../api/constants';
+import { weatherApi } from '../../../api/weatherApi';
+import useDebounce from '../../../hooks/useDebounce';
+import { queryKeys } from '../../../react-query/constants';
+import { CityDataType } from '../../../types/forecastType';
 
-import { getAutocompleteCityName } from '../api/weatherApi';
-import useDebounce from '../hooks/useDebounce';
-import { queryKeys } from './constants';
-import { cityDataType, hourlyDataType } from './types';
+const getAutocompleteCityName = async (q: string | undefined) => {
+	if (typeof q === 'undefined') {
+		console.log('can not get search term...');
+		return;
+	}
+	const res = await weatherApi.get(`/locations/v1/cities/autocomplete`, {
+		params: {
+			apikey: API_KEY,
+			q: q,
+		},
+	});
+	const data = await res.data;
+	return data;
+};
 
-export const useGetCityQuery = (search: string | undefined) => {
+export const useAutocompleteResult = (search: string | undefined) => {
 	const client = useQueryClient();
 	const debouncedSearch = useDebounce(search, 0);
 	// const prevSearchedData = client.getQueryData(['Autocomplete', search], { exact: true });
@@ -21,7 +36,7 @@ export const useGetCityQuery = (search: string | undefined) => {
 			cacheTime: Infinity,
 			staleTime: Infinity,
 			select: citiesData => {
-				const cities = citiesData.map((city: cityDataType) => {
+				const cities = citiesData.map((city: CityDataType) => {
 					const cityKey = city?.Key;
 					const countryName = city?.Country?.LocalizedName;
 					const cityName = city?.LocalizedName;
@@ -34,17 +49,9 @@ export const useGetCityQuery = (search: string | undefined) => {
 		}
 	);
 
-	// if (search === '') {
-	// 	console.log('delete search...');
-	// 	return {
-	// 		citiesData: [],
-	// 		isLoading: false,
-	// 	};
-	// } else {
 	return {
 		citiesData,
 		isLoading,
 		// prevSearchedData,
 	};
-	// }
 };

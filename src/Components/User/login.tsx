@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { ReactElement, useEffect } from 'react';
 import Button from '../../Common/Button';
 import Input from '../../Common/Input';
 import * as Styled from './styles';
@@ -9,7 +9,8 @@ import Logo from '../../assets/Logo';
 import { useAuth } from '../../auth/useAuth';
 
 import { useLoginStore } from '../../zustand/store';
-import { useUserQuery } from '../../react-query/useUserQuery';
+import { useUser } from './hooks/useUser';
+import { useNavigate } from 'react-router-dom';
 
 export interface LoginProps {}
 
@@ -18,17 +19,22 @@ interface ValuesType {
 	password: string;
 }
 
-const Login: React.FC<LoginProps> = Props => {
+export const Login = (): ReactElement => {
 	const auth = useAuth();
+	const { user } = useUser();
+	const navigate = useNavigate();
 	const loginStore = useLoginStore(state => state);
 
-	const { user } = useUserQuery();
-	console.log('user from login:', user);
+	useEffect(() => {
+		if (user) {
+			navigate('/home');
+			console.log(user);
+		}
+	}, [user]);
 
 	const onSubmit = async (values: ValuesType, actions: any) => {
 		const { email, password } = values;
-		const user = await auth.login(email, password);
-		console.log(user);
+		auth.login(email, password);
 
 		actions.resetForm();
 	};

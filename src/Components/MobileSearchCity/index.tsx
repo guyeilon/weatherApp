@@ -3,9 +3,9 @@ import { AnimatePresence } from 'framer-motion';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
 import { useAppStore } from '../../zustand/store';
-import { useGetCityQuery } from '../../react-query/useForecastQuery';
 import { ResultsProps } from './types';
 import { SvgCity } from '../../assets/Svg.styles';
+import { useAutocompleteResult } from '../SearchCity/hooks/useAutocompleteResult';
 
 interface MobileSearchCityProps {
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,7 +17,7 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 	const isDarkMode = store.theme === 'dark';
 
 	const [search, setSearch] = useState('');
-	const { citiesData, isLoading } = useGetCityQuery(search);
+	const { citiesData, isLoading } = useAutocompleteResult(search);
 	const handleChange = (e: any) => {
 		setSearch(e.target.value);
 	};

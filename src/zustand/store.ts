@@ -34,6 +34,7 @@ const useAppStore = create<AppStore>()(
 type loginStore = {
 	user: IUser | null;
 	setUser: (user: IUser) => void;
+	clearUser: () => void;
 };
 
 const useLoginStore = create<loginStore>()(
@@ -41,6 +42,7 @@ const useLoginStore = create<loginStore>()(
 		(set): loginStore => ({
 			user: null,
 			setUser: (user: IUser) => set(state => ({ ...state, user: user })),
+			clearUser: () => set(state => ({ ...state, user: null })),
 		}),
 		{
 			name: 'loggedInUser',

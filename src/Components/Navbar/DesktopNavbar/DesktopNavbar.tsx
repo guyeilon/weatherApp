@@ -6,19 +6,21 @@ import * as Styled from './styles';
 
 import { NavLink, useLocation, useParams } from 'react-router-dom';
 import SearchCity from '../../SearchCity';
+import { useAuth } from '../../../auth/useAuth';
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const store = useAppStore(state => state);
+	const auth = useAuth();
 	const location = useLocation();
 
 	const currentLocation = location.pathname.substring(1);
 
-	const [activeHome, setActiveHome] = useState(currentLocation === '/' ? true : false);
+	const [activeHome, setActiveHome] = useState(currentLocation === 'home' ? true : false);
 	const [activeFav, setActiveFav] = useState(currentLocation === 'favorites' ? true : false);
 
 	useEffect(() => {
-		if (currentLocation === '') {
+		if (currentLocation === 'home') {
 			setActiveHome(true);
 			setActiveFav(false);
 		}
@@ -66,7 +68,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 				<Styled.MapBtn>
 					<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
 				</Styled.MapBtn>
-				<Styled.LogoutBtn>
+				<Styled.LogoutBtn onClick={() => auth.logout()}>
 					<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 				</Styled.LogoutBtn>
 			</Styled.Grid3>
