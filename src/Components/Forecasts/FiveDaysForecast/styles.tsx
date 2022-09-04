@@ -1,5 +1,5 @@
 import styled from 'styled-components/macro';
-import { SvgMoonFlat, SvgSunFlat } from '../../assets/Svg.styles';
+import { SvgMoonFlat, SvgSunFlat } from '../../../assets/Svg.styles';
 
 export const FiveDaysForecastWrapper = styled.div`
 	width: 100%;

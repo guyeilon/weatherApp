@@ -2,13 +2,6 @@ import styled, { css } from 'styled-components/macro';
 import Button from '../../../Common/Button';
 import Switcher from '../../../Common/Switcher';
 
-export const MobileContentWrapper = styled.div`
-	display: block;
-
-	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
-		display: none;
-	}
-`;
 export const MobileNavbar = styled.div`
 	display: inline-flex;
 	align-items: center;

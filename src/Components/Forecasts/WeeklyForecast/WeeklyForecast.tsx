@@ -1,13 +1,15 @@
 import React from 'react';
 import { WeeklyForecastProps } from './types';
 import * as Styled from './styles';
-import { convertToC, getDay } from '../../utils';
-import { getForecastIcon } from '../../constants';
-import { Flex } from '../../design/helper.styles';
-import { useStore } from '../../zustand/store';
+import { convertToC, getDay } from '../../../utils';
 
-const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
-	const store = useStore(state => state);
+import { Flex } from '../../../design/helper.styles';
+import { useAppStore } from '../../../zustand/store';
+
+import { getForecastIcon } from '../hooks/getForecastIcon';
+
+const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
+	const store = useAppStore(state => state);
 
 	const toggleTemperature = (temp: number) => {
 		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
@@ -15,7 +17,8 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
 
 	let content;
 
-	content = fiveDaysData.map((day, idx) => {
+	content = data.map((day, idx) => {
+		if (idx == 4) return;
 		const icon = day.icon;
 		const dayTemp = day.dayTemp;
 		const nightTemp = day.nightTemp;
@@ -33,7 +36,7 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ fiveDaysData }) => {
 					{dayTemp && nightTemp && (
 						<Styled.Temp>
 							{toggleTemperature(dayTemp)}
-							&deg;<span> -{toggleTemperature(nightTemp)}&deg;</span>
+							&deg;<span> - {toggleTemperature(nightTemp)}&deg;</span>
 						</Styled.Temp>
 					)}
 				</Flex>

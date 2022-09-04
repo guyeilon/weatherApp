@@ -10,30 +10,20 @@ const toggleDegree = (degree: string) => {
 	return degree === 'fahrenheit' ? 'celsius' : 'fahrenheit';
 };
 
-type Store = {
+type AppStore = {
 	theme: string;
 	degree: string;
-	permission: boolean;
 	toggleTheme: (theme: string) => void;
 	toggleDegree: (degree: string) => void;
-	getPermission: () => Promise<void>;
 };
 
-const useStore = create<Store>()(
+const useAppStore = create<AppStore>()(
 	persist(
-		(set): Store => ({
+		(set): AppStore => ({
 			theme: 'light',
 			degree: 'celsius',
-			permission: false,
 			toggleTheme: (theme: string) => set(state => ({ ...state, theme: toggleTheme(theme) })),
 			toggleDegree: (degree: string) => set(state => ({ ...state, degree: toggleDegree(degree) })),
-			getPermission: async () => {
-				const permissions = await navigator.permissions.query({ name: 'geolocation' });
-				const result = permissions.state;
-				if (result === 'granted') {
-					set({ permission: true });
-				}
-			},
 		}),
 		{
 			name: 'userPref',
@@ -59,4 +49,4 @@ const useLoginStore = create<loginStore>()(
 	)
 );
 
-export { useStore, useLoginStore };
+export { useAppStore, useLoginStore };

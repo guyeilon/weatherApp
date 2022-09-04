@@ -1,9 +1,9 @@
 import React, { ReactNode, useEffect, useRef } from 'react';
 import ReactDOM from 'react-dom';
 import * as Styled from './styles';
-import { motion, Variants, AnimatePresence } from 'framer-motion';
-import { useCloseModalIfClickedOutside } from '../../hooks/useCloseIfClickedOutside';
-import { UsePreventScrollOutsideModal } from '../../hooks/usePreventScrollOutsideModal';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useCloseModalIfClickedOutside } from './hooks/useCloseIfClickedOutside';
+import { UsePreventScrollOutsideModal } from './hooks/usePreventScrollOutsideModal';
 import { useGetAnimationByPosition } from './hooks/useGetAnimationByPosition';
 
 export interface ModalProps {

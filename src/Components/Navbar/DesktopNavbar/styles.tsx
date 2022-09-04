@@ -28,9 +28,6 @@ export const DesktopContentWrapper = styled.div`
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		padding: 0 70px;
 	}
-	@media only screen and (${({ theme }) => theme.media.phone}) {
-		display: none;
-	}
 `;
 
 export const Grid1 = styled.div`

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
-import { useStore } from '../../zustand/store';
+import { useAppStore } from '../../zustand/store';
 import { useGetCityQuery } from '../../react-query/useForecastQuery';
 import { ResultsProps } from './types';
 import { SvgCity } from '../../assets/Svg.styles';
@@ -13,7 +13,7 @@ interface MobileSearchCityProps {
 }
 
 const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isExpanded }) => {
-	const store = useStore(state => state);
+	const store = useAppStore(state => state);
 	const isDarkMode = store.theme === 'dark';
 
 	const [search, setSearch] = useState('');

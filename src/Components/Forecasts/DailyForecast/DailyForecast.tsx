@@ -1,20 +1,19 @@
 import React from 'react';
-import { useStore } from '../../../zustand/store';
-import { getForecastIcon } from '../../../constants';
+import { useAppStore } from '../../../zustand/store';
+
 import { convertToC, getTime } from '../../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
-import { useGetDailyForecast } from '../hooks/useDailyForcaste';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({ cityName, cityKey }) => {
-	const store = useStore(state => state);
+import { getForecastIcon } from '../hooks/getForecastIcon';
 
-	const { fiveDaysData, updatedAt } = useGetDailyForecast(cityKey);
+const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName }) => {
+	const store = useAppStore(state => state);
 
-	const icon = fiveDaysData[0]?.icon;
-	const dayTemp = fiveDaysData[0]?.dayTemp;
-	const nightTemp = fiveDaysData[0]?.nightTemp;
-	const dayPhrase = fiveDaysData[0]?.dayPhrase;
+	const icon = data[0]?.icon;
+	const dayTemp = data[0]?.dayTemp;
+	const nightTemp = data[0]?.nightTemp;
+	const dayPhrase = data[0]?.dayPhrase;
 	const timestamp = updatedAt;
 
 	const toggleTemperature = (temp: number) => {

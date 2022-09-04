@@ -1,17 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { hourlyForecastProps } from './types';
 import * as Styled from './styles';
-import { convertMtoK, convertToC, getHour } from '../../utils';
-import { getForecastIcon } from '../../constants';
-import { Flex } from '../../design/helper.styles';
-import { useStore } from '../../zustand/store';
-import { SvgArrowLeft, SvgArrowRight } from '../../assets/Svg.styles';
-import Button from '../../Common/Button';
+import { convertMtoK, convertToC, getHour } from '../../../utils';
+import { Flex } from '../../../design/helper.styles';
+import { useAppStore } from '../../../zustand/store';
+import { SvgArrowLeft, SvgArrowRight } from '../../../assets/Svg.styles';
+import Button from '../../../Common/Button';
 import { motion } from 'framer-motion';
-import { useWindowSize } from '../../hooks/useWindowSize';
+import { getForecastIcon } from '../hooks/getForecastIcon';
 
-const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
-	const store = useStore(state => state);
+const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
+	const store = useAppStore(state => state);
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const carousel = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -26,6 +25,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 	let content;
 
 	const [selected, setSelected] = useState(0);
+	const [width, setWidth] = useState(0);
 
 	const clickForward = () => {
 		ref.current.scrollLeft += 220;
@@ -44,19 +44,13 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ hourlyData }) => {
 		setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
 	}, []);
 
-	const [width, setWidth] = useState(0);
-
-	const windowSize = useWindowSize();
-
 	const handleTouch = (idx: number) => {
-		// if (windowSize.width && windowSize.width <= 970) {
 		setSelected(idx);
-		// }
 	};
 
 	content = (
 		<Styled.InnerCarousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
-			{hourlyData.map((hour, idx) => {
+			{data.map((hour, idx) => {
 				const icon = hour.icon;
 				const temp = hour.temp;
 				const wind = hour.wind;
