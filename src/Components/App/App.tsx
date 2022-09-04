@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { ThemeProvider } from 'styled-components';
 import Toast from '../../Common/Toast';
 import { GlobalStyles } from '../../design/globalStyle';
@@ -10,9 +10,15 @@ import { useGetThemeMode } from './hooks/useGetThemeMode';
 import { Loading } from './Loading';
 import { Routes } from './Routes';
 import { queryClient } from '../../react-query/queryClient';
+import { useNavigate } from 'react-router-dom';
+import Clouds from '../Clouds';
 
-const App = (): ReactElement => {
+const App = () => {
 	const themeMode = useGetThemeMode();
+	const navigate = useNavigate();
+	useEffect(() => {
+		navigate('/home');
+	}, []);
 
 	return (
 		<ThemeProvider theme={themeMode}>
@@ -20,7 +26,7 @@ const App = (): ReactElement => {
 				<GlobalStyles />
 				<Loading />
 				<Toast />
-				{/* <Clouds cloudsNum={10} /> */}
+				<Clouds cloudsNum={10} />
 				<Routes />
 				<ReactQueryDevtools />
 			</QueryClientProvider>

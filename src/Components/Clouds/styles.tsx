@@ -2,8 +2,8 @@ import styled, { keyframes } from 'styled-components/macro';
 import { DIFF_CLOUD_SIZE_PER_SPEED, MAX_CLOUD_SPEED, MIN_CLOUD_SIZE } from './types';
 
 const cloudAnimation = keyframes`
-    0% { left:	100%}
-    100% { left: -200px}
+    0% { right:	100%}
+    100% { right: -200px}
 `;
 
 export const CloudsWrapper = styled.div`
@@ -12,7 +12,7 @@ export const CloudsWrapper = styled.div`
 `;
 export const CloudImg = styled.img<{ positionY: number; delayTime: number; speed: number }>`
 	position: absolute;
-	left: 100%;
+	right: 100%;
 	bottom: ${({ positionY }) => positionY}%;
 
 	animation: ${cloudAnimation} ${({ speed }) => speed}s linear infinite ${({ delayTime }) => delayTime}s;

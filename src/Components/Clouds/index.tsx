@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import cloudImage from '../../assets/Svgs/cloud.svg';
-import { useWindowSize } from '../../hooks/useWindowSize';
+
 import * as Styled from './styles';
 import { MAX_CLOUD_SPEED, MIN_CLOUD_SPEED } from './types';
 
