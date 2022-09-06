@@ -2,15 +2,9 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { serverApi } from '../../../api/userApi';
-import useAuth from '../../../api/hooks/useAuth';
 import { Credentials, IUser, UserServerResponse } from '../../../types/user';
 import { fireToast } from '../../App/hooks/useToast';
 import { useUser } from './useUser';
-
-interface UseServerCall {
-	login: (email: string, password: string) => void;
-	logout: () => void;
-}
 
 type LocationProps = {
 	state: {
@@ -57,39 +51,42 @@ const authServerCall = async (urlEndpoint: string, email: string, password: stri
 	}
 };
 
-const login = async (email: string, password: string) => {
+const signIn = async (email: string, password: string) => {
 	const user = await authServerCall('/api/auth/login/', email, password);
-
 	return user;
 };
 
-const logout = (): void => {
-	fireToast({ title: 'Logged 0ut!', status: 'success' });
-};
+interface UseLogin {
+	mutate: UseMutateFunction<IUser | undefined, unknown, Credentials, unknown>;
+	logout: () => void;
+}
 
-export const useLogin = (): UseMutateFunction<IUser | undefined, unknown, Credentials, unknown> => {
-	const { setAuth, auth } = useAuth();
+export const useLogin = (): UseLogin => {
 	const { clearUser, updateUser } = useUser();
 	const navigate = useNavigate();
 
 	const location = useLocation() as unknown as LocationProps;
-	const from = location.state.from.pathname || '/';
+	const from = location.state?.from.pathname || '/';
 
 	const { mutate } = useMutation(
 		(credentials: Credentials) => {
-			return login(credentials.email, credentials.password);
+			return signIn(credentials.email, credentials.password);
 		},
+
 		{
 			onSuccess: response => {
-				// updateUser(response);
 				const title = `Logged in as  ${response?.first_name}`;
 				fireToast({ title, status: 'success' });
-				setAuth(response);
-				// navigate('/');
+				updateUser(response);
 				navigate(from, { replace: true });
 			},
 		}
 	);
 
-	return mutate;
+	const logout = (): void => {
+		clearUser();
+		fireToast({ title: 'Logged 0ut!', status: 'success' });
+	};
+
+	return { mutate, logout };
 };

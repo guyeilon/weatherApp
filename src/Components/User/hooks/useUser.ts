@@ -3,7 +3,7 @@ import { useAuthUserStore } from '../../../zustand/store';
 
 interface UseUser {
 	user: IUser | null;
-	updateUser: (user: IUser) => void;
+	updateUser: (user: IUser | undefined) => void;
 	clearUser: () => void;
 }
 

@@ -15,7 +15,7 @@ interface ValuesType {
 }
 
 export const Login = (): ReactElement => {
-	const login = useLogin();
+	const { mutate: login } = useLogin();
 
 	const onSubmit = async (values: ValuesType, actions: any) => {
 		const { email, password } = values;
