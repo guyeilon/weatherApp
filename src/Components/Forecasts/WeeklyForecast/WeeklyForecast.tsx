@@ -7,10 +7,10 @@ import { getForecastIcon } from '../hooks/getForecastIcon';
 import { usePreference } from '../../../hooks/usePreference';
 
 const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
-	const { preference } = usePreference();
+	const { preference, isFahrenheit } = usePreference();
 
 	const toggleTemperature = (temp: number) => {
-		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return isFahrenheit ? temp : convertToC(temp);
 	};
 
 	let content;
