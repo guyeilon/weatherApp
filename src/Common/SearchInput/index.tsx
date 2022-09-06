@@ -9,13 +9,15 @@ export interface SearchInputProps {
 	onBlur?: (e: React.FocusEvent<any, Element>) => void;
 	onFocus?: (e: React.FocusEvent<any, Element>) => void;
 	onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+	placeHolder?: string;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ className, onChange, onBlur, onFocus }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ placeHolder, className, onChange, onBlur, onFocus }) => {
 	return (
 		<Styled.InputWrapper className={className}>
 			<Styled.searchInput
-				placeholder='Try "Tel Aviv - Jaffa"...'
+				// className={className}
+				placeholder={placeHolder}
 				onChange={onChange}
 				onBlur={onBlur}
 				onFocus={onFocus}

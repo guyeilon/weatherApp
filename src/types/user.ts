@@ -1,23 +1,34 @@
-export type IUser = {
+export interface IUser {
 	email: string;
-	firstName: string;
-	lastName: string;
-	id: number;
-	token: string;
-};
+	first_name: string;
+	last_name: string;
+	id: number | undefined;
+	accessToken: string;
+	refreshToken: string;
+}
 
 interface User {
-	user: {
-		email: string;
-		first_name: string;
-		last_name: string;
-		id: number;
-		token: string;
-	};
+	email: string;
+	first_name: string;
+	last_name: string;
+	id: number | undefined;
 }
 
-interface Token {
+export interface UserServerResponse {
+	access_token: string;
+	refresh_token: string;
 	token: string;
+	user: User;
 }
 
-export type UserServer = User & Token;
+export interface Favorites {
+	key: number;
+	title: string;
+	city: string;
+	country: string;
+}
+
+export interface Credentials {
+	email: string;
+	password: string;
+}

@@ -22,6 +22,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	return (
 		<>
 			<Styled.Input
+				placeHolder='Try "Tel Aviv - Jaffa"...'
 				onChange={handleChange}
 				onFocus={() => setIsFocused(true)}
 				onBlur={() => setIsFocused(false)}
@@ -77,7 +78,7 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 			{isExpanded && (
 				<Modal
 					blur='main'
-					padding='24px 0'
+					padding='0 '
 					width='476px'
 					height='360px'
 					position='top'
@@ -97,7 +98,7 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 							/>
 						</Styled.LoaderWrapper>
 					)}
-					{!isLoading && data.length === 0 && (
+					{!isLoading && data?.length === 0 && (
 						<Styled.NoResultWrapper>
 							<Styled.InnerContentWrapper>
 								<SvgCity width='120' height='120' />

@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
-import { useAppStore } from '../../zustand/store';
 import { ResultsProps } from './types';
 import { SvgCity } from '../../assets/Svg.styles';
 import { useAutocompleteResult } from '../SearchCity/hooks/useAutocompleteResult';
+import { usePreference } from '../../hooks/usePreference';
 
 interface MobileSearchCityProps {
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,8 +13,8 @@ interface MobileSearchCityProps {
 }
 
 const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isExpanded }) => {
-	const store = useAppStore(state => state);
-	const isDarkMode = store.theme === 'dark';
+	const { preference } = usePreference();
+	const isDarkMode = preference.theme === 'dark';
 
 	const [search, setSearch] = useState('');
 	const { citiesData, isLoading } = useAutocompleteResult(search);

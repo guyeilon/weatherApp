@@ -1,16 +1,11 @@
-import React, { ReactElement, useEffect } from 'react';
+import { ReactElement } from 'react';
 import Button from '../../Common/Button';
 import Input from '../../Common/Input';
-import * as Styled from './styles';
-
 import { useFormik } from 'formik';
 import { FormSchema } from '../../schemas';
+import { useLogin } from './hooks/useLogin';
+import * as Styled from './styles';
 import Logo from '../../assets/Logo';
-import { useAuth } from '../../auth/useAuth';
-
-import { useLoginStore } from '../../zustand/store';
-import { useUser } from './hooks/useUser';
-import { useNavigate } from 'react-router-dom';
 
 export interface LoginProps {}
 
@@ -20,21 +15,12 @@ interface ValuesType {
 }
 
 export const Login = (): ReactElement => {
-	const auth = useAuth();
-	const { user } = useUser();
-	const navigate = useNavigate();
-	const loginStore = useLoginStore(state => state);
-
-	useEffect(() => {
-		if (user) {
-			navigate('/home');
-			console.log(user);
-		}
-	}, [user]);
+	const login = useLogin();
 
 	const onSubmit = async (values: ValuesType, actions: any) => {
 		const { email, password } = values;
-		auth.login(email, password);
+
+		login(values);
 
 		actions.resetForm();
 	};

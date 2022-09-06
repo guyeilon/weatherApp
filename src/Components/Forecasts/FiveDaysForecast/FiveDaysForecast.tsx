@@ -2,20 +2,18 @@ import React, { useEffect, useRef, useState } from 'react';
 import { FiveDaysForecastProps } from './types';
 import * as Styled from './styles';
 import { convertToC, getDay, getDayAndMonth } from '../../../utils';
-
-import { useAppStore } from '../../../zustand/store';
-
 import Chart from 'react-apexcharts';
 import { motion } from 'framer-motion';
 import { useChartData } from './hooks/useChartData';
+import { usePreference } from '../../../hooks/usePreference';
 
 const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ data, isExpanded }) => {
-	const store = useAppStore(state => state);
+	const { preference } = usePreference();
 
 	let content;
 
-	const isDarkMode = store.theme === 'dark';
-	const isFahrenheit = store.degree === 'fahrenheit';
+	const isDarkMode = preference.theme === 'dark';
+	const isFahrenheit = preference.degree === 'fahrenheit';
 
 	const { options, seriesDay, seriesNight } = useChartData(data, isExpanded, isDarkMode, isFahrenheit);
 

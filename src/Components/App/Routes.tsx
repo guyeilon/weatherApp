@@ -1,9 +1,10 @@
 import { ReactElement } from 'react';
 import { Route, Routes as RouterRoutes } from 'react-router-dom';
 
-import Favorites from '../../Pages/Favorites';
+import Favorites from '../Favorites';
 import Forecast from '../Forecasts';
 import Login from '../User';
+import PersistLogin from '../User/PresistLogin';
 
 import Layout from './Layout';
 import RequireAuth from './RequireAuth';
@@ -15,12 +16,14 @@ export const Routes = (): ReactElement => {
 			<Route path='/login' element={<Login />} />
 
 			{/* protected routes */}
+			{/* <Route element={<PersistLogin />}> */}
 			<Route element={<RequireAuth />}>
 				<Route path='/' element={<Layout />}>
-					<Route path='/home' element={<Forecast />} />
+					<Route path='/' element={<Forecast />} />
 					<Route path='/favorites' element={<Favorites />} />
 				</Route>
 			</Route>
+			{/* </Route> */}
 		</RouterRoutes>
 	);
 };

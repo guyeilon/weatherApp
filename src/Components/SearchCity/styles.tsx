@@ -62,7 +62,7 @@ export const ContentWrapper = styled.div`
 `;
 export const ScrollWrapper = styled.div`
 	overflow-y: scroll;
-	height: 340px;
+	max-height: 345px;
 `;
 
 export const CityWrapper = styled.li`

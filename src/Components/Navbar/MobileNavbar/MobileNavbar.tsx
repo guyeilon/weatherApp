@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
-import { useAppStore } from '../../../zustand/store';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
-
 import * as Styled from './styles';
 import Modal from '../../../Common/Modal';
 import { AnimatePresence } from 'framer-motion';
+import { usePreference } from '../../../hooks/usePreference';
 
 interface MobileNavbarProps {}
 
 const MobileNavbar: React.FC<MobileNavbarProps> = () => {
-	const store = useAppStore(state => state);
-	const isDarkMode = store.theme === 'dark';
+	const { preference } = usePreference();
+	const isDarkMode = preference.theme === 'dark';
 	const [isExpanded, setIsExpanded] = useState(false);
+
 	// console.log('MenuModal:', isExpanded);
 
 	return (
@@ -33,21 +33,21 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 							<Styled.ThemeSwitcherWrapper>
 								<Styled.MenuText>Change mode</Styled.MenuText>
 								<Styled.ThemeSwitcher
-									isChecked={store.theme === 'dark'}
+									isChecked={preference.theme === 'dark'}
 									leftSvg={<SvgSun height='24' width='24' />}
 									rightSvg={<SvgMoon height='24' width='24' />}
 									onClick={() => {
-										store.toggleTheme(store.theme);
+										preference.toggleTheme(preference.theme);
 									}}
 								/>
 							</Styled.ThemeSwitcherWrapper>
 							<Styled.DegreeSwitcherWrapper>
 								<Styled.MenuText>Change degrees</Styled.MenuText>
 								<Styled.DegreeSwitcher
-									isChecked={store.degree === 'fahrenheit'}
+									isChecked={preference.degree === 'fahrenheit'}
 									leftSvg={<SvgCelsius height='24' width='24' />}
 									rightSvg={<SvgFahrenheit height='24' width='24' />}
-									onClick={() => store.toggleDegree(store.degree)}
+									onClick={() => preference.toggleDegree(preference.degree)}
 								/>
 							</Styled.DegreeSwitcherWrapper>
 						</Styled.SwitcherWrapper>

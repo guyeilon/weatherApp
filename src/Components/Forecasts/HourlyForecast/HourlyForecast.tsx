@@ -3,23 +3,23 @@ import { hourlyForecastProps } from './types';
 import * as Styled from './styles';
 import { convertMtoK, convertToC, getHour } from '../../../utils';
 import { Flex } from '../../../design/helper.styles';
-import { useAppStore } from '../../../zustand/store';
 import { SvgArrowLeft, SvgArrowRight } from '../../../assets/Svg.styles';
 import Button from '../../../Common/Button';
 import { motion } from 'framer-motion';
 import { getForecastIcon } from '../hooks/getForecastIcon';
+import { usePreference } from '../../../hooks/usePreference';
 
 const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
-	const store = useAppStore(state => state);
+	const { preference } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const carousel = useRef() as React.MutableRefObject<HTMLDivElement>;
 
 	const toggleTemperature = (temp: number) => {
-		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
 	};
 	const toggleSpeed = (wind: number) => {
-		return store.degree === 'fahrenheit' ? `${wind} m/h` : `${convertMtoK(wind)} km/h`;
+		return preference.degree === 'fahrenheit' ? `${wind} m/h` : `${convertMtoK(wind)} km/h`;
 	};
 
 	let content;

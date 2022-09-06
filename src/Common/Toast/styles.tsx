@@ -14,7 +14,7 @@ export const Toast = styled(ToastContainer).attrs({
 	.toast {
 		font-size: ${({ theme }) => theme.textFontSize.lg};
 
-		padding: 28px 40px;
+		/* padding: 28px 40px;	 */
 		font-family: Overpass;
 		border-radius: 8px;
 		bottom: 54px;
