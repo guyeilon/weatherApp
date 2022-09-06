@@ -3,9 +3,9 @@ import { usePreference } from '../../../hooks/usePreference';
 
 export const useGetThemeMode = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();
-	const { preference } = usePreference();
+	const { preference, isDarkMode } = usePreference();
 
-	const themeMode = preference.theme === 'light' ? lightTheme : darkTheme;
+	const themeMode = isDarkMode ? darkTheme : lightTheme;
 
 	return themeMode;
 };

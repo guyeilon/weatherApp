@@ -10,16 +10,16 @@ import { getForecastIcon } from '../hooks/getForecastIcon';
 import { usePreference } from '../../../hooks/usePreference';
 
 const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
-	const { preference } = usePreference();
+	const { preference, isFahrenheit } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const carousel = useRef() as React.MutableRefObject<HTMLDivElement>;
 
 	const toggleTemperature = (temp: number) => {
-		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return isFahrenheit ? temp : convertToC(temp);
 	};
 	const toggleSpeed = (wind: number) => {
-		return preference.degree === 'fahrenheit' ? `${wind} m/h` : `${convertMtoK(wind)} km/h`;
+		return isFahrenheit ? `${wind} m/h` : `${convertMtoK(wind)} km/h`;
 	};
 
 	let content;

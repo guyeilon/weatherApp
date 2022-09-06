@@ -8,12 +8,9 @@ import { useChartData } from './hooks/useChartData';
 import { usePreference } from '../../../hooks/usePreference';
 
 const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ data, isExpanded }) => {
-	const { preference } = usePreference();
+	const { isDarkMode, isFahrenheit } = usePreference();
 
 	let content;
-
-	const isDarkMode = preference.theme === 'dark';
-	const isFahrenheit = preference.degree === 'fahrenheit';
 
 	const { options, seriesDay, seriesNight } = useChartData(data, isExpanded, isDarkMode, isFahrenheit);
 

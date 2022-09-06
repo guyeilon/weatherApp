@@ -6,7 +6,7 @@ import { getForecastIcon } from '../hooks/getForecastIcon';
 import { usePreference } from '../../../hooks/usePreference';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName }) => {
-	const { preference } = usePreference();
+	const { preference, isFahrenheit } = usePreference();
 
 	const icon = data[0]?.icon;
 	const dayTemp = data[0]?.dayTemp;
@@ -15,7 +15,7 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName
 	const timestamp = updatedAt;
 
 	const toggleTemperature = (temp: number) => {
-		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return isFahrenheit ? temp : convertToC(temp);
 	};
 
 	return (

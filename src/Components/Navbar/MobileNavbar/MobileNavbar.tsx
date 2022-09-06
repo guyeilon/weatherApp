@@ -4,11 +4,13 @@ import * as Styled from './styles';
 import Modal from '../../../Common/Modal';
 import { AnimatePresence } from 'framer-motion';
 import { usePreference } from '../../../hooks/usePreference';
+import { useLogin } from '../../User/hooks/useLogin';
 
 interface MobileNavbarProps {}
 
 const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const { preference } = usePreference();
+	const { logout } = useLogin();
 	const isDarkMode = preference.theme === 'dark';
 	const [isExpanded, setIsExpanded] = useState(false);
 
@@ -51,7 +53,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 								/>
 							</Styled.DegreeSwitcherWrapper>
 						</Styled.SwitcherWrapper>
-						<Styled.LogoutBtn svg={isDarkMode ? 'logout' : 'logoutDark'}>Log out</Styled.LogoutBtn>
+						<Styled.LogoutBtn svg={isDarkMode ? 'logout' : 'logoutDark'} onClick={() => logout()}>
+							Log out
+						</Styled.LogoutBtn>
 					</Modal>
 				)}
 			</AnimatePresence>
