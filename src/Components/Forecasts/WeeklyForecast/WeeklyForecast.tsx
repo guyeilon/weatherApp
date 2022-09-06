@@ -2,17 +2,15 @@ import React from 'react';
 import { WeeklyForecastProps } from './types';
 import * as Styled from './styles';
 import { convertToC, getDay } from '../../../utils';
-
 import { Flex } from '../../../design/helper.styles';
-import { useAppStore } from '../../../zustand/store';
-
 import { getForecastIcon } from '../hooks/getForecastIcon';
+import { usePreference } from '../../../hooks/usePreference';
 
 const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
-	const store = useAppStore(state => state);
+	const { preference } = usePreference();
 
 	const toggleTemperature = (temp: number) => {
-		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
 	};
 
 	let content;

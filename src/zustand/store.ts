@@ -10,45 +10,45 @@ const toggleDegree = (degree: string) => {
 	return degree === 'fahrenheit' ? 'celsius' : 'fahrenheit';
 };
 
-type AppStore = {
+type preferenceStore = {
 	theme: string;
 	degree: string;
 	toggleTheme: (theme: string) => void;
 	toggleDegree: (degree: string) => void;
 };
 
-const useAppStore = create<AppStore>()(
+const usePreferenceStore = create<preferenceStore>()(
 	persist(
-		(set): AppStore => ({
+		(set): preferenceStore => ({
 			theme: 'light',
 			degree: 'celsius',
 			toggleTheme: (theme: string) => set(state => ({ ...state, theme: toggleTheme(theme) })),
 			toggleDegree: (degree: string) => set(state => ({ ...state, degree: toggleDegree(degree) })),
 		}),
 		{
-			name: 'userPref',
+			name: 'weatherAppPreference',
 			getStorage: () => localStorage,
 		}
 	)
 );
-type loginStore = {
+type authUserStore = {
 	user: IUser | null;
 	setUser: (user: IUser) => void;
 	clearUser: () => void;
 };
 
-const useLoginStore = create<loginStore>()(
+const useAuthUserStore = create<authUserStore>()(
 	persist(
-		(set): loginStore => ({
+		(set): authUserStore => ({
 			user: null,
 			setUser: (user: IUser) => set(state => ({ ...state, user: user })),
 			clearUser: () => set(state => ({ ...state, user: null })),
 		}),
 		{
-			name: 'loggedInUser',
+			name: 'weatherAppUser',
 			getStorage: () => localStorage,
 		}
 	)
 );
 
-export { useAppStore, useLoginStore };
+export { usePreferenceStore, useAuthUserStore };

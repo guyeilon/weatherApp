@@ -12,5 +12,10 @@ export const serverApi = axios.create({
 });
 
 export const getJWTHeader = (user: IUser): Record<string, string> => {
-	return { Authorization: `Bearer ${user.token}` };
+	return { Authorization: `Bearer ${user.accessToken}` };
 };
+
+export const privateApi = axios.create({
+	baseURL: USER_URL,
+	headers: { 'Content-Type': 'application/json' },
+});

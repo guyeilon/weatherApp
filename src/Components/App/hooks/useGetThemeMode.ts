@@ -1,11 +1,11 @@
 import { useSystemDesign } from '../../../design/useSystemDesign';
-import { useAppStore } from '../../../zustand/store';
+import { usePreference } from '../../../hooks/usePreference';
 
 export const useGetThemeMode = () => {
 	const { darkTheme, lightTheme } = useSystemDesign();
-	const store = useAppStore(state => state);
+	const { preference } = usePreference();
 
-	const themeMode = store.theme === 'light' ? lightTheme : darkTheme;
+	const themeMode = preference.theme === 'light' ? lightTheme : darkTheme;
 
 	return themeMode;
 };

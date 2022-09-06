@@ -44,6 +44,9 @@ const Modal: React.FC<ModalProps> = ({
 	UsePreventScrollOutsideModal(isModalOpen);
 
 	const modalRoot = document.getElementById('modal') as HTMLElement;
+	useEffect(() => {
+		isModalOpen && modalRef.current?.focus();
+	}, [isModalOpen]);
 
 	return ReactDOM.createPortal(
 		<AnimatePresence>

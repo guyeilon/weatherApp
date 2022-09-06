@@ -1,14 +1,12 @@
 import React from 'react';
-import { useAppStore } from '../../../zustand/store';
-
 import { convertToC, getTime } from '../../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
-
 import { getForecastIcon } from '../hooks/getForecastIcon';
+import { usePreference } from '../../../hooks/usePreference';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName }) => {
-	const store = useAppStore(state => state);
+	const { preference } = usePreference();
 
 	const icon = data[0]?.icon;
 	const dayTemp = data[0]?.dayTemp;
@@ -17,7 +15,7 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName
 	const timestamp = updatedAt;
 
 	const toggleTemperature = (temp: number) => {
-		return store.degree === 'fahrenheit' ? temp : convertToC(temp);
+		return preference.degree === 'fahrenheit' ? temp : convertToC(temp);
 	};
 
 	return (

@@ -1,26 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useAppStore } from '../../../zustand/store';
-import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSearch, SvgSun } from '../../../assets/Svg.styles';
-
+import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
 import * as Styled from './styles';
-
-import { NavLink, useLocation, useParams } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import SearchCity from '../../SearchCity';
-import { useAuth } from '../../../auth/useAuth';
+import { usePreference } from '../../../hooks/usePreference';
+
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
-	const store = useAppStore(state => state);
-	const auth = useAuth();
-	const location = useLocation();
+	const { preference } = usePreference();
 
+	const location = useLocation();
 	const currentLocation = location.pathname.substring(1);
 
-	const [activeHome, setActiveHome] = useState(currentLocation === 'home' ? true : false);
+	const [activeHome, setActiveHome] = useState(currentLocation === '' ? true : false);
 	const [activeFav, setActiveFav] = useState(currentLocation === 'favorites' ? true : false);
 
 	useEffect(() => {
-		if (currentLocation === 'home') {
+		if (currentLocation === '') {
 			setActiveHome(true);
 			setActiveFav(false);
 		}
@@ -53,22 +50,22 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 			<Styled.Grid3>
 				<Styled.SwitcherWrapper>
 					<Styled.DegreeSwitcher
-						isChecked={store.degree === 'fahrenheit'}
+						isChecked={preference.degree === 'fahrenheit'}
 						leftSvg={<SvgCelsius height='24' width='24' />}
 						rightSvg={<SvgFahrenheit height='24' width='24' />}
-						onClick={() => store.toggleDegree(store.degree)}
+						onClick={() => preference.toggleDegree(preference.degree)}
 					/>
 					<Styled.ThemeSwitcher
-						isChecked={store.theme === 'dark'}
+						isChecked={preference.theme === 'dark'}
 						leftSvg={<SvgSun height='24' width='24' />}
 						rightSvg={<SvgMoon height='24' width='24' />}
-						onClick={() => store.toggleTheme(store.theme)}
+						onClick={() => preference.toggleTheme(preference.theme)}
 					/>
 				</Styled.SwitcherWrapper>
 				<Styled.MapBtn>
 					<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
 				</Styled.MapBtn>
-				<Styled.LogoutBtn onClick={() => auth.logout()}>
+				<Styled.LogoutBtn>
 					<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 				</Styled.LogoutBtn>
 			</Styled.Grid3>

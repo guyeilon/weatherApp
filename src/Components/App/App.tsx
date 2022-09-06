@@ -10,15 +10,13 @@ import { useGetThemeMode } from './hooks/useGetThemeMode';
 import { Loading } from './Loading';
 import { Routes } from './Routes';
 import { queryClient } from '../../react-query/queryClient';
-import { useNavigate } from 'react-router-dom';
+
 import Clouds from '../Clouds';
+import useAuth from '../../api/hooks/useAuth';
 
 const App = () => {
 	const themeMode = useGetThemeMode();
-	const navigate = useNavigate();
-	useEffect(() => {
-		navigate('/home');
-	}, []);
+	const { auth } = useAuth();
 
 	return (
 		<ThemeProvider theme={themeMode}>

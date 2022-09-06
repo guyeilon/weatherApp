@@ -29,6 +29,7 @@ export const colors = {
 	},
 	inputs: {
 		mainBg: '#f2f2f2',
+		secondaryBg: 'rgba(255, 255, 255, 0.3)',
 		focusBg: '#fff',
 		placeHolderColor: ' #bebebe',
 		labelColor: '#838baa',
@@ -93,6 +94,7 @@ export const darkColors = {
 	},
 	inputs: {
 		mainBg: '#f2f2f2',
+		secondaryBg: 'rgba(255, 255, 255, 0.3)',
 		focusBg: '#fff',
 		placeHolderColor: ' #bebebe',
 		labelColor: '#838baa',

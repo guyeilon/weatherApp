@@ -12,13 +12,8 @@ export const useCloseModalIfClickedOutside = ({
 	useCloseModal: boolean;
 }): void => {
 	useEffect(() => {
-		console.log(modalRef.current?.scrollHeight);
 		const checkIfClickedOutside = (e: MouseEvent) => {
 			if (useCloseModal && isModalOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
-				console.log('isModalOpen?', isModalOpen);
-
-				console.log('closing modal....');
-
 				closeModalFunction();
 			}
 		};
