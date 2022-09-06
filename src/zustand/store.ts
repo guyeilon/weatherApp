@@ -41,7 +41,7 @@ const useAuthUserStore = create<authUserStore>()(
 	persist(
 		(set): authUserStore => ({
 			user: null,
-			setUser: (user: IUser) => set(state => ({ ...state, user: user })),
+			setUser: (user: IUser | undefined) => set(state => ({ ...state, user: user })),
 			clearUser: () => set(state => ({ ...state, user: null })),
 		}),
 		{

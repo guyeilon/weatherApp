@@ -4,7 +4,7 @@ import { fireToast } from '../Components/App/hooks/useToast';
 function queryErrorHandler(error: unknown): void {
 	const title = error instanceof Error ? error.message : 'error connecting to server';
 
-	fireToast({ title: title, status: 'error' });
+	fireToast({ title, status: 'error' });
 }
 
 export function generateQueryClient(): QueryClient {
@@ -13,7 +13,7 @@ export function generateQueryClient(): QueryClient {
 			queries: {
 				onError: queryErrorHandler,
 				staleTime: 600000, // 10 minutes
-				cacheTime: 900000, // default cacheTime is 5 minutes;
+				cacheTime: 900000, // 15 minutes;
 				refetchOnMount: false,
 				refetchOnWindowFocus: false,
 				refetchOnReconnect: false,

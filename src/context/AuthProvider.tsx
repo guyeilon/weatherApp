@@ -4,14 +4,7 @@ import { IUser } from '../types/user';
 const AuthContext = createContext<any>({});
 
 export const AuthProvider: React.FC<{ children: ReactElement }> = ({ children }) => {
-	const [auth, setAuth] = useState(
-		null
-		// {	email: '',
-		// 	first_name: '',
-		// 	last_name: '',
-		// 	id: undefined,
-		// 	accessToken: '',}
-	);
+	const [auth, setAuth] = useState(null);
 
 	return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>;
 };

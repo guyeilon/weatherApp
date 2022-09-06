@@ -4,11 +4,13 @@ import * as Styled from './styles';
 import { useLocation } from 'react-router-dom';
 import SearchCity from '../../SearchCity';
 import { usePreference } from '../../../hooks/usePreference';
+import { useLogin } from '../../User/hooks/useLogin';
 
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const { preference } = usePreference();
+	const { logout } = useLogin();
 
 	const location = useLocation();
 	const currentLocation = location.pathname.substring(1);
@@ -65,7 +67,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 				<Styled.MapBtn>
 					<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
 				</Styled.MapBtn>
-				<Styled.LogoutBtn>
+				<Styled.LogoutBtn onClick={() => logout()}>
 					<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 				</Styled.LogoutBtn>
 			</Styled.Grid3>
