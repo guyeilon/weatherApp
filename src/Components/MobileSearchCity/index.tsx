@@ -5,7 +5,7 @@ import Modal from '../../Common/Modal';
 import { ResultsProps } from './types';
 import { SvgCity } from '../../assets/Svg.styles';
 import { useAutocompleteResult } from '../SearchCity/hooks/useAutocompleteResult';
-import { usePreference } from '../../hooks/usePreference';
+import { usePreference } from '../../zustand/hooks/usePreference';
 
 interface MobileSearchCityProps {
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,8 +13,7 @@ interface MobileSearchCityProps {
 }
 
 const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isExpanded }) => {
-	const { preference } = usePreference();
-	const isDarkMode = preference.theme === 'dark';
+	const { isDarkMode } = usePreference();
 
 	const [search, setSearch] = useState('');
 	const { citiesData, isLoading } = useAutocompleteResult(search);

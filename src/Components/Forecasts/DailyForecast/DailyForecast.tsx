@@ -3,10 +3,10 @@ import { convertToC, getTime } from '../../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../hooks/usePreference';
+import { usePreference } from '../../../zustand/hooks/usePreference';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName }) => {
-	const { preference, isFahrenheit } = usePreference();
+	const { isFahrenheit } = usePreference();
 
 	const icon = data[0]?.icon;
 	const dayTemp = data[0]?.dayTemp;

@@ -2,14 +2,14 @@ import { ReactElement } from 'react';
 import { useIsFetching, useIsMutating } from '@tanstack/react-query';
 import { ThreeDots } from 'react-loader-spinner';
 import { queryKeys } from '../../react-query/constants';
-import { usePreference } from '../../hooks/usePreference';
+import { usePreference } from '../../zustand/hooks/usePreference';
 
 export function Loading(): ReactElement {
 	const isFetching = useIsFetching([queryKeys.forecast]);
 	const isMutating = useIsMutating([queryKeys.forecast]);
-	const { preference } = usePreference();
+	const { isDarkMode } = usePreference();
 
-	const color = preference.theme === 'light' ? '#0f0f0ef0' : '#fff';
+	const color = isDarkMode ? '#fff' : '#0f0f0ef0';
 
 	const display: boolean = isFetching || isMutating ? true : false;
 

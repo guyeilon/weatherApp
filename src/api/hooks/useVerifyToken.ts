@@ -1,9 +1,9 @@
 import { serverApi } from '../userApi';
 import { useState } from 'react';
-import { useUser } from '../../Components/User/hooks/useUser';
+import { useUserStore } from '../../zustand/store';
 
 const useVerifyToken = () => {
-	const { user } = useUser();
+	const { user } = useUserStore();
 	const [isTokenVerify, setIsTokenVerify] = useState<boolean>(false);
 
 	const verifyToken = async () => {

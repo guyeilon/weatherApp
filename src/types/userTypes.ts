@@ -4,7 +4,6 @@ export interface IUser {
 	last_name: string;
 	id: number | undefined;
 	accessToken: string;
-	refreshToken: string;
 }
 
 interface User {

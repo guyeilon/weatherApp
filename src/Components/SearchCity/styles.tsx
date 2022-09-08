@@ -62,13 +62,16 @@ export const ContentWrapper = styled.div`
 `;
 export const ScrollWrapper = styled.div`
 	overflow-y: scroll;
+	overflow-x: hidden;
 	max-height: 345px;
 `;
 
-export const CityWrapper = styled.li`
+export const CityWrapper = styled.button`
 	display: flex;
 	padding: 12px 36px;
 	cursor: pointer;
+	width: 100%;
+
 	&:hover {
 		background-color: ${({ theme }) => theme.colors.modals.hover};
 	}

@@ -6,18 +6,16 @@ export interface SearchCityPopOverProps {
 	setSearch: React.Dispatch<React.SetStateAction<string>>;
 	show: boolean;
 	searchValue: string;
-	data:
-		| [
-				{
-					cityKey: number;
-					countryName: string;
-					cityName: string;
-				}
-		  ]
-		| [];
+	data: [City] | [];
 }
 
 export interface CityNameHighlighterProps {
 	cityName: string;
 	searchValue: string;
+}
+
+export interface City {
+	cityKey: number;
+	countryName: string;
+	cityName: string;
 }

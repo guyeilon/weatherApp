@@ -1,15 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
 import * as Styled from './styles';
 import { useLocation } from 'react-router-dom';
 import SearchCity from '../../SearchCity';
-import { usePreference } from '../../../hooks/usePreference';
 import { useLogin } from '../../User/hooks/useLogin';
+import { usePreference } from '../../../zustand/hooks/usePreference';
+import { useForecast } from '../../../zustand/hooks/useForecast';
 
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
-	const { preference } = usePreference();
+	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree } = usePreference();
+
+	const { setCityKey, setCityName } = useForecast();
 	const { logout } = useLogin();
 
 	const location = useLocation();
@@ -29,13 +32,18 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 		}
 	}, [currentLocation]);
 
+	const handleClick = () => {
+		setCityKey(undefined);
+		setCityName(undefined);
+	};
+
 	return (
 		<Styled.DesktopContentWrapper>
 			<Styled.Grid1>
 				<Styled.Logo />
 				<Styled.MenuWrapper>
 					<Styled.RouterWrap to='/'>
-						<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} />
+						<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} onClick={handleClick} />
 						<Styled.LinkBorder />
 					</Styled.RouterWrap>
 					<Styled.RouterWrap to='/favorites'>
@@ -52,16 +60,16 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 			<Styled.Grid3>
 				<Styled.SwitcherWrapper>
 					<Styled.DegreeSwitcher
-						isChecked={preference.degree === 'fahrenheit'}
+						isChecked={isFahrenheit}
 						leftSvg={<SvgCelsius height='24' width='24' />}
 						rightSvg={<SvgFahrenheit height='24' width='24' />}
-						onClick={() => preference.toggleDegree(preference.degree)}
+						onClick={() => toggleDegree(degree)}
 					/>
 					<Styled.ThemeSwitcher
-						isChecked={preference.theme === 'dark'}
+						isChecked={isDarkMode}
 						leftSvg={<SvgSun height='24' width='24' />}
 						rightSvg={<SvgMoon height='24' width='24' />}
-						onClick={() => preference.toggleTheme(preference.theme)}
+						onClick={() => toggleTheme(theme)}
 					/>
 				</Styled.SwitcherWrapper>
 				<Styled.MapBtn>

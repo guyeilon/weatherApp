@@ -1,10 +1,10 @@
 import { useEffect } from 'react';
+import { useUserStore } from '../../zustand/store';
 
 import { privateApi } from '../userApi';
-import { useUser } from '../../Components/User/hooks/useUser';
 
 const useInterceptors = () => {
-	const { user } = useUser();
+	const { user } = useUserStore();
 
 	useEffect(() => {
 		const requestIntercept = privateApi.interceptors.request.use(
