@@ -1,5 +1,4 @@
-import React from 'react';
-import { Id, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 interface UseCustomToast {
 	title: string;

@@ -1,5 +1,5 @@
-import { IUser } from '../../../types/user';
-import { useAuthUserStore } from '../../../zustand/store';
+import { IUser } from '../../types/userTypes';
+import { useUserStore } from '../store';
 
 interface UseUser {
 	user: IUser | null;
@@ -8,17 +8,18 @@ interface UseUser {
 }
 
 export const useUser = (): UseUser => {
-	const authUser = useAuthUserStore(state => state);
+	const setUser = useUserStore(state => state.setUser);
+	const deleteUser = useUserStore(state => state.clearUser);
 
-	const user = authUser.user;
+	const user = useUserStore(state => state.user);
 
 	const updateUser = (newUser: IUser | undefined) => {
 		if (!newUser) return null;
-		authUser.setUser(newUser);
+		setUser(newUser);
 	};
 
 	const clearUser = () => {
-		authUser.clearUser();
+		deleteUser();
 	};
 
 	return { user, updateUser, clearUser };

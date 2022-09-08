@@ -3,6 +3,7 @@ import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
 import { LocationKey } from '../../../types/forecastType';
+import { useForecastStore } from '../../../zustand/store';
 
 export const getLocationKey = async (geoString: string | undefined) => {
 	if (typeof geoString === 'undefined') {
@@ -20,12 +21,13 @@ export const getLocationKey = async (geoString: string | undefined) => {
 };
 
 export const useGetLocation = (geoString: string | undefined): LocationKey => {
+	const { cityKey } = useForecastStore();
 	const fallback = {};
 	const { data: LocationKey = fallback } = useQuery(
-		[queryKeys.forecast, queryKeys.locationKey],
+		[queryKeys.forecast, queryKeys.localLocationKey],
 		() => getLocationKey(geoString),
 		{
-			enabled: Boolean(geoString),
+			enabled: !!geoString && !cityKey,
 		}
 	);
 

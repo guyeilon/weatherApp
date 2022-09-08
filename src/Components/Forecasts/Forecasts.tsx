@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useGetPositionString } from './hooks/useGetPositionString';
 import NoLocation from '../NoLocation';
@@ -17,20 +17,32 @@ import { useGetLocation } from './hooks/useGetLocation';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useDailyForecast } from './hooks/useDailyForecast';
 import { useGetHourlyForecast } from './hooks/useHourlyForecast';
-import { MOBILE_WIDTH } from '../../constants/screensWidth';
+import { FRESH_TIME, MOBILE_WIDTH } from '../../constants';
+import { useForecast } from '../../zustand/hooks/useForecast';
+import { useDataFromStore } from './hooks/useFreshLocalStorageData';
 
 export interface ForecastProps {}
 
 const Forecast: React.FC<ForecastProps> = Props => {
 	const { error, geoString } = useGetPositionString();
+	const { cityKey, cityName } = useForecast();
+
+	const isNeedToFetch = useDataFromStore(FRESH_TIME);
+
 	const { localCityName, localCityKey } = useGetLocation(geoString);
 	const { width: screenWidth } = useWindowSize();
 
-	const { isSuccess: isDailySuccess, fiveDaysData, updatedAt } = useDailyForecast(localCityKey, localCityName);
-	const { isSuccess: isHourlySuccess, hourlyData } = useGetHourlyForecast(localCityKey, localCityName);
+	const {
+		isSuccess: isDailySuccess,
+		fiveDaysData,
+		updatedAt,
+	} = useDailyForecast(cityKey ? cityKey : localCityKey, cityName ? cityName : localCityName);
+	const { isSuccess: isHourlySuccess, hourlyData } = useGetHourlyForecast(
+		cityKey ? cityKey : localCityKey,
+		cityName ? cityName : localCityName
+	);
 
 	let content;
-	// should get props with city key and name if not show local forecast
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
@@ -40,7 +52,11 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	if (isDailySuccess && isHourlySuccess) {
 		content = (
 			<div>
-				<DailyForecast data={fiveDaysData} cityName={localCityName} updatedAt={updatedAt} />
+				<DailyForecast
+					data={fiveDaysData}
+					cityName={cityName ? cityName : localCityName}
+					updatedAt={updatedAt}
+				/>
 				<WeeklyForecast data={fiveDaysData} />
 				{screenWidth <= MOBILE_WIDTH && (
 					<Styled.btnWrapper>

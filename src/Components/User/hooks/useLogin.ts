@@ -2,9 +2,9 @@ import { UseMutateFunction, useMutation } from '@tanstack/react-query';
 import axios, { AxiosResponse } from 'axios';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { serverApi } from '../../../api/userApi';
-import { Credentials, IUser, UserServerResponse } from '../../../types/user';
+import { Credentials, IUser, UserServerResponse } from '../../../types/userTypes';
 import { fireToast } from '../../App/hooks/useToast';
-import { useUser } from './useUser';
+import { useUserStore } from '../../../zustand/store';
 
 type LocationProps = {
 	state: {
@@ -27,8 +27,7 @@ const authServerCall = async (urlEndpoint: string, email: string, password: stri
 		});
 		if (data && 'access_token' in data) {
 			const accessToken = data.access_token;
-			const refreshToken = data.refresh_token;
-			const user = { ...data.user, accessToken: accessToken, refreshToken: refreshToken };
+			const user = { ...data.user, accessToken: accessToken };
 
 			return user;
 		}
@@ -62,7 +61,7 @@ interface UseLogin {
 }
 
 export const useLogin = (): UseLogin => {
-	const { clearUser, updateUser } = useUser();
+	const { setUser, clearUser } = useUserStore();
 	const navigate = useNavigate();
 
 	const location = useLocation() as unknown as LocationProps;
@@ -75,9 +74,9 @@ export const useLogin = (): UseLogin => {
 
 		{
 			onSuccess: response => {
-				const title = `Logged in as  ${response?.first_name}`;
+				const title = `${response?.first_name}, welcome!`;
 				fireToast({ title, status: 'success' });
-				updateUser(response);
+				setUser(response);
 				navigate(from, { replace: true });
 			},
 		}

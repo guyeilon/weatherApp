@@ -1,10 +1,11 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } from './types';
+import { City, CityNameHighlighterProps, SearchCityPopOverProps, SearchCityProps } from './types';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
 import { Bars } from 'react-loader-spinner';
 import { SvgCity } from '../../assets/Svg.styles';
 import { useAutocompleteResult } from './hooks/useAutocompleteResult';
+import { useForecastStore } from '../../zustand/store';
 
 const SearchCity: React.FC<SearchCityProps> = () => {
 	const [search, setSearch] = useState('');
@@ -15,7 +16,6 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 	};
 
 	const { citiesData, isLoading } = useAutocompleteResult(search);
-	// console.log('data,', citiesData);
 
 	return (
 		<>
@@ -28,7 +28,7 @@ const SearchCity: React.FC<SearchCityProps> = () => {
 			<SearchCityPopOver
 				isLoading={isLoading}
 				data={!!search ? citiesData : []}
-				show={!!search || isFocused}
+				show={!!search && isFocused}
 				isFocused={isFocused}
 				searchValue={search}
 				setSearch={setSearch}
@@ -48,6 +48,7 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 	setSearch,
 }) => {
 	const [isExpanded, setIsExpanded] = useState(false);
+	const { setCityKey, setCityName } = useForecastStore();
 
 	const closeModal = () => {
 		setIsExpanded(false);
@@ -55,17 +56,26 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 	};
 
 	useEffect(() => {
+		// console.log('isFocused', isFocused);
+		// console.log('isExpanded', isExpanded);
+		// console.log('show', show);
 		if (!isExpanded) {
 			show && setIsExpanded(true);
 		} else {
-			!show && closeModal();
+			// !show && closeModal();
 		}
 	}, [show, isFocused]);
 	// console.log('searchModalOpen?', isExpanded);
 	// console.log('show', show);
 	// console.log('isLoading', isLoading);
-	// console.log('isFocused', isFocused);
 	// console.log('searchValue', searchValue);
+
+	const handleClick = (city: City) => {
+		setCityKey(city.cityKey);
+		setCityName(city.cityName);
+
+		closeModal();
+	};
 
 	return (
 		<>
@@ -106,7 +116,7 @@ const SearchCityPopOver: React.FC<SearchCityPopOverProps> = ({
 						<Styled.ContentWrapper>
 							<Styled.ScrollWrapper>
 								{data.map(city => (
-									<Styled.CityWrapper key={city.cityKey}>
+									<Styled.CityWrapper key={city.cityKey} onClick={() => handleClick(city)}>
 										<CityNameHighlighter searchValue={searchValue} cityName={city.cityName} />
 										<Styled.CountryName>{city.countryName}</Styled.CountryName>
 									</Styled.CityWrapper>

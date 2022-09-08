@@ -4,10 +4,10 @@ import * as Styled from './styles';
 import { convertToC, getDay } from '../../../utils';
 import { Flex } from '../../../design/helper.styles';
 import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../hooks/usePreference';
+import { usePreference } from '../../../zustand/hooks/usePreference';
 
 const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
-	const { preference, isFahrenheit } = usePreference();
+	const { isFahrenheit } = usePreference();
 
 	const toggleTemperature = (temp: number) => {
 		return isFahrenheit ? temp : convertToC(temp);

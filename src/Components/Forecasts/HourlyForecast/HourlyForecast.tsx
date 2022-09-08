@@ -7,10 +7,10 @@ import { SvgArrowLeft, SvgArrowRight } from '../../../assets/Svg.styles';
 import Button from '../../../Common/Button';
 import { motion } from 'framer-motion';
 import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../hooks/usePreference';
+import { usePreference } from '../../../zustand/hooks/usePreference';
 
 const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
-	const { preference, isFahrenheit } = usePreference();
+	const { isFahrenheit } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const carousel = useRef() as React.MutableRefObject<HTMLDivElement>;

@@ -26,7 +26,7 @@ export const useGetHourlyForecast = (key: number | undefined, cityName: string |
 		() => getHourlyForecast(key),
 		{
 			staleTime: Infinity,
-			enabled: Boolean(key),
+			enabled: !!key,
 			select: hourlyData => {
 				const hours = hourlyData.map((hour: GetHourlyForecast) => {
 					const icon = hour?.WeatherIcon;

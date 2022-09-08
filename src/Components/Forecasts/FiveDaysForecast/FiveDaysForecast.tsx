@@ -5,7 +5,7 @@ import { convertToC, getDay, getDayAndMonth } from '../../../utils';
 import Chart from 'react-apexcharts';
 import { motion } from 'framer-motion';
 import { useChartData } from './hooks/useChartData';
-import { usePreference } from '../../../hooks/usePreference';
+import { usePreference } from '../../../zustand/hooks/usePreference';
 
 const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ data, isExpanded }) => {
 	const { isDarkMode, isFahrenheit } = usePreference();

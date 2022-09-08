@@ -53,6 +53,12 @@ export type CityDataType = {
 	LocalizedName: string;
 };
 
+export type Favorite = {
+	key: number;
+	city: string;
+	country: string;
+};
+
 export interface ReturnDailyForecast {
 	updatedAt: number;
 	fiveDaysData: DailyData;

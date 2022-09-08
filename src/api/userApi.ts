@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import { IUser } from '../types/user';
+import { IUser } from '../types/userTypes';
 import { USER_URL } from './constants';
 
 export interface Credentials {
