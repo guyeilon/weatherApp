@@ -27,7 +27,7 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 			<Modal
 				padding='36px 30px'
 				width='100%'
-				height='80%'
+				height='90%'
 				position='bottom'
 				isModalOpen={isExpanded}
 				closeModal={() => setIsExpanded(false)}>
