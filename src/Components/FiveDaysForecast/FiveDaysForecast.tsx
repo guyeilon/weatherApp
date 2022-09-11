@@ -58,7 +58,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ cityData }) => {
 
 	return (
 		<>
-			{screenWidth <= MOBILE_WIDTH ? (
+			{isSuccess && screenWidth <= MOBILE_WIDTH ? (
 				<Styled.btnWrapper>
 					<Styled.forecastBtn
 						ghost
@@ -69,10 +69,14 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ cityData }) => {
 					</Styled.forecastBtn>
 				</Styled.btnWrapper>
 			) : (
-				<Styled.FiveDaysForecastWrapper>
-					<Styled.Header>5-days forecast</Styled.Header>
-					<Styled.ChartWrapper>{chartContent} </Styled.ChartWrapper>
-				</Styled.FiveDaysForecastWrapper>
+				<>
+					{isSuccess && (
+						<Styled.FiveDaysForecastWrapper>
+							<Styled.Header>5-days forecast</Styled.Header>
+							<Styled.ChartWrapper>{chartContent} </Styled.ChartWrapper>
+						</Styled.FiveDaysForecastWrapper>
+					)}
+				</>
 			)}
 			{isExpanded && (
 				<Modal
