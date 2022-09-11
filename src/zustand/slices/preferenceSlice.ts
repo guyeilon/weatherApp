@@ -52,7 +52,7 @@ export const preferenceSlice: StateCreator<
 		})
 	),
 	{
-		name: 'weatherAppPreference',
+		name: 'weatherApp_Preference',
 		getStorage: () => localStorage,
 	}
 );

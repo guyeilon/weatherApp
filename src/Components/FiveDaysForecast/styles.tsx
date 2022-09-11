@@ -1,8 +1,13 @@
 import styled from 'styled-components/macro';
-import { SvgMoonFlat, SvgSunFlat } from '../../../assets/Svg.styles';
+import { SvgMoonFlat, SvgSunFlat } from '../../assets/Svg.styles';
+import Button from '../../Common/Button';
 
 export const FiveDaysForecastWrapper = styled.div`
-	width: 100%;
+	order: 4;
+`;
+
+export const ChartWrapper = styled.div`
+	max-width: 100%;
 
 	margin-bottom: 100px;
 	/* height: 181px; */
@@ -84,21 +89,26 @@ export const NightChart = styled.div`
 `;
 
 export const MoonIcon = styled(SvgMoonFlat)`
-	grid-row-start: 4;
-	grid-row-end: 5;
 	width: 35px;
 	height: 35px;
+	margin-top: 8px;
 
-	align-self: start;
-	justify-self: center;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		width: 16px;
 		height: 16px;
 	}
 `;
+
+export const MoonWrapper = styled.div`
+	grid-row-start: 4;
+	grid-row-end: 5;
+	align-self: start;
+	justify-self: center;
+`;
 export const SunIcon = styled(SvgSunFlat)`
 	width: 35px;
 	height: 35px;
+	margin-bottom: 8px;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		width: 16px;
@@ -197,4 +207,22 @@ export const Header = styled.h2`
 		margin-top: 0;
 		margin-bottom: 0;
 	}
+`;
+
+export const btnWrapper = styled.div`
+	order: 4;
+	max-width: 264px;
+
+	display: flex;
+
+	justify-content: center;
+	align-items: center;
+	margin: 0 auto;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		order: 3;
+	}
+`;
+export const forecastBtn = styled(Button)`
+	padding: 16px 8px;
 `;

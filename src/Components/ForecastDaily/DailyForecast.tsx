@@ -1,17 +1,24 @@
 import React from 'react';
-import { convertToC, getTime } from '../../../utils';
+import { convertToC, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
-import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../zustand/hooks/usePreference';
+import { getForecastIcon } from '../Forecasts/hooks/getForecastIcon';
+import { usePreference } from '../../zustand/hooks/usePreference';
+import { useFavorites } from '../Favorites/hooks/useFavorites';
+import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 
-const DailyForecast: React.FC<DailyForecastProps> = ({ data, updatedAt, cityName }) => {
+const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
+	const key = cityData?.key;
+	const cityName = cityData?.cityName;
 	const { isFahrenheit } = usePreference();
+	const { mutate: addToFav } = useFavorites();
 
-	const icon = data[0]?.icon;
-	const dayTemp = data[0]?.dayTemp;
-	const nightTemp = data[0]?.nightTemp;
-	const dayPhrase = data[0]?.dayPhrase;
+	const { isSuccess, fiveDaysData, updatedAt } = useDailyForecast(key, cityName);
+
+	const icon = fiveDaysData[0]?.icon;
+	const dayTemp = fiveDaysData[0]?.dayTemp;
+	const nightTemp = fiveDaysData[0]?.nightTemp;
+	const dayPhrase = fiveDaysData[0]?.dayPhrase;
 	const timestamp = updatedAt;
 
 	const toggleTemperature = (temp: number) => {

@@ -2,40 +2,48 @@ import { useQuery } from '@tanstack/react-query';
 import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
-import { LocationKey } from '../../../types/forecastType';
+import { CityData, CityDataApi } from '../../../types/forecastType';
+
 import { useForecastStore } from '../../../zustand/store';
 
-export const getLocationKey = async (geoString: string | undefined) => {
+export const getLocationKey = async (geoString: string | undefined): Promise<CityDataApi> => {
 	if (typeof geoString === 'undefined') {
-		console.log('Invalid geolocation position');
-		return;
+		return Promise.reject(new Error('Invalid string'));
+	} else {
+		const res = await weatherApi.get('/locations/v1/cities/geoposition/search', {
+			params: {
+				apikey: API_KEY,
+				q: geoString,
+			},
+		});
+		const data = await res.data;
+		return data;
 	}
-	const res = await weatherApi.get('/locations/v1/cities/geoposition/search', {
-		params: {
-			apikey: API_KEY,
-			q: geoString,
-		},
-	});
-	const data = await res.data;
-	return data;
 };
 
-export const useGetLocation = (geoString: string | undefined): LocationKey => {
-	const { cityKey } = useForecastStore();
-	const fallback = {};
-	const { data: LocationKey = fallback } = useQuery(
+export const useGetLocation = (geoString: string | undefined): CityData => {
+	const {} = useForecastStore();
+	const fallback: CityData = {
+		key: 0,
+		cityName: '',
+		countryName: '',
+	};
+	const { data: cityData = fallback } = useQuery(
 		[queryKeys.forecast, queryKeys.localLocationKey],
 		() => getLocationKey(geoString),
 		{
-			enabled: !!geoString && !cityKey,
+			enabled: !!geoString,
+			select: data => {
+				{
+					const key = data?.Key;
+					const cityName = data?.LocalizedName;
+					const countryName = data?.Country?.EnglishName;
+
+					return { key, cityName, countryName };
+				}
+			},
 		}
 	);
 
-	const localCityName = LocationKey?.LocalizedName;
-	const localCityKey = LocationKey?.Key;
-
-	return {
-		localCityName,
-		localCityKey,
-	};
+	return cityData;
 };

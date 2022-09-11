@@ -45,6 +45,10 @@ const Modal: React.FC<ModalProps> = ({
 
 	const modalRoot = document.getElementById('modal') as HTMLElement;
 
+	useEffect(() => {
+		modalRef.current?.focus();
+	}, [isModalOpen]);
+
 	return ReactDOM.createPortal(
 		<AnimatePresence>
 			<Styled.Container

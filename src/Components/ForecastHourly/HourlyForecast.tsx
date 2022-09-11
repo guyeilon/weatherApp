@@ -1,15 +1,19 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { hourlyForecastProps } from './types';
 import * as Styled from './styles';
-import { convertMtoK, convertToC, getHour } from '../../../utils';
-import { Flex } from '../../../design/helper.styles';
-import { SvgArrowLeft, SvgArrowRight } from '../../../assets/Svg.styles';
-import Button from '../../../Common/Button';
+import { convertMtoK, convertToC, getHour } from '../../utils';
+import { Flex } from '../../design/helper.styles';
+import { SvgArrowLeft, SvgArrowRight } from '../../assets/Svg.styles';
+import Button from '../../Common/Button';
 import { motion } from 'framer-motion';
-import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../zustand/hooks/usePreference';
+import { getForecastIcon } from '../Forecasts/hooks/getForecastIcon';
+import { usePreference } from '../../zustand/hooks/usePreference';
+import { useGetHourlyForecast } from '../Forecasts/hooks/useHourlyForecast';
 
-const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
+const HourlyForecast: React.FC<hourlyForecastProps> = ({ cityData }) => {
+	const key = cityData?.key;
+	const cityName = cityData?.cityName;
+	const { hourlyData } = useGetHourlyForecast(key, cityName);
 	const { isFahrenheit } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -50,7 +54,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
 
 	content = (
 		<Styled.InnerCarousel ref={carousel} as={motion.div} drag='x' dragConstraints={{ right: 0, left: -width }}>
-			{data.map((hour, idx) => {
+			{hourlyData.map((hour, idx) => {
 				const icon = hour.icon;
 				const temp = hour.temp;
 				const wind = hour.wind;
@@ -82,7 +86,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
 	);
 
 	return (
-		<>
+		<Styled.HourlyWrapper>
 			<Styled.hourlyForecastCarousel ref={ref} as={motion.div}>
 				{content}
 			</Styled.hourlyForecastCarousel>
@@ -94,7 +98,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ data }) => {
 					<SvgArrowRight width='40' height='40' />
 				</Button>
 			</Styled.BtnWrapper>
-		</>
+		</Styled.HourlyWrapper>
 	);
 };
 

@@ -48,4 +48,5 @@ export const useFavorites = () => {
 			},
 		}
 	);
+	return { mutate };
 };

@@ -1,12 +1,17 @@
 import React from 'react';
 import { WeeklyForecastProps } from './types';
 import * as Styled from './styles';
-import { convertToC, getDay } from '../../../utils';
-import { Flex } from '../../../design/helper.styles';
-import { getForecastIcon } from '../hooks/getForecastIcon';
-import { usePreference } from '../../../zustand/hooks/usePreference';
+import { convertToC, getDay } from '../../utils';
+import { Flex } from '../../design/helper.styles';
+import { getForecastIcon } from '../Forecasts/hooks/getForecastIcon';
+import { usePreference } from '../../zustand/hooks/usePreference';
+import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 
-const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
+const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ cityData }) => {
+	const key = cityData?.key;
+	const cityName = cityData?.cityName;
+
+	const { fiveDaysData } = useDailyForecast(key, cityName);
 	const { isFahrenheit } = usePreference();
 
 	const toggleTemperature = (temp: number) => {
@@ -15,7 +20,7 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ data }) => {
 
 	let content;
 
-	content = data.map((day, idx) => {
+	content = fiveDaysData.map((day, idx) => {
 		if (idx == 4) return;
 		const icon = day.icon;
 		const dayTemp = day.dayTemp;

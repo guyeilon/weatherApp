@@ -3,12 +3,11 @@ import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import useDebounce from '../../../hooks/useDebounce';
 import { queryKeys } from '../../../react-query/constants';
-import { CityDataType } from '../../../types/forecastType';
+import { SearchCityApi, CityData, SearchQuery } from '../../../types/forecastType';
 
-const getAutocompleteCityName = async (q: string | undefined) => {
+const getAutocompleteCityName = async (q: string | undefined): Promise<SearchCityApi[]> => {
 	if (typeof q === 'undefined') {
-		console.log('can not get search term...');
-		return;
+		return Promise.reject(new Error('Invalid search'));
 	}
 	const res = await weatherApi.get(`/locations/v1/cities/autocomplete`, {
 		params: {
@@ -20,12 +19,16 @@ const getAutocompleteCityName = async (q: string | undefined) => {
 	return data;
 };
 
-export const useAutocompleteResult = (search: string | undefined) => {
+export const useAutocompleteResult = (search: string | undefined): SearchQuery => {
 	const client = useQueryClient();
 	const debouncedSearch = useDebounce(search, 0);
 	// const prevSearchedData = client.getQueryData(['Autocomplete', search], { exact: true });
-
-	const { data: citiesData, isLoading } = useQuery(
+	const fallback: CityData[] = [];
+	const {
+		data: citiesData = fallback,
+		isLoading,
+		isFetched,
+	} = useQuery(
 		// ['Autocomplete', prevSearchedData ? search : debouncedSearch],
 		// ['Autocomplete' debouncedSearch],
 		[queryKeys.Autocomplete, debouncedSearch],
@@ -36,12 +39,12 @@ export const useAutocompleteResult = (search: string | undefined) => {
 			cacheTime: Infinity,
 			staleTime: Infinity,
 			select: citiesData => {
-				const cities = citiesData.map((city: CityDataType) => {
-					const cityKey = city?.Key;
+				const cities = citiesData.map(city => {
+					const key = city?.Key;
 					const countryName = city?.Country?.LocalizedName;
 					const cityName = city?.LocalizedName;
 
-					return { cityKey, countryName, cityName };
+					return { key, countryName, cityName };
 				});
 
 				return cities;
@@ -52,6 +55,7 @@ export const useAutocompleteResult = (search: string | undefined) => {
 	return {
 		citiesData,
 		isLoading,
+		isFetched,
 		// prevSearchedData,
 	};
 };

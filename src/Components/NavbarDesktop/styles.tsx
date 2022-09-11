@@ -1,10 +1,10 @@
 import { NavLink } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { SvgNavbarLogo } from '../../../assets/Svg.styles';
-import Button from '../../../Common/Button';
-import { IconWrapper } from '../../../Common/Button/styles';
-import SearchInput from '../../../Common/SearchInput';
-import Switcher from '../../../Common/Switcher';
+import { SvgNavbarLogo } from '../../assets/Svg.styles';
+import Button from '../../Common/Button';
+import { IconWrapper } from '../../Common/Button/styles';
+import SearchInput from '../../Common/SearchInput';
+import Switcher from '../../Common/Switcher';
 
 export const DesktopContentWrapper = styled.div`
 	background: ${({ theme }) => theme.colors.primary.background};
@@ -153,7 +153,6 @@ export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
 	justify-self: end;
 `;
 
-export const Input = styled(SearchInput)``;
 export const InputWrapper = styled.div`
 	max-width: 372px;
 	justify-self: center;

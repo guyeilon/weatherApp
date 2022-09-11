@@ -3,7 +3,6 @@ import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
 	position: relative;
-
 	display: grid;
 	height: calc(100vh + 90px);
 
@@ -32,4 +31,9 @@ export const btnWrapper = styled.div`
 `;
 export const forecastBtn = styled(Button)`
 	padding: 16px 0px;
+`;
+
+export const ComponentsOrder = styled.div`
+	display: flex;
+	flex-direction: column;
 `;

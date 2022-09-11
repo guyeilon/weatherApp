@@ -1,7 +1,8 @@
 import styled from 'styled-components/macro';
-import Button from '../../../Common/Button';
+import Button from '../../Common/Button';
 
 export const DailyForecastContainer = styled.div`
+	order: 1;
 	display: flex;
 	flex-direction: row;
 	@media only screen and (${({ theme }) => theme.media.phone}) {

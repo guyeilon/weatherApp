@@ -14,13 +14,16 @@ type position =
 	| {};
 export const useGetPositionString = () => {
 	const [position, setPosition] = useState<position>({});
-	const [error, setError] = useState<string | null>(null);
+	const [error, setError] = useState<string>();
+	const [geoString, setGeoString] = useState<string>();
 
-	const onChange = ({ coords }: GeolocationPosition) => {
+	const onSuccess = ({ coords }: GeolocationPosition) => {
 		setPosition({
 			latitude: coords.latitude,
 			longitude: coords.longitude,
 		});
+		const string = `${coords.latitude},${coords.longitude}`;
+		setGeoString(string);
 	};
 	const onError = (error: { message: string }) => {
 		setError(error.message);
@@ -38,12 +41,10 @@ export const useGetPositionString = () => {
 
 			return;
 		}
-		const watcher = geo.getCurrentPosition(onChange, onError, settings);
+		geo.getCurrentPosition(onSuccess, onError, settings);
 
 		// return () => geo.clearWatch(watcher);
 	}, []);
-
-	const geoString = 'latitude' in position ? `${position.latitude},${position.longitude}` : undefined;
 
 	return { geoString, error };
 };

@@ -1,20 +1,95 @@
 import { useEffect, useState } from 'react';
-import { DailyData } from '../../../../types/forecastType';
-import { convertToC } from '../../../../utils';
+import { DailyData } from '../../../types/forecastType';
+import { convertToC } from '../../../utils';
+import { usePreference } from '../../../zustand/hooks/usePreference';
 
-export const useChartData = (
-	data: DailyData,
-	isExpanded: boolean | undefined,
-	isDarkMode: boolean,
-	isFahrenheit: boolean
-) => {
-	const fahrenheitDay = data?.map(day => day.dayTemp);
-	const celsiusDay = data?.map(day => convertToC(day.dayTemp));
-	const fahrenheitNight = data?.map(day => day.nightTemp);
-	const celsiusNight = data?.map(day => convertToC(day.nightTemp));
+export const useChartData = (fiveDaysData: DailyData[], isExpanded: boolean | undefined, isSuccess: boolean) => {
+	const { isDarkMode, isFahrenheit } = usePreference();
+	const dayTemps = isFahrenheit
+		? fiveDaysData.map(day => day.dayTemp)
+		: fiveDaysData.map(day => convertToC(day.dayTemp));
+	const nightTemps = isFahrenheit
+		? fiveDaysData.map(day => day.nightTemp)
+		: fiveDaysData.map(day => convertToC(day.nightTemp));
 
 	const [options, setOptions] = useState({
 		colors: isExpanded ? ['#bebebe'] : ['#fff'],
+
+		responsive: [
+			{
+				breakpoint: 414,
+				options: {
+					chart: {
+						width: 300,
+						height: 100,
+					},
+				},
+			},
+			{
+				breakpoint: 650,
+				options: {
+					chart: {
+						width: 350,
+						height: 100,
+					},
+				},
+			},
+			{
+				breakpoint: 750,
+				options: {
+					chart: {
+						width: 450,
+						height: 100,
+					},
+				},
+			},
+			{
+				breakpoint: 980,
+				options: {
+					chart: {
+						width: 580,
+						height: 100,
+					},
+				},
+			},
+
+			{
+				breakpoint: 1180,
+				options: {
+					chart: {
+						width: 780,
+						height: 100,
+					},
+				},
+			},
+			{
+				breakpoint: 1280,
+				options: {
+					chart: {
+						width: 880,
+						height: 300,
+					},
+				},
+			},
+			{
+				breakpoint: 1080,
+				options: {
+					chart: {
+						width: 680,
+						height: 300,
+					},
+				},
+			},
+			{
+				breakpoint: 5000,
+				options: {
+					chart: {
+						width: 880,
+						height: 300,
+					},
+				},
+			},
+		],
 
 		xaxis: {
 			categories: [1, 2, 3, 4, 5],
@@ -103,40 +178,27 @@ export const useChartData = (
 	});
 	const [seriesDay, setSeriesDay] = useState([
 		{
-			data: fahrenheitDay,
+			data: dayTemps,
 		},
 	]);
 	const [seriesNight, setSeriesNight] = useState([
 		{
-			data: fahrenheitNight,
+			data: nightTemps,
 		},
 	]);
 
 	useEffect(() => {
-		if (isFahrenheit) {
-			setSeriesDay([
-				{
-					data: fahrenheitDay,
-				},
-			]);
-			setSeriesNight([
-				{
-					data: fahrenheitNight,
-				},
-			]);
-		} else {
-			setSeriesDay([
-				{
-					data: celsiusDay,
-				},
-			]);
-			setSeriesNight([
-				{
-					data: celsiusNight,
-				},
-			]);
-		}
-	}, [isFahrenheit]);
+		setSeriesDay([
+			{
+				data: dayTemps,
+			},
+		]);
+		setSeriesNight([
+			{
+				data: nightTemps,
+			},
+		]);
+	}, [isFahrenheit, isSuccess]);
 
 	return { options, seriesDay, seriesNight };
 };

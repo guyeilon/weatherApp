@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
-import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../../assets/Svg.styles';
+import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../assets/Svg.styles';
 import * as Styled from './styles';
-import Modal from '../../../Common/Modal';
+import Modal from '../../Common/Modal';
 import { AnimatePresence } from 'framer-motion';
-import { useLogin } from '../../User/hooks/useLogin';
-import { usePreferenceStore } from '../../../zustand/store';
+import { useLogin } from '../User/hooks/useLogin';
+import { usePreferenceStore } from '../../zustand/store';
 
 interface MobileNavbarProps {}
 

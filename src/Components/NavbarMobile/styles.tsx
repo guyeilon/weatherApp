@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/macro';
-import Button from '../../../Common/Button';
-import Switcher from '../../../Common/Switcher';
+import Button from '../../Common/Button';
+import Switcher from '../../Common/Switcher';
 
 export const MobileNavbar = styled.div`
 	display: inline-flex;
