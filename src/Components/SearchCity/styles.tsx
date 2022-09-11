@@ -63,10 +63,11 @@ export const ContentWrapper = styled.div`
 export const ScrollWrapper = styled.div`
 	overflow-y: scroll;
 	overflow-x: hidden;
-	max-height: 345px;
+	height: 345px;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		max-height: 100%;
+		height: 100%;
+		/* overflow-y: hidden; */
 	}
 `;
 

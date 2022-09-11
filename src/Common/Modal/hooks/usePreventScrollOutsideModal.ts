@@ -1,9 +1,12 @@
 import { useEffect } from 'react';
 
-export const UsePreventScrollOutsideModal = (isModalOpen: boolean) => {
+export const UsePreventScrollOutsideModal = (
+	isModalOpen: boolean,
+	modalRef: React.RefObject<HTMLDivElement | HTMLUListElement>
+) => {
 	useEffect(() => {
 		const preventTouche = (e: TouchEvent) => {
-			if (isModalOpen) {
+			if (isModalOpen && modalRef.current && !modalRef.current.contains(e.target as Node)) {
 				e.preventDefault();
 			}
 		};

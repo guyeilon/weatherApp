@@ -41,7 +41,7 @@ const Modal: React.FC<ModalProps> = ({
 		useCloseModal: useCloseModal,
 	});
 
-	UsePreventScrollOutsideModal(isModalOpen);
+	UsePreventScrollOutsideModal(isModalOpen, modalRef);
 
 	const modalRoot = document.getElementById('modal') as HTMLElement;
 

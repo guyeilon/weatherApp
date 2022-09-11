@@ -13,7 +13,7 @@ import { useGetHourlyForecast } from '../Forecasts/hooks/useHourlyForecast';
 const HourlyForecast: React.FC<hourlyForecastProps> = ({ cityData }) => {
 	const key = cityData?.key;
 	const cityName = cityData?.cityName;
-	const { hourlyData } = useGetHourlyForecast(key, cityName);
+	const { hourlyData, isSuccess } = useGetHourlyForecast(key, cityName);
 	const { isFahrenheit } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;
@@ -45,7 +45,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ cityData }) => {
 	};
 
 	useEffect(() => {
-		setWidth(carousel.current.scrollWidth - carousel.current.offsetWidth);
+		setWidth(carousel.current?.scrollWidth - carousel.current?.offsetWidth);
 	}, []);
 
 	const handleTouch = (idx: number) => {
@@ -86,19 +86,23 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ cityData }) => {
 	);
 
 	return (
-		<Styled.HourlyWrapper>
-			<Styled.hourlyForecastCarousel ref={ref} as={motion.div}>
-				{content}
-			</Styled.hourlyForecastCarousel>
-			<Styled.BtnWrapper>
-				<Button style={{ width: '40px' }} noHover onClick={clickBackwards}>
-					<SvgArrowLeft width='40' height='40' />
-				</Button>
-				<Button style={{ width: '40px' }} noHover onClick={clickForward}>
-					<SvgArrowRight width='40' height='40' />
-				</Button>
-			</Styled.BtnWrapper>
-		</Styled.HourlyWrapper>
+		<>
+			{isSuccess && (
+				<Styled.HourlyWrapper>
+					<Styled.hourlyForecastCarousel ref={ref} as={motion.div}>
+						{content}
+					</Styled.hourlyForecastCarousel>
+					<Styled.BtnWrapper>
+						<Button style={{ width: '40px' }} noHover onClick={clickBackwards}>
+							<SvgArrowLeft width='40' height='40' />
+						</Button>
+						<Button style={{ width: '40px' }} noHover onClick={clickForward}>
+							<SvgArrowRight width='40' height='40' />
+						</Button>
+					</Styled.BtnWrapper>
+				</Styled.HourlyWrapper>
+			)}
+		</>
 	);
 };
 

@@ -11,7 +11,7 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ cityData }) => {
 	const key = cityData?.key;
 	const cityName = cityData?.cityName;
 
-	const { fiveDaysData } = useDailyForecast(key, cityName);
+	const { fiveDaysData, isSuccess } = useDailyForecast(key, cityName);
 	const { isFahrenheit } = usePreference();
 
 	const toggleTemperature = (temp: number) => {
@@ -47,7 +47,7 @@ const WeeklyForecast: React.FC<WeeklyForecastProps> = ({ cityData }) => {
 		);
 	});
 
-	return <Styled.WeeklyForecastWrapper>{content}</Styled.WeeklyForecastWrapper>;
+	return <>{isSuccess && <Styled.WeeklyForecastWrapper>{content}</Styled.WeeklyForecastWrapper>}</>;
 };
 
 export default WeeklyForecast;
