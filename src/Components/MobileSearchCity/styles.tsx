@@ -21,7 +21,7 @@ export const SearchModal = styled.div`
 	bottom: 0;
 	z-index: 5;
 
-	user-select: none;
+	/* user-select: none; */
 
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
 	border-top-right-radius: ${({ theme }) => theme.border.modal};
