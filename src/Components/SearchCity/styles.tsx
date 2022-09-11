@@ -66,8 +66,7 @@ export const ScrollWrapper = styled.div`
 	height: 345px;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		height: 100%;
-		/* overflow-y: hidden; */
+		height: 100vh;
 	}
 `;
 
@@ -84,6 +83,9 @@ export const CityWrapper = styled.button`
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		padding: 12px 0px;
 		overflow-y: auto;
+		&:hover {
+			background-color: transparent;
+		}
 	}
 `;
 export const CityName = styled.div`
