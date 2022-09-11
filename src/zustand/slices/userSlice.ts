@@ -15,7 +15,7 @@ export const userSlice: StateCreator<userSlice, [], [['zustand/persist', userSli
 		clearUser: () => set(state => ({ ...state, user: null })),
 	}),
 	{
-		name: 'weatherAppUser',
+		name: 'weatherApp_User',
 		getStorage: () => localStorage,
 	}
 );

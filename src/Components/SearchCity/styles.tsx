@@ -64,6 +64,10 @@ export const ScrollWrapper = styled.div`
 	overflow-y: scroll;
 	overflow-x: hidden;
 	max-height: 345px;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		max-height: 100%;
+	}
 `;
 
 export const CityWrapper = styled.button`
@@ -74,6 +78,11 @@ export const CityWrapper = styled.button`
 
 	&:hover {
 		background-color: ${({ theme }) => theme.colors.modals.hover};
+	}
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		padding: 12px 0px;
+		overflow-y: auto;
 	}
 `;
 export const CityName = styled.div`
@@ -88,4 +97,18 @@ export const CountryName = styled.div`
 	color: ${({ theme }) => theme.colors.primary.secondaryModalText};
 
 	font-size: ${({ theme }) => theme.textFontSize.lg};
+`;
+
+export const SearchScreen = styled.div`
+	display: grid;
+	justify-items: center;
+	align-items: center;
+	height: 100%;
+	width: 100%;
+	gap: 40px;
+	margin-top: 100px;
+`;
+export const SearchScreenTxt = styled.div`
+	color: ${({ theme }) => theme.colors.primary.modalText};
+	font-size: ${({ theme }) => theme.textFontSize.xs}; ;
 `;

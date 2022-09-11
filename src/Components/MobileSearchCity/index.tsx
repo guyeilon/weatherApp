@@ -6,6 +6,9 @@ import { ResultsProps } from './types';
 import { SvgCity } from '../../assets/Svg.styles';
 import { useAutocompleteResult } from '../SearchCity/hooks/useAutocompleteResult';
 import { usePreference } from '../../zustand/hooks/usePreference';
+import SearchInput from '../../Common/SearchInput';
+import useInput from '../../Common/SearchInput/hooks/useInput';
+import SearchCity from '../SearchCity';
 
 interface MobileSearchCityProps {
 	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
@@ -15,13 +18,9 @@ interface MobileSearchCityProps {
 const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isExpanded }) => {
 	const { isDarkMode } = usePreference();
 
-	const [search, setSearch] = useState('');
-	const { citiesData, isLoading } = useAutocompleteResult(search);
-	const handleChange = (e: any) => {
-		setSearch(e.target.value);
-	};
+	const [search, resetSearch, searchAttribute] = useInput('wetherApp_CitySearch', '');
 
-	console.log('is Loading from mobile....', isLoading);
+	const [isFocused, setIsFocused] = useState(false);
 
 	return (
 		<AnimatePresence>
@@ -34,24 +33,29 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 				closeModal={() => setIsExpanded(false)}>
 				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} svg={isDarkMode ? 'whiteArrow' : 'arrow'} />
 				<Styled.InputWrapper>
-					<Styled.Input onChange={handleChange} />
+					<SearchInput
+						placeHolder='Try "Tel Aviv - Jaffa"...'
+						onFocus={() => setIsFocused(true)}
+						// onBlur={() => setIsFocused(false)}
+						{...searchAttribute}
+					/>
 				</Styled.InputWrapper>
-				<Results isLoading={isLoading} data={citiesData} searchValue={search}></Results>
+				<Results search={search} resetSearch={resetSearch} setIsExpanded={setIsExpanded} />
 			</Modal>
 		</AnimatePresence>
 	);
 };
 export default MobileSearchCity;
 
-const Results: React.FC<ResultsProps> = ({ isLoading, data, searchValue }) => {
+const Results: React.FC<ResultsProps> = ({ search, resetSearch, setIsExpanded }) => {
+	const closeModal = () => {
+		setIsExpanded(false);
+		resetSearch();
+	};
+
 	return (
 		<Styled.ResultContentWrapper>
-			{
-				<Styled.SearchScreen>
-					<SvgCity width='120' height='120' />
-					<Styled.SearchScreenTxt>Please search any city in the search button.</Styled.SearchScreenTxt>
-				</Styled.SearchScreen>
-			}
+			<SearchCity search={search} closeModal={closeModal} />
 		</Styled.ResultContentWrapper>
 	);
 };

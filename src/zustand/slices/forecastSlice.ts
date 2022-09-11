@@ -1,21 +1,19 @@
 import { StateCreator } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { DailyData, HourlyData } from '../../types/forecastType';
+import { CityData, DailyData, HourlyData } from '../../types/forecastType';
 
 export type forecastSlice = {
 	fiveDaysData: DailyData | undefined;
 	hourlyData: HourlyData | undefined;
+	cityData: CityData | undefined;
 	updatedAt: number | undefined;
-	cityName: string | undefined;
-	cityKey: number | undefined;
 	isHydrated: boolean;
-	setFiveDaysData: (fiveDaysData: DailyData) => void;
-	setHourlyData: (hourlyData: HourlyData) => void;
-	setUpdatedAt: (updatedAt: number) => void;
-	setCityKey: (cityKey: number | undefined) => void;
-	setCityName: (cityName: string | undefined) => void;
-	setIsHydrated: (isHydrated: boolean) => void;
+	setFiveDaysData: (data: DailyData | undefined) => void;
+	setHourlyData: (data: HourlyData | undefined) => void;
+	setCityData: (data: CityData | undefined) => void;
+	setUpdatedAt: (data: number) => void;
+	setIsHydrated: (data: boolean) => void;
 	reset: () => void;
 };
 
@@ -28,16 +26,15 @@ export const forecastSlice: StateCreator<
 	immer(
 		(set): forecastSlice => ({
 			updatedAt: undefined,
-			cityName: undefined,
+			cityData: undefined,
 			fiveDaysData: undefined,
 			hourlyData: undefined,
-			cityKey: undefined,
 			isHydrated: false,
-			setFiveDaysData: (fiveDaysData: DailyData) =>
+			setFiveDaysData: (fiveDaysData: DailyData | undefined) =>
 				set(state => {
 					state.fiveDaysData = fiveDaysData;
 				}),
-			setHourlyData: (hourlyData: HourlyData) =>
+			setHourlyData: (hourlyData: HourlyData | undefined) =>
 				set(state => {
 					state.hourlyData = hourlyData;
 				}),
@@ -45,13 +42,9 @@ export const forecastSlice: StateCreator<
 				set(state => {
 					state.updatedAt = updatedAt;
 				}),
-			setCityKey: (cityKey: number | undefined) =>
+			setCityData: (cityData: CityData | undefined) =>
 				set(state => {
-					state.cityKey = cityKey;
-				}),
-			setCityName: (cityName: string | undefined) =>
-				set(state => {
-					state.cityName = cityName;
+					state.cityData = cityData;
 				}),
 			setIsHydrated: (isHydrated: boolean) =>
 				set(state => {
@@ -69,7 +62,7 @@ export const forecastSlice: StateCreator<
 	),
 
 	{
-		name: 'weatherAppForecast',
+		name: 'weatherApp_Forecast',
 		getStorage: () => localStorage,
 		onRehydrateStorage: state => {
 			console.log('hydration starts');

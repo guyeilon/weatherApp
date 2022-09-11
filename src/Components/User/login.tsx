@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 import Button from '../../Common/Button';
-import Input from '../../Common/Input';
+import Input from '../../Common/FormInput';
 import { useFormik } from 'formik';
 import { FormSchema } from '../../schemas';
 import { useLogin } from './hooks/useLogin';

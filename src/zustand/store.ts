@@ -5,7 +5,7 @@ import { preferenceSlice } from './slices/preferenceSlice';
 import { forecastSlice } from './slices/forecastSlice';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
-import { DailyData, HourlyData } from '../types/forecastType';
+import { CityData, DailyData, HourlyData } from '../types/forecastType';
 
 export const usePreferenceStore = create<preferenceSlice>()((...args) => ({
 	...preferenceSlice(...args),
@@ -22,30 +22,25 @@ export const useForecastStore = create<forecastSlice>()(
 		immer(
 			(set): forecastSlice => ({
 				updatedAt: undefined,
-				cityName: undefined,
 				fiveDaysData: undefined,
 				hourlyData: undefined,
-				cityKey: undefined,
+				cityData: undefined,
 				isHydrated: false,
-				setFiveDaysData: (fiveDaysData: DailyData) =>
+				setFiveDaysData: (data: DailyData | undefined) =>
 					set(state => {
-						state.fiveDaysData = fiveDaysData;
+						state.fiveDaysData = data;
 					}),
-				setHourlyData: (hourlyData: HourlyData) =>
+				setHourlyData: (data: HourlyData | undefined) =>
 					set(state => {
-						state.hourlyData = hourlyData;
+						state.hourlyData = data;
 					}),
-				setUpdatedAt: (updatedAt: number) =>
+				setUpdatedAt: (data: number) =>
 					set(state => {
-						state.updatedAt = updatedAt;
+						state.updatedAt = data;
 					}),
-				setCityKey: (cityKey: number | undefined) =>
+				setCityData: (data: CityData | undefined) =>
 					set(state => {
-						state.cityKey = cityKey;
-					}),
-				setCityName: (cityName: string | undefined) =>
-					set(state => {
-						state.cityName = cityName;
+						state.cityData = data;
 					}),
 				setIsHydrated: (isHydrated: boolean) =>
 					set(state => {
@@ -62,7 +57,7 @@ export const useForecastStore = create<forecastSlice>()(
 			})
 		),
 		{
-			name: 'weatherAppForecast',
+			name: 'weatherApp_Forecast',
 			getStorage: () => localStorage,
 			// onRehydrateStorage: state => {
 			// 	console.log('hydration starts');

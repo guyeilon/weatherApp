@@ -63,16 +63,3 @@ export const ArrowBtn = styled(Btn).attrs(props => ({
 	margin-bottom: 16px;
 `;
 export const ResultContentWrapper = styled.div``;
-export const SearchScreen = styled.div`
-	display: grid;
-	justify-items: center;
-	align-items: center;
-	height: 100%;
-	width: 100%;
-	gap: 40px;
-	margin-top: 100px;
-`;
-export const SearchScreenTxt = styled.div`
-	color: ${({ theme }) => theme.colors.primary.modalText};
-	font-size: ${({ theme }) => theme.textFontSize.xs}; ;
-`;

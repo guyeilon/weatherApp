@@ -1,17 +1,11 @@
-export interface SearchCityProps {}
-
-export interface SearchCityPopOverProps {
-	isLoading: boolean;
-	isFocused: boolean;
-	setSearch: React.Dispatch<React.SetStateAction<string>>;
-	show: boolean;
-	searchValue: string;
-	data: [City] | [];
+export interface SearchCityProps {
+	search: string;
+	closeModal: () => void;
 }
 
 export interface CityNameHighlighterProps {
 	cityName: string;
-	searchValue: string;
+	search: string;
 }
 
 export interface City {

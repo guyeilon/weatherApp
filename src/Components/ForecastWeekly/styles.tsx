@@ -1,6 +1,7 @@
 import styled from 'styled-components/macro';
 
 export const WeeklyForecastWrapper = styled.div`
+	order: 2;
 	width: 100%;
 	margin-top: 88px;
 	margin-bottom: 140px;
@@ -47,7 +48,8 @@ export const DailyData = styled.div`
 export const DayAndPhrase = styled.div`
 	font-size: ${({ theme }) => theme.textFontSize.lg};
 	color: ${({ theme }) => theme.colors.primary.text};
-	white-space: nowrap;
+
+	text-align: center;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		font-size: ${({ theme }) => theme.textFontSize.base};
 		align-self: center;

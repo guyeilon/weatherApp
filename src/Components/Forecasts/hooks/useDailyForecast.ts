@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
-import { GetDailyForecast, ReturnDailyForecast } from '../../../types/forecastType';
+import { GetDailyForecast, DailyQuery, DailyData } from '../../../types/forecastType';
 
-export const getFiveDaysForecast = async (locationKey: number | undefined) => {
+export const getFiveDaysForecast = async (locationKey: number | undefined): Promise<GetDailyForecast[]> => {
 	if (typeof locationKey === 'undefined') {
-		console.log('Invalid city key');
-		return;
+		return Promise.reject(new Error('Invalid key'));
 	}
 	const res = await weatherApi.get(`forecasts/v1/daily/5day/${locationKey}`, {
 		params: {
@@ -16,11 +15,12 @@ export const getFiveDaysForecast = async (locationKey: number | undefined) => {
 		},
 	});
 	const data = await res.data;
-	return data;
+
+	return data.DailyForecasts;
 };
 
-export const useDailyForecast = (key: number | undefined, cityName: string | undefined): ReturnDailyForecast => {
-	const fallback = [{}];
+export const useDailyForecast = (key: number | undefined, cityName: string | undefined): DailyQuery => {
+	const fallback: DailyData[] = [];
 	const {
 		data: fiveDaysData = fallback,
 		dataUpdatedAt: updatedAt,
@@ -30,7 +30,7 @@ export const useDailyForecast = (key: number | undefined, cityName: string | und
 		cacheTime: Infinity,
 		enabled: !!key,
 		select: fiveDaysData => {
-			const days = fiveDaysData.DailyForecasts.map((day: GetDailyForecast) => {
+			const days = fiveDaysData.map(day => {
 				const icon = day?.Day?.Icon;
 				const dayTemp = day?.Temperature?.Maximum?.Value;
 				const nightTemp = day?.Temperature?.Minimum?.Value;

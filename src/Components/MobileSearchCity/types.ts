@@ -1,13 +1,7 @@
+import { CityData } from '../../types/forecastType';
+
 export interface ResultsProps {
-	isLoading: boolean;
-	searchValue: string;
-	data:
-		| [
-				{
-					cityKey: number;
-					countryName: string;
-					cityName: string;
-				}
-		  ]
-		| [];
+	search: string;
+	resetSearch: () => void;
+	setIsExpanded: React.Dispatch<React.SetStateAction<boolean>>;
 }

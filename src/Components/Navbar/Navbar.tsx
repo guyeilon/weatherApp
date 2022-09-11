@@ -1,5 +1,5 @@
-import DesktopNavbar from './DesktopNavbar';
-import MobileNavbar from './MobileNavbar';
+import DesktopNavbar from '../NavbarDesktop';
+import MobileNavbar from '../NavbarMobile';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { MOBILE_WIDTH } from '../../constants';
 

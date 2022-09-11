@@ -2,12 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
-import { GetHourlyForecast, ReturnHourlyForecast } from '../../../types/forecastType';
+import { GetHourlyForecast, HourlyData, HourlyQuery } from '../../../types/forecastType';
 
-export const getHourlyForecast = async (locationKey: number | undefined) => {
+export const getHourlyForecast = async (locationKey: number | undefined): Promise<GetHourlyForecast[]> => {
 	if (typeof locationKey === 'undefined') {
-		console.log('Invalid city key');
-		return;
+		return Promise.reject(new Error('Invalid key'));
 	}
 	const res = await weatherApi.get(`forecasts/v1/hourly/12hour/${locationKey}`, {
 		params: {
@@ -16,11 +15,12 @@ export const getHourlyForecast = async (locationKey: number | undefined) => {
 		},
 	});
 	const data = await res.data;
+
 	return data;
 };
 
-export const useGetHourlyForecast = (key: number | undefined, cityName: string | undefined): ReturnHourlyForecast => {
-	const fallback = [{}];
+export const useGetHourlyForecast = (key: number | undefined, cityName: string | undefined): HourlyQuery => {
+	const fallback: HourlyData[] = [];
 	const { data: hourlyData = fallback, isSuccess } = useQuery(
 		[queryKeys.forecast, queryKeys.hourly, cityName, key],
 		() => getHourlyForecast(key),

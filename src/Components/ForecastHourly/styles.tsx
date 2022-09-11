@@ -1,6 +1,13 @@
 import { RefObject } from 'react';
 import styled from 'styled-components/macro';
-import { SvgWind } from '../../../assets/Svg.styles';
+import { SvgWind } from '../../assets/Svg.styles';
+
+export const HourlyWrapper = styled.div`
+	order: 3;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		order: 4;
+	}
+`;
 
 export const hourlyForecastCarousel = styled.div`
 	/* overscroll-behavior-x: contain; */

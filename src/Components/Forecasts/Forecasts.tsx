@@ -1,96 +1,44 @@
-import React, { useState, useEffect } from 'react';
-
+import React, { useState } from 'react';
+import * as Styled from './styles';
 import { useGetPositionString } from './hooks/useGetPositionString';
 import NoLocation from '../NoLocation';
-import * as Styled from './styles';
-
-import DailyForecast from './DailyForecast/DailyForecast';
-
-import WeeklyForecast from './WeeklyForecast';
-
-import HourlyForecast from './HourlyForecast';
-import FiveDaysForecast from './FiveDaysForecast';
+import DailyForecast from '../ForecastDaily/DailyForecast';
+import WeeklyForecast from '../ForecastWeekly';
+import HourlyForecast from '../ForecastHourly';
+import FiveDaysForecast from '../FiveDaysForecast';
 
 import Modal from '../../Common/Modal';
-
 import { useGetLocation } from './hooks/useGetLocation';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { useDailyForecast } from './hooks/useDailyForecast';
-import { useGetHourlyForecast } from './hooks/useHourlyForecast';
-import { FRESH_TIME, MOBILE_WIDTH } from '../../constants';
 import { useForecast } from '../../zustand/hooks/useForecast';
-import { useDataFromStore } from './hooks/useFreshLocalStorageData';
+import { MOBILE_WIDTH } from '../../constants';
 
 export interface ForecastProps {}
 
 const Forecast: React.FC<ForecastProps> = Props => {
-	const { error, geoString } = useGetPositionString();
-	const { cityKey, cityName } = useForecast();
-
-	const isNeedToFetch = useDataFromStore(FRESH_TIME);
-
-	const { localCityName, localCityKey } = useGetLocation(geoString);
 	const { width: screenWidth } = useWindowSize();
-
-	const {
-		isSuccess: isDailySuccess,
-		fiveDaysData,
-		updatedAt,
-	} = useDailyForecast(cityKey ? cityKey : localCityKey, cityName ? cityName : localCityName);
-	const { isSuccess: isHourlySuccess, hourlyData } = useGetHourlyForecast(
-		cityKey ? cityKey : localCityKey,
-		cityName ? cityName : localCityName
-	);
-
-	let content;
+	const { error: geoPositionError, geoString } = useGetPositionString();
+	const cityData = useGetLocation(geoString);
+	const { cityData: cityDataFromStore } = useForecast();
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 
-	if (error) {
+	let content;
+
+	if (geoPositionError) {
 		content = <NoLocation />;
 	}
-	if (isDailySuccess && isHourlySuccess) {
-		content = (
-			<div>
-				<DailyForecast
-					data={fiveDaysData}
-					cityName={cityName ? cityName : localCityName}
-					updatedAt={updatedAt}
-				/>
-				<WeeklyForecast data={fiveDaysData} />
-				{screenWidth <= MOBILE_WIDTH && (
-					<Styled.btnWrapper>
-						<Styled.forecastBtn
-							ghost
-							onClick={() => {
-								setIsExpanded(true);
-							}}>
-							5 Days Forecast
-						</Styled.forecastBtn>
-					</Styled.btnWrapper>
-				)}
-				<HourlyForecast data={hourlyData} />
 
-				{screenWidth > MOBILE_WIDTH ? (
-					<FiveDaysForecast data={fiveDaysData} />
-				) : (
-					<>
-						{isExpanded && (
-							<Modal
-								padding='40px 30px'
-								width='100%'
-								height='511px'
-								position='bottom'
-								isModalOpen={isExpanded}
-								closeModal={() => setIsExpanded(false)}>
-								<FiveDaysForecast data={fiveDaysData} isExpanded={isExpanded} />
-							</Modal>
-						)}
-					</>
-				)}
-			</div>
-		);
-	}
+	const cityToShow = cityDataFromStore ? cityDataFromStore : cityData;
+
+	content = (
+		<Styled.ComponentsOrder>
+			<DailyForecast cityData={cityToShow} />
+			<WeeklyForecast cityData={cityToShow} />
+			<HourlyForecast cityData={cityToShow} />
+			<FiveDaysForecast cityData={cityToShow} />
+		</Styled.ComponentsOrder>
+	);
 
 	return <Styled.ContentWrapper>{content}</Styled.ContentWrapper>;
 };
