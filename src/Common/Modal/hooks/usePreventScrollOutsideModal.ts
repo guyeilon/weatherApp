@@ -11,10 +11,10 @@ export const UsePreventScrollOutsideModal = (
 			}
 		};
 
-		document.body.addEventListener('touchmove', preventTouche, { passive: true });
+		document.body.addEventListener('touchstart', preventTouche, { passive: false });
 
 		return () => {
-			document.body.removeEventListener('touchmove', preventTouche);
+			document.body.removeEventListener('touchstart', preventTouche);
 		};
 	}, [isModalOpen]);
 
