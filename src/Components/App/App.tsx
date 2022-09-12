@@ -21,7 +21,7 @@ const App = () => {
 				<GlobalStyles />
 				<Loading />
 				<Toast />
-				{/* <Clouds cloudsNum={10} /> */}
+				<Clouds cloudsNum={10} />
 				<Routes />
 				<ReactQueryDevtools />
 			</QueryClientProvider>

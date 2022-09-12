@@ -8,6 +8,8 @@ export const GlobalStyles = createGlobalStyle`
       }
       body {
         min-height: 100%;
+
+      
       background: ${({ theme }) => theme.colors.background.gradient};
       
         background-attachment: fixed;
@@ -17,6 +19,11 @@ export const GlobalStyles = createGlobalStyle`
         flex-direction:column
 
       }
+
+      html, body {
+  position:relative;
+  overflow-x:hidden;
+}
 
 
 
