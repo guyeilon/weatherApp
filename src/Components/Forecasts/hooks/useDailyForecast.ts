@@ -26,8 +26,6 @@ export const useDailyForecast = (key: number | undefined, cityName: string | und
 		dataUpdatedAt: updatedAt,
 		isSuccess,
 	} = useQuery([queryKeys.forecast, queryKeys.daily, cityName, key], () => getFiveDaysForecast(key), {
-		staleTime: Infinity,
-		cacheTime: Infinity,
 		enabled: !!key,
 		select: fiveDaysData => {
 			const days = fiveDaysData.map(day => {

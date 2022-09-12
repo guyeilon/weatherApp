@@ -2,7 +2,7 @@ import { QueryClient } from '@tanstack/react-query';
 import { fireToast } from '../Components/App/hooks/useToast';
 
 function queryErrorHandler(error: unknown): void {
-	const title = error instanceof Error ? error.message : 'error connecting to server';
+	const title = error instanceof Error ? `Something went wrong: ${error.message}` : 'error connecting to server';
 
 	fireToast({ title, status: 'error' });
 }

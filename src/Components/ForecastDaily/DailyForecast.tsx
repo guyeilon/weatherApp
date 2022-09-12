@@ -4,14 +4,15 @@ import * as Styled from './styles';
 import { DailyForecastProps } from './types';
 import { getForecastIcon } from '../Forecasts/hooks/getForecastIcon';
 import { usePreference } from '../../zustand/hooks/usePreference';
-import { useFavorites } from '../Favorites/hooks/useFavorites';
+import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites';
 import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 	const key = cityData?.key;
 	const cityName = cityData?.cityName;
 	const { isFahrenheit } = usePreference();
-	const { mutate: addToFav } = useFavorites();
+
+	const { addRemoveFavorites, addSuccess } = useAddRemoveFavorites();
 
 	const { isSuccess, fiveDaysData, updatedAt } = useDailyForecast(key, cityName);
 
@@ -51,8 +52,13 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 						<Styled.Phrase>{dayPhrase}</Styled.Phrase>
 						<Styled.Date>{getTime(timestamp)}</Styled.Date>
 					</div>
-					<Styled.FavBtn svg='fav' secondary>
-						Add to favorites
+
+					<Styled.FavBtn
+						svg='fav'
+						secondary
+						onClick={() => addRemoveFavorites(cityData)}
+						disabled={addSuccess ? true : false}>
+						{addSuccess ? 'Added to favorites' : 'Add to favorites'}
 					</Styled.FavBtn>
 				</Styled.DailyForecastContainer>
 			)}
