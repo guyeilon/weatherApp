@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
   html {
         font-size: 62.5%;
         height: 100%;
+
         
       }
       body {
@@ -16,14 +17,16 @@ export const GlobalStyles = createGlobalStyle`
         overflow-x: hidden;
 
         display: flex;
-        flex-direction:column
+        flex-direction:column;
+
 
       }
 
-      html, body {
+      /* html, body {
   position:relative;
   overflow-x:hidden;
-}
+
+} */
 
 
 

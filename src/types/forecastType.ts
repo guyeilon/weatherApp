@@ -92,8 +92,6 @@ export interface HourlyQuery {
 	isSuccess: boolean;
 }
 
-export type Favorite = {
-	key: number;
-	city: string;
-	country: string;
+export type Favorites = {
+	results: CityData[];
 };

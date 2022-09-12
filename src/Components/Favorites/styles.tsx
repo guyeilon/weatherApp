@@ -1,4 +1,5 @@
 import styled from 'styled-components/macro';
+import Button from '../../Common/Button';
 import SearchInput from '../../Common/SearchInput';
 
 export const ContentWrapper = styled.div`
@@ -43,4 +44,53 @@ export const Input = styled(SearchInput)`
 
 export const InputWrapper = styled.div`
 	max-width: 372px;
+	margin-bottom: 65px;
+`;
+export const Favorite = styled.div`
+	display: flex;
+	flex-direction: row;
+	align-items: stretch;
+	justify-content: space-between;
+`;
+export const Line = styled.hr`
+	color: rgba(255, 255, 255, 0.6);
+	height: 1px;
+	width: 100%;
+	margin-bottom: 23.5px;
+`;
+
+export const FavoritesWrapper = styled.div`
+	display: flex;
+	flex-direction: column;
+`;
+
+export const NamesWrapper = styled.button`
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-bottom: 13.5px;
+	cursor: pointer;
+`;
+
+export const BtnWrapper = styled.div`
+	align-self: center;
+`;
+
+export const FavBtn = styled(Button).attrs(props => ({
+	navbar: true,
+	svg: 'favoritesFull',
+}))`
+	width: fit-content;
+	justify-self: start;
+	border-bottom: 2px solid transparent;
+`;
+
+export const CityName = styled.div`
+	color: ${({ theme }) => theme.colors.primary.text};
+	font-size: ${({ theme }) => theme.textFontSize.xl};
+	font-weight: bold;
+`;
+export const CountryName = styled.div`
+	color: rgba(255, 255, 255, 0.8);
+	font-size: ${({ theme }) => theme.textFontSize.lg};
 `;
