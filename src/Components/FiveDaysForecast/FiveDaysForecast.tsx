@@ -63,7 +63,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ cityData }) => {
 					<Styled.forecastBtn
 						ghost
 						onClick={() => {
-							setIsExpanded(true);
+							setIsExpanded(current => !current);
 						}}>
 						5 Days Forecast
 					</Styled.forecastBtn>

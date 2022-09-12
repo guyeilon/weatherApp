@@ -38,9 +38,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 									isChecked={isDarkMode}
 									leftSvg={<SvgSun height='24' width='24' />}
 									rightSvg={<SvgMoon height='24' width='24' />}
-									onClick={() => {
-										toggleTheme(theme);
-									}}
+									onClick={() => toggleTheme(theme)}
 								/>
 							</Styled.ThemeSwitcherWrapper>
 							<Styled.DegreeSwitcherWrapper>
@@ -49,7 +47,9 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 									isChecked={isFahrenheit}
 									leftSvg={<SvgCelsius height='24' width='24' />}
 									rightSvg={<SvgFahrenheit height='24' width='24' />}
-									onClick={() => toggleDegree(degree)}
+									onClick={() => {
+										toggleDegree(degree);
+									}}
 								/>
 							</Styled.DegreeSwitcherWrapper>
 						</Styled.SwitcherWrapper>

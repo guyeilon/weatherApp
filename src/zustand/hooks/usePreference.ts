@@ -5,9 +5,8 @@ export const usePreference = () => {
 	const degree = usePreferenceStore(state => state.degree);
 	const toggleTheme = usePreferenceStore(state => state.toggleTheme);
 	const toggleDegree = usePreferenceStore(state => state.toggleDegree);
-
-	const isDarkMode = theme === 'dark';
-	const isFahrenheit = degree === 'fahrenheit';
+	const isDarkMode = usePreferenceStore(state => state.isDarkMode);
+	const isFahrenheit = usePreferenceStore(state => state.isFahrenheit);
 
 	return { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree };
 };

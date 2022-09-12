@@ -25,11 +25,11 @@ export const CheckBox = styled.input`
 	opacity: 0;
 	width: 0px;
 	height: 0px;
-	&:not(:checked) + ${CheckBoxLabel} {
-		right: 4px;
+	& ${CheckBoxLabel} {
+		left: 4px;
 	}
 	&:checked + ${CheckBoxLabel} {
-		left: 4px;
+		right: 4px;
 	}
 `;
 
