@@ -12,6 +12,7 @@ export const UsePreventScrollOutsideModal = (
 		};
 
 		document.body.addEventListener('touchmove', preventTouche, { passive: false });
+		document.body.addEventListener('touchstart', e => e.stopPropagation());
 
 		return () => {
 			document.body.removeEventListener('touchmove', preventTouche);

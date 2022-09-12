@@ -22,6 +22,13 @@ const toggleDegree = (degree: string) => {
 	return degree === 'fahrenheit' ? 'celsius' : 'fahrenheit';
 };
 
+const isDarkMode = (theme: string) => {
+	return theme === 'dark' ? true : false;
+};
+const isFahrenheit = (degree: string) => {
+	return degree === 'fahrenheit' ? true : false;
+};
+
 export const preferenceSlice: StateCreator<
 	preferenceSlice,
 	[],
@@ -30,23 +37,21 @@ export const preferenceSlice: StateCreator<
 > = persist(
 	immer(
 		(set, get): preferenceSlice => ({
-			theme: 'light',
+			theme: 'dark',
 			degree: 'celsius',
-			isDarkMode: false,
-			isFahrenheit: true,
+			isDarkMode: true,
+			isFahrenheit: false,
 
 			toggleTheme: (theme: string) => {
-				const isDarkMode = get().isDarkMode;
 				set(state => {
 					state.theme = toggleTheme(theme);
-					state.isDarkMode = !isDarkMode;
+					state.isDarkMode = isDarkMode(theme);
 				});
 			},
 			toggleDegree: (degree: string) => {
-				const isFahrenheit = get().isFahrenheit;
 				set(state => {
 					state.degree = toggleDegree(degree);
-					state.isFahrenheit = !isFahrenheit;
+					state.isFahrenheit = isFahrenheit(degree);
 				});
 			},
 		})
