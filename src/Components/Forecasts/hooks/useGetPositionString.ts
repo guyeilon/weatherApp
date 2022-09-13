@@ -11,9 +11,10 @@ type position =
 			latitude: number;
 			longitude: number;
 	  }
-	| {};
-export const useGetPositionString = () => {
-	const [position, setPosition] = useState<position>({});
+	| undefined;
+
+export const useGetPosition = () => {
+	const [position, setPosition] = useState<position>(undefined);
 	const [error, setError] = useState<string>();
 	const [geoString, setGeoString] = useState<string>();
 
@@ -46,5 +47,5 @@ export const useGetPositionString = () => {
 		// return () => geo.clearWatch(watcher);
 	}, []);
 
-	return { geoString, error };
+	return { geoString, error, position };
 };

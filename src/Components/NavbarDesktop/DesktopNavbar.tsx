@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../assets/Svg.styles';
 import * as Styled from './styles';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import SearchCity from '../SearchCity';
 import { useLogin } from '../User/hooks/useLogin';
 import { usePreference } from '../../zustand/hooks/usePreference';
@@ -19,6 +19,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const { setCityData } = useForecast();
 	const { logout } = useLogin();
 
+	const navigate = useNavigate();
 	const location = useLocation();
 	const currentLocation = location.pathname.substring(1);
 
@@ -99,7 +100,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 						/>
 					</Styled.SwitcherWrapper>
 
-					<Styled.MapBtn>
+					<Styled.MapBtn onClick={() => navigate('/map')}>
 						<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
 					</Styled.MapBtn>
 

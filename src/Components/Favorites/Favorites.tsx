@@ -4,6 +4,7 @@ import SearchInput from '../../Common/SearchInput';
 import useInput from '../../Common/SearchInput/hooks/useInput';
 import { CityData } from '../../types/forecastType';
 import { useForecast } from '../../zustand/hooks/useForecast';
+import { useGetLatLan } from '../Map/hooks/useGetLatLan';
 
 import { useAddRemoveFavorites } from './hooks/useAddRemoveFavorites';
 import { useGetFavorites } from './hooks/useGetFavorites';
@@ -15,6 +16,9 @@ export interface FavoritesProps {}
 const Favorites: React.FC<FavoritesProps> = Props => {
 	const [search, resetSearch, searchAttribute] = useInput('wetherApp_FavoritesSearch', '');
 	const { favorites, isSuccess } = useGetFavorites(search);
+
+	// const geoCodesData = useGetLatLan(favorites);
+	// console.log(geoCodesData);
 
 	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
 	const { setCityData } = useForecast();
