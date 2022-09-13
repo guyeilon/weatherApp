@@ -8,7 +8,7 @@ const cloudAnimation = keyframes`
 
 export const CloudsWrapper = styled.div`
 	overflow: hidden;
-	z-index: -5;
+	z-index: -900;
 `;
 export const CloudImg = styled.img<{ positionY: number; delayTime: number; speed: number }>`
 	position: absolute;

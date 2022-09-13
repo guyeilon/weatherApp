@@ -14,6 +14,7 @@ export const getLocationKey = async (geoString: string | undefined): Promise<Cit
 			params: {
 				apikey: API_KEY,
 				q: geoString,
+				toplevel: true,
 			},
 		});
 		const data = await res.data;
