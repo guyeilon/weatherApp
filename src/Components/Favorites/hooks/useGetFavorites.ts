@@ -4,7 +4,7 @@ import { queryKeys } from '../../../react-query/constants';
 import { CityData } from '../../../types/forecastType';
 import { FavoritesQuery, GetFavorites } from '../../../types/userTypes';
 
-export const useGetFavorites = (): FavoritesQuery => {
+export const useGetFavorites = (search: string | undefined): FavoritesQuery => {
 	const privateApi = useInterceptors();
 	const getFav = async (): Promise<GetFavorites> => {
 		const { data } = await privateApi.get('/favorites/');
@@ -23,7 +23,9 @@ export const useGetFavorites = (): FavoritesQuery => {
 				return { key, countryName, cityName };
 			});
 
-			return cities;
+			let filtered = cities;
+			if (search) filtered = filtered.filter(fav => fav.cityName.toLowerCase().includes(search.toLowerCase()));
+			return filtered;
 		},
 	});
 

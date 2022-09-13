@@ -11,8 +11,6 @@ export interface SearchInputProps {
 }
 
 const SearchInput: React.FC<SearchInputProps> = ({ placeHolder, onBlur, onFocus, ...rest }) => {
-	const [isFocused, setIsFocused] = useState(false);
-
 	return (
 		<Styled.InputWrapper>
 			<Styled.searchInput

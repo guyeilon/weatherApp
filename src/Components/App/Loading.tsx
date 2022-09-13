@@ -6,7 +6,7 @@ import { usePreference } from '../../zustand/hooks/usePreference';
 
 export function Loading(): ReactElement {
 	const isFetching = useIsFetching([queryKeys.forecast]);
-	const isMutating = useIsMutating([queryKeys.forecast]);
+	const isMutating = useIsMutating([queryKeys.favorites]);
 	const { isDarkMode } = usePreference();
 
 	const color = isDarkMode ? '#fff' : '#0f0f0ef0';

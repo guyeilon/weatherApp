@@ -1,5 +1,6 @@
 import { UseMutateFunction, useMutation, useQueryClient } from '@tanstack/react-query';
 import { AxiosResponse } from 'axios';
+import { object } from 'yup';
 import useInterceptors from '../../../api/hooks/useInterceptors';
 import { queryKeys } from '../../../react-query/constants';
 
@@ -27,6 +28,10 @@ export const useAddRemoveFavorites = (): UseAddRemoveFavorites => {
 				const title = `${data?.city} has added to favorites `;
 				fireToast({ title, status: 'success' });
 			}
+			if (!data || Object.keys(data).length === 0) {
+				const title = `${CityData.cityName} has removed from favorites `;
+				fireToast({ title, status: 'success' });
+			}
 		} catch (errorResponse: any) {
 			if (errorResponse?.response) {
 				const status = errorResponse.response.status;
@@ -43,12 +48,18 @@ export const useAddRemoveFavorites = (): UseAddRemoveFavorites => {
 		}
 	};
 
-	const { mutate: addRemoveFavorites, isSuccess: addSuccess } = useMutation((data: CityData) => AddRemoveFav(data), {
-		onSuccess: () => {
-			queryClient.invalidateQueries([queryKeys.favorites]);
-			console.log('invalidate');
+	const { mutate: addRemoveFavorites, isSuccess: addSuccess } = useMutation(
+		(data: CityData) => {
+			return AddRemoveFav(data);
 		},
-	});
+		{
+			onSuccess: () => {
+				queryClient.invalidateQueries([queryKeys.favorites], {
+					refetchType: 'all',
+				});
+			},
+		}
+	);
 
 	return { addRemoveFavorites, addSuccess };
 };
