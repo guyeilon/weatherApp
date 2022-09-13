@@ -28,6 +28,12 @@ export interface SearchQuery {
 	isLoading: boolean;
 	isFetched: boolean;
 }
+export interface NewSearchQuery {
+	citiesData: CityData[];
+	isCitiesLoading: boolean;
+	favoritesData: CityData[];
+	isFavoritesSuccess: boolean;
+}
 
 // Daily Data:
 

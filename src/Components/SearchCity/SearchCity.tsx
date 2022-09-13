@@ -1,23 +1,26 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { City, CityNameHighlighterProps, SearchCityProps } from './types';
+import React from 'react';
+import { CityNameHighlighterProps, SearchCityProps } from './types';
 import * as Styled from './styles';
-import Modal from '../../Common/Modal';
+
 import { Bars } from 'react-loader-spinner';
 import { SvgCity } from '../../assets/Svg.styles';
 import { useAutocompleteResult } from './hooks/useAutocompleteResult';
 import { CityData } from '../../types/forecastType';
 import { useForecast } from '../../zustand/hooks/useForecast';
+import { useNavigate } from 'react-router-dom';
 
 const SearchCity: React.FC<SearchCityProps> = ({ search, closeModal }) => {
-	const { citiesData, isLoading, isFetched } = useAutocompleteResult(search);
+	const { citiesData, isLoading } = useAutocompleteResult(search);
 
 	const { setCityData } = useForecast();
+	const navigate = useNavigate();
 
 	// const show = !!search && isFocused;
 
 	const handleClick = (city: CityData) => {
 		setCityData(city);
 		closeModal();
+		navigate('/');
 	};
 
 	return (

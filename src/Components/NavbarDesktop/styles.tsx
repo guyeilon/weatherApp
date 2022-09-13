@@ -3,7 +3,7 @@ import styled from 'styled-components/macro';
 import { SvgNavbarLogo } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 import { IconWrapper } from '../../Common/Button/styles';
-import SearchInput from '../../Common/SearchInput';
+import ReactTooltip from 'react-tooltip';
 import Switcher from '../../Common/Switcher';
 
 export const DesktopContentWrapper = styled.div`
@@ -179,3 +179,15 @@ export const DegreeSwitcher = styled(Switcher)`
 `;
 
 export const ThemeSwitcher = styled(Switcher)``;
+
+export const Tooltip = styled(ReactTooltip)`
+	max-width: 300px !important;
+	background-color: rgba(0, 0, 0, 0.1) !important;
+	color: #fff !important;
+	box-shadow: 0 0 25px rgba(0, 0, 0, 0.1) !important;
+	border-radius: 5px !important;
+	padding: 1rem !important;
+	text-align: center !important;
+	line-height: 1.5 !important;
+	opacity: 1 !important;
+`;

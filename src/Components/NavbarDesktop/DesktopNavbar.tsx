@@ -9,6 +9,7 @@ import { useForecast } from '../../zustand/hooks/useForecast';
 import SearchInput from '../../Common/SearchInput';
 import useInput from '../../Common/SearchInput/hooks/useInput';
 import Modal from '../../Common/Modal';
+import { motion } from 'framer-motion';
 
 export interface DesktopNavbarProps {}
 
@@ -97,9 +98,11 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 							onClick={() => toggleTheme(theme)}
 						/>
 					</Styled.SwitcherWrapper>
+
 					<Styled.MapBtn>
 						<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
 					</Styled.MapBtn>
+
 					<Styled.LogoutBtn onClick={() => logout()}>
 						<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 					</Styled.LogoutBtn>
