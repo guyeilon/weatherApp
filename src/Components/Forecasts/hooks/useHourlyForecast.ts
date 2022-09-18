@@ -22,7 +22,7 @@ export const getHourlyForecast = async (locationKey: number | undefined): Promis
 export const useGetHourlyForecast = (key: number | undefined, cityName: string | undefined): HourlyQuery => {
 	const fallback: HourlyData[] = [];
 	const { data: hourlyData = fallback, isSuccess } = useQuery(
-		[queryKeys.forecast, queryKeys.hourly, cityName, key],
+		[queryKeys.forecast, queryKeys.hourly, cityName],
 		() => getHourlyForecast(key),
 		{
 			staleTime: Infinity,

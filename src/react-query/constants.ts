@@ -9,4 +9,7 @@ export const queryKeys = {
 	// auth:
 	user: 'user',
 	favorites: 'favorites',
+
+	// map:
+	places: 'places',
 };

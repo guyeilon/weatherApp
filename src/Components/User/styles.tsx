@@ -2,6 +2,10 @@ import styled from 'styled-components/macro';
 import Button from '../../Common/Button';
 
 export const ContentWrapper = styled.div`
+	height: 100vh;
+`;
+
+export const LoginWrapper = styled.div`
 	background-color: ${({ theme }) => theme.colors.modals.primaryBg};
 
 	border-radius: ${({ theme }) => theme.border.modalUp};
@@ -14,14 +18,12 @@ export const ContentWrapper = styled.div`
 
 	width: 100%;
 
-	/* height: 713px; */
-
-	position: fixed;
+	/* position: fixed;
 	top: 135px;
 	right: auto;
 	left: auto;
 	margin: 0 auto;
-	bottom: 0;
+	bottom: 0; */
 
 	& > * {
 		grid-column: 2;

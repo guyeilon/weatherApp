@@ -18,6 +18,7 @@ export const getLocationKey = async (geoString: string | undefined): Promise<Cit
 			},
 		});
 		const data = await res.data;
+
 		return data;
 	}
 };

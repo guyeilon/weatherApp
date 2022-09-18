@@ -25,7 +25,7 @@ export const useDailyForecast = (key: number | undefined, cityName: string | und
 		data: fiveDaysData = fallback,
 		dataUpdatedAt: updatedAt,
 		isSuccess,
-	} = useQuery([queryKeys.forecast, queryKeys.daily, cityName, key], () => getFiveDaysForecast(key), {
+	} = useQuery([queryKeys.forecast, queryKeys.daily, cityName], () => getFiveDaysForecast(key), {
 		enabled: !!key,
 		select: fiveDaysData => {
 			const days = fiveDaysData.map(day => {

@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from '../../Common/SearchInput';
 import useInput from '../../Common/SearchInput/hooks/useInput';
 import { CityData } from '../../types/forecastType';
 import { useForecast } from '../../zustand/hooks/useForecast';
-import { useGetLatLan } from '../Map/hooks/useGetLatLan';
+import { usePreference } from '../../zustand/hooks/usePreference';
+import Map from '../Map';
 
 import { useAddRemoveFavorites } from './hooks/useAddRemoveFavorites';
 import { useGetFavorites } from './hooks/useGetFavorites';
@@ -17,11 +18,9 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 	const [search, resetSearch, searchAttribute] = useInput('wetherApp_FavoritesSearch', '');
 	const { favorites, isSuccess } = useGetFavorites(search);
 
-	// const geoCodesData = useGetLatLan(favorites);
-	// console.log(geoCodesData);
-
 	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
 	const { setCityData } = useForecast();
+	const { isMapOpen } = usePreference();
 	const navigate = useNavigate();
 
 	const handleFavClick = (favorite: CityData) => {
@@ -57,7 +56,9 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 		});
 	}
 
-	return (
+	return isMapOpen ? (
+		<Map cityData={favorites} />
+	) : (
 		<Styled.ContentWrapper>
 			<div>
 				<Styled.Header>Favorites</Styled.Header>

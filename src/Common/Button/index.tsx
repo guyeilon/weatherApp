@@ -7,8 +7,10 @@ import {
 	SvgGoogle,
 	SvgHome,
 	SvgHomeFull,
+	SvgLayout,
 	SvgLogout,
 	SvgMap,
+	SvgMapDark,
 	SvgMenu,
 	SvgSearch,
 } from '../../assets/Svg.styles';
@@ -39,11 +41,14 @@ type svgTypes =
 	| 'logout'
 	| 'logoutDark'
 	| 'map'
+	| 'mapDark'
 	| 'menu'
 	| 'search'
 	| 'arrow'
 	| 'favoritesFull'
 	| 'whiteArrow'
+	| 'layout'
+	| 'layoutWhite'
 	| undefined;
 
 const Button = <T extends ElementType = 'button'>({
@@ -82,6 +87,8 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgLogout outlinedark='true' width='30' height='30' />;
 			case 'map':
 				return <SvgMap width='30' height='30' />;
+			case 'mapDark':
+				return <SvgMapDark width='30' height='30' />;
 			case 'menu':
 				return <SvgMenu width='30' height='30' />;
 			case 'search':
@@ -90,6 +97,10 @@ const Button = <T extends ElementType = 'button'>({
 				return <SvgArrow width='30' height='30' />;
 			case 'whiteArrow':
 				return <SvgArrow full='true' width='30' height='30' />;
+			case 'layout':
+				return <SvgLayout width='30' height='30' />;
+			case 'layoutWhite':
+				return <SvgLayout full='true' width='30' height='30' />;
 
 			default:
 				break;

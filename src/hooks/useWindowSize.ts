@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { MOBILE_WIDTH } from '../constants';
 
 export const useWindowSize = () => {
 	const [windowSize, setWindowSize] = useState<{
@@ -10,16 +11,27 @@ export const useWindowSize = () => {
 	});
 
 	useEffect(() => {
+		let timeoutId: NodeJS.Timeout;
 		const handleResize = () => {
-			setWindowSize({
-				width: window.innerWidth,
-				height: window.innerHeight,
-			});
+			clearTimeout(timeoutId);
+
+			timeoutId = setTimeout(
+				() =>
+					setWindowSize({
+						width: window.innerWidth,
+						height: window.innerHeight,
+					}),
+				150
+			);
 		};
+
 		window.addEventListener('resize', handleResize);
 		handleResize();
 		return () => window.removeEventListener('resize', handleResize);
 	}, []);
 
-	return windowSize;
+	const isMobile = windowSize.width <= MOBILE_WIDTH;
+	const isDesktop = windowSize.width > MOBILE_WIDTH;
+
+	return { windowSize, isMobile, isDesktop };
 };

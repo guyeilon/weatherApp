@@ -8,14 +8,14 @@ import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 import { useChartData } from './hooks/useChartData';
 import HoverGrid from './HoverGrid';
 import { useWindowSize } from '../../hooks/useWindowSize';
-import { MOBILE_WIDTH } from '../../constants';
+
 import Modal from '../../Common/Modal';
 
 const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ cityData }) => {
 	const key = cityData?.key;
 	const cityName = cityData?.cityName;
 
-	const { width: screenWidth } = useWindowSize();
+	const { isMobile } = useWindowSize();
 
 	const [isExpanded, setIsExpanded] = useState<boolean>(false);
 	const { fiveDaysData, isSuccess } = useDailyForecast(key, cityName);
@@ -58,7 +58,7 @@ const FiveDaysForecast: React.FC<FiveDaysForecastProps> = ({ cityData }) => {
 
 	return (
 		<>
-			{isSuccess && screenWidth <= MOBILE_WIDTH ? (
+			{isSuccess && isMobile ? (
 				<Styled.btnWrapper>
 					<Styled.forecastBtn
 						ghost

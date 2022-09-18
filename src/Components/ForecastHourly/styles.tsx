@@ -6,7 +6,7 @@ export const HourlyWrapper = styled.div`
 	order: 3;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
 		order: 4;
-		margin-bottom: 50px;
+
 		margin-top: 48px;
 	}
 `;
@@ -19,6 +19,7 @@ export const hourlyForecastCarousel = styled.div`
 	overflow: hidden;
 
 	@media only screen and (${({ theme }) => theme.media.phone}) {
+		margin-bottom: 0px;
 	}
 `;
 export const InnerCarousel = styled.div`
@@ -120,7 +121,7 @@ export const WindIcon = styled(SvgWind)`
 	width: 22px;
 	height: 22px;
 	@media only screen and (${({ theme }) => theme.media.phone}) {
-		width: 16;
+		width: 16px;
 		height: 16px;
 	}
 `;

@@ -46,6 +46,7 @@ export const useLogin = (): UseLogin => {
 			}
 		} catch (errorResponse: any) {
 			if (axios.isAxiosError(errorResponse) && errorResponse?.response) {
+				navigate('/login', { state: { from: location }, replace: true });
 				const status = errorResponse.response.status;
 				if (status === 400) {
 					const title = 'Unauthorized';

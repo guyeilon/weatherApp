@@ -14,12 +14,12 @@ import { motion } from 'framer-motion';
 export interface DesktopNavbarProps {}
 
 const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
-	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree } = usePreference();
+	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree, toggleMap, isMapOpen } =
+		usePreference();
 
 	const { setCityData } = useForecast();
 	const { logout } = useLogin();
 
-	const navigate = useNavigate();
 	const location = useLocation();
 	const currentLocation = location.pathname.substring(1);
 
@@ -35,10 +35,18 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 			setActiveFav(true);
 			setActiveHome(false);
 		}
+		if (currentLocation === 'map') {
+			setActiveFav(false);
+			setActiveHome(false);
+		}
 	}, [currentLocation]);
 
-	const handleClick = () => {
+	const handleHomeClick = () => {
 		setCityData(undefined);
+		// toggleMap(false);
+	};
+	const handleFavClick = () => {
+		toggleMap(true);
 	};
 	const [search, resetSearch, searchAttribute] = useInput('wetherApp_CitySearch', '');
 	const [isFocused, setIsFocused] = useState(false);
@@ -65,11 +73,11 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 					<Styled.Logo />
 					<Styled.MenuWrapper>
 						<Styled.RouterWrap to='/'>
-							<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} onClick={handleClick} />
+							<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} onClick={handleHomeClick} />
 							<Styled.LinkBorder />
 						</Styled.RouterWrap>
 						<Styled.RouterWrap to='/favorites'>
-							<Styled.FavBtn svg={activeFav ? 'favoritesFull' : 'favorites'} />
+							<Styled.FavBtn svg={activeFav ? 'favoritesFull' : 'favorites'} onClick={handleFavClick} />
 							<Styled.LinkBorder />
 						</Styled.RouterWrap>
 					</Styled.MenuWrapper>
@@ -96,12 +104,14 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 							isChecked={isDarkMode}
 							leftSvg={<SvgSun height='24' width='24' />}
 							rightSvg={<SvgMoon height='24' width='24' />}
-							onClick={() => toggleTheme(theme)}
+							onClick={() => {
+								toggleTheme(theme);
+							}}
 						/>
 					</Styled.SwitcherWrapper>
 
-					<Styled.MapBtn onClick={() => navigate('/map')}>
-						<Styled.DesktopTxt>Switch to map</Styled.DesktopTxt>
+					<Styled.MapBtn svg={isMapOpen ? 'layoutWhite' : 'map'} onClick={() => toggleMap(isMapOpen)}>
+						<Styled.DesktopTxt>{isMapOpen ? 'Layout' : 'Switch to map'}</Styled.DesktopTxt>
 					</Styled.MapBtn>
 
 					<Styled.LogoutBtn onClick={() => logout()}>

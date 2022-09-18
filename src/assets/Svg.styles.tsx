@@ -9,6 +9,7 @@ import { ReactComponent as Home } from './Svgs/homeOutline.svg';
 import { ReactComponent as HomeFull } from './Svgs/homeFull.svg';
 import { ReactComponent as Logout } from './Svgs/logout.svg';
 import { ReactComponent as Map } from './Svgs/map.svg';
+import { ReactComponent as MapDark } from './Svgs/mapDark.svg';
 import { ReactComponent as Menu } from './Svgs/menu.svg';
 import { ReactComponent as Fav } from './Svgs/fav.svg';
 import { ReactComponent as FavFull } from './Svgs/favFull.svg';
@@ -26,6 +27,7 @@ import { ReactComponent as MoonFlat } from './Svgs/moonFlat.svg';
 import { ReactComponent as City } from './Svgs/city.svg';
 import { ReactComponent as Check } from './Svgs/check.svg';
 import { ReactComponent as InfoCircle } from './Svgs/infoCircle.svg';
+import { ReactComponent as LayoutIcon } from './Svgs/layout.svg';
 
 import Logo from './Logo';
 import NavbarLogo from './NavbarLogo';
@@ -89,6 +91,9 @@ const svgStyles = <
 export const SvgTest = styled(Test)<SvgProps>`
 	${props => svgStyles(props)};
 `;
+export const SvgLayout = styled(LayoutIcon)<SvgProps>`
+	${props => svgStyles(props)};
+`;
 export const SvgCheck = styled(Check)<SvgProps>`
 	${props => svgStyles(props)};
 `;
@@ -124,6 +129,9 @@ export const SvgMenu = styled(Menu)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgMap = styled(Map)<SvgProps>`
+	${props => svgStyles(props)};
+`;
+export const SvgMapDark = styled(MapDark)<SvgProps>`
 	${props => svgStyles(props)};
 `;
 export const SvgLogout = styled(Logout)<SvgProps>`

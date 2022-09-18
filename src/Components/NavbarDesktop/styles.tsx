@@ -122,7 +122,6 @@ export const DesktopTxt = styled.div`
 	}
 `;
 export const MapBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'map',
 	navbar: true,
 }))`
 	@media only screen and (${({ theme }) => theme.media.underDesktop}) {

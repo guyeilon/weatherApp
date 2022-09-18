@@ -1,9 +1,10 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import styled from 'styled-components/macro';
-import { MOBILE_WIDTH } from '../../constants';
+
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { usePreference } from '../../zustand/hooks/usePreference';
 import Clouds from '../Clouds';
-import MobileFooter from '../MobileFooter';
+import MobileFooter from '../Footer';
 import Navbar from '../Navbar';
 
 const Wrapper = styled.div`
@@ -13,14 +14,13 @@ const Wrapper = styled.div`
 `;
 
 const Layout = () => {
-	const { width: screenWidth } = useWindowSize();
-	const location = useLocation();
-	const currentLocation = location.pathname.substring(1);
-	const mapOnMobile = currentLocation === 'map' && screenWidth <= MOBILE_WIDTH;
+	const { isMobile } = useWindowSize();
+	const { isMapOpen } = usePreference();
+	const mapOnMobile = isMapOpen && isMobile;
 	return (
 		<>
 			<Wrapper>
-				<Clouds cloudsNum={10} />
+				{!mapOnMobile && <Clouds cloudsNum={10} />}
 				{!mapOnMobile && <Navbar />}
 				<Outlet />
 				<MobileFooter />

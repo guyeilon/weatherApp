@@ -35,10 +35,10 @@ export const Login = (): ReactElement => {
 	});
 
 	return (
-		<>
+		<Styled.ContentWrapper>
 			<Logo />
 
-			<Styled.ContentWrapper>
+			<Styled.LoginWrapper>
 				<Styled.Header>Log in</Styled.Header>
 				<form onSubmit={handleSubmit} autoComplete='off' noValidate style={{ width: '100%' }}>
 					<Input
@@ -76,8 +76,8 @@ export const Login = (): ReactElement => {
 						Log in with Google
 					</Styled.Btn>
 				</Styled.ButtonWrapper>
-			</Styled.ContentWrapper>
-		</>
+			</Styled.LoginWrapper>
+		</Styled.ContentWrapper>
 	);
 };
 

@@ -1,5 +1,9 @@
 // convert celsius to fahrenheit degrees:
 
+import { UseQueryResult } from '@tanstack/react-query';
+import { CityData } from '../types/forecastType';
+import { Location, MapData } from '../types/mapTypes';
+
 export const convertToC = (fahrenheit: number) => {
 	let celsius = Math.round(((fahrenheit - 32) * 5) / 9);
 
@@ -62,4 +66,35 @@ export const getDayAndMonth = (timestamp: number) => {
 	const formattedDay = ` ${day}.${month}`;
 
 	return formattedDay;
+};
+
+export const averageGeolocation = (citiesData: UseQueryResult<MapData, unknown>[]) => {
+	let x = 0.0;
+	let y = 0.0;
+	let z = 0.0;
+	citiesData?.map(city => {
+		if (city.isSuccess) {
+			let latitude = (city?.data?.location?.lat! * Math.PI) / 180;
+			let longitude = (city?.data?.location?.lng! * Math.PI) / 180;
+			x += Math.cos(latitude) * Math.cos(longitude);
+			y += Math.cos(latitude) * Math.sin(longitude);
+			z += Math.sin(latitude);
+		}
+	});
+
+	let total = citiesData.length;
+
+	x = x / total;
+	y = y / total;
+	z = z / total;
+
+	let centralLongitude = Math.atan2(y, x);
+	let centralSquareRoot = Math.sqrt(x * x + y * y);
+	let centralLatitude = Math.atan2(z, centralSquareRoot);
+	console.log(centralLongitude, centralLatitude);
+
+	return {
+		lat: (centralLatitude * 180) / Math.PI,
+		lng: (centralLongitude * 180) / Math.PI,
+	};
 };

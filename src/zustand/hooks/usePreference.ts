@@ -7,6 +7,8 @@ export const usePreference = () => {
 	const toggleDegree = usePreferenceStore(state => state.toggleDegree);
 	const isDarkMode = usePreferenceStore(state => state.isDarkMode);
 	const isFahrenheit = usePreferenceStore(state => state.isFahrenheit);
+	const isMapOpen = usePreferenceStore(state => state.isMapOpen);
+	const toggleMap = usePreferenceStore(state => state.toggleMap);
 
-	return { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree };
+	return { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree, isMapOpen, toggleMap };
 };

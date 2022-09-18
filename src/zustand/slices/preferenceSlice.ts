@@ -5,14 +5,13 @@ import { immer } from 'zustand/middleware/immer';
 export type preferenceSlice = {
 	theme: string;
 	degree: string;
-	toggleTheme: (theme: string) => void;
-	toggleDegree: (degree: string) => void;
 	isDarkMode: boolean;
 	isFahrenheit: boolean;
+	isMapOpen: boolean;
+	toggleTheme: (theme: string) => void;
+	toggleDegree: (degree: string) => void;
+	toggleMap: (isMapOpen: boolean) => void;
 };
-
-// const isDarkMode = theme === 'dark';
-// const isFahrenheit = degree === 'fahrenheit';
 
 const toggleTheme = (theme: string) => {
 	return theme === 'dark' ? 'light' : 'dark';
@@ -29,6 +28,10 @@ const isFahrenheit = (degree: string) => {
 	return degree === 'fahrenheit' ? true : false;
 };
 
+const toggleMap = (isMapOpen: boolean) => {
+	return isMapOpen === true ? false : true;
+};
+
 export const preferenceSlice: StateCreator<
 	preferenceSlice,
 	[],
@@ -41,6 +44,7 @@ export const preferenceSlice: StateCreator<
 			degree: 'celsius',
 			isDarkMode: true,
 			isFahrenheit: false,
+			isMapOpen: false,
 
 			toggleTheme: (theme: string) => {
 				set(state => {
@@ -52,6 +56,11 @@ export const preferenceSlice: StateCreator<
 				set(state => {
 					state.degree = toggleDegree(degree);
 					state.isFahrenheit = isFahrenheit(degree);
+				});
+			},
+			toggleMap: (isMapOpen: boolean) => {
+				set(state => {
+					state.isMapOpen = toggleMap(isMapOpen);
 				});
 			},
 		})
