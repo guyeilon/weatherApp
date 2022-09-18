@@ -4,7 +4,7 @@ import Button from '../../Common/Button';
 export const ContentWrapper = styled.div`
 	position: relative;
 	display: grid;
-	height: calc(100vh + 30px);
+	height: calc(100vh + 180px);
 
 	grid-template-columns: 1fr minmax(auto, calc(100vw - 50px)) 1fr;
 	@media only screen and (${({ theme }) => theme.media.tablet}) {

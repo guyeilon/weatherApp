@@ -14,6 +14,7 @@ const HourlyForecast: React.FC<hourlyForecastProps> = ({ cityData }) => {
 	const key = cityData?.key;
 	const cityName = cityData?.cityName;
 	const { hourlyData, isSuccess } = useGetHourlyForecast(key, cityName);
+
 	const { isFahrenheit } = usePreference();
 
 	const ref = useRef() as React.MutableRefObject<HTMLDivElement>;

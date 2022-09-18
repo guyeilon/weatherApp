@@ -2,9 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
-import { CityData, CityDataApi } from '../../../types/forecastType';
-
-import { useForecastStore } from '../../../zustand/store';
+import { CityData, CityDataApi, GetLocationQuery } from '../../../types/forecastType';
 
 export const getLocationKey = async (geoString: string | undefined): Promise<CityDataApi> => {
 	if (typeof geoString === 'undefined') {
@@ -23,15 +21,16 @@ export const getLocationKey = async (geoString: string | undefined): Promise<Cit
 	}
 };
 
-export const useGetLocation = (geoString: string | undefined): CityData => {
-	const {} = useForecastStore();
+export const useGetLocation = (geoString: string | undefined): GetLocationQuery => {
+	console.log(geoString);
+
 	const fallback: CityData = {
 		key: 0,
 		cityName: '',
 		countryName: '',
 	};
 	const { data: cityData = fallback } = useQuery(
-		[queryKeys.forecast, queryKeys.localLocationKey],
+		[queryKeys.forecast, queryKeys.key],
 		() => getLocationKey(geoString),
 		{
 			enabled: !!geoString,
@@ -47,5 +46,5 @@ export const useGetLocation = (geoString: string | undefined): CityData => {
 		}
 	);
 
-	return cityData;
+	return { cityData };
 };

@@ -10,10 +10,14 @@ import { CityData } from '../../types/forecastType';
 import { MAP_KEY } from '../../api/constants';
 
 import googleMapReact from 'google-map-react';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useGetPosition } from '../Forecasts/hooks/useGetPosition';
 import { useWindowSize } from '../../hooks/useWindowSize';
+
+import { useForecast } from '../../zustand/hooks/useForecast';
+import { useGetLocation } from '../Forecasts/hooks/useGetLocation';
+import { useGetKeyFromMap } from './hooks/useGetKeyFromMap';
 
 export interface MapProps {
 	cityData: CityData[];
@@ -40,38 +44,44 @@ const Map: React.FC<MapProps> = ({ cityData }) => {
 
 	const placesData = useGetMapData(cityData);
 	const { position } = useGetPosition();
+	const currentPosition = { lat: position?.latitude!, lng: position?.longitude! };
 
 	const coords = placesData
 		? placesData.length === 1
 			? placesData[0].data?.location!
+			: placesData.length === 0
+			? currentPosition
 			: averageGeolocation(placesData)
-		: { lat: position?.latitude!, lng: position?.longitude! };
+		: currentPosition;
 
-	const [geoString, setGeoString] = useState<string | undefined>(undefined);
+	const { setCityData } = useForecast();
+	const getKey = useGetKeyFromMap();
 
 	const handleMapClick = (e: googleMapReact.ClickEventValue) => {
-		setGeoString(`${e.lat},${e.lng}`);
-		console.log(geoString);
+		const geoString = `${e.lat},${e.lng}`;
+		const res = getKey(geoString);
+		console.log(res);
 	};
+
 	const handleLayoutClick = (e: googleMapReact) => {
 		toggleMap(isMapOpen);
 	};
-	// useGetCityDataByMapClick(geoString);
 
 	return (
 		<Styled.MapWrapper>
 			<div style={containerStyle}>
 				<GoogleMapReact
 					bootstrapURLKeys={{ key: MAP_KEY! }}
-					defaultCenter={coords}
+					defaultCenter={{ lat: position?.latitude!, lng: position?.longitude! }}
 					center={coords}
 					options={options}
-					defaultZoom={placesData.length === 1 ? 11 : 1}
+					defaultZoom={placesData.length === 1 ? 11 : 3}
 					// onChange={e => console.log(e)}
 					onClick={e => handleMapClick(e)}
 					onChildClick={e => console.log(e)}
 					yesIWantToUseGoogleMapApiInternals>
 					{placesData &&
+						placesData.length > 0 &&
 						placesData.map((placeData, idx) => {
 							if (placeData.isSuccess) {
 								if (placeData.data?.location === undefined) return;

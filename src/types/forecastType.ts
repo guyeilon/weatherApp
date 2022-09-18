@@ -1,4 +1,7 @@
 // Location:
+export interface GetLocationQuery {
+	cityData: CityData;
+}
 export interface CityData {
 	key: number;
 	cityName: string;

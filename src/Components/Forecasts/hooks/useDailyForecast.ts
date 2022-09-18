@@ -5,7 +5,7 @@ import { queryKeys } from '../../../react-query/constants';
 import { GetDailyForecast, DailyQuery, DailyData } from '../../../types/forecastType';
 
 export const getFiveDaysForecast = async (locationKey: number | undefined): Promise<GetDailyForecast[]> => {
-	if (typeof locationKey === 'undefined') {
+	if (typeof locationKey === ('undefined' || '')) {
 		return Promise.reject(new Error('Invalid key'));
 	}
 	const res = await weatherApi.get(`forecasts/v1/daily/5day/${locationKey}`, {
@@ -25,7 +25,7 @@ export const useDailyForecast = (key: number | undefined, cityName: string | und
 		data: fiveDaysData = fallback,
 		dataUpdatedAt: updatedAt,
 		isSuccess,
-	} = useQuery([queryKeys.forecast, queryKeys.daily, cityName], () => getFiveDaysForecast(key), {
+	} = useQuery([queryKeys.forecast, queryKeys.daily, cityName, key], () => getFiveDaysForecast(key), {
 		enabled: !!key,
 		select: fiveDaysData => {
 			const days = fiveDaysData.map(day => {

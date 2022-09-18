@@ -16,7 +16,12 @@ export const useGetPlacesForecast = (
 	const results = useQueries({
 		queries: places?.map(place => {
 			return {
-				queryKey: [queryKeys.forecast, queryKeys.daily, place?.data?.cityData.cityName],
+				queryKey: [
+					queryKeys.forecast,
+					queryKeys.daily,
+					place?.data?.cityData.cityName,
+					place?.data?.cityData.key,
+				],
 				queryFn: () => getFiveDaysForecast(place?.data?.cityData.key),
 				enabled: !!places,
 				select: (data: GetDailyForecast[]) => {

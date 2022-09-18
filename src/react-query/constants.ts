@@ -3,7 +3,7 @@ export const queryKeys = {
 	hourly: 'Hourly',
 	daily: 'Daily',
 	Autocomplete: 'Autocomplete',
-	localLocationKey: 'local Location Key',
+	key: 'key',
 	forecast: 'forecast',
 
 	// auth:

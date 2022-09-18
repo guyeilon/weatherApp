@@ -16,11 +16,11 @@ export interface ForecastProps {}
 
 const Forecast: React.FC<ForecastProps> = Props => {
 	const { error: geoPositionError, geoString } = useGetPosition();
-	const cityData = useGetLocation(geoString);
+	const { cityData } = useGetLocation(geoString);
+	console.log(cityData);
 	const { cityData: cityDataFromStore } = useForecast();
 	const { isMapOpen, toggleMap } = usePreference();
 	const { isMobile } = useWindowSize();
-	console.log(isMobile);
 
 	let content;
 

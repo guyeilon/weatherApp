@@ -5,7 +5,7 @@ import { queryKeys } from '../../../react-query/constants';
 import { GetHourlyForecast, HourlyData, HourlyQuery } from '../../../types/forecastType';
 
 export const getHourlyForecast = async (locationKey: number | undefined): Promise<GetHourlyForecast[]> => {
-	if (typeof locationKey === 'undefined') {
+	if (typeof locationKey === ('undefined' || '')) {
 		return Promise.reject(new Error('Invalid key'));
 	}
 	const res = await weatherApi.get(`forecasts/v1/hourly/12hour/${locationKey}`, {
@@ -22,7 +22,7 @@ export const getHourlyForecast = async (locationKey: number | undefined): Promis
 export const useGetHourlyForecast = (key: number | undefined, cityName: string | undefined): HourlyQuery => {
 	const fallback: HourlyData[] = [];
 	const { data: hourlyData = fallback, isSuccess } = useQuery(
-		[queryKeys.forecast, queryKeys.hourly, cityName],
+		[queryKeys.forecast, queryKeys.hourly, cityName, key],
 		() => getHourlyForecast(key),
 		{
 			staleTime: Infinity,

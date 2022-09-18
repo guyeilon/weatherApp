@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { convertToC, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
@@ -8,7 +8,6 @@ import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites'
 import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
-	console.log(cityData);
 	const key = cityData?.key;
 
 	const cityName = cityData?.cityName;
