@@ -4,13 +4,13 @@ import Button from '../../Common/Button';
 export const ContentWrapper = styled.div`
 	position: relative;
 	display: grid;
-	height: calc(100vh + 180px);
+
+	height: calc(100vh + 184px);
 
 	grid-template-columns: 1fr minmax(auto, calc(100vw - 50px)) 1fr;
 	@media only screen and (${({ theme }) => theme.media.tablet}) {
 		grid-template-columns: calc(100vw - 95%) minmax(auto, calc(100vw - 100px)) calc(100vw - 95%);
 		margin-top: 158px;
-		height: calc(100vh + 90px);
 	}
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
 		grid-template-columns: 1fr minmax(auto, 1180px) 1fr;

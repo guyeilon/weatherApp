@@ -75,7 +75,7 @@ const Map: React.FC<MapProps> = ({ cityData }) => {
 					defaultCenter={{ lat: position?.latitude!, lng: position?.longitude! }}
 					center={coords}
 					options={options}
-					defaultZoom={placesData.length === 1 ? 11 : 3}
+					defaultZoom={placesData.length === 1 ? 15 : 3}
 					// onChange={e => console.log(e)}
 					onClick={e => handleMapClick(e)}
 					onChildClick={e => console.log(e)}

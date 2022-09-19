@@ -136,11 +136,14 @@ export const FavBtn = styled(Button)`
 `;
 export const FavBtnMobile = styled(Button)`
 	position: absolute;
-	top: -30px;
-	left: -30px;
-	/* width: 34px; */
+	top: -50px;
+	left: -160px;
 
 	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
 		display: none;
 	}
+`;
+
+export const FavBtnMobileWrapper = styled.div`
+	width: 34px;
 `;
