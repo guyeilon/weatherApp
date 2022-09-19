@@ -57,13 +57,13 @@ const Map: React.FC<MapProps> = ({ cityData }) => {
 	const { setCityData } = useForecast();
 	const getKey = useGetKeyFromMap();
 
-	const handleMapClick = (e: googleMapReact.ClickEventValue) => {
+	const handleMapClick = (e: any) => {
 		const geoString = `${e.lat},${e.lng}`;
 		const res = getKey(geoString);
 		console.log(res);
 	};
 
-	const handleLayoutClick = (e: googleMapReact) => {
+	const handleLayoutClick = (e: GoogleMapReact) => {
 		toggleMap(isMapOpen);
 	};
 
