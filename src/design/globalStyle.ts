@@ -22,11 +22,13 @@ export const GlobalStyles = createGlobalStyle`
 
       }
 
-      /* html, body {
-  position:relative;
-  overflow-x:hidden;
-
-} */
+      input,
+      textarea,
+      button,
+      select,
+      a {
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+      }
 
 
 

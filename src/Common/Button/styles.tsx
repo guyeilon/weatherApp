@@ -32,6 +32,8 @@ const defaultButton = css`
 	align-content: center;
 	align-self: center;
 
+	user-select: none;
+
 	/* styling */
 	position: relative;
 

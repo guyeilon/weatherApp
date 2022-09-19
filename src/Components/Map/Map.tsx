@@ -8,15 +8,9 @@ import { averageGeolocation, convertToC } from '../../utils';
 import { getForecastIcon } from '../Forecasts/hooks/getForecastIcon';
 import { CityData } from '../../types/forecastType';
 import { MAP_KEY } from '../../api/constants';
-
 import googleMapReact from 'google-map-react';
-import { useEffect, useState } from 'react';
-
 import { useGetPosition } from '../Forecasts/hooks/useGetPosition';
 import { useWindowSize } from '../../hooks/useWindowSize';
-
-import { useForecast } from '../../zustand/hooks/useForecast';
-import { useGetLocation } from '../Forecasts/hooks/useGetLocation';
 import { useGetKeyFromMap } from './hooks/useGetKeyFromMap';
 
 export interface MapProps {
@@ -54,13 +48,11 @@ const Map: React.FC<MapProps> = ({ cityData }) => {
 			: averageGeolocation(placesData)
 		: currentPosition;
 
-	const { setCityData } = useForecast();
 	const getKey = useGetKeyFromMap();
 
 	const handleMapClick = (e: any) => {
 		const geoString = `${e.lat},${e.lng}`;
-		const res = getKey(geoString);
-		console.log(res);
+		getKey(geoString);
 	};
 
 	const handleLayoutClick = (e: GoogleMapReact) => {

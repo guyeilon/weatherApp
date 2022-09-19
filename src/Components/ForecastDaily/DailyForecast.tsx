@@ -55,19 +55,14 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 						<Styled.Phrase>{dayPhrase}</Styled.Phrase>
 						<Styled.Date>{getTime(timestamp)}</Styled.Date>
 					</div>
-					{isMobile ? (
-						<Styled.FavBtnMobileWrapper>
-							<Styled.FavBtnMobile svg='favorites' icon onClick={() => addRemoveFavorites(cityData)} />
-						</Styled.FavBtnMobileWrapper>
-					) : (
-						<Styled.FavBtn
-							svg='fav'
-							secondary
-							disabled={addSuccess ? true : false}
-							onClick={() => addRemoveFavorites(cityData)}>
-							{addSuccess ? 'Added to favorites' : 'Add to favorites'}
-						</Styled.FavBtn>
-					)}
+
+					<Styled.FavBtn
+						svg='fav'
+						secondary
+						disabled={addSuccess ? true : false}
+						onClick={() => addRemoveFavorites(cityData)}>
+						{addSuccess ? 'Added to favorites' : 'Add to favorites'}
+					</Styled.FavBtn>
 				</Styled.DailyForecastContainer>
 			)}
 		</>

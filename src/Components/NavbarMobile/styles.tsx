@@ -13,18 +13,22 @@ export const MobileNavbar = styled.div`
 	margin-bottom: 24px;
 
 	padding: 0 30px;
+
+	align-items: stretch;
+	justify-content: space-between;
 `;
 export const NavbarBtn = styled(Button)`
 	width: fit-content;
 `;
+export const FavoritesBtn = styled(NavbarBtn).attrs(props => ({
+	svg: 'favorites',
+	icon: true,
+}))``;
 
 export const MenuBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'menu',
 	icon: true,
-}))`
-	margin-left: auto;
-	align-self: flex-start;
-`;
+}))``;
 
 export const Container = styled.div`
 	position: fixed;
