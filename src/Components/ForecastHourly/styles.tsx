@@ -8,6 +8,7 @@ export const HourlyWrapper = styled.div`
 		order: 4;
 
 		margin-top: 48px;
+		margin-bottom: 60px;
 	}
 `;
 

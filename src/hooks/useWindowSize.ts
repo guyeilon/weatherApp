@@ -21,7 +21,7 @@ export const useWindowSize = () => {
 						width: window.innerWidth,
 						height: window.innerHeight,
 					}),
-				150
+				100
 			);
 		};
 

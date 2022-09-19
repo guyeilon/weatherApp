@@ -24,18 +24,20 @@ export const ContentWrapper = styled.div`
 `;
 
 export const BtnWrapper = styled.div`
-	width: 112px;
-	/* position: fixed;
+	order: 5;
 
-	top: 75%;
-	left: calc(50% - 136px);
-	transform: translate(50%); */
+	width: 112px;
 
 	display: flex;
 
 	justify-content: center;
 	align-items: center;
 	margin: 0 auto;
+
+	margin-bottom: 36px;
+	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
+		display: none;
+	}
 `;
 
 export const LayoutBtn = styled(Button)`

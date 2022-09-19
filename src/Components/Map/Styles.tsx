@@ -64,6 +64,9 @@ export const BtnWrapper = styled.div`
 	left: calc(50% - 136px);
 	transform: translate(50%);
 	z-index: 99;
+	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
+		display: none;
+	}
 `;
 
 export const LayoutBtn = styled(Button)`

@@ -58,7 +58,7 @@ export const Input = styled(SearchInput)`
 `;
 
 export const ArrowBtn = styled(Btn).attrs(props => ({
-	footer: true,
+	icon: true,
 }))`
 	margin-bottom: 16px;
 `;

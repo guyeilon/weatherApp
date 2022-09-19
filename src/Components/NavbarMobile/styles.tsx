@@ -20,7 +20,7 @@ export const NavbarBtn = styled(Button)`
 
 export const MenuBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'menu',
-	footer: true,
+	icon: true,
 }))`
 	margin-left: auto;
 	align-self: flex-start;
@@ -139,16 +139,16 @@ export const MobileFooter = styled.div`
 
 export const HomeBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'home',
-	footer: true,
+	icon: true,
 }))``;
 
 export const FavBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'favorites',
-	footer: true,
+	icon: true,
 }))``;
 export const SearchBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'search',
-	footer: true,
+	icon: true,
 }))``;
 
 export const Divider = styled.div`

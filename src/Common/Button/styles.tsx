@@ -49,6 +49,7 @@ const defaultButton = css`
 	/* animation */
 	transition: 0.3s all ease;
 `;
+
 const loginButton = css`
 	padding: var(--primaryPadding);
 	color: var(--mainTextColor);
@@ -95,8 +96,6 @@ const ghostButton = css`
 	background-color: var(--secondaryBgDisabled);
 	color: var(--secondaryTextColorDisable);
 	border: solid 1px var(--secondaryTextColorDisable);
-	/* box-shadow: var(--boxShadow); */
-	/* padding: var(--secondaryPadding); */
 
 	border-radius: var(--borderRadius);
 `;
@@ -110,7 +109,7 @@ const linkButton = css`
 const navbarButton = css`
 	color: var(--mainTextColor);
 `;
-const MobileFooterButton = css`
+const iconButton = css`
 	color: var(--mainTextColor);
 	flex-direction: column;
 	font-weight: normal;
@@ -119,7 +118,7 @@ const MobileFooterButton = css`
 `;
 
 const activeButton = css`
-	transform: scale(0.97);
+	/* transform: scale(0.97); */
 `;
 
 interface StyledButtonProps {
@@ -128,7 +127,7 @@ interface StyledButtonProps {
 	login?: boolean;
 	disabled?: boolean;
 	navbar?: boolean;
-	footer?: boolean;
+	icon?: boolean;
 	noHover?: boolean;
 	as?: React.ElementType;
 }
@@ -161,9 +160,9 @@ export const BTN = styled.button<StyledButtonProps>`
 		${p =>
 			!p.disabled &&
 			!p.secondary &&
+			!p.icon &&
 			!p.navbar &&
 			!p.as &&
-			!p.footer &&
 			!p.noHover &&
 			!p.ghost &&
 			hoveredLoginButton};
@@ -172,18 +171,18 @@ export const BTN = styled.button<StyledButtonProps>`
 	}
 
 	&:focus {
-		${p => !p.footer && !p.navbar && !p.disabled && !p.secondary && focusedButton};
+		${p => !p.icon && !p.navbar && !p.disabled && !p.secondary && focusedButton};
 	}
 
 	&:active {
-		${p => !p.footer && !p.navbar && !p.disabled && activeButton};
+		${p => !p.icon && !p.navbar && !p.disabled && activeButton};
 	}
 
 	${p => p.login && loginButton};
 	${p => p.secondary && secondary}
 	${p => p.as && linkButton}
 	${p => p.navbar && navbarButton}
-	${p => p.footer && MobileFooterButton}
+	${p => p.icon && iconButton}
 	${p => p.ghost && ghostButton}
 
 	&:disabled {
@@ -193,7 +192,7 @@ export const BTN = styled.button<StyledButtonProps>`
 
 	${IconWrapper} {
 		display: ${props =>
-			(props.secondary || props.as || props.navbar || props.footer) && !props.disabled ? `block  ` : `none `};
-		margin-right: ${props => props.footer && `0`};
+			(props.secondary || props.as || props.navbar || props.icon) && !props.disabled ? `block  ` : `none `};
+		margin-right: ${props => props.icon && `0`};
 	}
 `;

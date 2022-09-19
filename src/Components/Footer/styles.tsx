@@ -56,16 +56,16 @@ export const HomeWrapper = styled.div`
 
 export const HomeBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'home',
-	footer: true,
+	icon: true,
 }))``;
 
 export const FavBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'favorites',
-	footer: true,
+	icon: true,
 }))``;
 export const SearchBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'search',
-	footer: true,
+	icon: true,
 }))``;
 
 export const Divider1 = styled.div`

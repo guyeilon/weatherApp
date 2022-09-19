@@ -17,7 +17,7 @@ export interface ForecastProps {}
 const Forecast: React.FC<ForecastProps> = Props => {
 	const { error: geoPositionError, geoString } = useGetPosition();
 	const { cityData } = useGetLocation(geoString);
-	console.log(cityData);
+
 	const { cityData: cityDataFromStore } = useForecast();
 	const { isMapOpen, toggleMap } = usePreference();
 	const { isMobile } = useWindowSize();
@@ -33,7 +33,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const cityDataForMap = [cityToShow];
 
 	content = (
-		<div>
+		<Styled.OrderLayout>
 			<DailyForecast cityData={cityToShow} />
 			<WeeklyForecast cityData={cityToShow} />
 			<HourlyForecast cityData={cityToShow} />
@@ -45,7 +45,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 					</Styled.LayoutBtn>
 				</Styled.BtnWrapper>
 			)}
-		</div>
+		</Styled.OrderLayout>
 	);
 
 	return isMapOpen ? <Map cityData={cityDataForMap} /> : <Styled.ContentWrapper>{content}</Styled.ContentWrapper>;

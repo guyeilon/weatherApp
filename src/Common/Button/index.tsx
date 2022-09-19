@@ -24,7 +24,7 @@ export type ButtonProps<T extends ElementType> = {
 	disabled?: boolean;
 	svg?: svgTypes;
 	navbar?: boolean;
-	footer?: boolean;
+	icon?: boolean;
 	ghost?: boolean;
 	secondary?: boolean;
 	noHover?: boolean;
@@ -57,7 +57,7 @@ const Button = <T extends ElementType = 'button'>({
 	addToFav,
 	children,
 	navbar,
-	footer,
+	icon,
 	secondary,
 	svg,
 	ghost,
@@ -114,7 +114,7 @@ const Button = <T extends ElementType = 'button'>({
 				secondary={secondary}
 				login={login}
 				navbar={navbar}
-				footer={footer}
+				icon={icon}
 				svg={svg}
 				ghost={ghost}
 				noHover={noHover}

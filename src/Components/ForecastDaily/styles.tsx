@@ -134,3 +134,13 @@ export const FavBtn = styled(Button)`
 		display: none;
 	}
 `;
+export const FavBtnMobile = styled(Button)`
+	position: absolute;
+	top: -30px;
+	left: -30px;
+	/* width: 34px; */
+
+	@media only screen and (${({ theme }) => theme.media.abovePhone}) {
+		display: none;
+	}
+`;

@@ -22,8 +22,6 @@ export const getLocationKey = async (geoString: string | undefined): Promise<Cit
 };
 
 export const useGetLocation = (geoString: string | undefined): GetLocationQuery => {
-	console.log(geoString);
-
 	const fallback: CityData = {
 		key: 0,
 		cityName: '',
