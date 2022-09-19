@@ -21,7 +21,6 @@ export const NavbarBtn = styled(Button)`
 	width: fit-content;
 `;
 export const FavoritesBtn = styled(NavbarBtn).attrs(props => ({
-	svg: 'favorites',
 	icon: true,
 }))``;
 

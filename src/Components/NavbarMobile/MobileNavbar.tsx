@@ -7,6 +7,8 @@ import { useLogin } from '../User/hooks/useLogin';
 import { usePreferenceStore } from '../../zustand/store';
 import { useForecast } from '../../zustand/hooks/useForecast';
 import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites';
+import { useQueryClient } from '@tanstack/react-query';
+import { useIsAddedToFav } from '../Favorites/hooks/useIsAddedToFav';
 
 interface MobileNavbarProps {}
 
@@ -14,14 +16,17 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree } = usePreferenceStore();
 	const { logout } = useLogin();
 	const { cityData } = useForecast();
-	const { addRemoveFavorites, addSuccess } = useAddRemoveFavorites();
-
+	const { addRemoveFavorites } = useAddRemoveFavorites();
+	const isAddedToFav = useIsAddedToFav(cityData!);
 	const [isExpanded, setIsExpanded] = useState(false);
 
 	return (
 		<>
 			<Styled.MobileNavbar>
-				<Styled.FavoritesBtn onClick={() => addRemoveFavorites(cityData!)} />
+				<Styled.FavoritesBtn
+					svg={isAddedToFav ? 'favoritesFull' : 'favorites'}
+					onClick={() => addRemoveFavorites(cityData!)}
+				/>
 				<Styled.MenuBtn onClick={() => setIsExpanded(true)} />
 			</Styled.MobileNavbar>
 			<AnimatePresence>

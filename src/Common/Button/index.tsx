@@ -33,6 +33,7 @@ export type ButtonProps<T extends ElementType> = {
 } & ComponentPropsWithoutRef<T>;
 type svgTypes =
 	| 'fav'
+	| 'favFull'
 	| 'favorites'
 	| 'fb'
 	| 'google'
@@ -69,6 +70,8 @@ const Button = <T extends ElementType = 'button'>({
 		switch (svg) {
 			case 'fav':
 				return <Styled.FavIcon />;
+			case 'favFull':
+				return <SvgFav fulldark='true' outlinedark='true' width='24' height='24' />;
 			case 'favorites':
 				return <SvgFav width='30' height='30' />;
 			case 'favoritesFull':

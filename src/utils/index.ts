@@ -2,7 +2,7 @@
 
 import { UseQueryResult } from '@tanstack/react-query';
 import { CityData } from '../types/forecastType';
-import { Location, MapData } from '../types/mapTypes';
+import { MapData } from '../types/mapTypes';
 
 export const convertToC = (fahrenheit: number) => {
 	let celsius = Math.round(((fahrenheit - 32) * 5) / 9);

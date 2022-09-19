@@ -18,7 +18,8 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const { error: geoPositionError, geoString } = useGetPosition();
 	const { cityData } = useGetLocation(geoString);
 
-	const { cityData: cityDataFromStore } = useForecast();
+	const { cityData: cityDataFromStore, setCityData } = useForecast();
+
 	const { isMapOpen, toggleMap } = usePreference();
 	const { isMobile } = useWindowSize();
 
