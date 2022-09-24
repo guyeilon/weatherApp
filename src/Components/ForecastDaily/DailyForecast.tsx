@@ -20,10 +20,12 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 
 	const { isSuccess, fiveDaysData, updatedAt } = useDailyForecast(key, cityName);
 
-	const icon = fiveDaysData[0]?.icon;
-	const dayTemp = fiveDaysData[0]?.dayTemp;
-	const nightTemp = fiveDaysData[0]?.nightTemp;
-	const dayPhrase = fiveDaysData[0]?.dayPhrase;
+	const firstDay = fiveDaysData[0];
+
+	const icon = firstDay?.icon;
+	const dayTemp = firstDay?.dayTemp;
+	const nightTemp = firstDay?.nightTemp;
+	const dayPhrase = firstDay?.dayPhrase;
 	const timestamp = updatedAt;
 
 	const toggleTemperature = (temp: number) => {

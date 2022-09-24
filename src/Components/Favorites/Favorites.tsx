@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchInput from '../../Common/SearchInput';
 import useInput from '../../Common/SearchInput/hooks/useInput';
@@ -9,19 +9,25 @@ import Map from '../Map';
 
 import { useAddRemoveFavorites } from './hooks/useAddRemoveFavorites';
 import { useGetFavorites } from './hooks/useGetFavorites';
+import { useInfiniteFavorites } from './hooks/useInfiniteFavorites';
 
 import * as Styled from './styles';
+import { useQueryClient } from '@tanstack/react-query';
+import { queryKeys } from '../../react-query/constants';
+import { FavoritesQueriesData } from '../../types/userTypes';
+import { useFavorites } from '../../zustand/hooks/useFavorites';
 
 export interface FavoritesProps {}
 
 const Favorites: React.FC<FavoritesProps> = Props => {
 	const [search, resetSearch, searchAttribute] = useInput('wetherApp_FavoritesSearch', '');
-	const { favorites, isSuccess } = useGetFavorites(search);
+	// const { favorites, isSuccess } = useGetFavorites(search);
 
 	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
 	const { setCityData } = useForecast();
 	const { isMapOpen } = usePreference();
 	const navigate = useNavigate();
+	const queryClient = useQueryClient();
 
 	const handleFavClick = (favorite: CityData) => {
 		setCityData(favorite);
@@ -34,11 +40,27 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 		removeSuccess && resetSearch();
 	};
 
+	const { data, fetchNextPage, hasNextPage, isFetching, isSuccess, refetch } = useInfiniteFavorites(search);
+
+	useEffect(() => {
+		if (isSuccess && hasNextPage) {
+			fetchNextPage();
+		}
+	}, [isSuccess, hasNextPage, fetchNextPage, data]);
+
 	let favoritesList;
 
+	let favsArr: CityData[] = [];
+
+	const { favorites } = useFavorites();
+
 	if (isSuccess) {
-		favoritesList = favorites.map((fav, idx) => {
-			const lastFavIdx = favorites.length - 1;
+		const filtered = favorites?.filter(fav => fav.cityName.toLowerCase().includes(search.toLowerCase()));
+
+		favoritesList = filtered?.map((fav, idx) => {
+			const isExist = favsArr.find(favArr => favArr.key === fav.key);
+			!isExist && favsArr.push(fav);
+
 			return (
 				<div key={idx}>
 					<Styled.Favorite>
@@ -50,20 +72,20 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 							<Styled.FavBtn onClick={() => handleRemove(fav)} />
 						</Styled.BtnWrapper>
 					</Styled.Favorite>
-					{lastFavIdx != idx && <Styled.Line />}
+					<Styled.Line />
 				</div>
 			);
 		});
 	}
 
 	return isMapOpen ? (
-		<Map cityData={favorites} />
+		<Map citiesData={favsArr} />
 	) : (
 		<Styled.ContentWrapper>
 			<div>
 				<Styled.Header>Favorites</Styled.Header>
 				<Styled.InputWrapper>
-					<SearchInput placeHolder='Search from favorites' {...searchAttribute} />
+					<Styled.Input placeHolder='Search from favorites' {...searchAttribute} />
 				</Styled.InputWrapper>
 				<Styled.FavoritesWrapper>{favoritesList}</Styled.FavoritesWrapper>
 			</div>

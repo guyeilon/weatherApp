@@ -10,6 +10,8 @@ export const useGetKeyFromMap = (): UseMutateFunction<CityDataApi, unknown, stri
 	const { mutate } = useMutation(
 		(geoString: string | undefined) => {
 			const data = getLocationKey(geoString);
+			console.log(data);
+
 			return data;
 		},
 		{
@@ -20,6 +22,8 @@ export const useGetKeyFromMap = (): UseMutateFunction<CityDataApi, unknown, stri
 					cityName: data?.LocalizedName,
 					countryName: data?.Country?.EnglishName,
 				};
+				console.log(cityData);
+
 				setCityData(cityData);
 			},
 		}

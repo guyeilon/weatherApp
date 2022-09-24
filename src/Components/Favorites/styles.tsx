@@ -27,36 +27,44 @@ export const Header = styled.h1`
 	font-size: ${({ theme }) => theme.headingFontSize.h1};
 	color: ${({ theme }) => theme.colors.primary.text};
 	margin-bottom: 24px;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		display: none;
+	}
 `;
 
 export const Input = styled(SearchInput)`
 	color: ${({ theme }) => theme.colors.primary.text};
 	background-color: ${({ theme }) => theme.colors.inputs.secondaryBg};
 
-	& input {
+	/* background-color: red; */
+
+	color: ${({ theme }) => theme.colors.primary.text};
+	::placeholder {
 		color: ${({ theme }) => theme.colors.primary.text};
-		::placeholder {
-			color: ${({ theme }) => theme.colors.primary.text};
-			font-size: ${({ theme }) => theme.textFontSize.base};
-		}
+		font-size: ${({ theme }) => theme.textFontSize.base};
 	}
 `;
 
 export const InputWrapper = styled.div`
 	max-width: 372px;
 	margin-bottom: 65px;
+
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		max-width: 100%;
+	}
 `;
+export const Line = styled.hr`
+	color: rgba(255, 255, 255, 1);
+	height: 1px;
+	width: 100%;
+	margin-bottom: 23.5px;
+`;
+
 export const Favorite = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: stretch;
 	justify-content: space-between;
-`;
-export const Line = styled.hr`
-	color: rgba(255, 255, 255, 0.6);
-	height: 1px;
-	width: 100%;
-	margin-bottom: 23.5px;
 `;
 
 export const FavoritesWrapper = styled.div`
@@ -89,8 +97,14 @@ export const CityName = styled.div`
 	color: ${({ theme }) => theme.colors.primary.text};
 	font-size: ${({ theme }) => theme.textFontSize.xl};
 	font-weight: bold;
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.lg};
+	}
 `;
 export const CountryName = styled.div`
 	color: rgba(255, 255, 255, 0.8);
 	font-size: ${({ theme }) => theme.textFontSize.lg};
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.sm};
+	}
 `;

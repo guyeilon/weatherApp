@@ -11,6 +11,7 @@ import { useForecast } from '../../zustand/hooks/useForecast';
 import { usePreference } from '../../zustand/hooks/usePreference';
 import Map from '../Map';
 import { useWindowSize } from '../../hooks/useWindowSize';
+import { usePrefetchFavorites } from '../Favorites/hooks/usePrefetchFavorites';
 
 export interface ForecastProps {}
 
@@ -30,8 +31,13 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	}
 
 	const cityToShow = cityDataFromStore ? cityDataFromStore : cityData;
+	console.log('cityDataFromStore:', cityDataFromStore);
+	console.log('cityData:', cityData);
+	console.log(cityToShow);
 
 	const cityDataForMap = [cityToShow];
+
+	usePrefetchFavorites();
 
 	content = (
 		<Styled.OrderLayout>
@@ -49,7 +55,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 		</Styled.OrderLayout>
 	);
 
-	return isMapOpen ? <Map cityData={cityDataForMap} /> : <Styled.ContentWrapper>{content}</Styled.ContentWrapper>;
+	return isMapOpen ? <Map citiesData={cityDataForMap} /> : <Styled.ContentWrapper>{content}</Styled.ContentWrapper>;
 };
 
 export default Forecast;

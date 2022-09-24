@@ -1,3 +1,4 @@
+import { QueryKey } from '@tanstack/react-query';
 import { CityData } from './forecastType';
 
 export interface IUser {
@@ -46,4 +47,22 @@ export interface FavoritesQuery {
 export interface Credentials {
 	email: string;
 	password: string;
+}
+
+export interface FavoritesResponse {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: Favorites[];
+}
+export interface FavoritesTransform {
+	count: number;
+	next: string | null;
+	previous: string | null;
+	results: CityData[];
+}
+
+export interface FavoritesQueriesData {
+	pageParams: (string | undefined)[];
+	pages: FavoritesTransform[];
 }

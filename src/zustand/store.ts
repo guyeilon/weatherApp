@@ -6,12 +6,16 @@ import { forecastSlice } from './slices/forecastSlice';
 import { persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
 import { CityData, DailyData, HourlyData } from '../types/forecastType';
+import { favoritesSlice } from './slices/favoritesSlice';
 
 export const usePreferenceStore = create<preferenceSlice>()((...args) => ({
 	...preferenceSlice(...args),
 }));
 export const useUserStore = create<userSlice>()((...args) => ({
 	...userSlice(...args),
+}));
+export const useFavoritesStore = create<favoritesSlice>()((...args) => ({
+	...favoritesSlice(...args),
 }));
 // export const useForecastStore = create<forecastSlice>()((...args) => ({
 // 	...forecastSlice(...args),

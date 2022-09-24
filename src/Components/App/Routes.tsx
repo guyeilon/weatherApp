@@ -18,7 +18,6 @@ export const Routes = (): ReactElement => {
 				<Route path='/' element={<Layout />}>
 					<Route path='/' element={<Forecast />} />
 					<Route path='/favorites' element={<Favorites />} />
-					{/* <Route path='/map' element={<Map />} /> */}
 				</Route>
 			</Route>
 		</RouterRoutes>

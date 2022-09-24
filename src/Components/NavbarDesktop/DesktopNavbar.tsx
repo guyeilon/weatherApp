@@ -21,25 +21,21 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const { logout } = useLogin();
 
 	const location = useLocation();
-	const currentLocation = location.pathname.substring(1);
+	const currLocation = location.pathname;
 
-	const [activeHome, setActiveHome] = useState(currentLocation === '' ? true : false);
-	const [activeFav, setActiveFav] = useState(currentLocation === 'favorites' ? true : false);
+	const [activeHome, setActiveHome] = useState(currLocation === '/' ? true : false);
+	const [activeFav, setActiveFav] = useState(currLocation === '/favorites' ? true : false);
 
 	useEffect(() => {
-		if (currentLocation === '') {
+		if (currLocation === '/') {
 			setActiveHome(true);
 			setActiveFav(false);
 		}
-		if (currentLocation === 'favorites') {
+		if (currLocation === '/favorites') {
 			setActiveFav(true);
 			setActiveHome(false);
 		}
-		if (currentLocation === 'map') {
-			setActiveFav(false);
-			setActiveHome(false);
-		}
-	}, [currentLocation]);
+	}, [location]);
 
 	const handleHomeClick = () => {
 		setCityData(undefined);
@@ -88,6 +84,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 							placeHolder='Try "Tel Aviv - Jaffa"...'
 							onFocus={() => setIsFocused(true)}
 							// onBlur={() => setIsFocused(false)}
+							navbar
 							{...searchAttribute}
 						/>
 					</Styled.InputWrapper>

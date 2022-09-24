@@ -1,8 +1,10 @@
 import { CityData } from '../../../types/forecastType';
-import { useGetFavorites } from './useGetFavorites';
+import { useFavorites } from '../../../zustand/hooks/useFavorites';
 
 export const useIsAddedToFav = (cityData: CityData) => {
-	const { favorites } = useGetFavorites('');
+	const { favorites } = useFavorites();
+
 	const res = favorites?.find(fav => fav?.key === Number(cityData?.key));
+
 	return res ? true : false;
 };

@@ -67,7 +67,7 @@ export const MobileMenu = styled.div`
 	padding: 40px 30px;
 `;
 
-export const Header = styled.h2`
+export const MenuHeader = styled.h2`
 	color: ${({ theme }) => theme.colors.primary.modalText};
 	font-size: ${({ theme }) => theme.headingFontSize.h2};
 	line-height: 1.25;
@@ -159,4 +159,9 @@ export const Divider = styled.div`
 	width: 1px;
 	height: 46px;
 	margin-top: 15px;
+`;
+
+export const Header = styled.h1`
+	font-size: ${({ theme }) => theme.headingFontSize.h2};
+	color: ${({ theme }) => theme.colors.primary.text};
 `;

@@ -41,6 +41,10 @@ export const Grid1 = styled.div`
 `;
 export const Grid2 = styled.div`
 	grid-area: grid2;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 export const Grid3 = styled.div`
 	grid-area: grid3;
@@ -153,12 +157,11 @@ export const LogoutBtn = styled(NavbarBtn).attrs(props => ({
 `;
 
 export const InputWrapper = styled.div`
-	max-width: 372px;
-	justify-self: center;
+	width: 372px;
 
+	order: 4;
 	@media only screen and (${({ theme }) => theme.media.desktop}) {
-		order: 4;
-		max-width: 400px;
+		width: 400px;
 	}
 `;
 

@@ -8,9 +8,11 @@ export interface SearchInputProps {
 	placeHolder?: string;
 	onBlur?: (e: React.FocusEvent<any, Element>) => void;
 	onFocus?: (e: React.FocusEvent<any, Element>) => void;
+	navbar?: boolean;
+	favorites?: boolean;
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ placeHolder, onBlur, onFocus, ...rest }) => {
+const SearchInput: React.FC<SearchInputProps> = ({ navbar, placeHolder, onBlur, onFocus, ...rest }) => {
 	return (
 		<Styled.InputWrapper>
 			<Styled.searchInput
@@ -22,7 +24,8 @@ const SearchInput: React.FC<SearchInputProps> = ({ placeHolder, onBlur, onFocus,
 				// autoFocus
 				{...rest}
 			/>
-			<SvgSearch outlinedark='true' width='30' height='30' style={{ marginRight: '24px' }} />
+			<Styled.SearchIcon outlinedark={navbar ? 'true' : 'false'} width='30' height='30' />
+			{/* <SvgSearch outlinedark='true' width='30' height='30' style={{ marginRight: '24px' }} /> */}
 		</Styled.InputWrapper>
 	);
 };

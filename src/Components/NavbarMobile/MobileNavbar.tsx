@@ -3,12 +3,14 @@ import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../assets/Svg.sty
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
 import { AnimatePresence } from 'framer-motion';
+
 import { useLogin } from '../User/hooks/useLogin';
 import { usePreferenceStore } from '../../zustand/store';
 import { useForecast } from '../../zustand/hooks/useForecast';
 import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites';
-import { useQueryClient } from '@tanstack/react-query';
 import { useIsAddedToFav } from '../Favorites/hooks/useIsAddedToFav';
+import { useLocation } from 'react-router-dom';
+import { useFavorites } from '../../zustand/hooks/useFavorites';
 
 interface MobileNavbarProps {}
 
@@ -18,15 +20,27 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const { cityData } = useForecast();
 	const { addRemoveFavorites } = useAddRemoveFavorites();
 	const isAddedToFav = useIsAddedToFav(cityData!);
+
 	const [isExpanded, setIsExpanded] = useState(false);
+	const location = useLocation();
+
+	const currLocation = location.pathname;
+	const isFavPage = currLocation === '/favorites';
 
 	return (
 		<>
 			<Styled.MobileNavbar>
-				<Styled.FavoritesBtn
-					svg={isAddedToFav ? 'favoritesFull' : 'favorites'}
-					onClick={() => addRemoveFavorites(cityData!)}
-				/>
+				{isFavPage ? (
+					<Styled.Header>Favorites</Styled.Header>
+				) : (
+					<Styled.FavoritesBtn
+						svg={isAddedToFav ? 'favoritesFull' : 'favorites'}
+						onClick={() => {
+							addRemoveFavorites(cityData!);
+							console.log('clicked');
+						}}
+					/>
+				)}
 				<Styled.MenuBtn onClick={() => setIsExpanded(true)} />
 			</Styled.MobileNavbar>
 			<AnimatePresence>
@@ -38,7 +52,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 						position='bottom'
 						isModalOpen={isExpanded}
 						closeModal={() => setIsExpanded(false)}>
-						<Styled.Header>Menu</Styled.Header>
+						<Styled.MenuHeader>Menu</Styled.MenuHeader>
 						<Styled.SwitcherWrapper>
 							<Styled.ThemeSwitcherWrapper>
 								<Styled.MenuText>Change mode</Styled.MenuText>

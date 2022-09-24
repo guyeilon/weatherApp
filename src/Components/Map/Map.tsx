@@ -12,14 +12,18 @@ import googleMapReact from 'google-map-react';
 import { useGetPosition } from '../Forecasts/hooks/useGetPosition';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useGetKeyFromMap } from './hooks/useGetKeyFromMap';
+import { QueryKey } from '@tanstack/react-query';
+import { FavoritesQueriesData } from '../../types/userTypes';
 
 export interface MapProps {
-	cityData: CityData[];
+	citiesData: CityData[];
 }
 
-const Map: React.FC<MapProps> = ({ cityData }) => {
+const Map: React.FC<MapProps> = ({ citiesData }) => {
 	const { isDarkMode, isMapOpen, toggleMap } = usePreference();
 	const { isMobile } = useWindowSize();
+
+	console.log(citiesData);
 
 	const containerStyle = {
 		width: '100%',
@@ -36,7 +40,7 @@ const Map: React.FC<MapProps> = ({ cityData }) => {
 		mapId: isDarkMode ? 'ce5f41cd8a96446e' : '758c608fa6c8ae1',
 	};
 
-	const placesData = useGetMapData(cityData);
+	const placesData = useGetMapData(citiesData);
 	const { position } = useGetPosition();
 	const currentPosition = { lat: position?.latitude!, lng: position?.longitude! };
 

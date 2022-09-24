@@ -3,6 +3,7 @@ import { API_KEY } from '../../../api/constants';
 import { weatherApi } from '../../../api/weatherApi';
 import { queryKeys } from '../../../react-query/constants';
 import { CityData, CityDataApi, GetLocationQuery } from '../../../types/forecastType';
+import { useForecast } from '../../../zustand/hooks/useForecast';
 
 export const getLocationKey = async (geoString: string | undefined): Promise<CityDataApi> => {
 	if (typeof geoString === 'undefined') {
@@ -22,6 +23,7 @@ export const getLocationKey = async (geoString: string | undefined): Promise<Cit
 };
 
 export const useGetLocation = (geoString: string | undefined): GetLocationQuery => {
+	const { setCityData } = useForecast();
 	const fallback: CityData = {
 		key: 0,
 		cityName: '',
@@ -40,6 +42,9 @@ export const useGetLocation = (geoString: string | undefined): GetLocationQuery 
 
 					return { key, cityName, countryName };
 				}
+			},
+			onSuccess: data => {
+				setCityData(data);
 			},
 		}
 	);
