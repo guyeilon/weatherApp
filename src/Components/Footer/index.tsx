@@ -9,6 +9,7 @@ interface MobileFooterProps {}
 
 const MobileFooter: React.FC<MobileFooterProps> = () => {
 	const [isExpanded, setIsExpanded] = useState(false);
+	console.log(isExpanded);
 	const navigate = useNavigate();
 
 	return (

@@ -20,11 +20,10 @@ export const SearchResultWrapper = styled.div`
 `;
 
 export const NoResultWrapper = styled.div`
-	display: grid;
-	justify-items: center;
+	display: flex;
+	justify-content: center;
 	align-items: center;
-	height: 324px;
-	width: 476px;
+	margin-top: 50px;
 `;
 
 export const InnerContentWrapper = styled.div`
@@ -32,8 +31,7 @@ export const InnerContentWrapper = styled.div`
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	width: 416px;
-	height: 198px;
+
 	gap: 24px;
 `;
 
@@ -43,17 +41,20 @@ export const NoResultTxt = styled.div`
 
 	font-size: ${({ theme }) => theme.textFontSize.lg};
 
+	@media only screen and (${({ theme }) => theme.media.phone}) {
+		font-size: ${({ theme }) => theme.textFontSize.base};
+	}
+
 	& > span {
 		font-weight: bold;
 	}
 `;
 
 export const LoaderWrapper = styled.div`
-	display: grid;
-	justify-items: center;
+	display: flex;
+	justify-content: center;
 	align-items: center;
-	height: 324px;
-	width: 476px;
+	margin-top: 50px;
 `;
 
 export const ContentWrapper = styled.div`
@@ -109,7 +110,7 @@ export const SearchScreen = styled.div`
 	height: 100%;
 	width: 100%;
 	gap: 40px;
-	margin-top: 100px;
+	margin-top: 50px;
 `;
 export const SearchScreenTxt = styled.div`
 	color: ${({ theme }) => theme.colors.primary.modalText};

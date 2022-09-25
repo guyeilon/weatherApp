@@ -31,10 +31,6 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	}
 
 	const cityToShow = cityDataFromStore ? cityDataFromStore : cityData;
-	console.log('cityDataFromStore:', cityDataFromStore);
-	console.log('cityData:', cityData);
-	console.log(cityToShow);
-
 	const cityDataForMap = [cityToShow];
 
 	usePrefetchFavorites();

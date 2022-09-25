@@ -16,7 +16,6 @@ const getAutocompleteCityName = async (q: string | undefined): Promise<SearchCit
 		},
 	});
 	const data = await res.data;
-	console.log(data);
 
 	return data;
 };

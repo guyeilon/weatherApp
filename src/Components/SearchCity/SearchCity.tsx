@@ -38,7 +38,7 @@ const SearchCity: React.FC<SearchCityProps> = ({ search, closeModal }) => {
 					/>
 				</Styled.LoaderWrapper>
 			)}
-			{!isLoading && citiesData?.length === 0 && (
+			{!isLoading && citiesData?.length === 0 && search && (
 				<Styled.NoResultWrapper>
 					<Styled.InnerContentWrapper>
 						<SvgCity width='120' height='120' />

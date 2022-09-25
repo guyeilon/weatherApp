@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { AnimatePresence } from 'framer-motion';
 import * as Styled from './styles';
 import Modal from '../../Common/Modal';
@@ -18,9 +18,18 @@ interface MobileSearchCityProps {
 const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isExpanded }) => {
 	const { isDarkMode } = usePreference();
 
-	const [search, resetSearch, searchAttribute] = useInput('wetherApp_CitySearch', '');
+	const [search, resetSearch, searchAttribute] = useInput('weatherApp_CitySearch', '');
 
 	const [isFocused, setIsFocused] = useState(false);
+
+	const closeModal = () => {
+		setIsExpanded(false);
+	};
+	console.log(isExpanded);
+
+	useEffect(() => {
+		resetSearch();
+	}, [isExpanded]);
 
 	return (
 		<AnimatePresence>
@@ -30,8 +39,8 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 				height='90%'
 				position='bottom'
 				isModalOpen={isExpanded}
-				closeModal={() => setIsExpanded(false)}>
-				<Styled.ArrowBtn onClick={() => setIsExpanded(false)} svg={isDarkMode ? 'whiteArrow' : 'arrow'} />
+				closeModal={closeModal}>
+				<Styled.ArrowBtn onClick={() => closeModal()} svg={isDarkMode ? 'whiteArrow' : 'arrow'} />
 				<Styled.InputWrapper>
 					<SearchInput
 						placeHolder='Try "Tel Aviv - Jaffa"...'
@@ -40,19 +49,14 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 						{...searchAttribute}
 					/>
 				</Styled.InputWrapper>
-				<Results search={search} resetSearch={resetSearch} setIsExpanded={setIsExpanded} />
+				<Results search={search} closeModal={closeModal} />
 			</Modal>
 		</AnimatePresence>
 	);
 };
 export default MobileSearchCity;
 
-const Results: React.FC<ResultsProps> = ({ search, resetSearch, setIsExpanded }) => {
-	const closeModal = () => {
-		setIsExpanded(false);
-		resetSearch();
-	};
-
+const Results: React.FC<ResultsProps> = ({ search, closeModal }) => {
 	return (
 		<Styled.ResultContentWrapper>
 			<SearchCity search={search} closeModal={closeModal} />

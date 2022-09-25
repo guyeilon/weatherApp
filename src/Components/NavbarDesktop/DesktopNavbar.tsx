@@ -44,7 +44,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	const handleFavClick = () => {
 		toggleMap(true);
 	};
-	const [search, resetSearch, searchAttribute] = useInput('wetherApp_CitySearch', '');
+	const [search, resetSearch, searchAttribute] = useInput('weatherApp_CitySearch', '');
 	const [isFocused, setIsFocused] = useState(false);
 	const [isExpanded, setIsExpanded] = useState(false);
 	const closeModal = () => {
@@ -125,8 +125,8 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 					height='360px'
 					position='top'
 					isModalOpen={isExpanded}
-					closeModal={() => setIsExpanded(false)}
-					useCloseModal={false}>
+					closeModal={closeModal}
+					useCloseModal={true}>
 					<SearchCity search={search} closeModal={closeModal} />
 				</Modal>
 			)}

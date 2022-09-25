@@ -57,16 +57,22 @@ export const HomeWrapper = styled.div`
 export const HomeBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'home',
 	icon: true,
-}))``;
+}))`
+	width: 100%;
+`;
 
 export const FavBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'favorites',
 	icon: true,
-}))``;
+}))`
+	width: 100%;
+`;
 export const SearchBtn = styled(NavbarBtn).attrs(props => ({
 	svg: 'search',
 	icon: true,
-}))``;
+}))`
+	width: 100%;
+`;
 
 export const Divider1 = styled.div`
 	grid-area: divider1;

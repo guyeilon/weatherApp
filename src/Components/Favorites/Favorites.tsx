@@ -20,7 +20,7 @@ import { useFavorites } from '../../zustand/hooks/useFavorites';
 export interface FavoritesProps {}
 
 const Favorites: React.FC<FavoritesProps> = Props => {
-	const [search, resetSearch, searchAttribute] = useInput('wetherApp_FavoritesSearch', '');
+	const [search, resetSearch, searchAttribute] = useInput('weatherApp_FavoritesSearch', '');
 	// const { favorites, isSuccess } = useGetFavorites(search);
 
 	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
