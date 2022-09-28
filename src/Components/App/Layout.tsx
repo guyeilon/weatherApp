@@ -19,12 +19,12 @@ const Layout = () => {
 	const mapOnMobile = isMapOpen && isMobile;
 	return (
 		<>
-			<Wrapper>
-				{!mapOnMobile && <Clouds cloudsNum={10} />}
-				{!mapOnMobile && <Navbar />}
-				<Outlet />
-				<MobileFooter />
-			</Wrapper>
+			{/* <Wrapper> */}
+			{/* {!mapOnMobile && <Clouds cloudsNum={10} />} */}
+			{!mapOnMobile && <Navbar />}
+			<Outlet />
+			<MobileFooter />
+			{/* </Wrapper> */}
 		</>
 	);
 };
