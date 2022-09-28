@@ -20,7 +20,7 @@ const Layout = () => {
 	return (
 		<>
 			{/* <Wrapper> */}
-			{/* {!mapOnMobile && <Clouds cloudsNum={10} />} */}
+			{!isMobile && <Clouds cloudsNum={10} />}
 			{!mapOnMobile && <Navbar />}
 			<Outlet />
 			<MobileFooter />
