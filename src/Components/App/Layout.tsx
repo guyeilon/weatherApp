@@ -10,7 +10,7 @@ import Navbar from '../Navbar';
 const Wrapper = styled.div`
 	overflow-x: hidden;
 	position: relative;
-	height: 100vh;
+	height: calc(100vh + 80px);
 `;
 
 const Layout = () => {
