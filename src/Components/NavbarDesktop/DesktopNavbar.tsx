@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { SvgCelsius, SvgFahrenheit, SvgMoon, SvgSun } from '../../assets/Svg.styles';
 import * as Styled from './styles';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import SearchCity from '../SearchCity';
 import { useLogin } from '../User/hooks/useLogin';
 import { usePreference } from '../../zustand/hooks/usePreference';
@@ -9,7 +9,7 @@ import { useForecast } from '../../zustand/hooks/useForecast';
 import SearchInput from '../../Common/SearchInput';
 import useInput from '../../Common/SearchInput/hooks/useInput';
 import Modal from '../../Common/Modal';
-import { motion } from 'framer-motion';
+import ConfirmMessage from '../../Common/ConfirmMessage';
 
 export interface DesktopNavbarProps {}
 
@@ -46,19 +46,24 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 	};
 	const [search, resetSearch, searchAttribute] = useInput('weatherApp_CitySearch', '');
 	const [isFocused, setIsFocused] = useState(false);
-	const [isExpanded, setIsExpanded] = useState(false);
+	const [isSearchExpanded, setIsSearchExpanded] = useState(false);
+	const [isLogoutMsgExpanded, setIsLogoutMsgExpanded] = useState(false);
 	const closeModal = () => {
-		setIsExpanded(false);
+		setIsSearchExpanded(false);
 		resetSearch();
 	};
 	const show = !!search;
 
+	const handelLogout = () => {
+		setIsLogoutMsgExpanded(true);
+	};
+
 	useEffect(() => {
-		if (!isExpanded) {
-			show && setIsExpanded(true);
+		if (!isSearchExpanded) {
+			show && setIsSearchExpanded(true);
 		} else {
 			// !isFocused && closeModal();
-			!show && setIsExpanded(false);
+			!show && setIsSearchExpanded(false);
 		}
 	}, [show, isFocused]);
 
@@ -111,23 +116,43 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 						<Styled.DesktopTxt>{isMapOpen ? 'Layout' : 'Switch to map'}</Styled.DesktopTxt>
 					</Styled.MapBtn>
 
-					<Styled.LogoutBtn onClick={() => logout()}>
+					<Styled.LogoutBtn onClick={() => handelLogout()}>
 						<Styled.DesktopTxt>Log out</Styled.DesktopTxt>
 					</Styled.LogoutBtn>
 				</Styled.Grid3>
 			</Styled.DesktopContentWrapper>
 
-			{isExpanded && (
+			{isSearchExpanded && (
 				<Modal
 					blur='main'
 					padding='0 '
 					width='476px'
 					height='360px'
 					position='top'
-					isModalOpen={isExpanded}
+					isModalOpen={isSearchExpanded}
 					closeModal={closeModal}
 					useCloseModal={true}>
 					<SearchCity search={search} closeModal={closeModal} />
+				</Modal>
+			)}
+			{isLogoutMsgExpanded && (
+				<Modal
+					blur='main'
+					padding='48px 48px '
+					width='500px'
+					height='308px'
+					position='top'
+					isModalOpen={isLogoutMsgExpanded}
+					closeModal={() => setIsLogoutMsgExpanded(false)}
+					useCloseModal={true}>
+					<ConfirmMessage
+						header={'Log out'}
+						body={`You about to log out from WeatherApp. Are you sure you want to log out?`}
+						cancel={'I want to stay'}
+						approveFn={logout}
+						cancelFn={() => setIsLogoutMsgExpanded(false)}
+						approve={'Yes, log out'}
+					/>
 				</Modal>
 			)}
 		</>

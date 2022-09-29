@@ -41,7 +41,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 			<WeeklyForecast cityData={cityToShow} />
 			<HourlyForecast cityData={cityToShow} />
 			<FiveDaysForecast cityData={cityToShow} />
-			{isMobile && (
+			{isMobile && cityToShow && (
 				<Styled.BtnWrapper>
 					<Styled.LayoutBtn svg='mapDark' secondary onClick={() => toggleMap(isMapOpen)}>
 						Map
