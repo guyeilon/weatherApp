@@ -6,7 +6,7 @@ export const ContentWrapper = styled.div`
 	position: relative;
 
 	display: grid;
-	height: 100%;
+	height: calc(100vh + 164px + 80px);
 
 	grid-template-columns: 1fr minmax(auto, calc(100vw - 50px)) 1fr;
 	@media only screen and (${({ theme }) => theme.media.tablet}) {
