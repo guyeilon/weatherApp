@@ -1,34 +1,22 @@
 import { useQuery } from '@tanstack/react-query';
-import useInterceptors from '../../../api/hooks/useInterceptors';
 import { queryKeys } from '../../../react-query/constants';
 import { CityData } from '../../../types/forecastType';
-import { Favorites, FavoritesQuery, GetFavorites } from '../../../types/userTypes';
+import useLocalStorage from '../../../hooks/useLocalStorage';
 
-export const useGetFavorites = (search: string | undefined): FavoritesQuery => {
-	const privateApi = useInterceptors();
-	const getFav = async (): Promise<Favorites[]> => {
-		const { data } = await privateApi.get('/favorites/');
+export const useGetFavorites = (search?: string) => {
+	const [favorites] = useLocalStorage<CityData[]>('favorites', []);
 
-		return data.results;
-	};
-
-	const fallback: CityData[] = [];
-	const { data: favorites = fallback, isSuccess } = useQuery([queryKeys.favorites], () => getFav(), {
-		select: favorites => {
-			// const favs = favorites.results;
-			const cities = favorites.map(fav => {
-				const key = fav.key;
-				const countryName = fav.country;
-				const cityName = fav.city;
-
-				return { key, countryName, cityName };
-			});
-
-			let filtered = cities;
-			if (search) filtered = filtered.filter(fav => fav.cityName.toLowerCase().includes(search.toLowerCase()));
-			return filtered;
+	const { data: filteredFavorites = [], isSuccess } = useQuery(
+		[queryKeys.favorites, search],
+		async () => {
+			let result = [...favorites];
+			if (search) {
+				result = result.filter(f => f.cityName.toLowerCase().includes(search.toLowerCase()));
+			}
+			return result;
 		},
-	});
+		{ initialData: [] }
+	);
 
-	return { favorites, isSuccess };
+	return { favorites: filteredFavorites, isSuccess };
 };

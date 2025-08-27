@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import useInput from '../../Common/SearchInput/hooks/useInput';
@@ -8,23 +8,21 @@ import { usePreference } from '../../zustand/hooks/usePreference';
 import Map from '../Map';
 
 import { useAddRemoveFavorites } from './hooks/useAddRemoveFavorites';
-
-// import { useInfiniteFavorites } from './hooks/useInfiniteFavorites';
+import { useGetFavorites } from './hooks/useGetFavorites';
 
 import * as Styled from './styles';
 
-import { useFavorites } from '../../zustand/hooks/useFavorites';
 import Modal from '../../Common/Modal';
 import ConfirmMessage from '../../Common/ConfirmMessage';
 import { useWindowSize } from '../../hooks/useWindowSize';
 
 export interface FavoritesProps {}
 
-const Favorites: React.FC<FavoritesProps> = Props => {
+const Favorites: React.FC<FavoritesProps> = () => {
 	const [search, resetSearch, searchAttribute] = useInput('weatherApp_FavoritesSearch', '');
-	// const { favorites, isSuccess } = useGetFavorites(search);
+	const { favorites, isSuccess } = useGetFavorites(search);
 
-	// const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
+	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
 	const { setCityData } = useForecast();
 	const { isMapOpen } = usePreference();
 	const { isMobile } = useWindowSize();
@@ -33,6 +31,7 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 	const [isRemoveFavMsgExpanded, setIsRemoveFavMsgExpanded] = useState(false);
 	const [favToRemove, setFavToRemove] = useState<CityData | undefined>(undefined);
 
+	// --- Handlers ---
 	const handleFavClick = (favorite: CityData) => {
 		setCityData(favorite);
 		navigate('/');
@@ -45,45 +44,31 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 	};
 
 	const removeFav = () => {
-		// addRemoveFavorites(favToRemove!);
-		// removeSuccess && resetSearch();
+		if (favToRemove) {
+			addRemoveFavorites(favToRemove);
+			if (removeSuccess) resetSearch();
+		}
 		setIsRemoveFavMsgExpanded(false);
 	};
 
-	// const { data, fetchNextPage, hasNextPage, isFetching, isSuccess, refetch } = useInfiniteFavorites(search);
-
-	// useEffect(() => {
-	// 	if (isSuccess && hasNextPage) {
-	// 		fetchNextPage();
-	// 	}
-	// }, [isSuccess, hasNextPage, fetchNextPage, data]);
-
-	let favoritesList;
-
+	// --- Build favorites list ---
 	let favsArr: CityData[] = [];
+	let favoritesList: React.ReactNode = null;
 
-	const { favorites } = useFavorites();
-	const isSuccess = false;
-
-	if (isSuccess) {
-		const filtered = favorites?.filter(fav => fav.cityName.toLowerCase().includes(search.toLowerCase()));
-
-		favoritesList = filtered?.map((fav, idx) => {
-			const isExist = favsArr.find(favArr => favArr.key === fav.key);
-			!isExist && favsArr.push(fav);
+	if (isSuccess && favorites.length > 0) {
+		favoritesList = favorites.map(fav => {
+			const alreadyAdded = favsArr.find(f => f.key === fav.key);
+			if (!alreadyAdded) favsArr.push(fav);
 
 			return (
-				<div key={idx}>
+				<div key={fav.key}>
 					<Styled.Favorite>
 						<Styled.NamesWrapper onClick={() => handleFavClick(fav)}>
 							<Styled.CityName>{fav.cityName}</Styled.CityName>
 							<Styled.CountryName>{fav.countryName}</Styled.CountryName>
 						</Styled.NamesWrapper>
 						<Styled.BtnWrapper>
-							<Styled.FavBtn onClick={() => handleRemove(fav)}>
-								{/* You can put an icon or text here, e.g. a trash icon or "Remove" */}
-								Remove
-							</Styled.FavBtn>
+							<Styled.FavBtn onClick={() => handleRemove(fav)}>Remove</Styled.FavBtn>
 						</Styled.BtnWrapper>
 					</Styled.Favorite>
 					<Styled.Line />
@@ -92,6 +77,7 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 		});
 	}
 
+	// --- Render ---
 	return isMapOpen ? (
 		<Map citiesData={favsArr} />
 	) : (
@@ -100,28 +86,29 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 				<div>
 					<Styled.Header>Favorites</Styled.Header>
 					<Styled.InputWrapper>
-						<Styled.Input placeHolder='Search from favorites' {...searchAttribute} />
+						<Styled.Input placeholder='Search from favorites' {...searchAttribute} />
 					</Styled.InputWrapper>
 					<Styled.FavoritesWrapper>{favoritesList}</Styled.FavoritesWrapper>
 				</div>
 			</Styled.ContentWrapper>
+
 			{isRemoveFavMsgExpanded && (
 				<Modal
 					blur='all'
-					padding='48px 48px '
+					padding='48px 48px'
 					width={isMobile ? '100%' : '500px'}
 					height={isMobile ? '340px' : '308px'}
 					position={isMobile ? 'bottom' : 'top'}
 					isModalOpen={isRemoveFavMsgExpanded}
 					closeModal={() => setIsRemoveFavMsgExpanded(false)}
-					useCloseModal={true}>
+					useCloseModal>
 					<ConfirmMessage
-						header={'Remove from favorites'}
+						header='Remove from favorites'
 						body={`Are you sure you want to remove ${favToRemove?.cityName} from favorites list?`}
-						cancel={'Keep it'}
-						approveFn={() => removeFav()}
+						cancel='Keep it'
+						approveFn={removeFav}
 						cancelFn={() => setIsRemoveFavMsgExpanded(false)}
-						approve={'Yes, remove'}
+						approve='Yes, remove'
 					/>
 				</Modal>
 			)}

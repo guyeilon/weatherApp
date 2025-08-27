@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { convertToC, getTime } from '../../utils';
 import * as Styled from './styles';
 import { DailyForecastProps } from './types';
@@ -9,18 +9,18 @@ import { useDailyForecast } from '../Forecasts/hooks/useDailyForecast';
 import { useIsAddedToFav } from '../Favorites/hooks/useIsAddedToFav';
 
 const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
-	const key = cityData?.key;
-
-	const cityName = cityData?.cityName;
 	const { isFahrenheit } = usePreference();
 
-	// const { addRemoveFavorites } = useAddRemoveFavorites();
-	const isAddedToFav = useIsAddedToFav(cityData!);
+	const { key, cityName } = cityData;
+
+	const { addRemoveFavorites } = useAddRemoveFavorites();
+	const isAddedToFav = useIsAddedToFav(cityData);
 
 	const { isSuccess, fiveDaysData, updatedAt } = useDailyForecast(key, cityName);
 
-	const firstDay = fiveDaysData[0];
+	if (!cityData) return null;
 
+	const firstDay = fiveDaysData[0];
 	const icon = firstDay?.icon;
 	const dayTemp = firstDay?.dayTemp;
 	const nightTemp = firstDay?.nightTemp;
@@ -37,16 +37,17 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 				<Styled.DailyForecastContainer>
 					<div>
 						<Styled.CityName>{cityName}</Styled.CityName>
+
 						<Styled.DailyTempIconWrapper>
 							{icon && <Styled.Icon src={getForecastIcon(icon)} />}
 							<Styled.DailyTempWrapper>
-								{dayTemp && (
+								{dayTemp !== undefined && (
 									<Styled.DayTemp>
 										{toggleTemperature(dayTemp)}
 										<span>&deg;</span>
 									</Styled.DayTemp>
 								)}
-								{nightTemp && (
+								{nightTemp !== undefined && (
 									<Styled.NightTemp>
 										- {toggleTemperature(nightTemp)}
 										<span>&deg;</span>
@@ -54,17 +55,17 @@ const DailyForecast: React.FC<DailyForecastProps> = ({ cityData }) => {
 								)}
 							</Styled.DailyTempWrapper>
 						</Styled.DailyTempIconWrapper>
+
 						<Styled.Phrase>{dayPhrase}</Styled.Phrase>
 						<Styled.Date>{getTime(timestamp)}</Styled.Date>
 					</div>
-					{/* 
+
 					<Styled.FavBtn
 						svg={isAddedToFav ? 'favFull' : 'fav'}
 						secondary
-						// disabled={isAddedToFav ? true : false}
 						onClick={() => addRemoveFavorites(cityData)}>
 						{isAddedToFav ? 'Added to favorites' : 'Add to favorites'}
-					</Styled.FavBtn> */}
+					</Styled.FavBtn>
 				</Styled.DailyForecastContainer>
 			)}
 		</>

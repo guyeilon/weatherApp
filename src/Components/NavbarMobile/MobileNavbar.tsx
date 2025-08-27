@@ -6,6 +6,10 @@ import { AnimatePresence } from 'framer-motion';
 
 import { useLogin } from '../User/hooks/useLogin';
 import { usePreferenceStore } from '../../zustand/store';
+import { useForecast } from '../../zustand/hooks/useForecast';
+import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites';
+import { useIsAddedToFav } from '../Favorites/hooks/useIsAddedToFav';
+import { useLocation } from 'react-router-dom';
 
 import ConfirmMessage from '../../Common/ConfirmMessage';
 
@@ -14,38 +18,43 @@ interface MobileNavbarProps {}
 const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree } = usePreferenceStore();
 	const { logout } = useLogin();
-	// const { cityData } = useForecast();
-	// const { addRemoveFavorites } = useAddRemoveFavorites();
-	// const isAddedToFav = useIsAddedToFav(cityData!);
+	const { cityData } = useForecast();
+	const { addRemoveFavorites } = useAddRemoveFavorites();
+	const isAddedToFav = useIsAddedToFav(cityData!);
 
 	const [isExpanded, setIsExpanded] = useState(false);
-	// const location = useLocation();
-
-	// const currLocation = location.pathname;
-	// const isFavPage = currLocation === '/favorites';
-
 	const [isLogoutMsgExpanded, setIsLogoutMsgExpanded] = useState(false);
+
+	const location = useLocation();
+	const currLocation = location.pathname;
+	const isFavPage = currLocation === '/favorites';
+
+	// --- Handlers ---
+	const handleFavoritesClick = () => {
+		if (cityData) {
+			addRemoveFavorites(cityData);
+		}
+	};
 
 	const handleLogout = () => {
 		setIsLogoutMsgExpanded(true);
 	};
 
+	// --- Render ---
 	return (
 		<>
-			{/* <Styled.MobileNavbar>
+			<Styled.MobileNavbar>
 				{isFavPage ? (
 					<Styled.Header>Favorites</Styled.Header>
 				) : (
 					<Styled.FavoritesBtn
 						svg={isAddedToFav ? 'favoritesFull' : 'favorites'}
-						onClick={() => {
-							addRemoveFavorites(cityData!);
-							
-						}}
+						onClick={handleFavoritesClick}
 					/>
 				)}
 				<Styled.MenuBtn onClick={() => setIsExpanded(true)} />
-			</Styled.MobileNavbar> */}
+			</Styled.MobileNavbar>
+
 			<AnimatePresence>
 				{isExpanded && (
 					<Modal
@@ -54,19 +63,23 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 						height={isLogoutMsgExpanded ? '340px' : '416px'}
 						position='bottom'
 						isModalOpen={isExpanded}
-						closeModal={() => setIsExpanded(false)}>
+						closeModal={() => {
+							setIsExpanded(false);
+							setIsLogoutMsgExpanded(false);
+						}}>
 						{isLogoutMsgExpanded ? (
 							<ConfirmMessage
-								header={'Log out'}
-								body={`You about to log out from WeatherApp. Are you sure you want to log out?`}
-								cancel={'I want to stay'}
+								header='Log out'
+								body='You are about to log out from WeatherApp. Are you sure you want to log out?'
+								cancel='I want to stay'
 								approveFn={logout}
 								cancelFn={() => setIsLogoutMsgExpanded(false)}
-								approve={'Yes, log out'}
+								approve='Yes, log out'
 							/>
 						) : (
 							<>
 								<Styled.MenuHeader>Menu</Styled.MenuHeader>
+
 								<Styled.SwitcherWrapper>
 									<Styled.ThemeSwitcherWrapper>
 										<Styled.MenuText>Change mode</Styled.MenuText>
@@ -77,21 +90,19 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 											onClick={() => toggleTheme(theme)}
 										/>
 									</Styled.ThemeSwitcherWrapper>
+
 									<Styled.DegreeSwitcherWrapper>
 										<Styled.MenuText>Change degrees</Styled.MenuText>
 										<Styled.DegreeSwitcher
 											isChecked={isFahrenheit}
 											leftSvg={<SvgCelsius height='24' width='24' />}
 											rightSvg={<SvgFahrenheit height='24' width='24' />}
-											onClick={() => {
-												toggleDegree(degree);
-											}}
+											onClick={() => toggleDegree(degree)}
 										/>
 									</Styled.DegreeSwitcherWrapper>
 								</Styled.SwitcherWrapper>
-								<Styled.LogoutBtn
-									svg={isDarkMode ? 'logout' : 'logoutDark'}
-									onClick={() => handleLogout()}>
+
+								<Styled.LogoutBtn svg={isDarkMode ? 'logout' : 'logoutDark'} onClick={handleLogout}>
 									Log out
 								</Styled.LogoutBtn>
 							</>
