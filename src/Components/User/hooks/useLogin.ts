@@ -32,32 +32,38 @@ export const useLogin = (): UseLogin => {
 
 	const authServerCall = async (urlEndpoint: string, email: string, password: string): Promise<void> => {
 		try {
-			const { data }: AxiosResponse<AuthResponseType> = await serverApi({
-				url: urlEndpoint,
-				method: 'POST',
-				data: { email, password },
-			});
-			if (data && 'access_token' in data) {
-				const accessToken = data.access_token;
-				const user = { ...data.user, accessToken: accessToken };
-				const title = `${data?.user.first_name}, welcome!`;
-				fireToast({ title, status: 'success' });
-				setUser(user);
-			}
-		} catch (errorResponse: any) {
-			if (axios.isAxiosError(errorResponse) && errorResponse?.response) {
-				navigate('/login', { state: { from: location }, replace: true });
-				const status = errorResponse.response.status;
-				if (status === 400) {
-					const title = 'Unauthorized';
-					fireToast({ title, status: 'error' });
-					return;
-				} else {
-					const title = SERVER_ERROR;
-					fireToast({ title, status: 'error' });
-					return;
-				}
-			}
+			// const { data }: AxiosResponse<AuthResponseType> = await serverApi({
+			// 	url: urlEndpoint,
+			// 	method: 'POST',
+			// 	data: { email, password },
+			// });
+			// if (data && 'access_token' in data) {
+			// 	const accessToken = data.access_token;
+			// 	const user = { ...data.user, accessToken: accessToken };
+			// 	const title = `${data?.user.first_name}, welcome!`;
+			// 	fireToast({ title, status: 'success' });
+			// 	setUser(user);
+			// }
+			const mockResponse: AuthResponseType = {
+				access_token: 'fake-jwt-token',
+				user: {
+					id: 1,
+					email,
+					first_name: 'Guy',
+					last_name: 'Eilon',
+				},
+			} as unknown as UserResponse;
+			// simulate server delay
+			await new Promise(res => setTimeout(res, 500));
+
+			const accessToken = mockResponse.access_token;
+			const user = { ...mockResponse.user, accessToken };
+			const title = `${mockResponse.user.first_name}, welcome!`;
+			fireToast({ title, status: 'success' });
+			setUser(user);
+		} catch (err) {
+			const title = SERVER_ERROR;
+			fireToast({ title, status: 'error' });
 		}
 	};
 
