@@ -49,8 +49,8 @@ export const useLogin = (): UseLogin => {
 				user: {
 					id: 1,
 					email,
-					first_name: 'Guy',
-					last_name: 'Eilon',
+					first_name: 'Guest',
+					last_name: 'User',
 				},
 			} as unknown as UserResponse;
 			// simulate server delay

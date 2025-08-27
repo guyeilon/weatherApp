@@ -27,8 +27,8 @@ export const Login = (): ReactElement => {
 
 	const { values, errors, touched, isSubmitting, handleBlur, handleChange, handleSubmit } = useFormik({
 		initialValues: {
-			email: 'guyeilon84@gmail.com',
-			password: '@Q1w2e3r4',
+			email: 'guest@gmail.com',
+			password: '123456',
 		},
 		validationSchema: FormSchema,
 		onSubmit,
