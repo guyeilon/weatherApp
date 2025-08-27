@@ -1,5 +1,5 @@
 import { RefObject } from 'react';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { SvgWind } from '../../assets/Svg.styles';
 
 export const HourlyWrapper = styled.div`

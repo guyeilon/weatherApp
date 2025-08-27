@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import Button from '../../Common/Button';
 import SearchInput from '../../Common/SearchInput';
 
@@ -62,4 +62,5 @@ export const ArrowBtn = styled(Btn).attrs(props => ({
 }))`
 	margin-bottom: 16px;
 `;
+
 export const ResultContentWrapper = styled.div``;

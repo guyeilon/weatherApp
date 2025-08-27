@@ -91,7 +91,6 @@ export const averageGeolocation = (citiesData: UseQueryResult<MapData, unknown>[
 	let centralLongitude = Math.atan2(y, x);
 	let centralSquareRoot = Math.sqrt(x * x + y * y);
 	let centralLatitude = Math.atan2(z, centralSquareRoot);
-	console.log(centralLongitude, centralLatitude);
 
 	return {
 		lat: (centralLatitude * 180) / Math.PI,

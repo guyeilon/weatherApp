@@ -21,6 +21,7 @@ export const useAddRemoveFavorites = (): UseAddRemoveFavorites => {
 	const location = useLocation();
 
 	const AddRemoveFav = async (cityData: CityData): Promise<void> => {
+		console.log('run');
 		try {
 			const { data, status }: AxiosResponse<AddFavRes> = await privateApi.post('/favorites/', {
 				key: Number(cityData.key),

@@ -25,11 +25,10 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 	const closeModal = () => {
 		setIsExpanded(false);
 	};
-	console.log(isExpanded);
 
 	useEffect(() => {
 		resetSearch();
-	}, [isExpanded]);
+	}, [isExpanded, resetSearch]);
 
 	return (
 		<AnimatePresence>

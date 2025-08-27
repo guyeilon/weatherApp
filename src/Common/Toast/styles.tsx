@@ -1,5 +1,5 @@
 import { ToastContainer } from 'react-toastify';
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 
 export const Toast = styled(ToastContainer).attrs({
 	className: 'toast-container',

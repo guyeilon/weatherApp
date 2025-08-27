@@ -33,7 +33,7 @@ const Forecast: React.FC<ForecastProps> = Props => {
 	const cityToShow = cityDataFromStore ? cityDataFromStore : cityData;
 	const cityDataForMap = [cityToShow];
 
-	usePrefetchFavorites();
+	// usePrefetchFavorites();
 
 	content = (
 		<Styled.OrderLayout>

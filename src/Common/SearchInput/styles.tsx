@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { SvgSearch } from '../../assets/Svg.styles';
 
 export const InputWrapper = styled.div`

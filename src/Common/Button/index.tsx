@@ -28,7 +28,7 @@ export type ButtonProps<T extends ElementType> = {
 	ghost?: boolean;
 	secondary?: boolean;
 	noHover?: boolean;
-	children: ReactNode;
+	children?: ReactNode;
 	className?: string;
 } & ComponentPropsWithoutRef<T>;
 type svgTypes =

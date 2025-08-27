@@ -12,8 +12,6 @@ import googleMapReact from 'google-map-react';
 import { useGetPosition } from '../Forecasts/hooks/useGetPosition';
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { useGetKeyFromMap } from './hooks/useGetKeyFromMap';
-import { QueryKey } from '@tanstack/react-query';
-import { FavoritesQueriesData } from '../../types/userTypes';
 
 export interface MapProps {
 	citiesData: CityData[];
@@ -22,8 +20,6 @@ export interface MapProps {
 const Map: React.FC<MapProps> = ({ citiesData }) => {
 	const { isDarkMode, isMapOpen, toggleMap } = usePreference();
 	const { isMobile } = useWindowSize();
-
-	console.log(citiesData);
 
 	const containerStyle = {
 		width: '100%',
@@ -62,25 +58,24 @@ const Map: React.FC<MapProps> = ({ citiesData }) => {
 	const handleLayoutClick = (e: GoogleMapReact) => {
 		toggleMap(isMapOpen);
 	};
+	const GoogleMap: any = GoogleMapReact;
 
 	return (
 		<Styled.MapWrapper>
 			<div style={containerStyle}>
-				<GoogleMapReact
+				<GoogleMap
 					bootstrapURLKeys={{ key: MAP_KEY! }}
 					defaultCenter={{ lat: position?.latitude!, lng: position?.longitude! }}
 					center={coords}
 					options={options}
 					defaultZoom={placesData.length === 1 ? 15 : 3}
-					// onChange={e => console.log(e)}
-					onClick={e => handleMapClick(e)}
-					onChildClick={e => console.log(e)}
+					onClick={(e: { lat: number; lng: number; event: MouseEvent }) => handleMapClick(e)}
 					yesIWantToUseGoogleMapApiInternals>
 					{placesData &&
 						placesData.length > 0 &&
 						placesData.map((placeData, idx) => {
 							if (placeData.isSuccess) {
-								if (placeData.data?.location === undefined) return;
+								if (placeData.data?.location === undefined) return null;
 								return (
 									<PlaceCard
 										key={idx}
@@ -90,8 +85,9 @@ const Map: React.FC<MapProps> = ({ citiesData }) => {
 									/>
 								);
 							}
+							return null;
 						})}
-				</GoogleMapReact>
+				</GoogleMap>
 			</div>
 			{isMobile && (
 				<Styled.BtnWrapper>

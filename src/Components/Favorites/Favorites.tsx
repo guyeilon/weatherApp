@@ -9,7 +9,7 @@ import Map from '../Map';
 
 import { useAddRemoveFavorites } from './hooks/useAddRemoveFavorites';
 
-import { useInfiniteFavorites } from './hooks/useInfiniteFavorites';
+// import { useInfiniteFavorites } from './hooks/useInfiniteFavorites';
 
 import * as Styled from './styles';
 
@@ -24,7 +24,7 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 	const [search, resetSearch, searchAttribute] = useInput('weatherApp_FavoritesSearch', '');
 	// const { favorites, isSuccess } = useGetFavorites(search);
 
-	const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
+	// const { addRemoveFavorites, addSuccess: removeSuccess } = useAddRemoveFavorites();
 	const { setCityData } = useForecast();
 	const { isMapOpen } = usePreference();
 	const { isMobile } = useWindowSize();
@@ -45,24 +45,25 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 	};
 
 	const removeFav = () => {
-		addRemoveFavorites(favToRemove!);
-		removeSuccess && resetSearch();
+		// addRemoveFavorites(favToRemove!);
+		// removeSuccess && resetSearch();
 		setIsRemoveFavMsgExpanded(false);
 	};
 
-	const { data, fetchNextPage, hasNextPage, isFetching, isSuccess, refetch } = useInfiniteFavorites(search);
+	// const { data, fetchNextPage, hasNextPage, isFetching, isSuccess, refetch } = useInfiniteFavorites(search);
 
-	useEffect(() => {
-		if (isSuccess && hasNextPage) {
-			fetchNextPage();
-		}
-	}, [isSuccess, hasNextPage, fetchNextPage, data]);
+	// useEffect(() => {
+	// 	if (isSuccess && hasNextPage) {
+	// 		fetchNextPage();
+	// 	}
+	// }, [isSuccess, hasNextPage, fetchNextPage, data]);
 
 	let favoritesList;
 
 	let favsArr: CityData[] = [];
 
 	const { favorites } = useFavorites();
+	const isSuccess = false;
 
 	if (isSuccess) {
 		const filtered = favorites?.filter(fav => fav.cityName.toLowerCase().includes(search.toLowerCase()));
@@ -79,7 +80,10 @@ const Favorites: React.FC<FavoritesProps> = Props => {
 							<Styled.CountryName>{fav.countryName}</Styled.CountryName>
 						</Styled.NamesWrapper>
 						<Styled.BtnWrapper>
-							<Styled.FavBtn onClick={() => handleRemove(fav)} />
+							<Styled.FavBtn onClick={() => handleRemove(fav)}>
+								{/* You can put an icon or text here, e.g. a trash icon or "Remove" */}
+								Remove
+							</Styled.FavBtn>
 						</Styled.BtnWrapper>
 					</Styled.Favorite>
 					<Styled.Line />

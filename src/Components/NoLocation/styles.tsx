@@ -1,7 +1,7 @@
-import styled from 'styled-components/macro';
-import Logo from '../../assets/Logo';
+import styled from 'styled-components';
+
 import LogoTest from '../../assets/LogoTest';
-import { SvgLocation, SvgTest } from '../../assets/Svg.styles';
+import { SvgLocation } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 
 export const NoLocationWrapper = styled.div`

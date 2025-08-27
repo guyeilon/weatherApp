@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from 'styled-components';
 import { DIFF_CLOUD_SIZE_PER_SPEED, MAX_CLOUD_SPEED, MIN_CLOUD_SIZE } from './types';
 
 const cloudAnimation = keyframes`

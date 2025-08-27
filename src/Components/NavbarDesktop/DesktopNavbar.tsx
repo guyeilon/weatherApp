@@ -65,7 +65,7 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 			// !isFocused && closeModal();
 			!show && setIsSearchExpanded(false);
 		}
-	}, [show, isFocused]);
+	}, [show, isFocused, isSearchExpanded]);
 
 	return (
 		<>
@@ -77,10 +77,10 @@ const DesktopNavbar: React.FC<DesktopNavbarProps> = () => {
 							<Styled.HomeBtn svg={activeHome ? 'homeFull' : 'home'} onClick={handleHomeClick} />
 							<Styled.LinkBorder />
 						</Styled.RouterWrap>
-						<Styled.RouterWrap to='/favorites'>
+						{/* <Styled.RouterWrap to='/favorites'>
 							<Styled.FavBtn svg={activeFav ? 'favoritesFull' : 'favorites'} onClick={handleFavClick} />
 							<Styled.LinkBorder />
-						</Styled.RouterWrap>
+						</Styled.RouterWrap> */}
 					</Styled.MenuWrapper>
 				</Styled.Grid1>
 				<Styled.Grid2>

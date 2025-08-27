@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components/macro';
+import styled, { css } from 'styled-components';
 
 import { ReactComponent as Celsius } from './Svgs/celsius.svg';
 import { ReactComponent as Fahrenheit } from './Svgs/fahrenheit.svg';

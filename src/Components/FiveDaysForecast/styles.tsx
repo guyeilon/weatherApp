@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { SvgMoonFlat, SvgSunFlat } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 

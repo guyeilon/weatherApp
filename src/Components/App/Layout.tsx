@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 
 import { useWindowSize } from '../../hooks/useWindowSize';
 import { usePreference } from '../../zustand/hooks/usePreference';

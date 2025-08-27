@@ -6,11 +6,7 @@ import { AnimatePresence } from 'framer-motion';
 
 import { useLogin } from '../User/hooks/useLogin';
 import { usePreferenceStore } from '../../zustand/store';
-import { useForecast } from '../../zustand/hooks/useForecast';
-import { useAddRemoveFavorites } from '../Favorites/hooks/useAddRemoveFavorites';
-import { useIsAddedToFav } from '../Favorites/hooks/useIsAddedToFav';
-import { useLocation } from 'react-router-dom';
-import { useFavorites } from '../../zustand/hooks/useFavorites';
+
 import ConfirmMessage from '../../Common/ConfirmMessage';
 
 interface MobileNavbarProps {}
@@ -18,15 +14,15 @@ interface MobileNavbarProps {}
 const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 	const { isDarkMode, isFahrenheit, toggleTheme, toggleDegree, theme, degree } = usePreferenceStore();
 	const { logout } = useLogin();
-	const { cityData } = useForecast();
-	const { addRemoveFavorites } = useAddRemoveFavorites();
-	const isAddedToFav = useIsAddedToFav(cityData!);
+	// const { cityData } = useForecast();
+	// const { addRemoveFavorites } = useAddRemoveFavorites();
+	// const isAddedToFav = useIsAddedToFav(cityData!);
 
 	const [isExpanded, setIsExpanded] = useState(false);
-	const location = useLocation();
+	// const location = useLocation();
 
-	const currLocation = location.pathname;
-	const isFavPage = currLocation === '/favorites';
+	// const currLocation = location.pathname;
+	// const isFavPage = currLocation === '/favorites';
 
 	const [isLogoutMsgExpanded, setIsLogoutMsgExpanded] = useState(false);
 
@@ -36,7 +32,7 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 
 	return (
 		<>
-			<Styled.MobileNavbar>
+			{/* <Styled.MobileNavbar>
 				{isFavPage ? (
 					<Styled.Header>Favorites</Styled.Header>
 				) : (
@@ -44,12 +40,12 @@ const MobileNavbar: React.FC<MobileNavbarProps> = () => {
 						svg={isAddedToFav ? 'favoritesFull' : 'favorites'}
 						onClick={() => {
 							addRemoveFavorites(cityData!);
-							console.log('clicked');
+							
 						}}
 					/>
 				)}
 				<Styled.MenuBtn onClick={() => setIsExpanded(true)} />
-			</Styled.MobileNavbar>
+			</Styled.MobileNavbar> */}
 			<AnimatePresence>
 				{isExpanded && (
 					<Modal

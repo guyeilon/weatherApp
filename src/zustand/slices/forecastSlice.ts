@@ -64,8 +64,5 @@ export const forecastSlice: StateCreator<
 	{
 		name: 'weatherApp_Forecast',
 		getStorage: () => localStorage,
-		onRehydrateStorage: state => {
-			console.log('hydration starts');
-		},
 	}
 );

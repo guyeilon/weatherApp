@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useForecast } from '../../../zustand/hooks/useForecast';
 import { useForecastStore } from '../../../zustand/store';
@@ -16,13 +16,12 @@ export const useDataFromStore = (refreshTime: number) => {
 
 			if (isInvalid) {
 				reset();
-				console.log('delete data....');
 			}
 		}, 1000 * 60);
 		return () => {
 			clearInterval(intervalId);
 		};
-	}, [hasHydrated]);
+	}, [hasHydrated, refreshTime, reset, updatedAt]);
 
 	return isNeedToFetch;
 };

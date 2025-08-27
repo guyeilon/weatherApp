@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import { SvgNavbarLogo } from '../../assets/Svg.styles';
 import Button from '../../Common/Button';
 import { IconWrapper } from '../../Common/Button/styles';

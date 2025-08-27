@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from 'styled-components';
 import SearchInput from '../../Common/SearchInput';
 
 export const Input = styled(SearchInput)`
@@ -114,5 +114,5 @@ export const SearchScreen = styled.div`
 `;
 export const SearchScreenTxt = styled.div`
 	color: ${({ theme }) => theme.colors.primary.modalText};
-	font-size: ${({ theme }) => theme.textFontSize.xs}; ;
+	font-size: ${({ theme }) => theme.textFontSize.xs};
 `;
