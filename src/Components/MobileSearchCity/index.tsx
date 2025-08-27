@@ -27,8 +27,10 @@ const MobileSearchCity: React.FC<MobileSearchCityProps> = ({ setIsExpanded, isEx
 	};
 
 	useEffect(() => {
-		resetSearch();
-	}, [isExpanded]);
+		if (!isExpanded) {
+			resetSearch();
+		}
+	}, [isExpanded, resetSearch]);
 
 	return (
 		<AnimatePresence>
